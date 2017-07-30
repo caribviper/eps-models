@@ -8,7 +8,7 @@
     "url": "???"
   },
   "license": "SEE LICENSE IN <licence.txt>",
-  "dependencies": {   
+  "dependencies": {
     "caribviper-common": "file:..\\..\\library\\common",
     "caribviper-entities": "file:..\\..\\library\\entity"
   },
