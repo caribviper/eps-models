@@ -1,22 +1,25 @@
 export const ENTITY_MODELS = {
-  /**Various Entity Types */
+  //Planning Types
+  PLANNING: {
+    AGENT: 'agent',
+    CONSULTATION: 'consultation',
+    ATTACHMENT: 'attachment',
+    REGISTRY_ITEM: 'registry'
+  },
+  /**Various Security Types */
   SECURITY: {
     //Manges tokens
     USER_TOKEN: 'user-tokens',
     USER: 'user',
      GROUP: 'group'
   },
-  TYPES: {
+  GENERAL: {
     CATEGORY: 'category',
-
+    MINUTE: 'minute',
   },
-  //Stores model information for system objects
-  ID_ENTITY: {
-    //Manages the users
-    USER_LIST: { TYPE: 'system', ID: 'users', FULL_ID: 'system:users' },
-    //Manages the groups
-    GROUP_LIST: { TYPE: 'system', ID: 'groups', FULL_ID: 'system:groups' },
-    //Manages the resources/endpoints
-    RESOURCE_LIST: { TYPE: 'system', ID: 'resources', FULL_ID: 'system:resources' },
+  SYSTEM: {
+    EVENT: 'event',
+    WORKFLOW_TEMPLATE: 'workflow-template',
+    WORKFLOW:'workflow-action'
   }
 }

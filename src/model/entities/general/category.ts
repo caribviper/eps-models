@@ -28,7 +28,7 @@ export class Category extends Entity {
    * @param values CategoryNameValues mapped to the category
    */
   constructor(name: string = '', values: CategoryNameValue[] = []) {
-    super(ENTITY_MODELS.TYPES.CATEGORY, name);
+    super(ENTITY_MODELS.GENERAL.CATEGORY, name);
     this.values = [];
   }
 
@@ -43,7 +43,7 @@ export class Category extends Entity {
    * @param name Name of the category
    */
   public static createId(name: string): string {
-    return Entity.generateId(ENTITY_MODELS.TYPES.CATEGORY, name);
+    return Entity.generateId(ENTITY_MODELS.GENERAL.CATEGORY, name);
   }
 
   /**
