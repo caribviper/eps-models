@@ -2,8 +2,9 @@ export const ENTITY_MODELS = {
   //Planning Types
   PLANNING: {
     AGENT: 'agent',
-    CONSULTATION: 'consultation',
     ATTACHMENT: 'attachment',
+    CONSULTATION: 'consultation',
+    DECISION: 'decision',
     REPORT: 'report',
     //used for searches and not creation of ids
     SITE_REPORT: 'site',
@@ -23,6 +24,7 @@ export const ENTITY_MODELS = {
     MINUTE: 'minute'
   },
   SYSTEM: {
+    DECISION_TEMPLATE: 'decision-template',
     DOCUMENT: 'document',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',

@@ -34,6 +34,10 @@ export * from './model/entities/planning/attachment';
 export * from './model/entities/planning/report-base';
 export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
+export * from './model/entities/planning/decision';
 
+
+export * from './model/entities/system/decision-types';
+export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/workflow-event';
