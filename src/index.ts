@@ -16,6 +16,7 @@ export * from './model/value-objects/planning/applications/chattel';
 export * from './model/value-objects/planning/applications/formal';
 export * from './model/value-objects/planning/applications/permitted';
 export * from './model/value-objects/planning/applications/tree';
+export * from './model/value-objects/planning/report';
 
 //entities
 export * from './model/entities/entity-model-type';
@@ -30,6 +31,9 @@ export * from './model/entities/planning/registry-item';
 export * from './model/entities/planning/consultation';
 export * from './model/entities/planning/minute';
 export * from './model/entities/planning/attachment';
+export * from './model/entities/planning/report-base';
+export * from './model/entities/planning/report';
+export * from './model/entities/planning/site-report';
 
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/workflow-event';
