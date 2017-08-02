@@ -73,18 +73,5 @@ export class WorkflowEvent extends Entity {
       return Entity.generateId(ENTITY_MODELS.SYSTEM.EVENT);
     return Entity.generateId(ENTITY_MODELS.SYSTEM.EVENT, identifier.registryId, identifier.eventType, identifier.guid, 'link:00');
   }
-
-  public static createNew(link: string, registryId: string, eventType: string, templateId: string, activity: WorkflowActivity, creator: UserInfo, owner: UserInfo, comment: string ) {
-    let identifier = link || {registryId: registryId, eventType: eventType};
-    let event = new WorkflowEvent(identifier);
-    event.activity = activity;
-    event.comment = comment;
-    event.creator = creator;
-    event.eventType = eventType;
-    event.link = link;
-    event.owner = owner;
-    event.registryId = registryId;
-    event.templateId = templateId;
-  }
 }
 

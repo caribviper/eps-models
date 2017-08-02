@@ -121,7 +121,7 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
    * @param registryId linked registry id
    */
   constructor(registryId: string = '') {
-    super(ENTITY_MODELS.APPLICATIONS.FORMAL, FormalApplication.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.FORMAL, FormalApplication.createId(registryId), true);
     this.registryId = registryId;
     this.interestInLand = new InterestInLand();
     this.materials = new Materials();
@@ -138,7 +138,7 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.FORMAL);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.FORMAL);
   }
 
 }

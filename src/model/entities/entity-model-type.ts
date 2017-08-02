@@ -12,14 +12,19 @@ export const ENTITY_MODELS = {
     SITE_REPORT_ENFORCEMENT: 'site:enforcement',
     REGISTRY_ITEM: 'registry'
   },
-  APPLICATIONS: {
-    GENERAL: 'details',
-    FORMAL: 'details:formal',
-    CHATTEL: 'details:chattel',
-    PERMITTED: 'details:permitted',
-    TREE: 'details:tree',
-    TEMPORARY: 'details:temporary',
-    CERTIFICATE: 'details:certificate'
+  REGISTRY_DETAILS: {
+    APPLICATIONS: {
+      GENERAL: 'details',
+      FORMAL: 'details:formal',
+      CHATTEL: 'details:chattel',
+      PERMITTED: 'details:permitted',
+      TREE: 'details:tree',
+      TEMPORARY: 'details:temporary',
+      CERTIFICATE: 'details:certificate'
+    },
+    ENFORCEMENT: {
+      ENFORCEMENT_FILE: 'details:enforcement'
+    }
   },
   /**Various Security Types */
   SECURITY: {

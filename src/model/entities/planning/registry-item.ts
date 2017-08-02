@@ -1,5 +1,4 @@
 import { CategoryDescription } from './../../value-objects/planning/descriptive';
-import { IRegistryDetails } from './../../value-objects/planning/iregistry-details';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
 import { FeeItem } from './../../value-objects/common/fee-item';
 import { ENTITY_MODELS } from './../entity-model-type';

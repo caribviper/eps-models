@@ -27,7 +27,7 @@ export class KillTreeApplication extends RegistryDetails implements IRegistryDet
    * @param registryId linked registry id
    */
   constructor(registryId: string = '') {
-    super(ENTITY_MODELS.APPLICATIONS.TREE, KillTreeApplication.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TREE, KillTreeApplication.createId(registryId), true);
     this.registryId = registryId;
   }
 
@@ -40,6 +40,6 @@ export class KillTreeApplication extends RegistryDetails implements IRegistryDet
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.TREE);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TREE);
   }
 }

@@ -21,7 +21,7 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
    * @param dates Dates for when the structure should be up and for how long
    */
   constructor(public registryId: string, public type: string, public dates: DateRange[]) {
-    super(ENTITY_MODELS.APPLICATIONS.TEMPORARY, TemporaryDevelopment.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TEMPORARY, TemporaryDevelopment.createId(registryId), true);
   }
 
   public validateEntity() {
@@ -32,6 +32,6 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.TEMPORARY);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TEMPORARY);
   }
 }

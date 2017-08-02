@@ -18,7 +18,7 @@ export abstract class RegistryDetails extends Entity implements IRegistryDetails
    */
   public static idHelper(registryId: string, detailsType: string) : string {
     if(!registryId || !detailsType)
-      throw new Error('Invalid registry id or details')
+      return '';
     return Entity.generateId(registryId, detailsType, Date.now().toString());
   }
 }

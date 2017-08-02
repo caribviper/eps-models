@@ -11,7 +11,7 @@ export class PermittedApplication extends RegistryDetails implements IRegistryDe
    * @param registryId linked registry id
    */
   constructor(registryId: string = '') {
-    super(ENTITY_MODELS.APPLICATIONS.PERMITTED, PermittedApplication.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.PERMITTED, PermittedApplication.createId(registryId), true);
     this.registryId = registryId;
   }
 
@@ -21,6 +21,6 @@ export class PermittedApplication extends RegistryDetails implements IRegistryDe
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.PERMITTED);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.PERMITTED);
   }
 }

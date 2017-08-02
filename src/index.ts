@@ -19,7 +19,6 @@ export * from './model/value-objects/workflow/workflow-activity';
 export * from './model/value-objects/planning/descriptive';
 export * from './model/value-objects/planning/measurement';
 export * from './model/value-objects/planning/descriptive';
-export * from './model/value-objects/planning/enforcement/enforcement';
 export * from './model/value-objects/planning/report';
 
 //entities
@@ -28,6 +27,7 @@ export * from './model/entities/entity-model-type';
 export * from './model/entities/general/category';
 export * from './model/entities/general/agency';
 export * from './model/entities/general/document';
+export * from './model/entities/general/workflow-event';
 
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
@@ -49,8 +49,8 @@ export * from './model/entities/planning/applications/formal';
 export * from './model/entities/planning/applications/permitted';
 export * from './model/entities/planning/applications/tree';
 export * from './model/entities/planning/applications/temporary';
+export * from './model/entities/planning/enforcement/enforcement';
 
 export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
-export * from './model/entities/system/workflow-event';

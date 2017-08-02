@@ -43,7 +43,7 @@ export class ChattelApplication extends RegistryDetails implements IRegistryDeta
    * @param registryId linked registry id
    */
   constructor(registryId: string = '') {
-    super(ENTITY_MODELS.APPLICATIONS.CHATTEL, ChattelApplication.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CHATTEL, ChattelApplication.createId(registryId), true);
     this.registryId = registryId;
     this.interestInLand = new InterestInLand();
     this.materials = new Materials();
@@ -59,6 +59,6 @@ export class ChattelApplication extends RegistryDetails implements IRegistryDeta
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.CHATTEL);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CHATTEL);
   }
 }

@@ -64,7 +64,7 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
    * @param registryId Linked registry id
    */
   constructor(registryId: string = '') {
-    super(ENTITY_MODELS.APPLICATIONS.CERTIFICATE, Certificate.createId(registryId), true);
+    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CERTIFICATE, Certificate.createId(registryId), true);
     this.registryId = registryId;
   }
 
@@ -74,6 +74,6 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
   }
 
   public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.CERTIFICATE);
+    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CERTIFICATE);
   }
 }
