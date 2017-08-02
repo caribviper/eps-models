@@ -1,11 +1,13 @@
-import { IRegistryDetails } from './../iregistry-details';
-import { ConstructionType, Materials, InterestInLand, CommercialDescription, CategoryDescription } from "../descriptive";
-import { Measurements, FloorSpaceMeasurement } from "../measurement";
+import { Assert } from 'caribviper-common';
+import { ENTITY_MODELS } from './../../entity-model-type';
+import { IRegistryDetails, RegistryDetails } from './../iregistry-details';
+import { ConstructionType, Materials, InterestInLand, CommercialDescription, CategoryDescription } from './../../../value-objects/planning/descriptive';
+import { Measurements, FloorSpaceMeasurement } from './../../../value-objects/planning/measurement';
 
 /**
  * Details of the formal application
  */
-export class FormalApplication implements IRegistryDetails {
+export class FormalApplication extends RegistryDetails implements IRegistryDetails {
 
   /**Specifies if the development is in retention */
   retention: boolean = false;
@@ -15,7 +17,6 @@ export class FormalApplication implements IRegistryDetails {
 	 * These types can Building construction, subdivision, change of use of land/building,  mining or engineering.
 	 */
   formalType: string;
-
 
   /**Applicant's interest in land. */
   interestInLand: InterestInLand = new InterestInLand();
@@ -113,6 +114,31 @@ export class FormalApplication implements IRegistryDetails {
   get isSection18(): boolean {
     return (this.onCoastline ||
       (this.proposedPrimaryLandUse.categoryName === 'AGRICULTURE' && this.measurements.areaOfSite > 8093.7128448));
+  }
+
+  /**
+   * Creates new Formal details
+   * @param registryId linked registry id
+   */
+  constructor(registryId: string = '') {
+    super(ENTITY_MODELS.APPLICATIONS.FORMAL, FormalApplication.createId(registryId), true);
+    this.registryId = registryId;
+    this.interestInLand = new InterestInLand();
+    this.materials = new Materials();
+    this.currentLandUse = new CategoryDescription('', '');
+  }
+
+  public validateEntity() {
+    Assert.isFalse(this.isTransient, 'Formal cannot be transient');
+    Assert.isTruthy(this.registryId, 'Formal registryId cannot be undefined/empty');
+    Assert.isTruthy(this.interestInLand, 'Formal interestInLand cannot be undefined');
+    Assert.isTruthy(this.materials, 'Formal materials cannot be undefined');
+    Assert.isTruthy(this.currentLandUse, 'Formal currentLandUse cannot be undefined');
+    Assert.isTruthy(this.formalType, 'Formal formalType cannot be undefined/empty');
+  }
+
+  public static createId(registryId: string): string {
+    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.FORMAL);
   }
 
 }

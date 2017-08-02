@@ -19,23 +19,20 @@ export * from './model/value-objects/workflow/workflow-activity';
 export * from './model/value-objects/planning/descriptive';
 export * from './model/value-objects/planning/measurement';
 export * from './model/value-objects/planning/descriptive';
-export * from './model/value-objects/planning/applications/chattel';
-export * from './model/value-objects/planning/applications/formal';
-export * from './model/value-objects/planning/applications/permitted';
-export * from './model/value-objects/planning/applications/tree';
-export * from './model/value-objects/planning/applications/temporary';
 export * from './model/value-objects/planning/enforcement/enforcement';
 export * from './model/value-objects/planning/report';
 
 //entities
 export * from './model/entities/entity-model-type';
+
 export * from './model/entities/general/category';
+export * from './model/entities/general/agency';
+
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
 export * from './model/entities/security/user-token';
 export * from './model/entities/security/user';
 
-export * from './model/entities/planning/agency';
 export * from './model/entities/planning/registry-item';
 export * from './model/entities/planning/consultation';
 export * from './model/entities/planning/minute';
@@ -44,6 +41,13 @@ export * from './model/entities/planning/report-base';
 export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
+
+export * from './model/entities/planning/applications/certificate';
+export * from './model/entities/planning/applications/chattel';
+export * from './model/entities/planning/applications/formal';
+export * from './model/entities/planning/applications/permitted';
+export * from './model/entities/planning/applications/tree';
+export * from './model/entities/planning/applications/temporary';
 
 
 export * from './model/entities/system/application-counter';

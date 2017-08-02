@@ -1,16 +1,8 @@
-import { IRegistryDetails } from './../iregistry-details';
-import { UserInfo } from './../../common/userinfo';
-
-/**Types of certificates */
-export const CERTIFICATE_TYPES = {
-  BUILDING_START: 'Building Start',
-  BONDED_WAREHOUSE: 'Bonded Warehouse',
-  COMPLIANCE_BUILDING: 'Certificate of Compliance: Building',
-  COMPLIANCE_ROAD_WORKS: 'Certificate of Compliance: Road Works',
-  COMPLIANCE_SUBDIVISION: 'Certificate of Compliance: Subdivision',
-  CONTINUING_USE: 'Certificate of Compliance: Continuing Use',
-  OTHER: 'Other'
-};
+import { Assert } from 'caribviper-common';
+import { ENTITY_MODELS } from './../../entity-model-type';
+import { Entity } from 'caribviper-entities';
+import { IRegistryDetails, RegistryDetails } from './../iregistry-details';
+import { UserInfo } from './../../../value-objects/common/userinfo';
 
 /** Provide information required for a Certificate Application without an original application */
 export class CertificateBusinessInformation {
@@ -27,7 +19,7 @@ export class CertificateBusinessInformation {
 }
 
 /**Certificate application */
-export class Certificate implements IRegistryDetails {
+export class Certificate extends RegistryDetails implements IRegistryDetails {
 
   /**Gets a referenced application registry id. */
   applicationRegistryId: string;
@@ -59,9 +51,29 @@ export class Certificate implements IRegistryDetails {
   /**Specifies the comments assocaited with the certification of the document. */
   comments: string;
 
-  /**Gets whether building start was certified */
-  certified: boolean;
+  /**Gets whether building start/certificate was certified */
+  get certified(): boolean {
+    return !this.certificationDate;
+  }
 
   /**Get document id */
   documentId: string;
+
+  /**
+   * Creates a new blank certificate
+   * @param registryId Linked registry id
+   */
+  constructor(registryId: string = '') {
+    super(ENTITY_MODELS.APPLICATIONS.CERTIFICATE, Certificate.createId(registryId), true);
+    this.registryId = registryId;
+  }
+
+  public validateEntity() {
+    Assert.isFalse(this.isTransient, 'Certificate cannot be transient');
+    Assert.isTruthy(this.registryId, 'Certificate registryId cannot be undefined/empty');
+  }
+
+  public static createId(registryId: string): string {
+    return this.idHelper(registryId, ENTITY_MODELS.APPLICATIONS.CERTIFICATE);
+  }
 }
