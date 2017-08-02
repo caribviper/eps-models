@@ -15,22 +15,42 @@ export class FileType {
   }
 }
 
+/**Types of file types */
+export const FILE_TYPES = {
+  FORMAL: 'Formal Application',
+  CHATTEL: 'Chattel Application',
+  PERMITTED: 'Permitted Development Application',
+  LISTED: 'Listed Building Application',
+  TREE: 'Tree Application',
+
+  UNAUTHORISED: 'Unauthorised Development',
+  COMPLAINT: 'Complaint',
+  ENQUIRY: 'Enquiry',
+  ENFORCEMENT: 'Enforcement',
+
+  CERTIFICATE: 'Certificate of Compliance',
+  BUILDING_START: 'Building Start',
+  CONTINUING_USE: 'Continuing Use Application',
+  TEMPORARY_DEVELOPMENT: 'Temporary Development of Land'
+};
+
 /**Registry file types */
 export class RegistryFileTypes {
-  private static _formal = new FileType('Formal Application', 'FA', '', true);
-  private static _chattel = new FileType('Chattel Application', 'CH', '', true);
-  private static _permitted = new FileType('Permitted Development Application', 'PD', '', true);
-  private static _listed = new FileType('Listed Building Application', 'LB', '', true);
-  private static _tree = new FileType('Tree Application', 'KT', '', true);
+  private static _formal = new FileType(FILE_TYPES.FORMAL, 'FA', '', true);
+  private static _chattel = new FileType(FILE_TYPES.CHATTEL, 'CH', '', true);
+  private static _permitted = new FileType(FILE_TYPES.PERMITTED, 'PD', '', true);
+  private static _listed = new FileType(FILE_TYPES.LISTED, 'LB', '', true);
+  private static _tree = new FileType(FILE_TYPES.TREE, 'KT', '', true);
 
-  private static _unauthorised = new FileType('Unauthorised Development', 'UA', '522', false);
-  private static _complaint = new FileType('Complaint', 'FA', 'C', false);
-  private static _enquiry = new FileType('Enquiry', 'E', '288', false);
-  private static _enforcement = new FileType('Enforcement', 'EN', '', false);
+  private static _unauthorised = new FileType(FILE_TYPES.UNAUTHORISED, 'UA', '522', false);
+  private static _complaint = new FileType(FILE_TYPES.COMPLAINT, 'FA', 'C', false);
+  private static _enquiry = new FileType(FILE_TYPES.ENQUIRY, 'E', '288', false);
+  private static _enforcement = new FileType(FILE_TYPES.ENFORCEMENT, 'EN', '', false);
   
-  private static _certificate = new FileType('Certificate of Compliance', 'COC', 'COC', true);
-  private static _buildingStart = new FileType('Building Start', 'BS', 'BS', true);
-  private static _continuingUse = new FileType('Continuing Use Application', 'CC', 'CC', true);
+  private static _certificate = new FileType(FILE_TYPES.CERTIFICATE, 'COC', 'COC', true);
+  private static _buildingStart = new FileType(FILE_TYPES.BUILDING_START, 'BS', 'BS', true);
+  private static _continuingUse = new FileType(FILE_TYPES.CONTINUING_USE, 'CC', 'CC', true);
+  private static _temporaryUse = new FileType(FILE_TYPES.TEMPORARY_DEVELOPMENT, 'TT', 'TT', true);
 
   public static get formal() { return this._formal; }
   public static get chattel() { return this._chattel ; }
@@ -39,11 +59,12 @@ export class RegistryFileTypes {
   public static get tree() { return this._tree; }
 
   public static get unauthorised() { return this._unauthorised; }
-  private static get complaint() { return this._complaint; }
-  private static get enquiry() { return this._enquiry; }
-  private static get enforcement() { return this._enforcement; }
+  public static get complaint() { return this._complaint; }
+  public static get enquiry() { return this._enquiry; }
+  public static get enforcement() { return this._enforcement; }
   
-  private static get certificate() { return this._certificate; }
-  private static get buildingStart() { return this._buildingStart; }
-  private static get continuingUse() { return this._continuingUse; }
+  public static get certificate() { return this._certificate; }
+  public static get buildingStart() { return this._buildingStart; }
+  public static get continuingUse() { return this._continuingUse; }
+  public static get temporaryUse() { return this._temporaryUse; }
 }

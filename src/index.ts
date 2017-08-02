@@ -16,6 +16,7 @@ export * from './model/value-objects/planning/applications/chattel';
 export * from './model/value-objects/planning/applications/formal';
 export * from './model/value-objects/planning/applications/permitted';
 export * from './model/value-objects/planning/applications/tree';
+export * from './model/value-objects/planning/applications/temporary';
 export * from './model/value-objects/planning/report';
 
 //entities
@@ -37,6 +38,7 @@ export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
 
 
+export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-types';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
