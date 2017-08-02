@@ -50,7 +50,6 @@ export * from './model/entities/planning/applications/permitted';
 export * from './model/entities/planning/applications/tree';
 export * from './model/entities/planning/applications/temporary';
 
-
 export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
