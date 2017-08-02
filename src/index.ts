@@ -12,6 +12,7 @@ export * from './model/value-objects/common/userinfo';
 
 export * from './model/value-objects/enumerators/filetype';
 export * from './model/value-objects/enumerators/decision-types';
+export * from './model/value-objects/enumerators/enforcement-notice-types';
 
 export * from './model/value-objects/workflow/workflow-activity';
 
@@ -23,6 +24,7 @@ export * from './model/value-objects/planning/applications/formal';
 export * from './model/value-objects/planning/applications/permitted';
 export * from './model/value-objects/planning/applications/tree';
 export * from './model/value-objects/planning/applications/temporary';
+export * from './model/value-objects/planning/enforcement/enforcement';
 export * from './model/value-objects/planning/report';
 
 //entities
