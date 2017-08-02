@@ -20,12 +20,6 @@ export class FormalApplication implements IRegistryDetails {
   /**Applicant's interest in land. */
   interestInLand: InterestInLand = new InterestInLand();
 
-	/**
-	 * Get the proposed development description.
-	 * Should allow automatic generation of proposed development from dblist.
-	 */
-  proposedDevelopment: CategoryDescription = new CategoryDescription();
-
   /**Description of proposed primary land uses. */
   proposedPrimaryLandUse: CategoryDescription = new CategoryDescription();
 

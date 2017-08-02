@@ -17,9 +17,6 @@ export class ChattelApplication implements IRegistryDetails {
   /**Description of current land uses. */
   currentLandUse: CategoryDescription;
 
-  /**Proposed development. */
-  proposedDevelopmentDescription: string;
-
   /**Proposed sewage disposal. */
   proposedSewageDisposal: string;
 

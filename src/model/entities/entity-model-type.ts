@@ -24,6 +24,7 @@ export const ENTITY_MODELS = {
     MINUTE: 'minute'
   },
   SYSTEM: {
+    APPLICATION_COUNTER: 'counter',
     DECISION_TEMPLATE: 'decision-template',
     DOCUMENT: 'document',
     EVENT: 'event',

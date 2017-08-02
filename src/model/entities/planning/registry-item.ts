@@ -1,3 +1,4 @@
+import { CategoryDescription } from './../../value-objects/planning/descriptive';
 import { IRegistryDetails } from './../../value-objects/planning/iregistry-details';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
 import { FeeItem } from './../../value-objects/common/fee-item';
@@ -34,7 +35,7 @@ export class CrossReferenceItem {
 
 /**Store a significant event associated with the registry item */
 export class Milestone {
-  
+
   /**
    * Creates a new milestone
    * @param date Date of the Milestone
@@ -57,9 +58,10 @@ export class Location {
    * @param landTaxNo Land tax number
    * @param validated Indicates whether this location has been validated
    */
-  constructor(public address: Address, public coordinate: Coordinate, public parcel: string ='', public landTaxNo: string = '', public validated: boolean = false) { }
+  constructor(public address: Address, public coordinate: Coordinate, public parcel: string = '', public landTaxNo: string = '', public validated: boolean = false) { }
 }
 
+/**Types of stakeholders */
 export const STAKEHOLDER_TYPES = {
   APPLICANT: 'applicant',
   APPLICANT_SECONDARY: 'applicant secondary',
@@ -72,6 +74,8 @@ export const STAKEHOLDER_TYPES = {
 
 /** Details of the a stakeholder */
 export class Stakeholder {
+  /**Indicates if the stakeholder is active. A false indicates that the stakeholder was present but is no longer active */
+  active: boolean;
 
   /**
    * Creates a new stakeholder
@@ -132,9 +136,14 @@ export class RegistryItem extends Entity {
   /**associated Fee */
   fees: FeeItem = null;
 
+  /**
+   * Get the proposed development description. 
+   * Should allow automatic generation of proposed development from dblist.
+   */
+  proposedDevelopment: CategoryDescription = new CategoryDescription();
+
   /**Details of the registry file */
   registryDetails: IRegistryDetails;
-
 
   /**
    * 
@@ -152,7 +161,7 @@ export class RegistryItem extends Entity {
   }
 
 
-  public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = '') : string {
+  public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
     return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).prefix, guid || Utilities.guid());
   }
 }

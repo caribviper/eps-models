@@ -147,31 +147,3 @@ export class Decision extends Entity {
 
 }
 
-
-// /**Specifies decision and the type of item requested */
-// export class DecisionItemBuilder {
-//   /**Decision created */
-//   decision: Decision;
-
-//   /**Decision item type to get decision templates */
-//   decisionItemType: number;
-
-//   /**stores already selected decision item no */
-//   existingItems: number[];
-
-//   /**Stores the existing decision items template type */
-//   existingTemplateTypes: number[];
-
-//   constructor(decision: Decision, itemType: number, existingItems: number[], existingTemplateTypes: number[]) {
-//     if (!decision) {
-//       throw new Error('Invalid decision');
-//     }
-//     if (itemType === undefined || itemType === null || itemType < 0) {
-//       throw new Error('Invalid item type');
-//     }
-//     this.decision = decision;
-//     this.decisionItemType = itemType;
-//     this.existingItems = existingItems;
-//     this.existingTemplateTypes = existingTemplateTypes;
-//   }
-// }
