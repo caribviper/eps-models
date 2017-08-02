@@ -28,10 +28,13 @@ export class DocumentProperty {
 export class Document extends Entity {
 	
 	/**Registry Id */
-	registryId: string = '';
+  registryId: string = '';
+  
+  /**Indicates if the document a draft */
+  draft: boolean;
 
 	/** Type of document */
-	documentType: string = ''
+	documentType: string = '';
 
 	/**Document code associated with item. */
 	documentCode: string;

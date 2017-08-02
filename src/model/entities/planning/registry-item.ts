@@ -143,7 +143,7 @@ export class RegistryItem extends Entity {
   proposedDevelopment: CategoryDescription = new CategoryDescription();
 
   /**Details of the registry file */
-  registryDetails: IRegistryDetails;
+  //registryDetails: IRegistryDetails;
 
   /**
    * 
