@@ -1,5 +1,3 @@
-
-
 /** Manages the type of policies to be implemented*/
 export class PolicyItem {
 
