@@ -11,7 +11,7 @@ export class Group extends Entity {
   public groupName: string;
   public description: string;
   public pooled: boolean = false;
-  public resources: Resource[] = []
+  public resources: Resource[] = [];
 
   /**
    * Creates a new Group

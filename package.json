@@ -4,6 +4,7 @@
   "description": "Manages the electronic planning system models or entities",
   "author": "Kurtis Best <kurtis.best@townplanning.gov.bb>",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "repository": {
     "type": "???",
     "url": "???"
@@ -16,7 +17,9 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
     "gulp-typescript": "^3.1.1",
+    "merge2": "^1.1.0",
     "ts-node": "^3.2.0",
     "tslint": "^5.5.0",
     "typescript": "^2.4.1"
