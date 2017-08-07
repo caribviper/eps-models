@@ -61,4 +61,12 @@ export class ChattelApplication extends RegistryDetails implements IRegistryDeta
   public static createId(registryId: string): string {
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CHATTEL);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: ChattelApplication): ChattelApplication {
+    return Object.assign(new ChattelApplication(), source);
+  }
 }

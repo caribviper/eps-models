@@ -73,7 +73,7 @@ export class UserToken extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: any): UserToken {
+  public static mapToEntity(source: UserToken): UserToken {
     return Object.assign(new UserToken(), source);
   }
 }

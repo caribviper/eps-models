@@ -145,5 +145,13 @@ export class Decision extends Entity {
     return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId);
   }
 
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Decision): Decision {
+    return Object.assign(new Decision(), source);
+  }
+
 }
 

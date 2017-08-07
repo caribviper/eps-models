@@ -26,4 +26,12 @@ export class Report extends BaseReport {
     else
       return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId, username, ...identifiers, Date.now().toString());
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Report): Report {
+    return Object.assign(new Report(), source);
+  }
 }

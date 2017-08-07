@@ -66,4 +66,8 @@ export class Group extends Entity {
   static createId(groupName: string) : string {
     return Entity.generateId(ENTITY_MODELS.SECURITY.GROUP, groupName);
   } 
+
+  public static mapToEntity(group: Group) : Group {
+    return Object.assign(new Group(), group);
+  }
 }

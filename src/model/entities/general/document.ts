@@ -6,61 +6,61 @@ import { UserInfo } from './../../value-objects/common/userinfo';
 
 /**Specific information regarding the document details */
 export class DocumentDetails {
-	model: any = undefined;
-	Document: Document = new Document();
+  model: any = undefined;
+  Document: Document = new Document();
 }
 
 /**Stores information relating to the document property */
 export class DocumentProperty {
-	/**Stores title of the letter */
-	title: string = '';
+  /**Stores title of the letter */
+  title: string = '';
 
-	/**Subject of document. */
-	subject: string = '';
+  /**Subject of document. */
+  subject: string = '';
 
-	/**List of keywords or tags. */
-	keywords: string = '';
+  /**List of keywords or tags. */
+  keywords: string = '';
 
-	/**Watermark to be displayed. */
-	watermark: string = '';
+  /**Watermark to be displayed. */
+  watermark: string = '';
 }
 
 export class Document extends Entity {
-	
-	/**Registry Id */
+
+  /**Registry Id */
   registryId: string = '';
-  
+
   /**Indicates if the document a draft */
   draft: boolean;
 
-	/** Type of document */
-	documentType: string = '';
+  /** Type of document */
+  documentType: string = '';
 
-	/**Document code associated with item. */
-	documentCode: string;
+  /**Document code associated with item. */
+  documentCode: string;
 
-	/**Document property information. */
-	property: DocumentProperty = new DocumentProperty();
+  /**Document property information. */
+  property: DocumentProperty = new DocumentProperty();
 
-	/**Date created. */
-	dateCreated: Date = new Date();
+  /**Date created. */
+  dateCreated: Date = new Date();
 
-	/**Date modified */
-	dateModified: Date = new Date();
+  /**Date modified */
+  dateModified: Date = new Date();
 
 	/**Date document was dispatched.
 	 * Not all documents will be dispatched.
 	 * */
-	dispatchedDate: Date;
+  dispatchedDate: Date;
 
-	/**Specifies the user who dispatched */
-	dispatchedBy: UserInfo;
+  /**Specifies the user who dispatched */
+  dispatchedBy: UserInfo;
 
-	/**Owner of the document. */
-	owner: UserInfo;
+  /**Owner of the document. */
+  owner: UserInfo;
 
-	/**Date document was finalised */
-	finalisedDate: Date;
+  /**Date document was finalised */
+  finalisedDate: Date;
 
 	/**Stores all information relating to document.
 	 * Remarks - Information stored stored as html
@@ -85,7 +85,7 @@ export class Document extends Entity {
   }
 
   public dispatch(dispatchingUser: UserInfo) {
-    if(!this.finalisedDate)
+    if (!this.finalisedDate)
       throw new Error('Document has not been finalised');
     this.dispatchedBy = dispatchingUser;
     this.dispatchedDate = new Date();
@@ -93,15 +93,23 @@ export class Document extends Entity {
   }
 
   public finalise(requestingUser: UserInfo) {
-    if(this.owner.username === requestingUser.username) {
+    if (this.owner.username === requestingUser.username) {
       this.finalisedDate = new Date();
       this.update();
     }
   }
-  
-  public static createId(registryId: string = '', guid: string = '') : string {
-    if(!registryId || !guid)
+
+  public static createId(registryId: string = '', guid: string = ''): string {
+    if (!registryId || !guid)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT);
     return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT, registryId, guid);
+  }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Document): Document {
+    return Object.assign(new Document(), source);
   }
 }

@@ -12,7 +12,7 @@ export class DecisionItemTemplate extends Entity {
    * @param description Description of the decision item
    * @param rationale Rationale explaining the reasoning behind condition/clause/reason
    */
-  constructor(public decisionType: string, public itemNo: number = undefined, public description: string = '', public rationale: string = '') {
+  constructor(public decisionType: string = '', public itemNo: number = undefined, public description: string = '', public rationale: string = '') {
     super(ENTITY_MODELS.SYSTEM.DECISION_TEMPLATE, DecisionItemTemplate.createId(decisionType, itemNo), true);
   }
 
@@ -31,5 +31,13 @@ export class DecisionItemTemplate extends Entity {
       return Entity.generateId(ENTITY_MODELS.SYSTEM.DECISION_TEMPLATE, decisionType);
 
     return Entity.generateId(ENTITY_MODELS.SYSTEM.DECISION_TEMPLATE, decisionType, itemNo.toString());
+  }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: DecisionItemTemplate): DecisionItemTemplate {
+    return Object.assign(new DecisionItemTemplate(), source);
   }
 }

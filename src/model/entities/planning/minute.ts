@@ -72,4 +72,12 @@ export class Minute extends Entity {
       return Entity.generateId(ENTITY_MODELS.GENERAL.MINUTE);
     return Entity.generateId(ENTITY_MODELS.GENERAL.MINUTE, registryId, guid);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Minute): Minute {
+    return Object.assign(new Minute(), source);
+  }
 }

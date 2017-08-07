@@ -141,4 +141,12 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.FORMAL);
   }
 
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: FormalApplication): FormalApplication {
+    return Object.assign(new FormalApplication(), source);
+  }
+
 }

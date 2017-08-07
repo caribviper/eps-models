@@ -49,4 +49,12 @@ export class Consultation extends Entity {
       return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId);
     return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId, Date.now().toString(), guid);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Consultation): Consultation {
+    return Object.assign(new Consultation(), source);
+  }
 }

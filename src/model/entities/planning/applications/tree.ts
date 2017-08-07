@@ -42,4 +42,12 @@ export class KillTreeApplication extends RegistryDetails implements IRegistryDet
   public static createId(registryId: string): string {
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TREE);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: KillTreeApplication): KillTreeApplication {
+    return Object.assign(new KillTreeApplication(), source);
+  }
 }

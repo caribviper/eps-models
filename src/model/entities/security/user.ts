@@ -112,6 +112,6 @@ export class User extends Entity {
   }
 
   public static mapToEntity(user: User) : User {
-    return Object.assign(new User(user.username), user);
+    return Object.assign(new User(), user);
   }
 }

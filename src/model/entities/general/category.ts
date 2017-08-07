@@ -50,7 +50,7 @@ export class Category extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: any): Category {
+  public static mapToEntity(source: Category): Category {
     return Object.assign(new Category(), source);
   }
 }

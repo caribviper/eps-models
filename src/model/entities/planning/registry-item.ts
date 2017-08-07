@@ -163,4 +163,12 @@ export class RegistryItem extends Entity {
   public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
     return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).prefix, guid || Utilities.guid());
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: RegistryItem): RegistryItem {
+    return Object.assign(new RegistryItem(), source);
+  }
 }

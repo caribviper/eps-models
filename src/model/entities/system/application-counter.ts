@@ -37,4 +37,12 @@ export class ApplicationCounter extends Entity {
       return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString());
     return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: ApplicationCounter): ApplicationCounter {
+    return Object.assign(new ApplicationCounter(), source);
+  }
 }

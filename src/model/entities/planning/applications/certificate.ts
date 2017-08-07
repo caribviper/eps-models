@@ -76,4 +76,12 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
   public static createId(registryId: string): string {
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CERTIFICATE);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Certificate): Certificate {
+    return Object.assign(new Certificate(), source);
+  }
 }

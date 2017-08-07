@@ -12,7 +12,7 @@ export const TEMPORARY_DEVELOPMENT_TYPE = {
 /**
  * Temporary development application
  */
-export class TemporaryDevelopment extends RegistryDetails implements IRegistryDetails  {
+export class TemporaryDevelopment extends RegistryDetails implements IRegistryDetails {
 
   /**
    * Creates a temporary development
@@ -20,7 +20,7 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
    * @param type Type of temporary development
    * @param dates Dates for when the structure should be up and for how long
    */
-  constructor(public registryId: string, public type: string, public dates: DateRange[]) {
+  constructor(public registryId: string = '', public type: string = '', public dates: DateRange[] = []) {
     super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TEMPORARY, TemporaryDevelopment.createId(registryId), true);
   }
 
@@ -33,5 +33,13 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
 
   public static createId(registryId: string): string {
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TEMPORARY);
+  }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: TemporaryDevelopment): TemporaryDevelopment {
+    return Object.assign(new TemporaryDevelopment(), source);
   }
 }

@@ -69,6 +69,14 @@ export class WorkflowTemplate extends Entity {
   public static createId(name: string): string {
     return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW_TEMPLATE, name);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: WorkflowTemplate): WorkflowTemplate {
+    return Object.assign(new WorkflowTemplate(), source);
+  }
 }
 
 export const WORKFLOW_STATES = {

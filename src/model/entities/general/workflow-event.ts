@@ -10,7 +10,7 @@ import { Entity } from 'caribviper-entities';
 export class WorkflowEvent extends Entity {
 
   /**Id of the registry item */
-  registryId:string;
+  registryId: string;
 
   /**Type of event */
   eventType: string;
@@ -42,7 +42,7 @@ export class WorkflowEvent extends Entity {
   constructor(identifier: string | { registryId: string, eventType: string, guid: string } = '') {
     super(ENTITY_MODELS.SYSTEM.EVENT, WorkflowEvent.createId(identifier), true);
     this.date = new Date();
-    this.status = (typeof identifier === 'string') ? 'end': 'start';
+    this.status = (typeof identifier === 'string') ? 'end' : 'start';
   }
 
   validateEntity() {
@@ -69,9 +69,17 @@ export class WorkflowEvent extends Entity {
       return `${identifier.substr(0, linkpos)}link:01`;
     }
     //creates a new unlinked event
-    if (!identifier || !identifier.registryId || !identifier.eventType|| !identifier.guid)
+    if (!identifier || !identifier.registryId || !identifier.eventType || !identifier.guid)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.EVENT);
     return Entity.generateId(ENTITY_MODELS.SYSTEM.EVENT, identifier.registryId, identifier.eventType, identifier.guid, 'link:00');
+  }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: WorkflowEvent): WorkflowEvent {
+    return Object.assign(new WorkflowEvent(), source);
   }
 }
 

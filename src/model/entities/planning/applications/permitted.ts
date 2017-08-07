@@ -23,4 +23,12 @@ export class PermittedApplication extends RegistryDetails implements IRegistryDe
   public static createId(registryId: string): string {
     return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.PERMITTED);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: PermittedApplication): PermittedApplication {
+    return Object.assign(new PermittedApplication(), source);
+  }
 }

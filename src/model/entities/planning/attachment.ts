@@ -47,4 +47,12 @@ export class Attachment extends Entity {
       return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT);
     return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId, username, filename);
   }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: Attachment): Attachment {
+    return Object.assign(new Attachment(), source);
+  }
 }

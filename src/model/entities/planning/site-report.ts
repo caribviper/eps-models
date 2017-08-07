@@ -73,6 +73,14 @@ export class SiteReportDevelopment extends SiteReport {
     return super.createId(registryId, username, ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT);
   }
 
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: SiteReportDevelopment): SiteReportDevelopment {
+    return Object.assign(new SiteReportDevelopment(), source);
+  }
+
 }
 
 /**Enforcement site report data */
@@ -92,5 +100,17 @@ export class SiteReportEnforcement extends SiteReport {
 
   /**The land tax number of the property. */
   landTaxNo: string;
+
+  public static createId(registryId: string = '', username: string = ''): string {
+    return super.createId(registryId, username, ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT);
+  }
+
+  /**
+   * Maps data from source to an entity of this type
+   * @param source Data to be mapped to the entity
+   */
+  public static mapToEntity(source: SiteReportEnforcement): SiteReportEnforcement {
+    return Object.assign(new SiteReportEnforcement(), source);
+  }
 
 }
