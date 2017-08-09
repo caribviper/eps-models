@@ -37,6 +37,11 @@ export class UserToken extends Entity {
     this.dateCreated = new Date();
   }
 
+  /**
+   * Check if the user token has expired. Empty tokens or invalid expire data will result in true
+   */
+  public hasExpired(): boolean { return !this.expires ? this.expires < Date.now(): true; }
+
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Entity cannot be transient');
     Assert.isTruthy(this.username, 'Username cannot be null/empty');
