@@ -24,11 +24,6 @@ export class UserToken extends Entity {
   public expires: number;
 
   /**
-   * resources assigned to the user
-   */
-  public resources: Resource[];
-
-  /**
    * Is the token valid
    */
   public valid: boolean = true;
@@ -48,7 +43,6 @@ export class UserToken extends Entity {
     Assert.isTruthy(this.username, 'Username cannot be null/empty');
     Assert.isTruthy(this.expires, 'Expiration date cannot be null');
     Assert.isTruthy(this.token, 'Token cannot be null');
-    Assert.isTruthy(this.resources, 'Resources cannot be null');
   }
 
   /**

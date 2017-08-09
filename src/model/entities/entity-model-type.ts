@@ -29,9 +29,10 @@ export const ENTITY_MODELS = {
   /**Various Security Types */
   SECURITY: {
     //Manges tokens
-    USER_TOKEN: 'user-tokens',
+    USER_TOKEN: 'token',
     USER: 'user',
-    GROUP: 'group'
+    GROUP: 'group',
+    RESOURCE: 'resource'
   },
   GENERAL: {
     CATEGORY: 'category',

@@ -1,23 +1,38 @@
+import { ENTITY_MODELS } from './../entity-model-type';
+import { Entity } from 'caribviper-entities';
 import { Assert } from 'caribviper-common';
 /**
  * Resource item used to determine permissions
  */
-export class Resource {
+export class Resource extends Entity {
 
   /**
    * Creates a resource
+   * @param group Group resource belong to
    * @param url Resource url
    * @param verb Verb used to access resource
    * @param description Description about the resource
    */
-  constructor(public url: string, public verb: string = 'get', public description: string = '') {
-    Assert.isTruthy(url, 'Invalid resource as resource cannot be null/empty');
-    this.url = url.toLowerCase();
-    this.verb = verb.toLowerCase() || 'get';
+  constructor(public group: string = '', public url: string = '', public verb: string = '', public description: string = '') {
+    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(group, url, verb), true);
   }
 
-  validateResource() {
-    Assert.isTruthy(this.url, 'Url cannot be undefined/empty');
-    Assert.isTruthy(this.verb, 'Verb cannot be undefined/empty');
+  public validateEntity() {
+    Assert.isFalse(this.isTransient, 'Resource cannot be transient');
+    Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
+    Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
+    Assert.isTruthy(this.group, 'Resource group cannot be empty/undefined');
+  }
+
+  public static createId(group: string, url: string, verb: string): string {
+    if (!group)
+      return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE);
+    else if (!url || !verb)
+      return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, group);
+    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, group, url, verb);
+  }
+
+  public static mapToEntity(resource: Resource): Resource {
+    return Object.assign(new Resource(), resource);
   }
 }
