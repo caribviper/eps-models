@@ -13,7 +13,7 @@ export class Resource extends Entity {
    * @param verb Verb used to access resource
    * @param description Description about the resource
    */
-  constructor(public group: string = '', public url: string = '', public verb: string = '', public description: string = '') {
+  constructor(public url: string = '', public verb: string = '', public group: string = '', public description: string = '') {
     super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(group, url, verb), true);
   }
 
@@ -25,11 +25,9 @@ export class Resource extends Entity {
   }
 
   public static createId(group: string, url: string, verb: string): string {
-    if (!group)
+    if (!url || !verb)
       return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE);
-    else if (!url || !verb)
-      return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, group);
-    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, group, url, verb);
+    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, url, verb);
   }
 
   public static mapToEntity(resource: Resource): Resource {
