@@ -14,7 +14,7 @@ export class Resource extends Entity {
    * @param description Description about the resource
    */
   constructor(public url: string = '', public verb: string = '', public group: string = '', public description: string = '') {
-    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(group, url, verb), true);
+    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb), true);
   }
 
   public validateEntity() {
@@ -24,7 +24,7 @@ export class Resource extends Entity {
     Assert.isTruthy(this.group, 'Resource group cannot be empty/undefined');
   }
 
-  public static createId(group: string, url: string, verb: string): string {
+  public static createId(url: string, verb: string): string {
     if (!url || !verb)
       return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE);
     return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, url, verb);
