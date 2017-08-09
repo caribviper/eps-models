@@ -1,10 +1,9 @@
-import { Resource } from './resource';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entities';
 import { Assert } from 'caribviper-common';
 
 /**
- * Stores a user token information for quick looking of resources as well as current access
+ * Stores a user token information for detemrining current access
  */
 export class UserToken extends Entity {
 
@@ -50,7 +49,7 @@ export class UserToken extends Entity {
    * @param type Type of entity 
    * @param data 
    */
-  public static createNew(data: { username: string, expires: number, token: string, resources: Resource[], valid: boolean }): UserToken {
+  public static createNew(data: { username: string, expires: number, token: string, valid: boolean }): UserToken {
     return Object.assign(new UserToken(this.createId(data.username, data.expires), true), data);
   }
 

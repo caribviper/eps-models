@@ -1,6 +1,6 @@
 {
   "name": "eps-models",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Manages the electronic planning system models or entities",
   "author": "Kurtis Best <kurtis.best@townplanning.gov.bb>",
   "main": "dist/index.js",
