@@ -8,11 +8,10 @@ import { InterestInLand, CategoryDescription, Materials } from './../../../value
  */
 export class ChattelApplication extends RegistryDetails implements IRegistryDetails {
 
-  /**Is the development in retention */
-  retention: boolean;
+  proposedDevelopment: string;
 
   /**Comments by accepting officer. */
-  OfficerComments: string;
+  officerComments: string;
 
   /**Applicant's interest in land. */
   interestInLand: InterestInLand;
@@ -40,19 +39,15 @@ export class ChattelApplication extends RegistryDetails implements IRegistryDeta
 
   /**
    * Creates new Chattel details
-   * @param registryId linked registry id
    */
-  constructor(registryId: string = '') {
-    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CHATTEL, ChattelApplication.createId(registryId), true);
-    this.registryId = registryId;
+  constructor() {
+    super();
     this.interestInLand = new InterestInLand();
     this.materials = new Materials();
     this.currentLandUse = new CategoryDescription('', '');
   }
 
   public validateEntity() {
-    Assert.isFalse(this.isTransient, 'Chattel cannot be transient');
-    Assert.isTruthy(this.registryId, 'Chattel registryId cannot be undefined/empty');
     Assert.isTruthy(this.interestInLand, 'Chattel interestInLand cannot be undefined');
     Assert.isTruthy(this.materials, 'Chattel materials cannot be undefined');
     Assert.isTruthy(this.currentLandUse, 'Chattel currentLandUse cannot be undefined');

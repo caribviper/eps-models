@@ -22,6 +22,7 @@ export class Resource extends Entity {
     Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
     Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
     Assert.isTruthy(this.group, 'Resource group cannot be empty/undefined');
+    Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
   }
 
   public static createId(url: string, verb: string): string {

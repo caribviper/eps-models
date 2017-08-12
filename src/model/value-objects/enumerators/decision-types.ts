@@ -1,4 +1,3 @@
-
 /**Decision types */
 export const DECISION_TYPES = {
   STANDARD_CONDITION: 'Standard Condition',

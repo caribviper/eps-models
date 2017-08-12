@@ -1,5 +1,7 @@
+import { Notice } from './enforcement/notice';
+import { IRegistryDetails, RegistryDetails } from './iregistry-details';
 import { CategoryDescription } from './../../value-objects/planning/descriptive';
-import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
+import { FileType, RegistryFileTypes, FILE_TYPES } from './../../value-objects/enumerators/filetype';
 import { FeeItem } from './../../value-objects/common/fee-item';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
@@ -7,6 +9,7 @@ import { Contact } from './../../value-objects/common/contact';
 import { Address } from './../../value-objects/common/address';
 import { Entity } from 'caribviper-entities';
 import { Utilities, Assert } from 'caribviper-common';
+import * as numeral from 'numeral';
 
 
 /**
@@ -28,8 +31,9 @@ export class CrossReferenceItem {
    * Creates a new cross reference
    * @param registryItemId Id of the registryItem being reference
    * @param referenceNo Reference no of the registry item
+   * @param systemLink Indicates that the cross reference was made by the system and should not be removed
    */
-  constructor(public registryItemId: string, public referenceNo: string) { }
+  constructor(public registryItemId: string, public referenceNo: string, public systemLink: boolean = false) { }
 }
 
 /**Store a significant event associated with the registry item */
@@ -141,8 +145,17 @@ export class RegistryItem extends Entity {
    */
   proposedDevelopment: CategoryDescription = new CategoryDescription();
 
+  /**Mail address */
+  mailingAddress: Address;
+
   /**Details of the registry file */
-  //registryDetails: IRegistryDetails;
+  details: RegistryDetails;
+
+  /**Stores the guid associated with this entity */
+  registryId: string;
+
+  /**associated notices */
+  notices: Notice[] = [];
 
   /**
    * 
@@ -152,6 +165,7 @@ export class RegistryItem extends Entity {
   constructor(fileType: FileType = RegistryFileTypes.formal, guid: string = '') {
     super(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, RegistryItem.createId(fileType || RegistryFileTypes.formal, guid));
     this.fileType = fileType || RegistryFileTypes.formal;
+    this.stakeholders = [];
   }
 
   public validateEntity() {
@@ -159,9 +173,38 @@ export class RegistryItem extends Entity {
     Assert.isTruthy(this.referenceNo, 'Must have a valida reference number');
   }
 
+  public createReferenceNumber(counterValue: number) {
+    Assert.isTrue(counterValue >= 1, "Counter value cannot be less than 1");
+
+    let referenceNo: string = '';
+
+    //check for permitted
+    if (this.fileType === RegistryFileTypes.permitted) {
+      //do permitted
+      this.referenceNo = numeral(counterValue).format('0000') + "/" + this.location.address.lot + "/" + this.subDivisionNumber;
+      return;
+    }
+
+    if (this.fileType.isApplication) {
+      //applications
+      referenceNo = `${this.fileType.prefix}${numeral(counterValue).format('0000')}`
+        + `/${numeral(this.dateReceived.getMonth()).format('00')}`
+        + `/${numeral(this.dateReceived.getFullYear()).format('00')}`
+        + `${this.area}`;
+    }
+    else {
+      //enforcement matter
+      referenceNo = `${this.fileType.prefix}/${this.area}/${numeral(counterValue).format('0000')}`
+        + `/${numeral(this.dateReceived.getFullYear()).format('00')}`;
+    }
+
+    this.referenceNo = referenceNo;
+    this.counterValue = counterValue;
+  }
+
 
   public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
-    return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).prefix, guid || Utilities.guid());
+    return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).folderPrefix, guid || Utilities.guid());
   }
 
   /**

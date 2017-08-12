@@ -61,27 +61,12 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
 
   /**
    * Creates a new blank certificate
-   * @param registryId Linked registry id
    */
-  constructor(registryId: string = '') {
-    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CERTIFICATE, Certificate.createId(registryId), true);
-    this.registryId = registryId;
+  constructor() {
+    super();
   }
 
   public validateEntity() {
-    Assert.isFalse(this.isTransient, 'Certificate cannot be transient');
-    Assert.isTruthy(this.registryId, 'Certificate registryId cannot be undefined/empty');
   }
 
-  public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.CERTIFICATE);
-  }
-
-  /**
-   * Maps data from source to an entity of this type
-   * @param source Data to be mapped to the entity
-   */
-  public static mapToEntity(source: Certificate): Certificate {
-    return Object.assign(new Certificate(), source);
-  }
 }

@@ -11,7 +11,7 @@ export class KillTreeApplication extends RegistryDetails implements IRegistryDet
   numberOfTrees: number;
 
   /**The types of trees to be destroyed. */
-  typeOfTrees: string[];
+  typeOfTrees: string;
 
   /**Reason(s) for terminating tree(s) */
   reasonForKilling: string;
@@ -20,34 +20,18 @@ export class KillTreeApplication extends RegistryDetails implements IRegistryDet
   directionsToSite: string;
 
   /**Officer's Comments */
-  OfficerComments: string;
+  officerComments: string;
 
   /**
    * Creates new Chattel details
-   * @param registryId linked registry id
    */
-  constructor(registryId: string = '') {
-    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TREE, KillTreeApplication.createId(registryId), true);
-    this.registryId = registryId;
+  constructor() {
+    super();
   }
 
   public validateEntity() {
-    Assert.isFalse(this.isTransient, 'KillTreeApplication cannot be transient');
-    Assert.isTruthy(this.registryId, 'KillTreeApplication registryId cannot be undefined/empty');
     Assert.isTruthy(this.numberOfTrees, 'KillTreeApplication number of trees cannot be undefined');
     Assert.isTrue(this.numberOfTrees > 0, 'KillTreeApplication number of trees cannot be less than 1');
     Assert.isTruthy(this.reasonForKilling, 'KillTreeApplication reason for killing cannot be undefined/empty');
-  }
-
-  public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.TREE);
-  }
-
-  /**
-   * Maps data from source to an entity of this type
-   * @param source Data to be mapped to the entity
-   */
-  public static mapToEntity(source: KillTreeApplication): KillTreeApplication {
-    return Object.assign(new KillTreeApplication(), source);
   }
 }

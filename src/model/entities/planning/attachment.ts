@@ -26,8 +26,8 @@ export class Attachment extends Entity {
   /**Gets the new filename of the attached file */
   filename: string = '';
 
-  constructor(registryId: string = '', username: string = '', filename: string = '', attachedBy: UserInfo = undefined, description: string = '') {
-    super(ENTITY_MODELS.PLANNING.ATTACHMENT, Attachment.createId(registryId, username, filename), true);
+  constructor(registryId: string = '', guid: string = '', username: string = '', filename: string = '', attachedBy: UserInfo = undefined, description: string = '') {
+    super(ENTITY_MODELS.PLANNING.ATTACHMENT, Attachment.createId(registryId, guid), true);
     this.registryId =registryId;
     this.attachedBy = attachedBy;
     this.filename = filename;
@@ -42,10 +42,12 @@ export class Attachment extends Entity {
     Assert.isTruthy(this.filename, 'Attachment requires a valid filename');
   }
 
-  public static createId(registryId: string = '', username: string = '', filename: string = ''): string{
-    if(!registryId || !username || !filename)
+  public static createId(registryId: string = '', guid: string = ''): string{
+    if(!registryId)
       return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT);
-    return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId, username, filename);
+    if(!guid)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId);
+    return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId, guid);
   }
 
   /**

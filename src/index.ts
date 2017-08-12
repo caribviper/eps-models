@@ -43,13 +43,15 @@ export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
 
+export * from './model/entities/planning/iregistry-details';
 export * from './model/entities/planning/applications/certificate';
 export * from './model/entities/planning/applications/chattel';
 export * from './model/entities/planning/applications/formal';
 export * from './model/entities/planning/applications/permitted';
 export * from './model/entities/planning/applications/tree';
 export * from './model/entities/planning/applications/temporary';
-export * from './model/entities/planning/enforcement/enforcement';
+export * from './model/entities/planning/enforcement/notice';
+export * from './model/entities/planning/enforcement/invest';
 
 export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';

@@ -7,7 +7,7 @@ import { Entity } from 'caribviper-entities';
  */
 export interface IRegistryDetails { }
 
-export abstract class RegistryDetails extends Entity implements IRegistryDetails {
+export abstract class RegistryDetails  {//extends Entity implements IRegistryDetails {
 
   public registryId: string;
 

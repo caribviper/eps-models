@@ -1,15 +1,32 @@
+import { ActionEvent } from './../../value-objects/common/action-event';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Contact } from './../../value-objects/common/contact';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entities';
 
+export class ConsultationEvent {
+
+}
+
 export class Consultation extends Entity {
   /**Id of registry item */
   registryId: string;
 
-  /**consultation event ids */
-  events: string[];
+  /**date consultation was completed */
+  public dateCompleted: Date;
+
+  /**Date consultation was requested */
+  public dateRequested: Date;
+  
+  /**Date consultation is expected back */
+  public dateDue: Date;
+
+  /**user requesting */
+  public requestingUser: UserInfo;
+
+  /**user logging return */
+  public returnedByUser: UserInfo;
 
   /**Contact */
   organisation: Contact;
@@ -18,7 +35,7 @@ export class Consultation extends Entity {
   comments: string;
 
   /**Document/letter sent to consulting group */
-  documentId: string
+  documentId: string;
 
   /**Attachment id  */
   attachment: string;
@@ -30,24 +47,23 @@ export class Consultation extends Entity {
     this.comments = comments;
     this.documentId = documentId;
     this.attachment = attachmentId;
-    this.events = [];
   }
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Consultation cannot be transient');
     Assert.isTruthy(this.registryId, 'Consutlation must have a valid registry id');
     Assert.isTruthy(this.organisation, 'Consutlation must have a valid organisation');
-    Assert.isTruthy(this.events, 'Consutlation must have a valid set of events');
+    Assert.isTruthy(this.dateRequested, 'Consutlation must have a requested date');
+    Assert.isTruthy(this.dateDue, 'Consutlation must have a due date');
   }
 
-  public addEvent(eventId) {
-    this.events.push(eventId);
-  }
 
   public static createId(registryId: string = '', guid: string = '') {
-    if (!registryId || !guid)
+    if(!registryId)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION);
+    if (!guid)
       return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId);
-    return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId, Date.now().toString(), guid);
+    return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId, guid);
   }
 
   /**

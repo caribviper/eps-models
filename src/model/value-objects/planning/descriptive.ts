@@ -3,10 +3,10 @@
 export class CategoryDescription {
   /**
    * Creates a new category description
-   * @param categoryName Name of the category
+   * @param category Name of the category
    * @param string Additional descriptive information
    */
-  constructor(public categoryName: string = '', public description: string ='') { }
+  constructor(public category: string = '', public description: string ='') { }
 }
 
 /**
@@ -74,14 +74,14 @@ export class InterestInLand {
  */
 export class Materials {
   /**Description of wall materials. */
-  wallMaterials: string = 'NONE';
+  wall: string = 'NONE';
 
   /**Description of roof covering materials. */
-  roofCoveringMaterials: string = 'NONE';
+  roofCovering: string = 'NONE';
 
   /**Description of roof support materials. */
-  roofSupportOrFloorMaterials: string = 'NONE';
+  roofSupportOrFloor: string = 'NONE';
 
   /**Description of Roof covering - other */
-  roofCoveringMaterialsOther: string = 'NONE';
+  roofCoveringOther: string = 'NONE';
 }

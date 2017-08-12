@@ -1,4 +1,4 @@
-import { Assert } from 'caribviper-common';
+import { Assert, Utilities } from 'caribviper-common';
 import { Entity } from 'caribviper-entities';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Address } from './../../value-objects/common/address';
@@ -12,19 +12,27 @@ export class Agency extends Entity {
   /**
    * Agency contact
    */
-  contact: Contact;
+  public contact: Contact;
 
   /**Indicates whether the agency is a government site */
-  isGovernment: boolean = false;
+  public isGovernment: boolean = false;
 
   /**Indicates whether the agency can be used for consultancy */
-  canConsultWith: boolean = false;
+  public consulting: boolean = false;
 
-  constructor(contact: Contact | string = '') {
-    super(ENTITY_MODELS.PLANNING.AGENT, Agency.createId(contact), true);
+  /**Agency code for some agencies */
+  public code: string = '';
+
+  constructor(contact: Contact | string = '', guid: string = '') {
+    super(ENTITY_MODELS.PLANNING.AGENCY, Agency.createId(guid), true);
     if (typeof contact !== 'string') {
       this.contact = contact;
     }
+    else{
+      this.contact = new Contact();
+      this.contact.company = contact;
+    }
+    this.code = guid;
   }
 
   public validateEntity() {
@@ -34,15 +42,10 @@ export class Agency extends Entity {
     Assert.isTruthy(this.contact.address, 'Must have a valid address');
   }
 
-  public static createId(company: string | { firstname: string, lastname: string } = ''): string {
-    let name: string = '';
-    if (typeof company !== 'string')
-      name = `${company.firstname}_${company.lastname}`
-    else if (typeof company === undefined)
-      name = '';
-    else
-      name = company;
-    return Entity.generateId(ENTITY_MODELS.PLANNING.AGENT, name);
+  public static createId(guid: string = undefined): string {
+    if(!guid)
+    return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY);
+    return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY, guid);
   }
 
   public static mapToEntity(source: Agency): Agency {

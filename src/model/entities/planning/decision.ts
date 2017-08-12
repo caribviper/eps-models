@@ -14,7 +14,7 @@ export const DECISION_AUTHORITY = {
 export class DecisionItem {
   /**Order of the decision item */
   order: number;
-  
+
   /**Decision item number */
   itemNumber: number;
 
@@ -33,7 +33,7 @@ export class DecisionItem {
   constructor(order: number, itemNo: number, template: DecisionItemTemplate) {
     this.order = order;
     this.itemNumber = itemNo;
-    if(!template)
+    if (!template)
       throw new Error('Invalid template used to create DecisionItem');
     this.templateType = template.decisionType;
     this.templateNumber = template.itemNo;
@@ -114,13 +114,13 @@ export class Decision extends Entity {
   properties: DecisionProperty[];
 
   /**Decision items linked to decision from CTP */
-  DecisionItems: DecisionItem[];
+  decisionItems: DecisionItem[];
 
   /**decision information from minister */
   ministerialContent: string;
 
-  constructor(registryId: string = '') {
-    super(ENTITY_MODELS.PLANNING.DECISION, Decision.createId(registryId), true);
+  constructor(registryId: string = '', guid: string = '') {
+    super(ENTITY_MODELS.PLANNING.DECISION, Decision.createId(registryId, guid), true);
     this.registryId = registryId;
   }
 
@@ -141,8 +141,10 @@ export class Decision extends Entity {
     return this.properties[0].approved;
   }
 
-  public static createId(registryId: string): string {
-    return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId);
+  public static createId(registryId: string, guid: string = ''): string {
+    if (!guid)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId);
+    return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId, guid);
   }
 
   /**

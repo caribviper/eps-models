@@ -16,7 +16,7 @@ export class Contact {
    * @param telephone Telephone number of the contact
    * @param mobile Mobile number of the contact
    */
-  constructor(public address: Address = undefined, public company: string = '', public firstname: string = '', public lastname: string = '', public title: string = '',  public email: string ='', public telephone: string = '', public mobile: string) { }
+  constructor(public address: Address = undefined, public company: string = '', public firstname: string = '', public lastname: string = '', public title: string = '',  public email: string ='', public telephone: string = '', public mobile: string ='') { }
 }
 
 export class ContactEssentials {

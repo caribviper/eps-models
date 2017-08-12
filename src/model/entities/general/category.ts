@@ -9,7 +9,7 @@ export class CategoryNameValue {
 
   constructor(name: string, value: any = '') {
     this.name = name;
-    this.value = (!!value) ? value : name;
+    this.value = value || name;
   }
 }
 
@@ -17,25 +17,21 @@ export class CategoryNameValue {
  * Stores Category
  */
 export class Category extends Entity {
-  /** Name of the category*/
-  public name: string;
-  /** CategoryNameValues mapped to the category*/
-  public values: CategoryNameValue[] = [];
 
   /**
    * Creates a new Category
    * @param name Name of the category
    * @param values CategoryNameValues mapped to the category
    */
-  constructor(name: string = '', values: CategoryNameValue[] = []) {
-    super(ENTITY_MODELS.GENERAL.CATEGORY, name);
-    this.values = [];
+  constructor(public name: string = '', public values: CategoryNameValue[] = []) {
+    super(ENTITY_MODELS.GENERAL.CATEGORY, Category.createId(name), true);
+    this.values = values || [];
   }
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Entity cannot be transient');
-    Assert.isTruthy(this.name, 'Username cannot be null/empty');
-    Assert.isTruthy(this.values, 'Values cannot be null');
+    Assert.isTruthy(this.name, 'Category name cannot be null/empty');
+    Assert.isTruthy(this.values, 'Category values cannot be null');
   }
 
   /**

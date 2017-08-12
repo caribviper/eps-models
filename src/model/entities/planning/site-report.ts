@@ -70,7 +70,12 @@ export class SiteReportDevelopment extends SiteReport {
   wallsOrEnclosures: boolean = false;
 
   public static createId(registryId: string = '', username: string = ''): string {
-    return super.createId(registryId, username, ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT);
+    if(!registryId)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT);
+    else if(!username)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId);
+    else 
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId, username, Date.now().toString());
   }
 
   /**
@@ -101,8 +106,13 @@ export class SiteReportEnforcement extends SiteReport {
   /**The land tax number of the property. */
   landTaxNo: string;
 
-  public static createId(registryId: string = '', username: string = ''): string {
-    return super.createId(registryId, username, ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT);
+  public static createId(registryId: string = '', username: string = ''): string {    
+    if(!registryId)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT);
+    else if(!username)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId);
+    else 
+      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId, username, Date.now().toString());
   }
 
   /**

@@ -1,4 +1,26 @@
 import { Assert } from 'caribviper-common';
+
+/**All possible statuses */
+export const FILE_STATUS = {
+  APPROVED: 'Approved',
+  DENIED: 'Denied',
+  DISMISSED: 'Dismissed',
+  DRAFT: 'Draft',
+  ENFORCEMENT: 'Enforcement',
+  EXECUTUION: 'Execution',
+  FINAL: 'Final',
+  INDEFINTE_DEFERAL: 'Indefinte Deferral',
+  INVESTIGATING: 'Investigating',
+  ISSUED: 'Issued',
+  LAPSED: 'Lapsed',
+  REFUSED: 'Refused',
+  REVOCATED: 'Revocated',
+  SECTION37: 'Section37',
+  STOPPED: 'Stopped',
+  SUBMITTED: 'Submitted',
+  WARNING: 'Warning',
+  WITHDRAWN: 'Withdrawn'
+}
 /**
  * Encapsulates the file types
  */
@@ -6,11 +28,11 @@ export class FileType {
   /**
    * 
    * @param displayName Name displayed for the file type
-   * @param storageArea Prefix location where files are stored
+   * @param folderPrefix Prefix location where files are stored
    * @param prefix Prefix forming part of application number
    * @param isApplication Specifies whether the file type is an application
    */
-  constructor(public displayName: string, public storageArea: string, public prefix: string, public isApplication: boolean = false) {
+  constructor(public displayName: string, public folderPrefix: string, public prefix: string, public isApplication: boolean = false) {
     Assert.isTruthy(displayName, 'Display name cannot be undefined or empty');
   }
 }
@@ -40,20 +62,20 @@ export class RegistryFileTypes {
   private static _chattel = new FileType(FILE_TYPES.CHATTEL, 'CH', '', true);
   private static _permitted = new FileType(FILE_TYPES.PERMITTED, 'PD', '', true);
   private static _listed = new FileType(FILE_TYPES.LISTED, 'LB', '', true);
-  private static _tree = new FileType(FILE_TYPES.TREE, 'KT', '', true);
+  private static _tree = new FileType(FILE_TYPES.TREE, 'KT', 'T', true);
 
   private static _unauthorised = new FileType(FILE_TYPES.UNAUTHORISED, 'UA', '522', false);
   private static _complaint = new FileType(FILE_TYPES.COMPLAINT, 'FA', 'C', false);
   private static _enquiry = new FileType(FILE_TYPES.ENQUIRY, 'E', '288', false);
   private static _enforcement = new FileType(FILE_TYPES.ENFORCEMENT, 'EN', '', false);
-  
+
   private static _certificate = new FileType(FILE_TYPES.CERTIFICATE, 'COC', 'COC', true);
   private static _buildingStart = new FileType(FILE_TYPES.BUILDING_START, 'BS', 'BS', true);
   private static _continuingUse = new FileType(FILE_TYPES.CONTINUING_USE, 'CC', 'CC', true);
   private static _temporaryUse = new FileType(FILE_TYPES.TEMPORARY_DEVELOPMENT, 'TT', 'TT', true);
 
   public static get formal() { return this._formal; }
-  public static get chattel() { return this._chattel ; }
+  public static get chattel() { return this._chattel; }
   public static get permitted() { return this._permitted; }
   public static get listed() { return this._listed; }
   public static get tree() { return this._tree; }
@@ -62,9 +84,27 @@ export class RegistryFileTypes {
   public static get complaint() { return this._complaint; }
   public static get enquiry() { return this._enquiry; }
   public static get enforcement() { return this._enforcement; }
-  
+
   public static get certificate() { return this._certificate; }
   public static get buildingStart() { return this._buildingStart; }
   public static get continuingUse() { return this._continuingUse; }
   public static get temporaryUse() { return this._temporaryUse; }
+}
+
+/**Type of notice */
+export class NoticeType {
+  /**
+   * Creates a new notice type
+   * @param name Name of the notice
+   * @param prefix prefix associated with notice
+   */
+  constructor(public name: string, public prefix: string) { }
+}
+
+export class RegistryNoticeTypes {
+  public static warning(): NoticeType { return new NoticeType('warning', 'WN'); }
+  public static enforcement(): NoticeType { return new NoticeType('enforcement', 'EN'); }
+  public static final(): NoticeType { return new NoticeType('final', 'FN'); }
+  public static stop(): NoticeType { return new NoticeType('stop', 'SN'); }
+  public static section37(): NoticeType { return new NoticeType('warning', 'S37N'); }
 }

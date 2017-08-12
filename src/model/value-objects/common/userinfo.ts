@@ -4,8 +4,9 @@ export class UserInfo {
   /**
    * Creates a new userinfo
    * @param username User name of the user
-   * @param firstname First name of the user
-   * @param lastname Last name of the user
+   * @param fullname Fullname of the user
    */
-  constructor(public username: string, public firstname: string, public lastname: string) { }
+  constructor(public username: string, public fullname: string) { }
 }
+
+export const SYSTEM_USER = new UserInfo('system', 'system');

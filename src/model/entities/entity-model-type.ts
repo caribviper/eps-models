@@ -1,15 +1,15 @@
 export const ENTITY_MODELS = {
   //Planning Types
   PLANNING: {
-    AGENT: 'agent',
+    AGENCY: 'agency',
     ATTACHMENT: 'attachment',
     CONSULTATION: 'consultation',
     DECISION: 'decision',
     REPORT: 'report',
     //used for searches and not creation of ids
-    SITE_REPORT: 'site',
-    SITE_REPORT_DEVELOPMENT: 'site:development',
-    SITE_REPORT_ENFORCEMENT: 'site:enforcement',
+    SITE_REPORT: 'report:site',
+    SITE_REPORT_DEVELOPMENT: 'report:site:development',
+    SITE_REPORT_ENFORCEMENT: 'report:site:enforcement',
     REGISTRY_ITEM: 'registry'
   },
   REGISTRY_DETAILS: {

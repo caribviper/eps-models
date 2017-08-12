@@ -12,6 +12,9 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
   /**Specifies if the development is in retention */
   retention: boolean = false;
 
+  /**Propose development to take place */
+  proposedDevelopment: CategoryDescription;
+
 	/**
 	 * Type of formal applicaiton.
 	 * These types can Building construction, subdivision, change of use of land/building,  mining or engineering.
@@ -113,40 +116,24 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
 
   get isSection18(): boolean {
     return (this.onCoastline ||
-      (this.proposedPrimaryLandUse.categoryName === 'AGRICULTURE' && this.measurements.areaOfSite > 8093.7128448));
+      (this.proposedPrimaryLandUse.category === 'AGRICULTURE' && this.measurements.areaOfSite > 8093.7128448));
   }
 
   /**
    * Creates new Formal details
-   * @param registryId linked registry id
    */
-  constructor(registryId: string = '') {
-    super(ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.FORMAL, FormalApplication.createId(registryId), true);
-    this.registryId = registryId;
+  constructor() {
+    super();
     this.interestInLand = new InterestInLand();
     this.materials = new Materials();
     this.currentLandUse = new CategoryDescription('', '');
   }
 
   public validateEntity() {
-    Assert.isFalse(this.isTransient, 'Formal cannot be transient');
-    Assert.isTruthy(this.registryId, 'Formal registryId cannot be undefined/empty');
     Assert.isTruthy(this.interestInLand, 'Formal interestInLand cannot be undefined');
     Assert.isTruthy(this.materials, 'Formal materials cannot be undefined');
     Assert.isTruthy(this.currentLandUse, 'Formal currentLandUse cannot be undefined');
     Assert.isTruthy(this.formalType, 'Formal formalType cannot be undefined/empty');
-  }
-
-  public static createId(registryId: string): string {
-    return this.idHelper(registryId, ENTITY_MODELS.REGISTRY_DETAILS.APPLICATIONS.FORMAL);
-  }
-
-  /**
-   * Maps data from source to an entity of this type
-   * @param source Data to be mapped to the entity
-   */
-  public static mapToEntity(source: FormalApplication): FormalApplication {
-    return Object.assign(new FormalApplication(), source);
   }
 
 }

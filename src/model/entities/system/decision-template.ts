@@ -2,6 +2,7 @@ import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entities';
 
+
 /**Template bases for decision items */
 export class DecisionItemTemplate extends Entity {
 
