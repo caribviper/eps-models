@@ -16,15 +16,13 @@ export class Report extends BaseReport {
     this.description = description;
   }
 
-  public static createId(registryId: string, username: string = '', ...identifiers: string[]): string {
+  public static createId(registryId: string, username: string = ''): string {
     if(!registryId)
       return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT);
     else if(!username)
       return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId);
-    else if(!identifiers || identifiers.length< 1)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId, username, Date.now().toString());
     else
-      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId, username, ...identifiers, Date.now().toString());
+      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId, username, Date.now().toString());
   }
 
   /**

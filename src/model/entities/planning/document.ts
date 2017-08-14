@@ -30,8 +30,6 @@ export class Document extends Entity {
   /**Registry Id */
   registryId: string = '';
 
-  /**Indicates if the document a draft */
-  draft: boolean;
 
   /** Type of document */
   documentType: string = '';
@@ -84,6 +82,11 @@ export class Document extends Entity {
     Assert.isTruthy(this.property, 'Document property cannot be undefined');
   }
 
+  /**Indicates if the document a draft */
+  public get isDraft(): boolean {
+    return !this.finalisedDate;
+  }
+
   public dispatch(dispatchingUser: UserInfo) {
     if (!this.finalisedDate)
       throw new Error('Document has not been finalised');
@@ -92,15 +95,19 @@ export class Document extends Entity {
     this.update();
   }
 
-  public finalise(requestingUser: UserInfo) {
+  public finalise(requestingUser: UserInfo) : boolean {
     if (this.owner.username === requestingUser.username) {
       this.finalisedDate = new Date();
       this.update();
+      return true;
     }
+    return false;
   }
 
   public static createId(registryId: string = '', guid: string = ''): string {
-    if (!registryId || !guid)
+    if (!registryId)
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT);
+    if (!guid)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT);
     return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT, registryId, guid);
   }

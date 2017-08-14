@@ -25,7 +25,7 @@ export class DecisionItemTemplate extends Entity {
     Assert.isTruthy(this.description, 'DecisionItemTemplate description cannot be undefined/empty');
   }
 
-  public static createId(decisionType: string = '', itemNo: number = undefined): string {
+  public static createId(decisionType: string = '', itemNo: number = -1): string {
     if (!decisionType)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.DECISION_TEMPLATE);
     else if (!itemNo || itemNo < 1)

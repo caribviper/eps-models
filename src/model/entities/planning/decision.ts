@@ -98,6 +98,11 @@ export class DecisionProperty {
       this.signingUser = ctpUser;
   }
 
+  loggedAppeal(appealDate: Date) {
+    if (this.isFinalised)
+      this.appealed = appealDate;
+  }
+
   validateProperty() {
     Assert.isTruthy(this.authority, 'Decision Property authority cannot be undefined/empty');
     Assert.isTruthy(this.preparedBy, 'Decision Property preparedBy cannot be undefined/empty');
@@ -111,7 +116,7 @@ export class Decision extends Entity {
   registryId: string;
 
   /**Properties associated with the decision */
-  properties: DecisionProperty[];
+  properties: DecisionProperty
 
   /**Decision items linked to decision from CTP */
   decisionItems: DecisionItem[];
@@ -127,18 +132,23 @@ export class Decision extends Entity {
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Decision cannot be transient');
     Assert.isTruthy(this.registryId, 'Decision registryId cannot be undefined/empty');
-    Assert.isNonEmptyArray(this.properties, 'Decision properties cannot be undefined/empty and must contain at least one item');
-    this.properties.forEach(property => {
-      property.validateProperty();
-    });
+    //Assert.isNonEmptyArray(this.decisionItems, 'Decision items cannot be undefined/empty and must contain at least one item');
+    this.properties.validateProperty();
   }
 
   get approved(): boolean {
-    if (!this.properties || this.properties.length < 1)
-      return false;
-    if (this.properties.length > 1)
-      return this.properties[1].approved;
-    return this.properties[0].approved;
+    return !!this.properties && this.properties.approved;
+  }
+
+  get finalised(): boolean {
+    return !!this.properties && this.finalised;
+  }
+
+  public static createNew(registryId: string, guid: string, approved: boolean, preparedBy: UserInfo): Decision {
+    let d = new Decision(registryId, guid);
+    d.properties = new DecisionProperty(DECISION_AUTHORITY.CTP.name, approved, preparedBy);
+    d.decisionItems = [];
+    return d;
   }
 
   public static createId(registryId: string, guid: string = ''): string {

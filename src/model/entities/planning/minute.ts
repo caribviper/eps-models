@@ -68,8 +68,10 @@ export class Minute extends Entity {
   }
   
   public static createId(registryId: string = '', guid: string = '') : string {
-    if(!registryId || !guid)
+    if(!registryId)
       return Entity.generateId(ENTITY_MODELS.GENERAL.MINUTE);
+    if(guid)
+      return Entity.generateId(ENTITY_MODELS.GENERAL.MINUTE, registryId);
     return Entity.generateId(ENTITY_MODELS.GENERAL.MINUTE, registryId, guid);
   }
 

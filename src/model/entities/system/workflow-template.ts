@@ -66,7 +66,9 @@ export class WorkflowTemplate extends Entity {
     this.activities[index2] = tmp;
   }
 
-  public static createId(name: string): string {
+  public static createId(name: string = ''): string {
+    if (!name)
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW_TEMPLATE);
     return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW_TEMPLATE, name);
   }
 

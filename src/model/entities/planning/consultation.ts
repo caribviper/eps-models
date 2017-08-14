@@ -5,9 +5,6 @@ import { Contact } from './../../value-objects/common/contact';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entities';
 
-export class ConsultationEvent {
-
-}
 
 export class Consultation extends Entity {
   /**Id of registry item */
@@ -33,6 +30,9 @@ export class Consultation extends Entity {
 
   /**Comments/information sent to agency */
   comments: string;
+
+  /**Comments/information sent from agency */
+  agencyComment: string;
 
   /**Document/letter sent to consulting group */
   documentId: string;

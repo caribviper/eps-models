@@ -26,8 +26,6 @@ export * from './model/entities/entity-model-type';
 
 export * from './model/entities/general/category';
 export * from './model/entities/general/agency';
-export * from './model/entities/general/document';
-export * from './model/entities/general/workflow-event';
 
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
@@ -36,12 +34,14 @@ export * from './model/entities/security/user';
 
 export * from './model/entities/planning/registry-item';
 export * from './model/entities/planning/consultation';
+export * from './model/entities/planning/document';
 export * from './model/entities/planning/minute';
 export * from './model/entities/planning/attachment';
 export * from './model/entities/planning/report-base';
 export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
+export * from './model/entities/planning/workflow-event';
 
 export * from './model/entities/planning/iregistry-details';
 export * from './model/entities/planning/applications/certificate';
