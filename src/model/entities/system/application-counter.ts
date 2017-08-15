@@ -42,7 +42,17 @@ export class ApplicationCounter extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: ApplicationCounter): ApplicationCounter {
-    return Object.assign(new ApplicationCounter(), source);
+  public static mapToEntity(source: ApplicationCounter | ApplicationCounter[]): ApplicationCounter | ApplicationCounter[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new ApplicationCounter(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new ApplicationCounter(), source);
   }
 }

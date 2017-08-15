@@ -114,6 +114,7 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
   /**Gets whether there is a BoardOfHealth reference no. */
   get hasReferenceNo() { return this.referenceNo ? true : false; }
 
+  /**Determine if the application warrants a section 18 */
   get isSection18(): boolean {
     return (this.onCoastline ||
       (this.proposedPrimaryLandUse.category === 'AGRICULTURE' && this.measurements.areaOfSite > 8093.7128448));

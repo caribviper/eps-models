@@ -79,7 +79,17 @@ export class Minute extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: Minute): Minute {
-    return Object.assign(new Minute(), source);
+  public static mapToEntity(source: Minute | Minute[]): Minute | Minute[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new Minute(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new Minute(), source);
   }
 }

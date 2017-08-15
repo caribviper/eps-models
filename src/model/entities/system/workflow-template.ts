@@ -76,8 +76,18 @@ export class WorkflowTemplate extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: WorkflowTemplate): WorkflowTemplate {
-    return Object.assign(new WorkflowTemplate(), source);
+  public static mapToEntity(source: WorkflowTemplate | WorkflowTemplate[]): WorkflowTemplate | WorkflowTemplate[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new WorkflowTemplate(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new WorkflowTemplate(), source);
   }
 }
 

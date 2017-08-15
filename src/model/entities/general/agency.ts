@@ -28,7 +28,7 @@ export class Agency extends Entity {
     if (typeof contact !== 'string') {
       this.contact = contact;
     }
-    else{
+    else {
       this.contact = new Contact();
       this.contact.company = contact;
     }
@@ -43,12 +43,22 @@ export class Agency extends Entity {
   }
 
   public static createId(guid: string = undefined): string {
-    if(!guid)
-    return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY);
+    if (!guid)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY);
     return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY, guid);
   }
 
-  public static mapToEntity(source: Agency): Agency {
-    return Object.assign(new Agency(), source);
+  public static mapToEntity(source: Agency | Agency[]): Agency | Agency[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new Agency(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new Agency(), source);
   }
 }

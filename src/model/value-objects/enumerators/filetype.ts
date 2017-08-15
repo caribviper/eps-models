@@ -21,6 +21,39 @@ export const FILE_STATUS = {
   WARNING: 'Warning',
   WITHDRAWN: 'Withdrawn'
 }
+
+/**Used to get the string status of applications */
+export class FileStatusFactory {
+  private static dictionary = {
+    '0': 'SUBMITTED',
+    '1': 'PERMITTED',
+    '2': 'REFUSED',
+    '3': 'WITHDRAWN',
+    '4': 'DRAFT',
+    '5': 'PERMISSION LAPSED',
+    '101': 'ISSUED',
+    '102': 'DENIED',
+    '103': 'REVOCATED',
+    '200': 'INVESTIGATING',
+    '201': 'WARNING NOTICE SERVED',
+    '202': 'ENFORCEMENT NOTICE SERVED',
+    '203': 'STOP NOTICE SERVED',
+    '204': 'FINAL NOTICE SERVED',
+    '205': 'SECTION37 NOTICE SERVED',
+    '206': 'ENFORCEMENT EXECUTED',
+    '207': 'INDEFINTE DEFFERAL',
+    '208': 'DISMISSED'
+  }
+  /**
+   * Converts numerical status to string status
+   * @param status Numerical status to be converted to string
+   */
+  public static convertToStringStatus(status: any): string {
+    return this.dictionary[status.toString()];
+
+  }
+}
+
 /**
  * Encapsulates the file types
  */
@@ -65,7 +98,7 @@ export class RegistryFileTypes {
   private static _tree = new FileType(FILE_TYPES.TREE, 'KT', 'T', true);
 
   private static _unauthorised = new FileType(FILE_TYPES.UNAUTHORISED, 'UA', '522', false);
-  private static _complaint = new FileType(FILE_TYPES.COMPLAINT, 'FA', 'C', false);
+  private static _complaint = new FileType(FILE_TYPES.COMPLAINT, 'C', '404', false);
   private static _enquiry = new FileType(FILE_TYPES.ENQUIRY, 'E', '288', false);
   private static _enforcement = new FileType(FILE_TYPES.ENFORCEMENT, 'EN', '', false);
 

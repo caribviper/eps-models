@@ -111,7 +111,17 @@ export class User extends Entity {
     return Entity.generateId(ENTITY_MODELS.SECURITY.USER, username);
   }
 
-  public static mapToEntity(user: User) : User {
-    return Object.assign(new User(), user);
+  public static mapToEntity(source: User | User[]) : User | User[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new User(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new User(), source);
   }
 }

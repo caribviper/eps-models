@@ -82,8 +82,18 @@ export class SiteReportDevelopment extends SiteReport {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: SiteReportDevelopment): SiteReportDevelopment {
-    return Object.assign(new SiteReportDevelopment(), source);
+  public static mapToEntity(source: SiteReportDevelopment | SiteReportDevelopment[]): SiteReportDevelopment | SiteReportDevelopment[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new SiteReportDevelopment(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new SiteReportDevelopment(), source);
   }
 
 }
@@ -119,8 +129,18 @@ export class SiteReportEnforcement extends SiteReport {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: SiteReportEnforcement): SiteReportEnforcement {
-    return Object.assign(new SiteReportEnforcement(), source);
+  public static mapToEntity(source: SiteReportEnforcement | SiteReportEnforcement[]): SiteReportEnforcement | SiteReportEnforcement[] {
+    if (source instanceof Array) {
+      if (source.length < 1)
+        return [];
+      let array = [];
+      source.forEach(element => {
+        array.push(Object.assign(new SiteReportEnforcement(), source));
+      });
+      return array;
+    }
+    else
+      return Object.assign(new SiteReportEnforcement(), source);
   }
 
 }
