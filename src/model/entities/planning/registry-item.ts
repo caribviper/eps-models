@@ -1,3 +1,7 @@
+import { Invest } from './enforcement/invest';
+import { KillTreeApplication } from './applications/tree';
+import { FormalApplication } from './applications/formal';
+import { ChattelApplication } from './applications/chattel';
 import { Notice } from './enforcement/notice';
 import { IRegistryDetails, RegistryDetails } from './iregistry-details';
 import { CategoryDescription } from './../../value-objects/planning/descriptive';
@@ -86,6 +90,7 @@ export class Stakeholder {
    * @param stakeholderType Type of stakeholder
    */
   constructor(public contact: Contact, public stakeholderType: string) { }
+
 }
 
 /**Registry information */
@@ -157,6 +162,9 @@ export class RegistryItem extends Entity {
   /**associated notices */
   notices: Notice[] = [];
 
+  /**This registry item has been flagged as major application */
+  majorApplication: boolean = false;
+
   /**
    * 
    * @param fileType Type of registry file to create
@@ -166,6 +174,56 @@ export class RegistryItem extends Entity {
     super(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, RegistryItem.createId(fileType || RegistryFileTypes.formal, guid));
     this.fileType = fileType || RegistryFileTypes.formal;
     this.stakeholders = [];
+  }
+
+  /**Gets the description about the land */
+  get landDescription(): string {
+    let description = '';
+    if (!this.details)
+      return description;
+    switch (this.fileType.folderPrefix) {
+      case 'CH': { description = (this.details as ChattelApplication).proposedDevelopment; break; }
+      case 'FA': { description = (this.details as FormalApplication).proposedDevelopment.description; break; }
+      case 'KT': { description = `Termination of ${(this.details as KillTreeApplication).numberOfTrees} trees`; break; }
+      case 'PD': { description = 'Development of Permitted Structure'; break; }
+      case 'C':
+      case 'E':
+      case 'UA': { description = (this.details as Invest).offendingAction; break; }
+      case 'BS': { description = 'BUILDING START REQUEST'; break; }
+      case 'COC': { description = 'CERTIFICATE OF COMPLIANCE REQUEST'; break; }
+      case 'CC': { description = 'CONTINUING USE CERTIFICATE'; break; }
+      case 'TT': { description = 'USE OF BANNER/TENT/ENTERTAINMENT VENUE'; break; }
+      default: { description = ''; break; }
+    }
+    return description;
+
+  }
+
+  get agent(): Stakeholder {
+    if (!!this.stakeholders && this.stakeholders.length > 1) {
+      return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.AGENT });
+    }
+    return undefined;
+  }
+
+  get applicant(): Stakeholder {
+    if (!!this.stakeholders && this.stakeholders.length > 0) {
+      return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT });
+    }
+    return undefined;
+  }
+
+  get otherApplicants(): Stakeholder[] {
+    let array: Stakeholder[] = [];
+    this.stakeholders.forEach((s: Stakeholder) => {
+      if (s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY)
+        array.push(s);
+    });
+    return array;
+  }
+
+  getStakeholderContactFullname(s: Stakeholder) {
+    return (!!s && !!s.contact) ? (s.contact.firstname + " " + s.contact.lastname).trim() : '';
   }
 
   public validateEntity() {
@@ -204,24 +262,26 @@ export class RegistryItem extends Entity {
 
 
   public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
-    return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).folderPrefix, guid || Utilities.guid());
+    if (!guid)
+      return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).folderPrefix, guid);
+    return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).folderPrefix, guid);
   }
 
   /**
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: RegistryItem | RegistryItem[]): RegistryItem | RegistryItem[] {
-    if (source instanceof Array) {
-      if (source.length < 1)
-        return [];
-      let array = [];
-      source.forEach(element => {
-        array.push(Object.assign(new RegistryItem(), source));
-      });
-      return array;
-    }
-    else
-      return Object.assign(new RegistryItem(), source);
+  public static mapToEntity(source): RegistryItem {
+    return Object.assign(new RegistryItem(), source);
+  }
+
+  public static mapToEntityArray(source: RegistryItem[]): RegistryItem[] {
+    if (source.length < 1)
+      return [];
+    let array = [];
+    source.forEach(element => {
+      array.push(Object.assign(new RegistryItem(), element));
+    });
+    return array;
   }
 }

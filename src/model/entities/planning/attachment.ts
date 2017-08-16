@@ -54,17 +54,17 @@ export class Attachment extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: Attachment | Attachment[]): Attachment | Attachment[] {
-    if (source instanceof Array) {
-      if (source.length < 1)
-        return [];
-      let array = [];
-      source.forEach(element => {
-        array.push(Object.assign(new Attachment(), source));
-      });
-      return array;
-    }
-    else
-      return Object.assign(new Attachment(), source);
+  public static mapToEntity(source): Attachment {
+    return Object.assign(new Attachment(), source);
+  }
+
+  public static mapToEntityArray(source: Attachment[]): Attachment[] {
+    if (source.length < 1)
+      return [];
+    let array = [];
+    source.forEach(element => {
+      array.push(Object.assign(new Attachment(), element));
+    });
+    return array;
   }
 }

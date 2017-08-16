@@ -48,17 +48,17 @@ export class Agency extends Entity {
     return Entity.generateId(ENTITY_MODELS.PLANNING.AGENCY, guid);
   }
 
-  public static mapToEntity(source: Agency | Agency[]): Agency | Agency[] {
-    if (source instanceof Array) {
-      if (source.length < 1)
-        return [];
-      let array = [];
-      source.forEach(element => {
-        array.push(Object.assign(new Agency(), source));
-      });
-      return array;
-    }
-    else
-      return Object.assign(new Agency(), source);
+  public static mapToEntity(source): Agency {
+    return Object.assign(new Agency(), source);
+  }
+
+  public static mapToEntityArray(source: Agency[]): Agency[] {
+    if (source.length < 1)
+      return [];
+    let array = [];
+    source.forEach(element => {
+      array.push(Object.assign(new Agency(), element));
+    });
+    return array;
   }
 }

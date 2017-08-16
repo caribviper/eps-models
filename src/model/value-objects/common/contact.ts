@@ -4,7 +4,7 @@ import { Address } from './address';
 export class Contact {
 
   public middleName: string;
-   
+
   /**
    * Creates a new contact
    * @param address Address of the contact
@@ -16,20 +16,21 @@ export class Contact {
    * @param telephone Telephone number of the contact
    * @param mobile Mobile number of the contact
    */
-  constructor(public address: Address = undefined, public company: string = '', public firstname: string = '', public lastname: string = '', public title: string = '',  public email: string ='', public telephone: string = '', public mobile: string ='') { }
+  constructor(public address: Address = undefined, public company: string = '', public firstname: string = '', public lastname: string = '', public title: string = '', public email: string = '', public telephone: string = '', public mobile: string = '') { }
+
 }
 
 export class ContactEssentials {
   public middleName: string;
 
-/**
-   * Creates a new contact
-   * @param firstname Firstname of the contact
-   * @param lastname Lastname of the contact
-   * @param title Title of the contact
-   * @param email Email address of the contact
-   * @param telephone Telephone number of the contact
-   */
-  constructor(public firstname: string, public lastname: string, public title: string = '',  public email: string ='', public telephone: string = '') { }
+  /**
+     * Creates a new contact
+     * @param firstname Firstname of the contact
+     * @param lastname Lastname of the contact
+     * @param title Title of the contact
+     * @param email Email address of the contact
+     * @param telephone Telephone number of the contact
+     */
+  constructor(public firstname: string, public lastname: string, public title: string = '', public email: string = '', public telephone: string = '') { }
 
 }

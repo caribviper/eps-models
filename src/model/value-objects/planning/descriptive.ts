@@ -35,7 +35,7 @@ export class CommercialDescription {
   hazardousMaterialDescription: string = '';
 
   /**Gets whether the proposed development involves the usage of hazardaous materials. */
-  get InvolvesHazardousMaterial() { return this.hazardousMaterialDescription ? true : false; }
+  get involvesHazardousMaterial() { return this.hazardousMaterialDescription ? true : false; }
 }
 
 /**

@@ -39,17 +39,17 @@ export class Group extends Entity {
     return Entity.generateId(ENTITY_MODELS.SECURITY.GROUP, groupName);
   } 
 
-  public static mapToEntity(source: Group | Group[]) : Group | Group[] {
-    if (source instanceof Array) {
-      if (source.length < 1)
-        return [];
-      let array = [];
-      source.forEach(element => {
-        array.push(Object.assign(new Group(), source));
-      });
-      return array;
-    }
-    else
-      return Object.assign(new Group(), source);
+  public static mapToEntity(source): Group {
+    return Object.assign(new Group(), source);
+  }
+
+  public static mapToEntityArray(source: Group[]): Group[] {
+    if (source.length < 1)
+      return [];
+    let array = [];
+    source.forEach(element => {
+      array.push(Object.assign(new Group(), element));
+    });
+    return array;
   }
 }

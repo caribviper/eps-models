@@ -31,17 +31,17 @@ export class Resource extends Entity {
     return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, url, verb);
   }
 
-  public static mapToEntity(source: Resource | Resource[]): Resource | Resource[] {
-    if (source instanceof Array) {
-      if (source.length < 1)
-        return [];
-      let array = [];
-      source.forEach(element => {
-        array.push(Object.assign(new Resource(), source));
-      });
-      return array;
-    }
-    else
-      return Object.assign(new Resource(), source);
+  public static mapToEntity(source): Resource {
+    return Object.assign(new Resource(), source);
+  }
+
+  public static mapToEntityArray(source: Resource[]): Resource[] {
+    if (source.length < 1)
+      return [];
+    let array = [];
+    source.forEach(element => {
+      array.push(Object.assign(new Resource(), element));
+    });
+    return array;
   }
 }
