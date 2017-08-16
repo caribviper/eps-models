@@ -16,7 +16,7 @@ import { RegistryItem, Stakeholder, STAKEHOLDER_TYPES, Location, Coordinate } fr
 
 export class ModelFactory {
 
-  private createRegistry(fileType: FileType): RegistryItem {
+  public static createRegistry(fileType: FileType): RegistryItem {
     let r = new RegistryItem(fileType, '');
     r.acceptingUser = new UserInfo('', '');
     r.area = '';
@@ -28,7 +28,7 @@ export class ModelFactory {
   }
 
   //create applications
-  public createFormal(): RegistryItem {
+  public static createFormal(): RegistryItem {
     let r: RegistryItem = this.createRegistry(RegistryFileTypes.formal);
     //add stakeholders
     r.stakeholders.push(
@@ -44,7 +44,7 @@ export class ModelFactory {
   }
 
   //create chattel
-  public createChattel(): RegistryItem {
+  public static createChattel(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.chattel);
     //add stakeholders
     r.stakeholders.push(
@@ -59,7 +59,7 @@ export class ModelFactory {
   }
 
   //create tree
-  public createTree(): RegistryItem {
+  public static createTree(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.tree);
     //add stakeholders
     r.stakeholders.push(
@@ -71,7 +71,7 @@ export class ModelFactory {
   }
 
   //create permitted development
-  public createPermittedDevelopment(): RegistryItem {
+  public static createPermittedDevelopment(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.permitted);
     //add stakeholders
     r.stakeholders.push(
@@ -86,7 +86,7 @@ export class ModelFactory {
   }
 
   //create building start
-  public createBuildingStart(): RegistryItem {
+  public static createBuildingStart(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.buildingStart);
     //add stakeholders
     r.stakeholders.push(
@@ -98,7 +98,7 @@ export class ModelFactory {
   }
 
   //create certifcate
-  public createCertificateOfCompliance(): RegistryItem {
+  public static createCertificateOfCompliance(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.certificate);
     //add stakeholders
     r.stakeholders.push(
@@ -111,7 +111,7 @@ export class ModelFactory {
   }
 
   //create continuing use
-  public createContinuedUseCertificate(): RegistryItem {
+  public static createContinuedUseCertificate(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.continuingUse);
     //add stakeholders
     r.stakeholders.push(
@@ -124,7 +124,7 @@ export class ModelFactory {
   }
 
   //create temporary
-  public createTemporary(): RegistryItem {
+  public static createTemporary(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.temporaryUse);
     //add stakeholders
     r.stakeholders.push(
@@ -138,7 +138,7 @@ export class ModelFactory {
   }
 
   //create complaint
-  public createComplaint(): RegistryItem {
+  public static createComplaint(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.complaint);
     //add stakeholders
     r.stakeholders.push(
@@ -151,7 +151,7 @@ export class ModelFactory {
   }
 
   //create enquiry
-  public createEnquiry(): RegistryItem {
+  public static createEnquiry(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.enquiry);
     //add stakeholders
     r.stakeholders.push(
@@ -164,7 +164,7 @@ export class ModelFactory {
   }
 
   //create unauthorised development
-  public createUnAuthorised(): RegistryItem {
+  public static createUnAuthorised(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.unauthorised);
     //add stakeholders
     r.stakeholders.push(
