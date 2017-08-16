@@ -4,16 +4,15 @@ import { IRegistryDetails, RegistryDetails } from './../iregistry-details';
 
 export class PermittedApplication extends RegistryDetails implements IRegistryDetails {
   /**Comments by accepting officer. */
-  officerComments: string;
+  officerComments: string = '';
 
   /**
-   * Creates new Chattel details
+   * Creates new Permitted details
    */
   constructor() {
     super();
   }
 
-  public validateEntity() {
-}
+  public validateEntity() { }
 
 }

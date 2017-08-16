@@ -13,10 +13,10 @@ export const DECISION_AUTHORITY = {
 /**Decision Item making up the decision */
 export class DecisionItem {
   /**Order of the decision item */
-  order: number;
+  order: number = 0;
 
   /**Decision item number */
-  itemNumber: number;
+  itemNumber: number = 0;
 
   /**Type of decision item category */
   templateType: string;
@@ -25,7 +25,7 @@ export class DecisionItem {
   templateNumber: number;
 
   /**Description of the decision item. */
-  description: string;
+  description: string = '';
 
   /**Rationale explaining the reasoning behind condition. */
   rationale: string;

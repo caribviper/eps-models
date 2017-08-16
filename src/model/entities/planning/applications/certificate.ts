@@ -22,10 +22,10 @@ export class CertificateBusinessInformation {
 export class Certificate extends RegistryDetails implements IRegistryDetails {
 
   /**Gets a referenced application registry id. */
-  applicationRegistryId: string;
+  applicationRegistryId: string = '';
 
   /**Gets or sets the reference type, with respect to the reference Secondary file number. */
-  subdivisionRegistryId: string;
+  subdivisionRegistryId: string = '';
 
   /**Date building start was certified. */
   certificationDate: Date;
@@ -34,22 +34,22 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
   certifiedBy: UserInfo;
 
   /**Gets the associated lotnumber */
-  lotNumber: string;
+  lotNumber: string = '';
 
   /**Gets the type of certificate */
-  certificateType: string;
+  certificateType: string = '';
 
   /**Specifies whether the request was made for a parital or full certificate. */
-  fullCertificate: boolean;
+  fullCertificate: boolean = false;
 
   /**Date construction began. */
   commencementDate: Date;
 
   /**Get certificate compliance business information */
-  businessInformation: CertificateBusinessInformation;
+  businessInformation: CertificateBusinessInformation = new CertificateBusinessInformation();
 
   /**Specifies the comments assocaited with the certification of the document. */
-  comments: string;
+  comments: string = '';
 
   /**Gets whether building start/certificate was certified */
   get certified(): boolean {
@@ -57,13 +57,18 @@ export class Certificate extends RegistryDetails implements IRegistryDetails {
   }
 
   /**Get document id */
-  documentId: string;
+  documentId: string = '';
 
   /**
    * Creates a new blank certificate
    */
   constructor() {
     super();
+  }
+
+  certify(certifiedDate: Date, certifiedBy: UserInfo) {
+    this.certificationDate = certifiedDate;
+    this.certifiedBy = certifiedBy;
   }
 
   public validateEntity() {

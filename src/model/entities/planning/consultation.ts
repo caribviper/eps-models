@@ -47,6 +47,7 @@ export class Consultation extends Entity {
     this.comments = comments;
     this.documentId = documentId;
     this.attachment = attachmentId;
+    this.dateRequested = new Date();
   }
 
   public validateEntity() {

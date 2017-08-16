@@ -7,19 +7,19 @@ import { AttachedPicture } from './../../value-objects/planning/report';
 export abstract class BaseReport extends Entity {
 
   /**Get comments and assessments. */
-  content: string;  
+  content: string = '';  
 
   /**Recommendations */
-  recommendations: string;
+  recommendations: string = '';
 
   /**Specifies description about the type of site. */
-  description: string;
+  description: string = '';
 
   /**Date site report was attached. */
   dateAttached: Date;
 
   /**Date site report was created. */
-  dateCreated: Date;
+  dateCreated: Date  = new Date();
 
   /**Attached pictures */
   attachedPictures: AttachedPicture[];

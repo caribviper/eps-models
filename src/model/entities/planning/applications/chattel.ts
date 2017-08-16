@@ -8,34 +8,34 @@ import { InterestInLand, CategoryDescription, Materials } from './../../../value
  */
 export class ChattelApplication extends RegistryDetails implements IRegistryDetails {
 
-  proposedDevelopment: string;
+  proposedDevelopment: string = '';
 
   /**Comments by accepting officer. */
-  officerComments: string;
+  officerComments: string = '';
 
   /**Applicant's interest in land. */
-  interestInLand: InterestInLand;
+  interestInLand: InterestInLand = new InterestInLand();
 
   /**Description of current land uses. */
-  currentLandUse: CategoryDescription;
+  currentLandUse: CategoryDescription = new CategoryDescription();
 
   /**Proposed sewage disposal. */
-  proposedSewageDisposal: string;
+  proposedSewageDisposal: string = '';
 
   /**Determines where the water source will be coming from. */
-  proposedWater: string;
+  proposedWater: string = '';
 
   /**Description of wall, roof materials. */
-  materials: Materials;
+  materials: Materials = new Materials();
 
   /**Determines if the foundation is solid or loose. */
-  isFoundationSolid: boolean;
+  isFoundationSolid: boolean = false;
 
   /**Specifies whether the development has enforcement notice. */
-  hasEnforcementNotice: boolean;
+  hasEnforcementNotice: boolean = false;
 
   /**Specifies the enforcement notice number. */
-  enforcementNumber: string;
+  enforcementNumber: string = '';
 
   /**
    * Creates new Chattel details

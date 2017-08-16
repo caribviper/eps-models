@@ -13,13 +13,13 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
   retention: boolean = false;
 
   /**Propose development to take place */
-  proposedDevelopment: CategoryDescription;
+  proposedDevelopment: CategoryDescription = new CategoryDescription();
 
 	/**
 	 * Type of formal applicaiton.
 	 * These types can Building construction, subdivision, change of use of land/building,  mining or engineering.
 	 */
-  formalType: string;
+  formalType: string = '';
 
   /**Applicant's interest in land. */
   interestInLand: InterestInLand = new InterestInLand();

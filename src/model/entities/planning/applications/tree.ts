@@ -8,19 +8,19 @@ import { IRegistryDetails, RegistryDetails } from './../iregistry-details';
 export class KillTreeApplication extends RegistryDetails implements IRegistryDetails {
 
   /**Number of trees to be destroyed. */
-  numberOfTrees: number;
+  numberOfTrees: number = 0;
 
   /**The types of trees to be destroyed. */
-  typeOfTrees: string;
+  typeOfTrees: string = '';
 
   /**Reason(s) for terminating tree(s) */
-  reasonForKilling: string;
+  reasonForKilling: string = '';
 
   /**Directions to the site. */
-  directionsToSite: string;
+  directionsToSite: string = '';
 
   /**Officer's Comments */
-  officerComments: string;
+  officerComments: string = '';
 
   /**
    * Creates new Chattel details

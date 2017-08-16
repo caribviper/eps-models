@@ -8,10 +8,10 @@ import { Report } from './report';
 export abstract class SiteReport extends Report {
 
   /**Gets the date visited */
-  dateVisited: Date;
+  dateVisited: Date = new Date();
 
   /**Get the policies of the site report. */
-  policies: PolicyItem;
+  policies: PolicyItem = new PolicyItem();
 
   public validateEntity() {
     super.validateEntity();
@@ -102,10 +102,10 @@ export class SiteReportDevelopment extends SiteReport {
 export class SiteReportEnforcement extends SiteReport {
 
   /**Type of development. */
-  typeOfDevelopment: string;
+  typeOfDevelopment: string = '';
 
   /**Duration on site in weeks. */
-  durationOnSite: number;
+  durationOnSite: number = 0;
 
   /**The water authority meter number on the property. */
   waterMeterNo: string;

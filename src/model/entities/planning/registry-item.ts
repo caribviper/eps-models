@@ -97,19 +97,19 @@ export class Stakeholder {
 export class RegistryItem extends Entity {
 
   /**Reference associated with the file */
-  referenceNo: string;
+  referenceNo: string = '';
 
   /**Item number of this type if RegistryItem. */
-  counterValue: number;
+  counterValue: number = 0;
 
   /**Current area of operations */
-  area: string;
+  area: string = '';
 
   /**Specifies the location of the registry entry */
-  location: Location;
+  location: Location =  new Location(new Address('',''), new Coordinate());
 
   /**Gets any valid sub-division number application is apart of. */
-  subDivisionNumber: string;
+  subDivisionNumber: string = '';
 
   /**Gets the valid date the sub-division was approved */
   subDivisionNumberApprovalDate: Date;
@@ -148,10 +148,10 @@ export class RegistryItem extends Entity {
    * Get the proposed development description. 
    * Should allow automatic generation of proposed development from dblist.
    */
-  proposedDevelopment: CategoryDescription = new CategoryDescription();
+  //proposedDevelopment: CategoryDescription = new CategoryDescription();
 
   /**Mail address */
-  mailingAddress: Address;
+  //mailingAddress: Address;
 
   /**Details of the registry file */
   details: RegistryDetails;
