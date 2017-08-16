@@ -13,6 +13,6 @@ export class Address {
      * @param inCareOf In care of name
      */
   constructor(public parish: string, public streetOne: string, public streetTwo: string = '', 
-    public lot: string = '', public country: string = 'Barbados', public postalCode: string = '',
+    public lot: string = '', public country: string = 'BARBADOS', public postalCode: string = '',
     public inCareOf: string = '') { }
 }
