@@ -14,7 +14,7 @@ import { Contact } from './../../value-objects/common/contact';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
 import { RegistryItem, Stakeholder, STAKEHOLDER_TYPES, Location, Coordinate } from './registry-item';
 
-export class ModelFactory {
+export class PlanningFactory {
 
   public static createRegistry(fileType: FileType): RegistryItem {
     let r = new RegistryItem(fileType, '');
