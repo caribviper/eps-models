@@ -32,10 +32,10 @@ export class PlanningFactory {
     let r: RegistryItem = this.createRegistry(RegistryFileTypes.formal);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
 
     //formal
     r.details = new FormalApplication();
@@ -48,10 +48,10 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.chattel);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
 
     //details
     r.details = new ChattelApplication();
@@ -63,7 +63,7 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.tree);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT));
 
     //details
     r.details = new KillTreeApplication();
@@ -75,10 +75,10 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.permitted);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT_SECONDARY));
 
     //details
     r.details = new PermittedApplication();
@@ -90,7 +90,7 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.buildingStart);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT));
 
     //details
     r.details = new Certificate();
@@ -102,8 +102,8 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.certificate);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
 
     //details
     r.details = new Certificate();
@@ -115,8 +115,8 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.continuingUse);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
 
     //details
     r.details = new Certificate();
@@ -128,8 +128,8 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.temporaryUse);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.AGENT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
 
     //details
     r.details = new TemporaryDevelopment();
@@ -142,8 +142,8 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.complaint);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.OFFENDER),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.COMPLAINANT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.OFFENDER),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.COMPLAINANT));
 
     //details
     r.details = new Invest();
@@ -155,8 +155,8 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.enquiry);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.OFFENDER),
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.COMPLAINANT));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.OFFENDER),
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.COMPLAINANT));
 
     //details
     r.details = new Invest();
@@ -168,7 +168,7 @@ export class PlanningFactory {
     let r = this.createRegistry(RegistryFileTypes.unauthorised);
     //add stakeholders
     r.stakeholders.push(
-      new Stakeholder(new Contact(), STAKEHOLDER_TYPES.OFFENDER));
+      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.OFFENDER));
 
     //details
     r.details = new Invest();

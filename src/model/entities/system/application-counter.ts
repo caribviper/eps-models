@@ -4,15 +4,13 @@ import { Entity } from 'caribviper-entities';
 
 export class ApplicationCounter extends Entity {
 
-  /**Counter value being incremented */
-  public counter: number = 0;
-
   /**
    * Creates an application counter for the specified application type
    * @param year Year of counter
    * @param applicationType Type of application being counted
+   * @param counter Counter value
    */
-  constructor(public year: number = undefined, public applicationType: string = '') {
+  constructor(public year: number = 0, public applicationType: string = '', public counter: number = 0) {
     super(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, ApplicationCounter.createId(year, applicationType), true);
     this.counter = 0;
   }
@@ -21,21 +19,19 @@ export class ApplicationCounter extends Entity {
     Assert.isFalse(this.isTransient, 'ApplicationCounter cannot be transient');
     Assert.isTruthy(this.applicationType, 'ApplicationCounter applicationType cannot be undefined/empty');
     Assert.isTruthy(this.year, 'ApplicationCounter year cannot be undefined/empty');
-    Assert.isTrue(this.year > 0, 'ApplicationCounter year cannot be less than 1')
+    Assert.isTrue(this.year > 0, 'ApplicationCounter year cannot be less than 1');
+    Assert.isTruthy(this.counter, 'ApplicationCounter counter cannot be undefined');
+    Assert.isTrue(this.counter > 0, 'ApplicationCounter cannot be less than 1');
   }
 
-  /**Increments the counter value */
-  public increment(): number {
-    this.counter++;
-    return this.counter;
-  }
-
-  public static createId(year: number, applicationType: string = ''): string {
+  public static createId(year: number, applicationType: string = '', counter: number = 0): string {
     if (year < 1)
-      throw new Error('ApplicationCounter cannot have a year less than 1');
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER);
     if (!applicationType)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString());
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType);
+    if (counter < 1)
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType);
+    return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType, counter.toString());
   }
 
   /**
