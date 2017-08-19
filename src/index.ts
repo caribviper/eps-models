@@ -56,6 +56,7 @@ export * from './model/entities/planning/enforcement/invest';
 export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
+export * from './model/entities/system/document-template';
 
 //model factory
 export * from './model/entities/planning/planning-factory';

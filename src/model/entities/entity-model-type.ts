@@ -42,6 +42,7 @@ export const ENTITY_MODELS = {
     APPLICATION_COUNTER: 'counter',
     DECISION_TEMPLATE: 'decision-template',
     DOCUMENT: 'document',
+    DOCUMENT_TEMPLATE: 'document-template',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
     WORKFLOW: 'workflow-action'
