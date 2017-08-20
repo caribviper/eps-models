@@ -4,10 +4,13 @@ import { Entity } from 'caribviper-entities';
 import { UserInfo } from './../../value-objects/common/userinfo';
 
 
-/**Specific information regarding the document details */
+/**Specific information regarding the construction of the document by templates */
+export class DocumentModel {
+  constructor(public document: Document, public model: any = undefined) { }
+}
+
 export class DocumentDetails {
-  model: any = undefined;
-  Document: Document = new Document();
+  constructor(public template: string, public document: Document, public model: any = undefined) { }
 }
 
 /**Stores information relating to the document property */
@@ -95,7 +98,7 @@ export class Document extends Entity {
     this.update();
   }
 
-  public finalise(requestingUser: UserInfo) : boolean {
+  public finalise(requestingUser: UserInfo): boolean {
     if (this.owner.username === requestingUser.username) {
       this.finalisedDate = new Date();
       this.update();

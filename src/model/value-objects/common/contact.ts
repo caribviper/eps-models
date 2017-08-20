@@ -18,6 +18,9 @@ export class Contact {
    */
   constructor(public address: Address = new Address('',''), public company: string = '', public firstname: string = '', public lastname: string = '', public title: string = '', public email: string = '', public telephone: string = '', public mobile: string = '') { }
 
+  public get isEmpty(): boolean {
+    return (!this.address || this.address.isEmpty) && !this.company && !this.lastname;
+  }
 }
 
 export class ContactEssentials {

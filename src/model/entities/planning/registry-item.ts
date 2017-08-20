@@ -66,6 +66,10 @@ export class Location {
    * @param validated Indicates whether this location has been validated
    */
   constructor(public address: Address, public coordinate: Coordinate, public parcel: string = '', public landTaxNo: string = '', public validated: boolean = false) { }
+
+  public get isEmpty(): boolean {
+    return !this.address || this.address.isEmpty;
+  }
 }
 
 /**Types of stakeholders */
@@ -90,6 +94,10 @@ export class Stakeholder {
    * @param stakeholderType Type of stakeholder
    */
   constructor(public contact: Contact, public stakeholderType: string) { }
+
+  public isEmpty(): boolean {
+    return (!this.contact || this.contact.isEmpty);
+  }
 
 }
 
@@ -199,6 +207,10 @@ export class RegistryItem extends Entity {
 
   }
 
+  get hasValidAgent(): boolean {
+    return (this.agent && !this.agent.isEmpty);
+  }
+
   get agent(): Stakeholder {
     if (!!this.stakeholders && this.stakeholders.length > 1) {
       return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.AGENT });
@@ -206,6 +218,9 @@ export class RegistryItem extends Entity {
     return undefined;
   }
 
+  get hasValidApplicant(): boolean {
+    return (this.applicant && !this.applicant.isEmpty);
+  }
   get applicant(): Stakeholder {
     if (!!this.stakeholders && this.stakeholders.length > 0) {
       return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT });

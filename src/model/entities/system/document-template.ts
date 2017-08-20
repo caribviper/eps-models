@@ -7,7 +7,6 @@ export class DocumentTemplate extends Entity {
 
   constructor(public name: string = '', public template: string = '') {
     super(ENTITY_MODELS.SYSTEM.DOCUMENT_TEMPLATE, DocumentTemplate.createId(name), true);
-    this.template = '';
   }
 
   public validateEntity() {
