@@ -29,7 +29,7 @@ export class Dossier {
     this.tasks = [];
   }
 
-  mapToEntity(dossier: Dossier): Dossier {
+  public static mapToEntity(dossier: Dossier): Dossier {
     //mapp dossier items
     let d = Object.assign(new Dossier(), dossier);
     d.registry = RegistryItem.mapToEntity(d.registry);
