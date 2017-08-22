@@ -12,7 +12,7 @@ import { UserInfo } from './../../value-objects/common/userinfo';
 import { Contact } from './../../value-objects/common/contact';
 import { Address } from './../../value-objects/common/address';
 import { Entity } from 'caribviper-entities';
-import { Utilities, Assert } from 'caribviper-common';
+import { Utilities, Assert, StringUtilities } from 'caribviper-common';
 import * as numeral from 'numeral';
 
 
@@ -184,6 +184,11 @@ export class RegistryItem extends Entity {
     this.stakeholders = [];
   }
 
+  /**Gets the storage folder for the registry item */
+  get storageFolder(): string {
+    return this.fileType.folderPrefix + '- '+ StringUtilities.replaceAll('/', ' ') +'\\';
+  }
+
   /**Gets the description about the land */
   get landDescription(): string {
     let description = '';
@@ -221,6 +226,7 @@ export class RegistryItem extends Entity {
   get hasValidApplicant(): boolean {
     return (this.applicant && !this.applicant.isEmpty);
   }
+
   get applicant(): Stakeholder {
     if (!!this.stakeholders && this.stakeholders.length > 0) {
       return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT });
