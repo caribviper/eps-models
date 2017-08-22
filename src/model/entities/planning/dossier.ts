@@ -34,18 +34,19 @@ export class Dossier {
      let d = Object.assign(new Dossier(), dossier);
    }
 
-   public static createDossier(registry: RegistryItem, items: any[]) {
-     let d = new Dossier();
-     d.registry = registry;
+   public static createDossier(registry: RegistryItem, items: any[]): Dossier {
+     let dossier = new Dossier();
+     dossier.registry = registry;
      items.forEach((item:Entity) => {
        switch(item.type) {
-        case ENTITY_MODELS.PLANNING.ATTACHMENT: { d.attachments.push(Attachment.mapToEntity(item)); break; }
-        case ENTITY_MODELS.PLANNING.CONSULTATION: { d.consultations.push(Consultation.mapToEntity(item)); break; }
-        case ENTITY_MODELS.PLANNING.DECISION: { d.decisions.push(Decision.mapToEntity(item)); break; }
-        case ENTITY_MODELS.GENERAL.MINUTE: { d.minutes.push(Minute.mapToEntity(item)); break; }
-        case ENTITY_MODELS.PLANNING.REPORT: { d.reports.push(Report.mapToEntity(item)); break; }
-        case ENTITY_MODELS.SYSTEM.TASK: { d.tasks.push(Task.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.ATTACHMENT: { dossier.attachments.push(Attachment.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.CONSULTATION: { dossier.consultations.push(Consultation.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.DECISION: { dossier.decisions.push(Decision.mapToEntity(item)); break; }
+        case ENTITY_MODELS.GENERAL.MINUTE: { dossier.minutes.push(Minute.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
+        case ENTITY_MODELS.SYSTEM.TASK: { dossier.tasks.push(Task.mapToEntity(item)); break; }
        }
      });
+     return dossier;
    }
 }
