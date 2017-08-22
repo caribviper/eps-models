@@ -47,15 +47,12 @@ export class Consultation extends Entity {
     this.comments = comments;
     this.documentId = documentId;
     this.attachment = attachmentId;
-    this.dateRequested = new Date();
   }
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Consultation cannot be transient');
     Assert.isTruthy(this.registryId, 'Consutlation must have a valid registry id');
     Assert.isTruthy(this.organisation, 'Consutlation must have a valid organisation');
-    Assert.isTruthy(this.dateRequested, 'Consutlation must have a requested date');
-    Assert.isTruthy(this.dateDue, 'Consutlation must have a due date');
   }
 
 

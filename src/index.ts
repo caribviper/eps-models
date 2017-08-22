@@ -41,7 +41,7 @@ export * from './model/entities/planning/report-base';
 export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
-export * from './model/entities/planning/workflow-event';
+export * from './model/entities/planning/task';
 
 export * from './model/entities/planning/iregistry-details';
 export * from './model/entities/planning/applications/certificate';
@@ -59,4 +59,5 @@ export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/document-template';
 
 //model factory
+export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

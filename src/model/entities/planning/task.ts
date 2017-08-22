@@ -7,13 +7,10 @@ import { Entity } from 'caribviper-entities';
 /**
  * Manages the workflow event
  */
-export class WorkflowEvent extends Entity {
+export class Task extends Entity {
 
   /**Id of the registry item */
   registryId: string;
-
-  /**Type of event */
-  eventType: string;
 
   /**User who controls event */
   owner: UserInfo;
@@ -22,10 +19,10 @@ export class WorkflowEvent extends Entity {
   sender: UserInfo;
 
   /**Date of event */
-  date: Date;
+  dateStarted: Date;
 
   /**Date completed */
-  completed: Date;
+  dateCompleted: Date;
 
   /**Event details/activity */
   activity: WorkflowActivity;
@@ -42,55 +39,57 @@ export class WorkflowEvent extends Entity {
   /**id of the complimentary start/ending event */
   link: string;
 
-  constructor(registryId: string = '', eventType: string = '', sender: UserInfo = null, dateCreated: Date = null) {
-    super(ENTITY_MODELS.SYSTEM.EVENT, WorkflowEvent.createId(registryId, dateCreated, eventType, !!sender ? sender.username : ''), true);
-    this.date = dateCreated;
+  /** indicates whether the owner has seen it */
+  seen: boolean
+
+  constructor(registryId: string = '', guid='', sender: UserInfo = null, dateStarted: Date = null) {
+    super(ENTITY_MODELS.SYSTEM.EVENT, Task.createId(registryId, guid), true);
+    this.dateStarted = dateStarted;
     this.status = '';
   }
 
   validateEntity() {
     Assert.isFalse(this.isTransient, 'Must not be transient');
-    Assert.isTruthy(this.owner, 'Must have a valid owner');
+    Assert.isTruthy(this.owner, 'Must have a valid owner/receiver');
     Assert.isTruthy(this.sender, 'Must have a valid creator');
     Assert.isTruthy(this.registryId, 'Must have a valid registry id');
-    Assert.isTruthy(this.eventType, 'Must have a valid event type');
     Assert.isTruthy(this.activity, 'Must have a valid activity');
-    Assert.isTruthy(this.date, 'Must have a valid date of event');
-    Assert.isTruthy(this.status, 'Must have a valid status of event');
+    Assert.isTruthy(this.dateStarted, 'Must have a valid date of event');
+    //Assert.isTruthy(this.status, 'Must have a valid status of event');
     Assert.isTruthy(this.templateId, 'Must have a valid template id');
   }
 
-  public static createNew(registryId: string, eventType: string, sender: UserInfo, receiver: UserInfo, activity: WorkflowActivity, templateId: string): WorkflowEvent {
+  public static createNew(registryId: string, eventType: string, sender: UserInfo, receiver: UserInfo, activity: WorkflowActivity, templateId: string): Task {
     let datecreated = new Date();
-    let e = new WorkflowEvent(registryId, eventType, sender, datecreated);
+    let e = new Task(registryId, eventType, sender, datecreated);
     e.owner = receiver;
     e.sender = sender;
     e.activity = activity;
     return e;
   }
 
-  public static createId(registryId: string = '', dateCreated: Date = null, eventType: string = '', senderName: string = '') {
-    if (!!registryId)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW);
-    if (!dateCreated || !eventType || !senderName)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW, registryId);
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.WORKFLOW, registryId, dateCreated.getTime().toString(), senderName);
+  public static createId(registryId: string = '', guid: string = '') {
+    if (!registryId)
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK);
+    if (!guid)
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK, registryId);
+    return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK, registryId, guid);
   }
 
   /**
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): WorkflowEvent {
-    return Object.assign(new WorkflowEvent(), source);
+  public static mapToEntity(source): Task {
+    return Object.assign(new Task(), source);
   }
 
-  public static mapToEntityArray(source: WorkflowEvent[]): WorkflowEvent[] {
+  public static mapToEntityArray(source: Task[]): Task[] {
     if (source.length < 1)
       return [];
     let array = [];
     source.forEach(element => {
-      array.push(Object.assign(new WorkflowEvent(), element));
+      array.push(Object.assign(new Task(), element));
     });
     return array;
   }

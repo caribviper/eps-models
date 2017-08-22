@@ -10,7 +10,7 @@ export class DocumentModel {
 }
 
 export class DocumentDetails {
-  constructor(public template: string, public document: Document, public model: any = undefined) { }
+  constructor(public template: string, public model: any = undefined) { }
 }
 
 /**Stores information relating to the document property */
@@ -26,6 +26,8 @@ export class DocumentProperty {
 
   /**Watermark to be displayed. */
   watermark: string = '';
+
+  imagePath: string = '';
 }
 
 export class Document extends Entity {
@@ -68,7 +70,7 @@ export class Document extends Entity {
 	 * */
   data: string = '';
 
-  constructor(registryId: string = '', documentCode: string = '', property: DocumentProperty = null, owner: UserInfo = null) {
+  constructor(registryId: string = '', documentCode: string = '', property: DocumentProperty = new DocumentProperty(), owner: UserInfo = null) {
     super(ENTITY_MODELS.SYSTEM.DOCUMENT, Document.createId(registryId, documentCode), true);
     this.registryId = registryId;
     this.documentCode = documentCode;
