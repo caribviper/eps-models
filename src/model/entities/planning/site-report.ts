@@ -1,3 +1,4 @@
+import { UserInfo } from './../../value-objects/common/userinfo';
 import { Assert } from 'caribviper-common';
 import { Entity } from 'caribviper-entities';
 import { ENTITY_MODELS } from './../entity-model-type';
@@ -69,12 +70,17 @@ export class SiteReportDevelopment extends SiteReport {
   /**Site contains walls, fences etc within the prescrined road reserve. */
   wallsOrEnclosures: boolean = false;
 
+  constructor(registryId: string = '', user: UserInfo = null, description: string = '') {
+    super(registryId, user, description)
+    this._id = SiteReportDevelopment.createId(registryId, (!user) ? '' : user.username);
+  }
+
   public static createId(registryId: string = '', username: string = ''): string {
-    if(!registryId)
+    if (!registryId)
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT);
-    else if(!username)
+    else if (!username)
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId);
-    else 
+    else
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId, username, Date.now().toString());
   }
 
@@ -101,6 +107,11 @@ export class SiteReportDevelopment extends SiteReport {
 /**Enforcement site report data */
 export class SiteReportEnforcement extends SiteReport {
 
+
+  roadReserve: SiteReportMeasurementGroup = new SiteReportMeasurementGroup();
+  buildingLine: SiteReportMeasurementGroup = new SiteReportMeasurementGroup();
+  rearAndSideDistances: SiteReportMeasurementGroup = new SiteReportMeasurementGroup();
+
   /**Type of development. */
   typeOfDevelopment: string = '';
 
@@ -116,12 +127,17 @@ export class SiteReportEnforcement extends SiteReport {
   /**The land tax number of the property. */
   landTaxNo: string;
 
-  public static createId(registryId: string = '', username: string = ''): string {    
-    if(!registryId)
+  constructor(registryId: string = '', user: UserInfo = null, description: string = '') {
+    super(registryId, user, description)
+    this._id = SiteReportEnforcement.createId(registryId, (!user) ? '' : user.username);
+  }
+
+  public static createId(registryId: string = '', username: string = ''): string {
+    if (!registryId)
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT);
-    else if(!username)
+    else if (!username)
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId);
-    else 
+    else
       return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId, username, Date.now().toString());
   }
 

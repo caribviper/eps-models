@@ -1,3 +1,4 @@
+import { SiteReportDevelopment, SiteReportEnforcement } from './site-report';
 import { Invest } from './enforcement/invest';
 import { TemporaryDevelopment } from './applications/temporary';
 import { Certificate } from './applications/certificate';
@@ -13,6 +14,7 @@ import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
 import { RegistryItem, Stakeholder, STAKEHOLDER_TYPES, Location, Coordinate } from './registry-item';
+import { Report } from "./report";
 
 export class PlanningFactory {
 
@@ -174,4 +176,33 @@ export class PlanningFactory {
     r.details = new Invest();
     return r;
   }
+
+  //Create new report
+  public static createReport(reportType: number, registry: RegistryItem, currentUser: UserInfo): Report|SiteReportDevelopment|SiteReportEnforcement {
+    let report = null;
+    //get description
+    let description = (registry.details as any).proposedDevelopment.description
+      || (registry.details as any).proposedDevelopment
+      || (registry.details as any).offendingAction;
+    switch (reportType) {
+      case 0: {//site
+        report = new SiteReportDevelopment(registry.registryId, currentUser, description);
+        report.content = '<p><br/></p>';
+        break;
+      }
+      case 1: {//enf
+        report = new SiteReportEnforcement(registry.registryId, currentUser, description);
+        report.content = '<p><br/></p>';
+        break;
+      }
+      default: {//general
+        report = new Report(registry.registryId, currentUser, description);
+        report.content = '<p><br/></p>';
+        break;
+      }
+    }
+    return report;
+  }
+
+
 }

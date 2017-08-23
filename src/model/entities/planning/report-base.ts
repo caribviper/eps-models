@@ -35,7 +35,7 @@ export abstract class BaseReport extends Entity {
 
   /**Indicates if the report has been finalised */
   get isFinalised(): boolean {
-    return !this.dateAttached;
+    return !!this.dateAttached;
   }
   
   public validateEntity() {

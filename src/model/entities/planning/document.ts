@@ -28,6 +28,9 @@ export class DocumentProperty {
   watermark: string = '';
 
   imagePath: string = '';
+
+  /**generated document code */
+  code: string = '';
 }
 
 export class Document extends Entity {
