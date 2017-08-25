@@ -1,3 +1,4 @@
+import { Projection } from './../../value-objects/common/projection';
 import { Invest } from './enforcement/invest';
 import { KillTreeApplication } from './applications/tree';
 import { FormalApplication } from './applications/formal';
@@ -14,6 +15,7 @@ import { Address } from './../../value-objects/common/address';
 import { Entity } from 'caribviper-entities';
 import { Utilities, Assert, StringUtilities } from 'caribviper-common';
 import * as numeral from 'numeral';
+import { Stakeholder, STAKEHOLDER_TYPES } from "../../value-objects/common/stakeholder";
 
 
 /**
@@ -72,35 +74,6 @@ export class Location {
   }
 }
 
-/**Types of stakeholders */
-export const STAKEHOLDER_TYPES = {
-  APPLICANT: 'applicant',
-  APPLICANT_SECONDARY: 'applicant secondary',
-  AGENT: 'agent',
-  COMPLAINANT: 'complainant',
-  OFFENDER: 'offender',
-  THIRD_PARTY: 'third party',
-  ASSOCIATED_ORGANISATION: 'associated organisation'
-};
-
-/** Details of the a stakeholder */
-export class Stakeholder {
-  /**Indicates if the stakeholder is active. A false indicates that the stakeholder was present but is no longer active */
-  active: boolean;
-
-  /**
-   * Creates a new stakeholder
-   * @param contact Contact information of the stakeholder
-   * @param stakeholderType Type of stakeholder
-   */
-  constructor(public contact: Contact, public stakeholderType: string) { }
-
-  public isEmpty(): boolean {
-    return (!this.contact || this.contact.isEmpty);
-  }
-
-}
-
 /**Registry information */
 export class RegistryItem extends Entity {
 
@@ -152,15 +125,6 @@ export class RegistryItem extends Entity {
   /**associated Fee */
   fees: FeeItem = null;
 
-  /**
-   * Get the proposed development description. 
-   * Should allow automatic generation of proposed development from dblist.
-   */
-  //proposedDevelopment: CategoryDescription = new CategoryDescription();
-
-  /**Mail address */
-  //mailingAddress: Address;
-
   /**Details of the registry file */
   details: RegistryDetails;
 
@@ -173,8 +137,11 @@ export class RegistryItem extends Entity {
   /**This registry item has been flagged as major application */
   majorApplication: boolean = false;
 
+  /**Stores search related information for processing */
+  projection: Projection;
+
   /**
-   * 
+   * Creates a new registry item
    * @param fileType Type of registry file to create
    * @param guid Guid to be created
    */
@@ -280,7 +247,6 @@ export class RegistryItem extends Entity {
     this.referenceNo = referenceNo;
     this.counterValue = counterValue;
   }
-
 
   public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
     if (!guid)

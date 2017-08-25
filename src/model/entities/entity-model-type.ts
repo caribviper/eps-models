@@ -3,14 +3,15 @@ export const ENTITY_MODELS = {
   PLANNING: {
     AGENCY: 'agency',
     ATTACHMENT: 'attachment',
+    CERTIFICATE: 'certificate',
+    BUILDING_START: 'building_start',
     CONSULTATION: 'consultation',
     DECISION: 'decision',
+    REGISTRY_ITEM: 'registry',
     REPORT: 'report',
     //used for searches and not creation of ids
-    SITE_REPORT: 'report:site',
-    SITE_REPORT_DEVELOPMENT: 'report:site:development',
-    SITE_REPORT_ENFORCEMENT: 'report:site:enforcement',
-    REGISTRY_ITEM: 'registry'
+    SITE_REPORT_DEVELOPMENT: 'development',
+    SITE_REPORT_ENFORCEMENT: 'enforcement'
   },
   REGISTRY_DETAILS: {
     APPLICATIONS: {

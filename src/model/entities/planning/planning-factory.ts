@@ -1,7 +1,8 @@
+import { Certificate, BuildingStart } from './certificate';
+import { Projection } from './../../value-objects/common/projection';
 import { SiteReportDevelopment, SiteReportEnforcement } from './site-report';
 import { Invest } from './enforcement/invest';
 import { TemporaryDevelopment } from './applications/temporary';
-import { Certificate } from './applications/certificate';
 import { PermittedApplication } from './applications/permitted';
 import { KillTreeApplication } from './applications/tree';
 import { ChattelApplication } from './applications/chattel';
@@ -13,7 +14,8 @@ import { UserInfo } from './../../value-objects/common/userinfo';
 import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
-import { RegistryItem, Stakeholder, STAKEHOLDER_TYPES, Location, Coordinate } from './registry-item';
+import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
+import { RegistryItem, Location, Coordinate} from './registry-item';
 import { Report } from "./report";
 
 export class PlanningFactory {
@@ -88,28 +90,19 @@ export class PlanningFactory {
   }
 
   //create building start
-  public static createBuildingStart(): RegistryItem {
-    let r = this.createRegistry(RegistryFileTypes.buildingStart);
-    //add stakeholders
-    r.stakeholders.push(
-      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT));
-
-    //details
-    r.details = new Certificate();
-    return r;
+  public static createBuildingStart(registryId: string): BuildingStart {
+    let c = new BuildingStart(registryId, '');
+    c.applicant = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT);
+    c.agent = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT);
+    return c;
   }
 
   //create certifcate
-  public static createCertificateOfCompliance(): RegistryItem {
-    let r = this.createRegistry(RegistryFileTypes.certificate);
-    //add stakeholders
-    r.stakeholders.push(
-      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
-      new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
-
-    //details
-    r.details = new Certificate();
-    return r;
+  public static createCertificateOfCompliance(registryId: string): Certificate {
+    let c = new Certificate(registryId);
+    c.applicant = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT);
+    c.agent = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT);
+    return c;
   }
 
   //create continuing use
@@ -178,7 +171,7 @@ export class PlanningFactory {
   }
 
   //Create new report
-  public static createReport(reportType: number, registry: RegistryItem, currentUser: UserInfo): Report|SiteReportDevelopment|SiteReportEnforcement {
+  public static createReport(reportType: number, registry: RegistryItem, currentUser: UserInfo): Report | SiteReportDevelopment | SiteReportEnforcement {
     let report = null;
     //get description
     let description = (registry.details as any).proposedDevelopment.description
@@ -202,6 +195,28 @@ export class PlanningFactory {
       }
     }
     return report;
+  }
+
+  //Create projection
+  public static createProjection(registry: RegistryItem, projectionVersion: string): Projection {
+    if (!registry || !projectionVersion)
+      return null;
+    let fullAddress = registry.location.address.lot + ' '
+      + registry.location.address.streetOne + ' '
+      + registry.location.address.streetTwo + ' '
+      + registry.location.address.parish;
+    fullAddress = fullAddress.trim();
+
+    let fullName1 = '', fullName2 = '';
+    if (!!registry.applicant) {
+      fullName1 = registry.applicant.contact.title + ' ' + registry.applicant.contact.firstname + ' ' + registry.applicant.contact.lastname
+      fullName1 = fullName1.trim();
+    }
+    if (!!registry.agent) {
+      fullName2 = registry.agent.contact.title + ' ' + registry.agent.contact.firstname + ' ' + registry.agent.contact.lastname
+      fullName2 = fullName1.trim();
+    }
+    return new Projection(projectionVersion, fullAddress, fullName1, fullName2);
   }
 
 
