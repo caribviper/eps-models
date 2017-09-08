@@ -39,8 +39,8 @@ export class Notice extends Entity {
     }
 
     validateEntity() {
-      Assert.isFalse(this.isTransient, 'Consultation cannot be transient');
-      Assert.isTruthy(this.registryId, 'Consutlation must have a valid registry id');
+      Assert.isFalse(this.isTransient, 'Notice cannot be transient');
+      Assert.isTruthy(this.registryId, 'Notice must have a valid registry id');
     }
   
     /**
