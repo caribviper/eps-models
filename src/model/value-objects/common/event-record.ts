@@ -3,7 +3,7 @@ import { UserInfo } from './userinfo';
 /**
  * Manages date records for create, signed and dispatched
  */
-export class DateRecord {
+export class EventRecord {
   /**Date created */
   created: Date;
   /**User that created the record */
