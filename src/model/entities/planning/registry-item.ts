@@ -3,7 +3,6 @@ import { Invest } from './enforcement/invest';
 import { KillTreeApplication } from './applications/tree';
 import { FormalApplication } from './applications/formal';
 import { ChattelApplication } from './applications/chattel';
-import { Notice } from './enforcement/notice';
 import { IRegistryDetails, RegistryDetails } from './iregistry-details';
 import { CategoryDescription } from './../../value-objects/planning/descriptive';
 import { FileType, RegistryFileTypes, FILE_TYPES } from './../../value-objects/enumerators/filetype';
@@ -132,7 +131,7 @@ export class RegistryItem extends Entity {
   registryId: string;
 
   /**associated notices */
-  notices: Notice[] = [];
+  //notices: Notice[] = [];
 
   /**This registry item has been flagged as major application */
   majorApplication: boolean = false;
