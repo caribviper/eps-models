@@ -19,11 +19,11 @@ export class Report extends BaseReport {
 
   public static createId(registryId: string, username: string = ''): string {
     if (!registryId)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT);
+      return '';
     else if (!username)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId);
+      return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.REPORT);
     else
-      return Entity.generateId(ENTITY_MODELS.PLANNING.REPORT, registryId, username, Date.now().toString());
+      return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.REPORT, username, Date.now().toString());
   }
 
   /**

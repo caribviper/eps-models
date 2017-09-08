@@ -114,10 +114,10 @@ export class Document extends Entity {
 
   public static createId(registryId: string = '', guid: string = ''): string {
     if (!registryId)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT);
+      return '';
     if (!guid)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT);
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.DOCUMENT, registryId, guid);
+      return Entity.generateId(registryId, ENTITY_MODELS.SYSTEM.DOCUMENT);
+    return Entity.generateId(registryId, ENTITY_MODELS.SYSTEM.DOCUMENT, guid);
   }
 
   /**

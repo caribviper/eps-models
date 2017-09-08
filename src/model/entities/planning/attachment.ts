@@ -44,10 +44,10 @@ export class Attachment extends Entity {
 
   public static createId(registryId: string = '', guid: string = ''): string{
     if(!registryId)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT);
+      return'';
     if(!guid)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId);
-    return Entity.generateId(ENTITY_MODELS.PLANNING.ATTACHMENT, registryId, guid);
+      return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.ATTACHMENT);
+    return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.ATTACHMENT, guid);
   }
 
   /**

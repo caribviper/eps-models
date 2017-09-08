@@ -153,8 +153,8 @@ export class Decision extends Entity {
 
   public static createId(registryId: string, guid: string = ''): string {
     if (!guid)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId);
-    return Entity.generateId(ENTITY_MODELS.PLANNING.DECISION, registryId, guid);
+      return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.DECISION);
+    return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.DECISION, guid);
   }
 
   /**

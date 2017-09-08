@@ -58,10 +58,10 @@ export class Consultation extends Entity {
 
   public static createId(registryId: string = '', guid: string = '') {
     if(!registryId)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION);
+      return '';
     if (!guid)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId);
-    return Entity.generateId(ENTITY_MODELS.PLANNING.CONSULTATION, registryId, guid);
+      return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.CONSULTATION);
+    return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.CONSULTATION, guid);
   }
 
   /**

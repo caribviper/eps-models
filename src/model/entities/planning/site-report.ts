@@ -72,16 +72,6 @@ export class SiteReportDevelopment extends SiteReport {
 
   constructor(registryId: string = '', user: UserInfo = null, description: string = '') {
     super(registryId, user, description)
-    this._id = SiteReportDevelopment.createId(registryId, (!user) ? '' : user.username);
-  }
-
-  public static createId(registryId: string = '', username: string = ''): string {
-    if (!registryId)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT);
-    else if (!username)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId);
-    else
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_DEVELOPMENT, registryId, username, Date.now().toString());
   }
 
   /**
@@ -129,16 +119,6 @@ export class SiteReportEnforcement extends SiteReport {
 
   constructor(registryId: string = '', user: UserInfo = null, description: string = '') {
     super(registryId, user, description)
-    this._id = SiteReportEnforcement.createId(registryId, (!user) ? '' : user.username);
-  }
-
-  public static createId(registryId: string = '', username: string = ''): string {
-    if (!registryId)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT);
-    else if (!username)
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId);
-    else
-      return Entity.generateId(ENTITY_MODELS.PLANNING.SITE_REPORT_ENFORCEMENT, registryId, username, Date.now().toString());
   }
 
   /**
