@@ -42,9 +42,10 @@ export class Dossier {
     return d;
   }
 
-  public static createDossier(registry: RegistryItem, items: any[]): Dossier {
+  public static createDossier(items: any[]): Dossier {
     let dossier = new Dossier();
-    dossier.registry = registry;
+    if(!items || items.length < 1)
+      return null;
     items.forEach((item: Entity) => {
       switch (item.type) {
         case ENTITY_MODELS.PLANNING.ATTACHMENT: { dossier.attachments.push(Attachment.mapToEntity(item)); break; }
@@ -53,6 +54,7 @@ export class Dossier {
         case ENTITY_MODELS.GENERAL.MINUTE: { dossier.minutes.push(Minute.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
         case ENTITY_MODELS.SYSTEM.TASK: { dossier.tasks.push(Task.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break;}
       }
     });
     return dossier;
