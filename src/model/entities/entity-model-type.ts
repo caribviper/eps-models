@@ -8,6 +8,7 @@ export const ENTITY_MODELS = {
     CONSULTATION: 'consultation',
     DECISION: 'decision',
     REGISTRY_ITEM: 'registry',
+    NOTICE: 'notice',
     REPORT: 'report',
     //used for searches and not creation of ids
     SITE_REPORT_DEVELOPMENT: 'development',
