@@ -13,7 +13,7 @@ export class Task extends Entity {
   registryId: string;
 
   /**User who controls event */
-  owner: UserInfo;
+  recipient: UserInfo;
 
   /**Sender of the event */
   sender: UserInfo;
@@ -36,13 +36,13 @@ export class Task extends Entity {
   /**specifies whether the event is starting or completing*/
   status: string;
 
-  /**id of the complimentary start/ending event */
+  /**id of the complimentary registry items, such as consultation/report etc */
   link: string;
 
   /** indicates whether the owner has seen it */
   seen: boolean
 
-  constructor(registryId: string = '', guid='', sender: UserInfo = null, dateStarted: Date = null) {
+  constructor(registryId: string = '', guid = '', sender: UserInfo = null, dateStarted: Date = null) {
     super(ENTITY_MODELS.SYSTEM.EVENT, Task.createId(registryId, guid), true);
     this.dateStarted = dateStarted;
     this.status = '';
@@ -50,7 +50,7 @@ export class Task extends Entity {
 
   validateEntity() {
     Assert.isFalse(this.isTransient, 'Must not be transient');
-    Assert.isTruthy(this.owner, 'Must have a valid owner/receiver');
+    Assert.isTruthy(this.recipient, 'Must have a valid owner/receiver');
     Assert.isTruthy(this.sender, 'Must have a valid creator');
     Assert.isTruthy(this.registryId, 'Must have a valid registry id');
     Assert.isTruthy(this.activity, 'Must have a valid activity');
@@ -62,7 +62,7 @@ export class Task extends Entity {
   public static createNew(registryId: string, eventType: string, sender: UserInfo, receiver: UserInfo, activity: WorkflowActivity, templateId: string): Task {
     let datecreated = new Date();
     let e = new Task(registryId, eventType, sender, datecreated);
-    e.owner = receiver;
+    e.recipient = receiver;
     e.sender = sender;
     e.activity = activity;
     return e;
@@ -70,10 +70,10 @@ export class Task extends Entity {
 
   public static createId(registryId: string = '', guid: string = '') {
     if (!registryId)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK);
+      return '';
     if (!guid)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK, registryId);
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.TASK, registryId, guid);
+      return Entity.generateId(registryId, ENTITY_MODELS.SYSTEM.TASK);
+    return Entity.generateId(registryId, ENTITY_MODELS.SYSTEM.TASK, guid);
   }
 
   /**

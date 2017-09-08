@@ -102,7 +102,7 @@ export class RegistryFileTypes {
   private static _enquiry = new FileType(FILE_TYPES.ENQUIRY, 'E', '288', false);
   private static _enforcement = new FileType(FILE_TYPES.ENFORCEMENT, 'EN', '', false);
 
-  // private static _certificate = new FileType(FILE_TYPES.CERTIFICATE, 'COC', 'COC', true);
+  private static _certificate = new FileType(FILE_TYPES.CERTIFICATE, 'COC', 'COC', true);
   // private static _buildingStart = new FileType(FILE_TYPES.BUILDING_START, 'BS', 'BS', true);
   private static _continuingUse = new FileType(FILE_TYPES.CONTINUING_USE, 'CC', 'CC', true);
   private static _temporaryUse = new FileType(FILE_TYPES.TEMPORARY_DEVELOPMENT, 'TT', 'TT', true);
@@ -118,7 +118,7 @@ export class RegistryFileTypes {
   public static get enquiry() { return this._enquiry; }
   public static get enforcement() { return this._enforcement; }
 
-  // public static get certificate() { return this._certificate; }
+  public static get certificate() { return this._certificate; }
   // public static get buildingStart() { return this._buildingStart; }
   public static get continuingUse() { return this._continuingUse; }
   public static get temporaryUse() { return this._temporaryUse; }

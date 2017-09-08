@@ -5,9 +5,10 @@ export class Projection {
   /**
    * Creates a new project for searching
    * @param version Stores the version of the projection indicating that the registry item should be fixed if older
-   * @param locationFullAddress Full address of the site
-   * @param primaryContactFullname Fullname of the primary contact
-   * @param secondaryContactFullname Full name of the secondary contact
+   * @param location Full address of the site
+   * @param primaryContact Fullname of the primary contact
+   * @param secondaryContact Full name of the secondary contact
+   * @param description Gets a brief description about the registry item
    */
-  constructor(public version: string, public locationFullAddress: string, public primaryContactFullname: string = '', public secondaryContactFullname: string = '') {}
+  constructor(public version: string, public location: string, public primaryContact: string = '', public secondaryContact: string = '', public description = "") {}
 }
