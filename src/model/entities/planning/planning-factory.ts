@@ -1,4 +1,5 @@
-import { Certificate, BuildingStart } from './certificate';
+import { Certificate } from './../planning/applications/certificate';
+import { BuildingStart } from './building-start';
 import { Projection } from './../../value-objects/common/projection';
 import { SiteReportDevelopment, SiteReportEnforcement } from './site-report';
 import { Invest } from './enforcement/invest';
@@ -92,16 +93,6 @@ export class PlanningFactory {
   //create building start
   public static createBuildingStart(registryId: string): BuildingStart {
     let c = new BuildingStart(registryId, '');
-    c.applicant = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT);
-    c.agent = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT);
-    return c;
-  }
-
-  //create certifcate
-  public static createCertificateOfCompliance(registryId: string): Certificate {
-    let c = new Certificate(registryId);
-    c.applicant = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT);
-    c.agent = new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT);
     return c;
   }
 
