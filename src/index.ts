@@ -25,6 +25,8 @@ export * from './model/value-objects/planning/descriptive';
 export * from './model/value-objects/planning/report';
 export * from './model/value-objects/common/label';
 
+export * from './model/value-objects/system/search-result';
+
 //entities
 export * from './model/entities/entity-model-type';
 
