@@ -29,7 +29,7 @@ export class SearchFetchResults {
    * Apply new settings to the search results. Ensuring that it has all properties of the SearchFetchResults class
    * @param results Search results to be converted
    */
-  public static apply(results: SearchFetchResults) : SearchFetchResults {
+  public static initialise(results: SearchFetchResults) : SearchFetchResults {
     let s: SearchFetchResults = Object.assign(new SearchFetchResults(), results);
     for(let i=0; i<s.rows.length;i++){
       s.rows[i] = Object.assign(new ScoredRow(), s.rows[i]);
