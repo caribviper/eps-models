@@ -209,6 +209,13 @@ export class RegistryItem extends Entity {
     return array;
   }
 
+  /**
+   * Gets whether the registry item has other applicants
+   */
+  get hasOtherApplicants(): boolean {
+    return (!!this.otherApplicants && this.otherApplicants.length > 0);
+  }
+
   getStakeholderContactFullname(s: Stakeholder) {
     return (!!s && !!s.contact) ? (s.contact.firstname + " " + s.contact.lastname).trim() : '';
   }
