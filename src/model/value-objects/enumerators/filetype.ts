@@ -49,7 +49,11 @@ export class FileStatusFactory {
    * @param status Numerical status to be converted to string
    */
   public static convertToStringStatus(status: any): string {
-    return this.dictionary[status.toString()];
+    try {
+      return this.dictionary[status.toString()];
+    } catch (error) {
+      return 'N/A';
+    }
 
   }
 }
