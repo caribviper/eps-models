@@ -5,7 +5,7 @@ import { FormalApplication } from './applications/formal';
 import { ChattelApplication } from './applications/chattel';
 import { IRegistryDetails, RegistryDetails } from './iregistry-details';
 import { CategoryDescription } from './../../value-objects/planning/descriptive';
-import { FileType, RegistryFileTypes, FILE_TYPES } from './../../value-objects/enumerators/filetype';
+import { FileType, RegistryFileTypes, FILE_TYPES, FileStatusFactory } from './../../value-objects/enumerators/filetype';
 import { FeeItem } from './../../value-objects/common/fee-item';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
@@ -207,6 +207,10 @@ export class RegistryItem extends Entity {
         array.push(s);
     });
     return array;
+  }
+
+  get registryStatus(): string {
+    return FileStatusFactory.convertToStringStatus(this.status);
   }
 
   /**
