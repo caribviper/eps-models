@@ -7,6 +7,7 @@ import { Consultation } from './consultation';
 import { Attachment } from './attachment';
 import { Report } from './report';
 import { RegistryItem } from './registry-item';
+import * as moment from 'moment';
 
 /**Encompasses all documents related to a file */
 export class Dossier {
@@ -44,7 +45,7 @@ export class Dossier {
 
   public static createDossier(items: any[]): Dossier {
     let dossier = new Dossier();
-    if(!items || items.length < 1)
+    if (!items || items.length < 1)
       return null;
     items.forEach((item: Entity) => {
       switch (item.type) {
@@ -54,9 +55,21 @@ export class Dossier {
         case ENTITY_MODELS.GENERAL.MINUTE: { dossier.minutes.push(Minute.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
         case ENTITY_MODELS.SYSTEM.TASK: { dossier.tasks.push(Task.mapToEntity(item)); break; }
-        case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break;}
+        case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break; }
       }
     });
+
+    //implement sorting
+    if (!!dossier && !!dossier.tasks && dossier.tasks.length > 0) {
+      //do sort
+      dossier.tasks.sort((a: Task, b: Task) => {
+        let x = moment(a.dateStarted);
+        let y = moment(b.dateStarted);
+        if (x < y) return -1;
+        if (y < x) return 1;
+        return 0;
+      });
+    }
     return dossier;
   }
 }
