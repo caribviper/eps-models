@@ -43,7 +43,7 @@ export class Task extends Entity {
   seen: boolean
 
   constructor(registryId: string = '', guid = '', sender: UserInfo = null, dateStarted: Date = null) {
-    super(ENTITY_MODELS.SYSTEM.EVENT, Task.createId(registryId, guid), true);
+    super(ENTITY_MODELS.SYSTEM.TASK, Task.createId(registryId, guid), true);
     this.dateStarted = dateStarted;
     this.status = '';
   }
