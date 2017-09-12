@@ -23,6 +23,16 @@ export class WorkflowTemplate extends Entity {
     Assert.isTruthy(this.name, 'Must have a valid name');
   }
 
+  public get activityDays(): number {
+    if(!this.activities || this.activities.length < 1)
+      return 0;
+    let total = 0;
+    this.activities.forEach((a: WorkflowActivity) => {
+      total+= a.estimatedDays;
+    });
+    return total;
+  }
+
 
   /**
    * Adds an activity to the workflow
@@ -61,6 +71,12 @@ export class WorkflowTemplate extends Entity {
   }
 
   private swap(index1: number, index2: number) {
+    //let swap orders
+    let order = this.activities[index1].order;
+    this.activities[index1].order = this.activities[index2].order;
+    this.activities[index2].order = order;
+
+    //swap for array
     let tmp = this.activities[index1];
     this.activities[index1] = this.activities[index2];
     this.activities[index2] = tmp;
