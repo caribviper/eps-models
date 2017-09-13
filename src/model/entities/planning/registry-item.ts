@@ -157,7 +157,7 @@ export class RegistryItem extends Entity {
 
   /**Gets the description about the land */
   get landDescription(): string {
-    let description = '';
+    let description = 'N/A';
     if (!this.details)
       return description;
     switch (this.fileType.folderPrefix) {
