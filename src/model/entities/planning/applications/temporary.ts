@@ -4,9 +4,9 @@ import { DateRange } from './../../../value-objects/common/date-range';
 import { Assert } from 'caribviper-common';
 
 export const TEMPORARY_DEVELOPMENT_TYPE = {
-  ENTERTAINMENT: 'Entertainment Licence',
-  BANNER: 'Banner',
-  TENT: 'Tent or Other Temporary Structure'
+  ENTERTAINMENT: 'Public Entertainment Licence',
+  BANNER: 'Erection Banner',
+  TENT: 'Erection of a Tent or Other Temporary Structure'
 };
 
 /**
@@ -18,9 +18,10 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
    * Creates a temporary development
    * @param type Type of temporary development
    * @param dates Dates for when the structure should be up and for how long
+   * @param referenceNo Reference number used in conjunction with the site
    */
-  constructor(public type: string = '', public dates: DateRange[] = []) {
-    super()
+  constructor(public type: string = '', public dates: DateRange[] = [], public referenceNo: string) {
+    super();
   }
 
   public validateEntity() {
