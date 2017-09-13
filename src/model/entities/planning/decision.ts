@@ -1,3 +1,4 @@
+import { DECISION_TYPES } from './../../value-objects/enumerators/decision-types';
 import { DecisionItemTemplate } from './../system/decision-template';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
@@ -124,6 +125,15 @@ export class Decision extends Entity {
   /**decision information from minister */
   ministerialContent: string;
 
+  /**forces the decision to have a new line for rendering conditions */
+  forceNewLineForConditions: boolean = true;
+
+  /**forces the decision to have a new line for rendering clauses */
+  forceNewLineForClause: boolean = true;
+
+  /**forces the decision to have a new line for rendering clauses */
+  forceNewLineForRefusals = true;
+
   constructor(registryId: string = '', guid: string = '') {
     super(ENTITY_MODELS.PLANNING.DECISION, Decision.createId(registryId, guid), true);
     this.registryId = registryId;
@@ -132,7 +142,6 @@ export class Decision extends Entity {
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Decision cannot be transient');
     Assert.isTruthy(this.registryId, 'Decision registryId cannot be undefined/empty');
-    //Assert.isNonEmptyArray(this.decisionItems, 'Decision items cannot be undefined/empty and must contain at least one item');
     this.properties.validateProperty();
   }
 
@@ -142,6 +151,43 @@ export class Decision extends Entity {
 
   get finalised(): boolean {
     return !!this.properties && this.finalised;
+  }
+
+  get conditions(): DecisionItem[] {
+    let items: DecisionItem[] = [];
+    this.decisionItems.forEach((item: DecisionItem) => {
+      if (item.templateType === DECISION_TYPES.STANDARD_CONDITION ||
+        item.templateType === DECISION_TYPES.CUSTOM_CONDITION ||
+        item.templateType === DECISION_TYPES.STANDARD_CONDITION_TREE ||
+        item.templateType === DECISION_TYPES.CUSTOM_CONDITION_TREE) {
+        items.push(item);
+      }
+    });
+    return items;
+  }
+
+  get clauses(): DecisionItem[] {
+    let items: DecisionItem[] = [];
+    this.decisionItems.forEach((item: DecisionItem) => {
+      if (item.templateType === DECISION_TYPES.CLAUSE ||
+        item.templateType === DECISION_TYPES.CUSTOM_CLAUSE) {
+        items.push(item);
+      }
+    });
+    return items;
+  }
+
+  get refusals(): DecisionItem[] {
+    let items: DecisionItem[] = [];
+    this.decisionItems.forEach((item: DecisionItem) => {
+      if (item.templateType === DECISION_TYPES.REASON_FOR_REFUSAL ||
+        item.templateType === DECISION_TYPES.CUSTOM_REASON_FOR_REFUSAL ||
+        item.templateType === DECISION_TYPES.REASON_FOR_REFUSAL_TREE ||
+        item.templateType === DECISION_TYPES.CUSTOM_REASON_FOR_REFUSAL_TREE) {
+        items.push(item);
+      }
+    });
+    return items;
   }
 
   public static createNew(registryId: string, guid: string, approved: boolean, preparedBy: UserInfo): Decision {
