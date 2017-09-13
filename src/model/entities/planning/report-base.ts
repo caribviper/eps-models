@@ -37,6 +37,11 @@ export abstract class BaseReport extends Entity {
   get isFinalised(): boolean {
     return !!this.dateAttached;
   }
+
+  /**Indicates if the report has pictures attached */
+  get hasPictures(): boolean {
+    return !!this.attachedPictures && this.attachedPictures.length > 0;
+  }
   
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Report cannot be transient');
