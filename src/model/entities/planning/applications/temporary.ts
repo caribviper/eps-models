@@ -20,7 +20,7 @@ export class TemporaryDevelopment extends RegistryDetails implements IRegistryDe
    * @param dates Dates for when the structure should be up and for how long
    * @param referenceNo Reference number used in conjunction with the site
    */
-  constructor(public type: string = '', public dates: DateRange[] = [], public referenceNo: string) {
+  constructor(public type: string = '', public dates: DateRange[] = [], public referenceNo: string = '') {
     super();
   }
 

@@ -16,7 +16,7 @@ import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
 import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
-import { RegistryItem, Location, Coordinate} from './registry-item';
+import { RegistryItem, Location, Coordinate } from './registry-item';
 import { Report } from "./report";
 
 export class PlanningFactory {
