@@ -1,3 +1,4 @@
+import { EntityAutoMapper } from './../entity-automapper';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entities';
@@ -9,8 +10,24 @@ export class DocumentModel {
   constructor(public document: Document, public model: any = undefined) { }
 }
 
+export class DocumentModelType {
+  constructor(public name: string, public model: any) { }
+}
+
+/**
+ * Manages document details used in creating documents
+ */
 export class DocumentDetails {
-  constructor(public template: string, public model: any = undefined) { }
+  constructor(public template: string, public models: DocumentModelType[] = []) { }
+
+  get model(): any {
+    let mapper = new EntityAutoMapper();
+    let obj = {};
+    this.models.forEach((m: DocumentModelType) => {
+      obj[m.name] = mapper.getMap(m.model);
+    });
+    return obj;
+  }
 }
 
 /**Stores information relating to the document property */
