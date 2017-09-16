@@ -179,7 +179,7 @@ export class RegistryItem extends Entity {
   }
 
   get hasValidAgent(): boolean {
-    return (this.agent && !this.agent.isEmpty);
+    return (this.agent && !this.agent.isEmpty && !this.agent.contact);
   }
 
   get agent(): Stakeholder {
