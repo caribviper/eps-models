@@ -52,6 +52,7 @@ export * from './model/entities/planning/task';
 
 export * from './model/entities/planning/iregistry-details';
 export * from './model/entities/planning/applications/chattel';
+export * from './model/entities/planning/applications/certificate';
 export * from './model/entities/planning/applications/formal';
 export * from './model/entities/planning/applications/permitted';
 export * from './model/entities/planning/applications/tree';
