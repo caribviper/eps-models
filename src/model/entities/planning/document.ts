@@ -18,7 +18,7 @@ export class DocumentModelType {
  * Manages document details used in creating documents
  */
 export class DocumentDetails {
-  constructor(public template: string, public models: DocumentModelType[] = []) { }
+  constructor(public template: string, public models: DocumentModelType[] = [], public title: string = '') { }
 
   get model(): any {
     let mapper = new EntityAutoMapper();
@@ -28,6 +28,18 @@ export class DocumentDetails {
     });
     return obj;
   }
+}
+
+/**
+ * Allows web services to return url and document data
+ */
+export class DocumentUrl {
+  /**
+   * Creates a new document url
+   * @param url Url of the document
+   * @param title Title associated with the document
+   */
+  constructor(public url: any, public title: string = '') { }
 }
 
 /**Stores information relating to the document property */
