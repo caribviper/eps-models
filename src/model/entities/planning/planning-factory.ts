@@ -170,18 +170,18 @@ export class PlanningFactory {
       || (registry.details as any).offendingAction;
     switch (reportType) {
       case 0: {//site
-        report = new SiteReportDevelopment(registry.registryId, currentUser, description);
-        report.content = '<p><br/></p>';
+        report = new SiteReportDevelopment(registry._id, currentUser, description);
+        //report.content = '<p><br/></p>';
         break;
       }
       case 1: {//enf
-        report = new SiteReportEnforcement(registry.registryId, currentUser, description);
-        report.content = '<p><br/></p>';
+        report = new SiteReportEnforcement(registry._id, currentUser, description);
+        //report.content = '<p><br/></p>';
         break;
       }
       default: {//general
-        report = new Report(registry.registryId, currentUser, description);
-        report.content = '<p><br/></p>';
+        report = new Report(registry._id, currentUser, description);
+        //report.content = '<p><br/></p>';
         break;
       }
     }
