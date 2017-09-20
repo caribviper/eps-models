@@ -11,8 +11,8 @@
   },
   "license": "SEE LICENSE IN <licence.txt>",
   "dependencies": {
-    "caribviper-common": "file:..\\..\\library\\common",
-    "caribviper-entity": "file:..\\..\\library\\entity",
+    "caribviper-common": "file:..\\..\\caribviper\\library\\common",
+    "caribviper-entity": "file:..\\..\\caribviper\\library\\entity",
     "moment": "^2.18.1",
     "numeral": "^2.0.6"
   },
