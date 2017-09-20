@@ -12,7 +12,7 @@
   "license": "SEE LICENSE IN <licence.txt>",
   "dependencies": {
     "caribviper-common": "file:..\\..\\library\\common",
-    "caribviper-entities": "file:..\\..\\library\\entity",
+    "caribviper-entity": "file:..\\..\\library\\entity",
     "moment": "^2.18.1",
     "numeral": "^2.0.6"
   },
