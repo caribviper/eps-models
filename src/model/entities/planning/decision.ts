@@ -3,7 +3,7 @@ import { DecisionItemTemplate } from './../system/decision-template';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Assert } from 'caribviper-common';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 /**Sepcifies the possible decision maker */
 export const DECISION_AUTHORITY = {

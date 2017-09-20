@@ -1,7 +1,7 @@
 import { WorkflowActivity } from './../../value-objects/workflow/workflow-activity';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 export class WorkflowTemplate extends Entity {
 

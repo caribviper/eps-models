@@ -1,6 +1,6 @@
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { AttachedPicture } from './../../value-objects/planning/report';
 

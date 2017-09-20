@@ -4,7 +4,7 @@ import { FeeItem } from './../../../value-objects/common/fee-item';
 import { UserInfo } from './../../../value-objects/common/userinfo';
 import { Contact } from './../../../value-objects/common/contact';
 import { Stakeholder, STAKEHOLDER_TYPES } from './../../../value-objects/common/stakeholder';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 /** Provide information required for a Certificate Application without an original application */
 export class BondedWarehouseInformation {

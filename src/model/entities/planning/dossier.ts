@@ -1,4 +1,4 @@
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Task } from './task';
 import { Minute } from './minute';

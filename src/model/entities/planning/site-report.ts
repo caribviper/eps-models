@@ -1,6 +1,6 @@
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Assert } from 'caribviper-common';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { PolicyItem, SiteReportMeasurementGroup } from './../../value-objects/planning/report';
 import { Report } from './report';

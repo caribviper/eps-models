@@ -1,5 +1,5 @@
 import { Assert, Utilities } from 'caribviper-common';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Address } from './../../value-objects/common/address';
 import { ContactEssentials, Contact } from "../../value-objects/common/contact";

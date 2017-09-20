@@ -4,7 +4,7 @@ import { Assert } from 'caribviper-common';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { EventRecord } from './../../value-objects/common/event-record';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import * as numeral from 'numeral';
 
 /**

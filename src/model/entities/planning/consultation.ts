@@ -3,7 +3,7 @@ import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Contact } from './../../value-objects/common/contact';
 import { UserInfo } from './../../value-objects/common/userinfo';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 
 export class Consultation extends Entity {

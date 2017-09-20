@@ -11,7 +11,7 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Contact } from './../../value-objects/common/contact';
 import { Address } from './../../value-objects/common/address';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { Utilities, Assert, StringUtilities } from 'caribviper-common';
 import * as numeral from 'numeral';
 import { Stakeholder, STAKEHOLDER_TYPES } from "../../value-objects/common/stakeholder";

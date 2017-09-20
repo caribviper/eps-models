@@ -2,7 +2,7 @@ import { Assert, Utilities } from 'caribviper-common';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { WorkflowActivity } from './../../value-objects/workflow/workflow-activity';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 /**
  * Manages the workflow event

@@ -1,5 +1,5 @@
 import { ENTITY_MODELS } from './../entity-model-type';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 /**
  * Resource item used to determine permissions

@@ -20,7 +20,7 @@ import { BuildingStart } from './planning/building-start';
 import { Certificate } from './planning/applications/certificate';
 import { Attachment } from './planning/attachment';
 import { Agency } from './general/agency';
-import { IEntityMapBuilder, Entity } from "caribviper-entities";
+import { IEntityMapBuilder, Entity } from "caribviper-entity";
 
 export class EntityMap<T extends Entity> {
   constructor(public map: IEntityMapBuilder<T>) { }

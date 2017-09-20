@@ -1,6 +1,6 @@
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { Entity } from 'caribviper-entities';
+import { Entity } from 'caribviper-entity';
 
 /**Manages document templates */
 export class DocumentTemplate extends Entity {
