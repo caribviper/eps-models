@@ -41,6 +41,7 @@ export * from './model/entities/security/user';
 export * from './model/entities/planning/registry-item';
 export * from './model/entities/planning/consultation';
 export * from './model/entities/planning/document';
+export * from './model/entities/planning/dispatched-item';
 export * from './model/entities/planning/minute';
 export * from './model/entities/planning/attachment';
 export * from './model/entities/planning/notice';

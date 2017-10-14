@@ -12,7 +12,8 @@ export const ENTITY_MODELS = {
     REPORT: 'report',
     //used for searches and not creation of ids
     SITE_REPORT_DEVELOPMENT: 'development',
-    SITE_REPORT_ENFORCEMENT: 'enforcement'
+    SITE_REPORT_ENFORCEMENT: 'enforcement',
+    DISPATCHED_ITEM: 'dispatched'
   },
   REGISTRY_DETAILS: {
     APPLICATIONS: {

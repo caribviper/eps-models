@@ -1,3 +1,4 @@
+import { DispatchedItem } from './planning/dispatched-item';
 import { ENTITY_MODELS } from './entity-model-type';
 import { Task } from './planning/task';
 import { User } from './security/user';
@@ -34,6 +35,7 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.PLANNING.BUILDING_START] = new EntityMap<BuildingStart>(BuildingStart);
     this.maps[ENTITY_MODELS.PLANNING.CONSULTATION] = new EntityMap<Consultation>(Consultation);
     this.maps[ENTITY_MODELS.PLANNING.DECISION] = new EntityMap<Decision>(Decision);
+    this.maps[ENTITY_MODELS.PLANNING.DISPATCHED_ITEM] = new EntityMap<DispatchedItem>(DispatchedItem)
     this.maps[ENTITY_MODELS.PLANNING.REGISTRY_ITEM] = new EntityMap<RegistryItem>(RegistryItem);
     this.maps[ENTITY_MODELS.PLANNING.NOTICE] = new EntityMap<Notice>(Notice);
     this.maps[ENTITY_MODELS.PLANNING.REPORT] = new EntityMap<Report>(Report);

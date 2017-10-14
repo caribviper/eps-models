@@ -1,3 +1,4 @@
+import { DispatchedItem } from './dispatched-item';
 import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Task } from './task';
@@ -19,6 +20,7 @@ export class Dossier {
   minutes: Minute[] = [];
   reports: Report[] = [];
   tasks: Task[] = [];
+  dispatchedItems: DispatchedItem[] = [];
 
   constructor() {
     this.registry = new RegistryItem();
@@ -28,6 +30,7 @@ export class Dossier {
     this.minutes = [];
     this.reports = [];
     this.tasks = [];
+    this.dispatchedItems = [];
   }
 
   public static mapToEntity(dossier: Dossier): Dossier {
@@ -40,6 +43,7 @@ export class Dossier {
     d.minutes = Minute.mapToEntityArray(d.minutes);
     d.reports = Report.mapToEntityArray(d.reports);
     d.tasks = Task.mapToEntityArray(d.tasks);
+    d.dispatchedItems = DispatchedItem.mapToEntityArray(d.dispatchedItems);
     return d;
   }
 
@@ -51,6 +55,7 @@ export class Dossier {
       switch (item.type) {
         case ENTITY_MODELS.PLANNING.ATTACHMENT: { dossier.attachments.push(Attachment.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.CONSULTATION: { dossier.consultations.push(Consultation.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.DISPATCHED_ITEM: { dossier.dispatchedItems.push(DispatchedItem.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.DECISION: { dossier.decisions.push(Decision.mapToEntity(item)); break; }
         case ENTITY_MODELS.GENERAL.MINUTE: { dossier.minutes.push(Minute.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
@@ -63,8 +68,8 @@ export class Dossier {
     if (!!dossier && !!dossier.tasks && dossier.tasks.length > 0) {
       //do sort
       dossier.tasks.sort((a: Task, b: Task) => {
-        let x = moment(a.dateStarted);
-        let y = moment(b.dateStarted);
+        let x = moment(new Date(a.dateStarted));
+        let y = moment(new Date(b.dateStarted));
         if (x < y) return -1;
         if (y < x) return 1;
         return 0;
