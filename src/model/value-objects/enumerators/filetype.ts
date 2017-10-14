@@ -13,6 +13,7 @@ export const FILE_STATUS = {
   INVESTIGATING: 'Investigating',
   ISSUED: 'Issued',
   LAPSED: 'Lapsed',
+  PERMITTED: 'Permitted',
   REFUSED: 'Refused',
   REVOCATED: 'Revocated',
   SECTION37: 'Section37',
