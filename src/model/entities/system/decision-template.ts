@@ -39,7 +39,14 @@ export class DecisionItemTemplate extends Entity {
    * @param source Data to be mapped to the entity
    */
   public static mapToEntity(source): DecisionItemTemplate {
-    return Object.assign(new DecisionItemTemplate(), source);
+    let template: DecisionItemTemplate = Object.assign(new DecisionItemTemplate(), source);
+    try {
+      if (typeof template.itemNo != 'number')
+        template.itemNo = parseInt(template.itemNo);
+    } catch (error) {
+      template.itemNo = 0;
+    }
+    return template;
   }
 
   public static mapToEntityArray(source: DecisionItemTemplate[]): DecisionItemTemplate[] {
