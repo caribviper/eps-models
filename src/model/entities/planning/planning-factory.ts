@@ -165,9 +165,10 @@ export class PlanningFactory {
   public static createReport(reportType: number, registry: RegistryItem, currentUser: UserInfo): Report | SiteReportDevelopment | SiteReportEnforcement {
     let report = null;
     //get description
-    let description = (registry.details as any).proposedDevelopment.description
-      || (registry.details as any).proposedDevelopment
-      || (registry.details as any).offendingAction;
+    // let description = (registry.details as any).proposedDevelopment.description
+    //   || (registry.details as any).proposedDevelopment
+    //   || (registry.details as any).offendingAction;
+    let description = registry.projection.description;
     switch (reportType) {
       case 0: {//site
         report = new SiteReportDevelopment(registry._id, currentUser, description);
