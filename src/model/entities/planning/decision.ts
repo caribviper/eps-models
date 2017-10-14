@@ -7,23 +7,20 @@ import { Entity } from 'caribviper-entity';
 
 /**Sepcifies the possible decision maker */
 export const DECISION_AUTHORITY = {
-  CTP: { name: 'ctp', value: 0 },
-  MINISTER: { name: 'minister', value: 1 }
+  CTP: { name: 'CTP', value: 0 },
+  MINISTER: { name: 'MINISTER', value: 1 }
 };
 
 /**Decision Item making up the decision */
 export class DecisionItem {
-  /**Order of the decision item */
+  /**Decision item number */
   order: number = 0;
 
-  /**Decision item number */
+  /**Number assigned to decision item template within cateogory. */
   itemNumber: number = 0;
 
   /**Type of decision item category */
   templateType: string;
-
-  /**Number assigned to decision item template within cateogory. */
-  templateNumber: number;
 
   /**Description of the decision item. */
   description: string = '';
@@ -31,13 +28,12 @@ export class DecisionItem {
   /**Rationale explaining the reasoning behind condition. */
   rationale: string;
 
-  constructor(order: number, itemNo: number, template: DecisionItemTemplate) {
+  constructor(order: number, template: DecisionItemTemplate) {
     this.order = order;
-    this.itemNumber = itemNo;
     if (!template)
       throw new Error('Invalid template used to create DecisionItem');
     this.templateType = template.decisionType;
-    this.templateNumber = template.itemNo;
+    this.itemNumber = template.itemNo;
     this.description = template.description;
     this.rationale = template.rationale;
   }
@@ -51,20 +47,26 @@ export class DecisionProperty {
   /**Is the decision an approval */
   approved: boolean = false;
 
+  //has application been withdrawn
+  withdrawn: boolean = false;
+
   /**Date decision was created */
   created: Date;
-
-  /**Date decision was signed. */
-  signed: Date;
-
-  /**Date decision was dispatached */
-  dispatched: Date;
 
   /**Username of person that prepared decision */
   preparedBy: UserInfo;
 
+  /**Date decision was signed. */
+  signed: Date;
+
   /**Gets the user who signed the decision. */
   signingUser: UserInfo;
+
+  /**Date decision was dispatached */
+  dispatched: Date;
+
+  /**User who dispatached */
+  dispatchingUser: UserInfo;
 
   /**states whether the decision was appealed */
   appealed: Date;
@@ -84,12 +86,14 @@ export class DecisionProperty {
 
   ensureNotFinalised() {
     if (this.isFinalised)
-      throw new Error('Cannot update Decision Property as it has already been finalised');
+      throw new Error('Cannot finalised Decision as it has already been finalised');
   }
 
-  dispatch() {
-    this.ensureNotFinalised();
+  dispatch(ctpUser: UserInfo) {
+    if(!this.isFinalised)
+      throw new Error('Cannot dispatch as deicison is not finalised');
     this.dispatched = new Date();
+    this.dispatchingUser = ctpUser;
   }
 
   sign(ctpUser: UserInfo = undefined) {
@@ -117,16 +121,19 @@ export class Decision extends Entity {
   registryId: string;
 
   /**Properties associated with the decision */
-  properties: DecisionProperty
+  properties: DecisionProperty = new DecisionProperty('', false, null);
 
   /**Decision items linked to decision from CTP */
-  decisionItems: DecisionItem[];
+  decisionItems: DecisionItem[] = [];
 
   /**decision information from minister */
   ministerialContent: string;
-
+  
   /**forces the decision to have a new line for rendering conditions */
   forceNewLineForConditions: boolean = true;
+    
+  /**forces the decision to have a new line for rendering conditions' reasons */
+  forceNewLineForConditionsReasons: boolean = true;
 
   /**forces the decision to have a new line for rendering clauses */
   forceNewLineForClause: boolean = true;
@@ -137,6 +144,8 @@ export class Decision extends Entity {
   constructor(registryId: string = '', guid: string = '') {
     super(ENTITY_MODELS.PLANNING.DECISION, Decision.createId(registryId, guid), true);
     this.registryId = registryId;
+    this.decisionItems = [];
+    this.properties = new DecisionProperty('', false, null);
   }
 
   public validateEntity() {
@@ -146,7 +155,11 @@ export class Decision extends Entity {
   }
 
   get approved(): boolean {
-    return !!this.properties && this.properties.approved;
+    return !!this.properties && this.properties.approved && !this.properties.withdrawn;
+  }
+
+  get withdrawn(): boolean {
+    return !!this.properties && this.properties.withdrawn;
   }
 
   get finalised(): boolean {
@@ -155,6 +168,8 @@ export class Decision extends Entity {
 
   get conditions(): DecisionItem[] {
     let items: DecisionItem[] = [];
+    if (!this.decisionItems || this.decisionItems.length < 1)
+      return items;
     this.decisionItems.forEach((item: DecisionItem) => {
       if (item.templateType === DECISION_TYPES.STANDARD_CONDITION ||
         item.templateType === DECISION_TYPES.CUSTOM_CONDITION ||
@@ -163,22 +178,36 @@ export class Decision extends Entity {
         items.push(item);
       }
     });
+    items.sort((a: DecisionItem, b: DecisionItem) => {
+      if (a.order !== b.order)
+        return a.order - b.order;
+      return a.itemNumber - b.itemNumber;
+    });
     return items;
   }
 
   get clauses(): DecisionItem[] {
     let items: DecisionItem[] = [];
+    if (!this.decisionItems || this.decisionItems.length < 1)
+      return items;
     this.decisionItems.forEach((item: DecisionItem) => {
       if (item.templateType === DECISION_TYPES.CLAUSE ||
         item.templateType === DECISION_TYPES.CUSTOM_CLAUSE) {
         items.push(item);
       }
     });
+    items.sort((a: DecisionItem, b: DecisionItem) => {
+      if (a.order !== b.order)
+        return a.order - b.order;
+      return a.itemNumber - b.itemNumber;
+    });
     return items;
   }
 
   get refusals(): DecisionItem[] {
     let items: DecisionItem[] = [];
+    if (!this.decisionItems || this.decisionItems.length < 1)
+      return items;
     this.decisionItems.forEach((item: DecisionItem) => {
       if (item.templateType === DECISION_TYPES.REASON_FOR_REFUSAL ||
         item.templateType === DECISION_TYPES.CUSTOM_REASON_FOR_REFUSAL ||
@@ -187,7 +216,23 @@ export class Decision extends Entity {
         items.push(item);
       }
     });
+    items.sort((a: DecisionItem, b: DecisionItem) => {
+      if (a.order !== b.order)
+        return a.order - b.order;
+      return a.itemNumber - b.itemNumber;
+    });
     return items;
+  }
+
+  /**
+   * Sorts the decision items
+   */
+  public sortDecisionItems() {
+    this.decisionItems.sort((a: DecisionItem, b: DecisionItem) => {
+      if (a.order !== b.order)
+        return a.order - b.order;
+      return a.itemNumber - b.itemNumber;
+    });
   }
 
   public static createNew(registryId: string, guid: string, approved: boolean, preparedBy: UserInfo): Decision {
@@ -208,7 +253,9 @@ export class Decision extends Entity {
    * @param source Data to be mapped to the entity
    */
   public static mapToEntity(source): Decision {
-    return Object.assign(new Decision(), source);
+    let decision = Object.assign(new Decision(), source);
+    decision.properties = Object.assign(new DecisionProperty('', false, null), decision.properties);
+    return decision;
   }
 
   public static mapToEntityArray(source: Decision[]): Decision[] {
