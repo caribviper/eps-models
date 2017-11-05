@@ -1,3 +1,5 @@
+import { Certificate } from './applications/certificate';
+import { BuildingStart } from './building-start';
 import { DispatchedItem } from './dispatched-item';
 import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
@@ -21,6 +23,8 @@ export class Dossier {
   reports: Report[] = [];
   tasks: Task[] = [];
   dispatchedItems: DispatchedItem[] = [];
+  buildingStarts: BuildingStart[] = [];
+  certificates: RegistryItem[] = [];
 
   constructor() {
     this.registry = new RegistryItem();
@@ -31,6 +35,8 @@ export class Dossier {
     this.reports = [];
     this.tasks = [];
     this.dispatchedItems = [];
+    this.buildingStarts = [];
+    this.certificates = [];
   }
 
   public static mapToEntity(dossier: Dossier): Dossier {
@@ -44,13 +50,20 @@ export class Dossier {
     d.reports = Report.mapToEntityArray(d.reports);
     d.tasks = Task.mapToEntityArray(d.tasks);
     d.dispatchedItems = DispatchedItem.mapToEntityArray(d.dispatchedItems);
+    d.buildingStarts = BuildingStart.mapToEntityArray(d.buildingStarts);
+    if(!!d.certificates) {
+      d.certificates = RegistryItem.mapToEntityArray(d.certificates);
+    }
     return d;
   }
 
-  public static createDossier(items: any[]): Dossier {
+  public static createDossier(items: any[], registryCertificates: RegistryItem[] = []): Dossier {
     let dossier = new Dossier();
     if (!items || items.length < 1)
       return null;
+    if(!!registryCertificates && registryCertificates.length > 0)
+      dossier.certificates= RegistryItem.mapToEntityArray(registryCertificates);
+      
     items.forEach((item: Entity) => {
       switch (item.type) {
         case ENTITY_MODELS.PLANNING.ATTACHMENT: { dossier.attachments.push(Attachment.mapToEntity(item)); break; }
@@ -59,6 +72,7 @@ export class Dossier {
         case ENTITY_MODELS.PLANNING.DECISION: { dossier.decisions.push(Decision.mapToEntity(item)); break; }
         case ENTITY_MODELS.GENERAL.MINUTE: { dossier.minutes.push(Minute.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.BUILDING_START: { dossier.buildingStarts.push(BuildingStart.mapToEntity(item)); break; }
         case ENTITY_MODELS.SYSTEM.TASK: { dossier.tasks.push(Task.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break; }
       }

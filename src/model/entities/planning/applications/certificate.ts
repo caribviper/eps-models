@@ -1,3 +1,4 @@
+import { DispatchedInfo } from './../../../value-objects/common/dispatched-info';
 import { ENTITY_MODELS } from './../../entity-model-type';
 import { Assert } from 'caribviper-common';
 import { FeeItem } from './../../../value-objects/common/fee-item';
@@ -47,8 +48,6 @@ export class Certificate {
 
   registryId: string = '';
 
-  fee: FeeItem = new FeeItem();
-
   certificateType: string = '';
 
   /**Specifies whether the request was made for a parital or full certificate. */
@@ -59,10 +58,17 @@ export class Certificate {
 
   public businessInformation: Contact;
 
+  /**dispatched infor */
+  dispatchedInfo: DispatchedInfo = null;
 
-  /**Gets whether building start/certificate was certified */
-  get certified(): boolean {
-    return !this.certificationDate;
+
+  /**Gets whether certificate was certified */
+  get isCertified(): boolean {
+    return !!this.certificationDate;
+  }
+
+  public get canDispatch(): boolean {
+    return this.isCertified && !this.dispatchedInfo;
   }
 
   /**
@@ -73,5 +79,17 @@ export class Certificate {
   public certify(certifiedDate: Date, certifiedBy: UserInfo) {
     this.certificationDate = certifiedDate;
     this.certifiedBy = certifiedBy;
+  }
+
+  /**
+   * Dispatches a certificate
+   * @param user User dispatching certificate
+   * @param dispatchedDate Date of dispatchment
+   * @param description Description about dispatchment
+   */
+  public dispatch(user: UserInfo, dispatchedDate: Date, description: string) {
+    if (!this.canDispatch)
+      return;
+    this.dispatchedInfo = new DispatchedInfo(user, dispatchedDate, description);
   }
 }

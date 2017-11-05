@@ -1,5 +1,6 @@
-import { Certificate } from './../planning/applications/certificate';
-import { BuildingStart } from './building-start';
+import { CERTIFICATES_COMPLIANCE_TYPES } from './../../value-objects/enumerators/certificate-types';
+import { Certificate, BondedWarehouseInformation } from './applications/certificate';
+import { BuildingStart } from './../planning/building-start';
 import { Projection } from './../../value-objects/common/projection';
 import { SiteReportDevelopment, SiteReportEnforcement } from './site-report';
 import { Invest } from './enforcement/invest';
@@ -14,7 +15,7 @@ import { FeeItem } from './../../value-objects/common/fee-item';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
-import { FileType, RegistryFileTypes } from './../../value-objects/enumerators/filetype';
+import { FileType, RegistryFileTypes, FILE_TYPES } from './../../value-objects/enumerators/filetype';
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
 import { RegistryItem, Location, Coordinate } from './registry-item';
 import { Report } from "./report";
@@ -96,9 +97,47 @@ export class PlanningFactory {
     return c;
   }
 
+  public static createCertificateBuildings(existingRegistry: RegistryItem): RegistryItem {
+    return this.createCertificate(existingRegistry, CERTIFICATES_COMPLIANCE_TYPES.COMPLIANCE_BUILDING);
+  }
+
+  public static createCertificateRoads(existingRegistry: RegistryItem): RegistryItem {
+    return this.createCertificate(existingRegistry, CERTIFICATES_COMPLIANCE_TYPES.COMPLIANCE_ROAD_WORKS);
+  }
+
+  public static createCertificateSubdivisions(existingRegistry: RegistryItem): RegistryItem {
+    return this.createCertificate(existingRegistry, CERTIFICATES_COMPLIANCE_TYPES.COMPLIANCE_SUBDIVISION);
+  }
+
+  public static createCertificateWarehouse(existingRegistry: RegistryItem): RegistryItem {
+    return this.createCertificate(existingRegistry, CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE);
+  }
+
+  private static createCertificate(existingRegistry: RegistryItem, certificateType: string): RegistryItem {
+    let r = new RegistryItem(RegistryFileTypes.certificate);
+    r.fees = new FeeItem();
+    if (!!existingRegistry && !!existingRegistry.stakeholders && existingRegistry.stakeholders.length > 0) {
+      r.stakeholders = existingRegistry.stakeholders;
+      r.location = Object.assign(r.location, existingRegistry.location);
+    }
+    else {
+      r.stakeholders.push(
+        new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
+        new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
+    }
+    r.details = new Certificate();
+    let certificate = (r.details as Certificate);
+    certificate.certificateType = certificateType;
+    if (certificateType === CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE)
+      certificate.bondedWarehouseInformation = new BondedWarehouseInformation(0, '');
+    certificate.applicationReferenceNo = existingRegistry.referenceNo;
+    return r;
+  }
+
   //create continuing use
   public static createContinuedUseCertificate(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.continuingUse);
+    r.fees = new FeeItem();
     //add stakeholders
     r.stakeholders.push(
       new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
@@ -106,6 +145,8 @@ export class PlanningFactory {
 
     //details
     r.details = new Certificate();
+    let certificate = (r.details as Certificate);
+    certificate.certificateType = CERTIFICATES_COMPLIANCE_TYPES.CONTINUING_USE;
     return r;
   }
 

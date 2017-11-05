@@ -18,7 +18,6 @@ import { RegistryItem } from './planning/registry-item';
 import { Decision } from './planning/decision';
 import { Consultation } from './planning/consultation';
 import { BuildingStart } from './planning/building-start';
-import { Certificate } from './planning/applications/certificate';
 import { Attachment } from './planning/attachment';
 import { Agency } from './general/agency';
 import { IEntityMapBuilder, Entity } from "caribviper-entity";

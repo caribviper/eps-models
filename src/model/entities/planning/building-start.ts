@@ -1,3 +1,4 @@
+import { DispatchedInfo } from './../../value-objects/common/dispatched-info';
 import { FeeItem } from './../../value-objects/common/fee-item';
 import { Stakeholder, STAKEHOLDER_TYPES } from './../../value-objects/common/stakeholder';
 import { UserInfo } from './../../value-objects/common/userinfo';
@@ -34,12 +35,25 @@ export class BuildingStart extends Entity {
 
   registryId: string = '';
 
+  /**Fee associated with building start */
   fee: FeeItem = new FeeItem();
+
+  /**dispatched infor */
+  dispatchedInfo: DispatchedInfo = null;
+
+  /**Date construction began. */
+  public commencementDate: Date;
 
 
   /**Gets whether building start/certificate was certified */
-  get certified(): boolean {
-    return !this.certificationDate;
+  get isCertified(): boolean {
+    return !!this.certificationDate;
+  }
+
+  constructor(registryId: string = '', guid: string = '', commencementDate: Date = null) {
+    super(ENTITY_MODELS.PLANNING.BUILDING_START, BuildingStart.createId(registryId, guid));
+    this.registryId = registryId;
+    this.commencementDate = commencementDate;
   }
 
   public validateEntity() {
@@ -57,13 +71,14 @@ export class BuildingStart extends Entity {
     this.certifiedBy = certifiedBy;
   }
 
-  /**Date construction began. */
-  public commencementDate: Date;
+  public get canDispatch(): boolean {
+    return this.isCertified && !this.dispatchedInfo;
+  }
 
-  constructor(registryId: string = '', guid: string = '', commencementDate: Date = null) {
-    super(ENTITY_MODELS.PLANNING.BUILDING_START, BuildingStart.createId(registryId, guid));
-    this.registryId = registryId;
-    this.commencementDate = commencementDate;
+  public dispatch(user: UserInfo, dispatchedDate: Date, description: string) {
+    if(!this.canDispatch)
+      return;
+    this.dispatchedInfo = new DispatchedInfo(user, dispatchedDate, description);
   }
 
   public static createId(registryId: string = '', guid: string = ''): string {

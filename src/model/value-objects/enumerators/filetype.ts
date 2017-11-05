@@ -23,6 +23,27 @@ export const FILE_STATUS = {
   WITHDRAWN: 'Withdrawn'
 }
 
+export const FILE_STATUS_VALUES = {
+  SUBMITTED: 0,
+  PERMITTED: 1,
+  REFUSED: 2,
+  WITHDRAWN: 3,
+  DRAFT: 4,
+  PERMISSION_LAPSED: 5,
+  ISSUED: 101,
+  DENIED: 102,
+  REVOCATED: 103,
+  INVESTIGATING: 200,
+  WARNING_NOTICE_SERVED: 201,
+  ENFORCEMENT_NOTICE_SERVED: 202,
+  STOP_NOTICE_SERVED: 203,
+  FINAL_NOTICE_SERVED: 204,
+  SECTION37_NOTICE_SERVED: 205,
+  ENFORCEMENT_EXECUTED: 206,
+  INDEFINTE_DEFFERAL: 207,
+  DISMISSED: 208
+};
+
 /**Used to get the string status of applications */
 export class FileStatusFactory {
   private static dictionary = {
