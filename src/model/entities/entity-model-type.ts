@@ -39,7 +39,8 @@ export const ENTITY_MODELS = {
   },
   GENERAL: {
     CATEGORY: 'category',
-    MINUTE: 'minute'
+    MINUTE: 'minute',
+    FAVOURITE: 'favourite'
   },
   SYSTEM: {
     APPLICATION_COUNTER: 'counter',

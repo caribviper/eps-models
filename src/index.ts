@@ -34,6 +34,7 @@ export * from './model/entities/entity-model-type';
 
 export * from './model/entities/general/category';
 export * from './model/entities/general/agency';
+export * from './model/entities/general/favourite';
 
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';

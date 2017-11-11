@@ -1,3 +1,4 @@
+import { Favourite } from './general/favourite';
 import { DispatchedItem } from './planning/dispatched-item';
 import { ENTITY_MODELS } from './entity-model-type';
 import { Task } from './planning/task';
@@ -50,6 +51,7 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.SYSTEM.DOCUMENT_TEMPLATE] = new EntityMap<DocumentTemplate>(DocumentTemplate);
     this.maps[ENTITY_MODELS.SYSTEM.WORKFLOW_TEMPLATE] = new EntityMap<WorkflowTemplate>(WorkflowTemplate);
     this.maps[ENTITY_MODELS.SYSTEM.TASK] = new EntityMap<Task>(Task);
+    this.maps[ENTITY_MODELS.GENERAL.FAVOURITE] = new EntityMap<Favourite>(Favourite);
   }
 
   getMap(entity: any): any {
