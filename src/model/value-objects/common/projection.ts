@@ -10,5 +10,5 @@ export class Projection {
    * @param secondaryContact Full name of the secondary contact
    * @param description Gets a brief description about the registry item
    */
-  constructor(public version: string, public location: string, public primaryContact: string = '', public secondaryContact: string = '', public description = "") {}
+  constructor(public version: string = '', public location: string = '', public primaryContact: string = '', public secondaryContact: string = '', public description = "") {}
 }
