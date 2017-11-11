@@ -27,4 +27,11 @@ export class Stakeholder {
     return (!this.contact || this.contact.isEmpty);
   }
 
+  /**
+   * Converts a contact to a string
+   */
+  public stringifyContact(): string {
+    return `${this.contact.firstname} ${this.contact.lastname}`;
+  }
+
 }

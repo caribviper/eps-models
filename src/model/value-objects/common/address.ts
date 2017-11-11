@@ -19,4 +19,27 @@ export class Address {
   public get isEmpty(): boolean {
     return !this.parish && !this.streetOne && !this.streetTwo;
   }
+
+  /**
+   * Converts an address into a string.
+   * @param address Address to be stringified.
+   */
+  public static stringifyAddress(address: Address) : string {
+    let result: string = '';
+    if (!address)
+    return '';
+  if (address.inCareOf)
+    result = result + `C/O ${address.inCareOf} `;
+  if (address.lot)
+    result = result + `LOT ${address.lot} `;
+
+  result = result + `${address.streetOne} `;
+  if (address.streetTwo)
+    result = result + `${address.streetTwo} `;
+  if (address.parish)
+    result = result + `${address.parish} `;
+  if (address.postalCode)
+    result = result + `${address.postalCode} `;
+  return result;
+  }
 }

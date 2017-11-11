@@ -71,6 +71,13 @@ export class Location {
   public get isEmpty(): boolean {
     return !this.address || this.address.isEmpty;
   }
+
+  /**
+   * Converts the existing address to a stringfy
+   */
+  public stringifyAddress(): string {
+    return Address.stringifyAddress(this.address);
+  }
 }
 
 /**Registry information */
@@ -86,7 +93,7 @@ export class RegistryItem extends Entity {
   area: string = '';
 
   /**Specifies the location of the registry entry */
-  location: Location =  new Location(new Address('',''), new Coordinate());
+  location: Location = new Location(new Address('', ''), new Coordinate());
 
   /**Gets any valid sub-division number application is apart of. */
   subDivisionNumber: string = '';
@@ -104,7 +111,7 @@ export class RegistryItem extends Entity {
   fileType: FileType;
 
   /**Specifies the current status of the registry item. */
-  status: string;
+  status: any;
 
   /**Specifies the User that accepted the information. */
   acceptingUser: UserInfo;
@@ -145,14 +152,16 @@ export class RegistryItem extends Entity {
    * @param guid Guid to be created
    */
   constructor(fileType: FileType = RegistryFileTypes.formal, guid: string = '') {
-    super(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, RegistryItem.createId(fileType || RegistryFileTypes.formal, guid));
+    super(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, RegistryItem.createId(fileType || RegistryFileTypes.formal, guid), true);
     this.fileType = fileType || RegistryFileTypes.formal;
     this.stakeholders = [];
+    this.registryId = guid;
+    this.projection = new Projection('1', '', '', '', fileType.displayName);
   }
 
   /**Gets the storage folder for the registry item */
   get storageFolder(): string {
-    return this.fileType.folderPrefix + '- '+ StringUtilities.replaceAll('/', ' ') +'\\';
+    return this.fileType.folderPrefix + '- ' + StringUtilities.replaceAll('/', ' ') + '\\';
   }
 
   /**Gets the description about the land */
@@ -226,7 +235,8 @@ export class RegistryItem extends Entity {
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
-    Assert.isTruthy(this.referenceNo, 'Must have a valida reference number');
+    Assert.isTruthy(this.referenceNo, 'Must have a valid reference number');
+    Assert.isTruthy(this.projection, 'Must have a valid projection');
   }
 
   public createReferenceNumber(counterValue: number) {
@@ -258,6 +268,16 @@ export class RegistryItem extends Entity {
     this.counterValue = counterValue;
   }
 
+  /**
+   * Creates a projection from an existing registry item;
+   * @param registry Regsitry item to have projection created from
+   */
+  public static createProjection(registry: RegistryItem): Projection {
+    let p: Projection = new Projection('1', registry.location.stringifyAddress(), registry.applicant.stringifyContact(), !!registry.agent ? registry.agent.stringifyContact() : '', registry.fileType.displayName);
+    registry.projection = p;
+    return p;
+  }
+
   public static createId(fileType: FileType = RegistryFileTypes.formal, guid: string = ''): string {
     if (!guid)
       return Entity.generateId(ENTITY_MODELS.PLANNING.REGISTRY_ITEM, (fileType || RegistryFileTypes.formal).folderPrefix, guid);
@@ -269,7 +289,9 @@ export class RegistryItem extends Entity {
    * @param source Data to be mapped to the entity
    */
   public static mapToEntity(source): RegistryItem {
-    return Object.assign(new RegistryItem(), source);
+    let r: RegistryItem = Object.assign(new RegistryItem(), source);
+    r.counterValue = parseInt(r.counterValue.toString());
+    return r;
   }
 
   public static mapToEntityArray(source: RegistryItem[]): RegistryItem[] {

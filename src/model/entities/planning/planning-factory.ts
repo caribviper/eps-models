@@ -15,10 +15,12 @@ import { FeeItem } from './../../value-objects/common/fee-item';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
-import { FileType, RegistryFileTypes, FILE_TYPES } from './../../value-objects/enumerators/filetype';
+import { FileType, RegistryFileTypes, FILE_TYPES, FILE_STATUS_VALUES } from './../../value-objects/enumerators/filetype';
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
-import { RegistryItem, Location, Coordinate } from './registry-item';
+import { RegistryItem, Location, Coordinate, CrossReferenceItem } from './registry-item';
 import { Report } from "./report";
+
+const projectionVersion: string = '1';
 
 export class PlanningFactory {
 
@@ -30,6 +32,7 @@ export class PlanningFactory {
     r.dateReceived = new Date();
     r.fees = new FeeItem();
     r.majorApplication = false;
+    r.projection = new Projection(projectionVersion, '', '', '', fileType.displayName);
     return r;
   }
 
@@ -116,21 +119,30 @@ export class PlanningFactory {
   private static createCertificate(existingRegistry: RegistryItem, certificateType: string): RegistryItem {
     let r = new RegistryItem(RegistryFileTypes.certificate);
     r.fees = new FeeItem();
+    if (!!existingRegistry)
+      r.referenceNo = existingRegistry.referenceNo;
     if (!!existingRegistry && !!existingRegistry.stakeholders && existingRegistry.stakeholders.length > 0) {
       r.stakeholders = existingRegistry.stakeholders;
       r.location = Object.assign(r.location, existingRegistry.location);
+      r.area = existingRegistry.area;
+      r.crossReferences = [];
+      r.crossReferences.push(new CrossReferenceItem(existingRegistry._id, existingRegistry.referenceNo, true));
+      r.status = FILE_STATUS_VALUES.SUBMITTED;
     }
     else {
       r.stakeholders.push(
         new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
         new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.AGENT));
     }
+    //do projection
+    r.projection = new Projection();
     r.details = new Certificate();
     let certificate = (r.details as Certificate);
     certificate.certificateType = certificateType;
     if (certificateType === CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE)
       certificate.bondedWarehouseInformation = new BondedWarehouseInformation(0, '');
     certificate.applicationReferenceNo = existingRegistry.referenceNo;
+    certificate.registryId = existingRegistry._id;
     return r;
   }
 
