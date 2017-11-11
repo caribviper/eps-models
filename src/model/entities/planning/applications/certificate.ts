@@ -46,6 +46,7 @@ export class Certificate {
   /**Get document id */
   documentId: string = '';
 
+  /**Registry id of existing application */
   registryId: string = '';
 
   certificateType: string = '';
