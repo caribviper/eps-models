@@ -64,6 +64,10 @@ export class PlanningFactory {
 
     //details
     r.details = new ChattelApplication();
+    let chattel = r.details as ChattelApplication;
+    chattel.proposedDevelopment = 'ERECTION OF A CHATTEL HOUSE';
+    chattel.materials.wall = 'TIMBER';
+    chattel.materials.roofSupportOrFloor = 'TIMBER';
     return r;
   }
 
@@ -139,6 +143,13 @@ export class PlanningFactory {
     r.details = new Certificate();
     let certificate = (r.details as Certificate);
     certificate.certificateType = certificateType;
+    if(!!existingRegistry && certificateType !== CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE) {
+      certificate.proposedDevelopment = existingRegistry.landDescription;
+    }
+    else {
+      certificate.proposedDevelopment = certificateType;
+    }
+    r.projection.description = certificate.proposedDevelopment;
     if (certificateType === CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE)
       certificate.bondedWarehouseInformation = new BondedWarehouseInformation(0, '');
     certificate.applicationReferenceNo = existingRegistry.referenceNo;
