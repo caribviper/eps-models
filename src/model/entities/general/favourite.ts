@@ -1,3 +1,4 @@
+import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 
@@ -13,17 +14,22 @@ export class Favourite extends Entity {
    * @param username Username of the owner of the favoured item
    */
   constructor(public referenceNo: string = '', public registryId: string = '', public username: string = '') {
-    super()
+    super(ENTITY_MODELS.GENERAL.FAVOURITE, Favourite.createId(username, registryId), true);
   }
 
   validateEntity() {
-    throw new Error("Method not implemented.");
+    Assert.isFalse(this.isTransient, 'Favourite cannot be transient');
+    Assert.isTruthy(this.referenceNo, 'Favourite reference number cannot be null/empty');
+    Assert.isTruthy(this.registryId, 'Favourite registry id cannot be null');
+    Assert.isTruthy(this.username, 'Favourite username cannot be null');
   }
 
 
-  public static createId(username: string, registryId: string): string {
-    if (!username || !registryId)
+  public static createId(username: string, registryId: string = ''): string {
+    if (!username)
       return Entity.generateId(ENTITY_MODELS.GENERAL.FAVOURITE);
+    if(!!username && !registryId)
+      return Entity.generateId(ENTITY_MODELS.GENERAL.FAVOURITE, username);
     return Entity.generateId(ENTITY_MODELS.GENERAL.FAVOURITE, username, registryId);
   }
 
@@ -31,18 +37,17 @@ export class Favourite extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): Decision {
-    let decision = Object.assign(new Decision(), source);
-    decision.properties = Object.assign(new DecisionProperty('', false, null), decision.properties);
-    return decision;
+  public static mapToEntity(source): Favourite {
+    let favourite = Object.assign(new Favourite(), source);
+    return favourite;
   }
 
-  public static mapToEntityArray(source: Decision[]): Decision[] {
+  public static mapToEntityArray(source: Favourite[]): Favourite[] {
     if (source.length < 1)
       return [];
     let array = [];
     source.forEach(element => {
-      array.push(Object.assign(new Decision(), element));
+      array.push(Object.assign(new Favourite(), element));
     });
     return array;
   }
