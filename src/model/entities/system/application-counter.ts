@@ -13,8 +13,7 @@ export class ApplicationCounter extends Entity {
    * @param counter Counter value
    */
   constructor(public year: number = 0, public applicationType: string = '', public counter: number = 0) {
-    super(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, ApplicationCounter.createId(year, applicationType), true);
-    this.counter = 0;
+    super(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, ApplicationCounter.createId(year, applicationType, counter), true);
   }
 
   public validateEntity() {
