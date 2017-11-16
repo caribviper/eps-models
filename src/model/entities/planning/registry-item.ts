@@ -178,7 +178,7 @@ export class RegistryItem extends Entity {
       case 'E':
       case 'UA': { description = (this.details as Invest).offendingAction; break; }
       case 'BS': { description = 'BUILDING START REQUEST'; break; }
-      case 'COC': { description = 'CERTIFICATE OF COMPLIANCE REQUEST'; break; }
+      case 'COC': { description = 'CERTIFICATE OF COMPLIANCE'; break; }
       case 'CC': { description = 'CONTINUING USE CERTIFICATE'; break; }
       case 'TT': { description = 'USE OF BANNER/TENT/ENTERTAINMENT VENUE'; break; }
       default: { description = ''; break; }
