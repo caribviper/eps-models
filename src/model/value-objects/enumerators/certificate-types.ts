@@ -12,7 +12,7 @@ export const CERTIFICATE_TYPES = {
 /**Types of certificates */
 export const LICENCE_TYPES = {
   CONTINUING_USE: 'Certificate of Compliance: Continuing Use',
-  ENTERTAINMENT: 'Certificate of Compliance: Continuing Use',
+  ENTERTAINMENT: 'Entertainment Licence',
   OTHER: 'Other'
 };
 

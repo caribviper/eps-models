@@ -49,7 +49,11 @@ export class Certificate {
   /**Registry id of existing application */
   registryId: string = '';
 
+  /**Type of certificate requested/issued */
   certificateType: string = '';
+
+  /**Description about the development. Usually pulled from an exisiting Question 3 or Bonded Warehouse */
+  proposedDevelopment: string = '';
 
   /**Specifies whether the request was made for a parital or full certificate. */
   public fullCertificate: boolean = false;
