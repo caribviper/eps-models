@@ -29,7 +29,7 @@ export class Category extends Entity {
   }
 
   public validateEntity() {
-    Assert.isFalse(this.isTransient, 'Entity cannot be transient');
+    Assert.isFalse(this.isTransient, 'Category cannot be transient');
     Assert.isTruthy(this.name, 'Category name cannot be null/empty');
     Assert.isTruthy(this.values, 'Category values cannot be null');
   }
