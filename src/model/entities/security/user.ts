@@ -1,3 +1,4 @@
+import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
@@ -124,5 +125,13 @@ export class User extends Entity {
     });
     return array;
   }
-  
+
+  /**
+   * Converts a User type to a UserInfo type
+   * @param user User to be converted to UserInfo
+   */
+  public static toUserInfo(user: User): UserInfo {
+    return new UserInfo(user.username, user.firstname + ' ' + user.lastname);
+  }
+
 }
