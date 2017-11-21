@@ -30,14 +30,14 @@ export class Group extends Entity {
     Assert.isFalse(this.isTransient, 'Group cannot be transient');
     Assert.isTruthy(this.groupName, 'Group name cannot be undefined/empty');
   }
-  
+
   /**
    * Creates a new group id
    * @param groupName Name of group
    */
-  public static createId(groupName: string) : string {
+  public static createId(groupName: string): string {
     return Entity.generateId(ENTITY_MODELS.SECURITY.GROUP, groupName);
-  } 
+  }
 
   public static mapToEntity(source): Group {
     return Object.assign(new Group(), source);
