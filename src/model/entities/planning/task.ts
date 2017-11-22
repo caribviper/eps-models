@@ -131,15 +131,11 @@ export class GroupTasksBox {
    */
   constructor(public membersTasksBoxes: UserTasksBox[] = []) { }
 
-  public addMemberBox(username: string, box: UserTasksBox = new UserTasksBox()) {
-    this.membersTasksBoxes[username] = box;
+  public addMemberBox(username: string, box: UserTasksBox) {
+    this.membersTasksBoxes.push(box);
   }
 
-  public removeMemberBox(username: string) {
-    this.membersTasksBoxes[username] = undefined;
-  }
-
-  public static clone(box: GroupTasksBox) : GroupTasksBox {
+  public static clone(box: GroupTasksBox): GroupTasksBox {
     let newBox = new GroupTasksBox(box.membersTasksBoxes);
     newBox.membersTasksBoxes.forEach((b: UserTasksBox) => {
       b = UserTasksBox.clone(b);
@@ -150,13 +146,15 @@ export class GroupTasksBox {
 
 /**Manages todo, inbox and outbox of a user */
 export class UserTasksBox {
+
   /**
    * Creates a user's todo, inbox and outbox 
+   * @param username Name of user of tasksbox
    * @param todo Todo list of undone tasks
    * @param inbox Inbox of tasks for a user
    * @param outbox Outbox of tasks for a user
    */
-  constructor(public todo: Task[] = [], public inbox: Task[] = [], public outbox: Task[] = []) { }
+  constructor(public username: string, public todo: Task[] = [], public inbox: Task[] = [], public outbox: Task[] = []) { }
 
   /**Sort all boxes */
   public sortAll() {
@@ -195,6 +193,7 @@ export class UserTasksBox {
 
   public static clone(box: UserTasksBox) {
     let newBox = new UserTasksBox(
+      box.username,
       Task.mapToEntityArray(box.todo || []),
       Task.mapToEntityArray(box.inbox || []),
       Task.mapToEntityArray(box.outbox || []));
