@@ -29,6 +29,8 @@ export * from './model/value-objects/common/label';
 
 export * from './model/value-objects/system/search-result';
 
+export * from './model/value-objects/system/backup-container';
+
 //entities
 export * from './model/entities/entity-model-type';
 
