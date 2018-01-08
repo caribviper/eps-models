@@ -14,4 +14,29 @@ export class BackupContainer {
     public workflowTemplates: WorkflowTemplate[] = [],
     public decisionItemTemplates: DecisionItemTemplate[] = []) 
     { }
+
+    /**Get backup agency count */
+    get agenciesCount(): number {
+      return this.agencies ? this.agencies.length : 0;
+    }
+
+    /**Get backup category count */
+    get categoriesCount(): number {
+      return this.categories ? this.categories.length : 0;
+    }
+
+    /**Get backup document count */
+    get documentCount(): number {
+      return this.documentTemplates ? this.documentTemplates.length : 0;
+    }
+
+    /**Get backup decision count */
+    get decisionCount(): number {
+      return this.decisionItemTemplates ? this.decisionItemTemplates.length : 0;
+    }
+
+    /**Get backup workflow count */
+    get workflowTemplateCount(): number {
+      return this.workflowTemplates ? this.workflowTemplates.length : 0;
+    }
 }
