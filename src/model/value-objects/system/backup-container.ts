@@ -12,31 +12,37 @@ export class BackupContainer {
     public agencies: Agency[] = [], 
     public documentTemplates: DocumentTemplate[] = [], 
     public workflowTemplates: WorkflowTemplate[] = [],
-    public decisionItemTemplates: DecisionItemTemplate[] = []) 
+    public decisionItemTemplates: DecisionItemTemplate[] = [], 
+    public indicies: any[] = []) 
     { }
 
     /**Get backup agency count */
-    get agenciesCount(): number {
+    public get agenciesCount(): number {
       return this.agencies ? this.agencies.length : 0;
     }
 
     /**Get backup category count */
-    get categoriesCount(): number {
+    public get categoriesCount(): number {
       return this.categories ? this.categories.length : 0;
     }
 
     /**Get backup document count */
-    get documentCount(): number {
+    public get documentsCount(): number {
       return this.documentTemplates ? this.documentTemplates.length : 0;
     }
 
     /**Get backup decision count */
-    get decisionCount(): number {
+    public get decisionsCount(): number {
       return this.decisionItemTemplates ? this.decisionItemTemplates.length : 0;
     }
 
     /**Get backup workflow count */
-    get workflowTemplateCount(): number {
+    public get workflowsCount(): number {
       return this.workflowTemplates ? this.workflowTemplates.length : 0;
+    }
+
+    /**Get backup indicies count */
+    public get indiciesCount() : number {
+      return this.indicies ? this.indicies.length : 0;
     }
 }
