@@ -5,7 +5,7 @@ import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Task } from './task';
 import { Minute } from './minute';
-import { Decision } from './decision';
+import { Decision, DecisionItem } from './decision';
 import { Consultation } from './consultation';
 import { Attachment } from './attachment';
 import { Report } from './report';
@@ -77,6 +77,16 @@ export class Dossier {
         case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break; }
       }
     });
+
+    //fix for decisions item number being 0
+    if(!!dossier && !!dossier.decisions && dossier.decisions.length > 0) {
+      dossier.decisions.forEach((d: Decision) => {
+        d.decisionItems.forEach((i: DecisionItem) => {
+          if(i.order === 0)
+            i.order = i.itemNumber;
+        });
+      });
+    }
 
     //implement sorting
     if (!!dossier && !!dossier.tasks && dossier.tasks.length > 0) {
