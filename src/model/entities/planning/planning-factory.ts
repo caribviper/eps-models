@@ -15,7 +15,7 @@ import { FeeItem } from './../../value-objects/common/fee-item';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Address } from './../../value-objects/common/address';
 import { Contact } from './../../value-objects/common/contact';
-import { FileType, RegistryFileTypes, FILE_TYPES, FILE_STATUS_VALUES } from './../../value-objects/enumerators/filetype';
+import { FileType, RegistryFileTypes, FILE_TYPES, FILE_STATUS_VALUES, FILE_STATUS } from './../../value-objects/enumerators/filetype';
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
 import { RegistryItem, Location, Coordinate, CrossReferenceItem } from './registry-item';
 import { Report } from "./report";
@@ -32,6 +32,7 @@ export class PlanningFactory {
     r.dateReceived = new Date();
     r.fees = new FeeItem();
     r.majorApplication = false;
+    r.status = FILE_STATUS.SUBMITTED;
     r.projection = new Projection(projectionVersion, '', '', '', fileType.displayName);
     return r;
   }
@@ -55,6 +56,7 @@ export class PlanningFactory {
   //create chattel
   public static createChattel(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.chattel);
+    r.fees.fee = 100;
     //add stakeholders
     r.stakeholders.push(
       new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
@@ -84,8 +86,11 @@ export class PlanningFactory {
   }
 
   //create permitted development
-  public static createPermittedDevelopment(): RegistryItem {
+  public static createPermittedDevelopment(registryItem: RegistryItem, lotNo: string = '000'): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.permitted);
+    r.location.address = !!registryItem ? registryItem.location.address: r.location.address;
+    r.location.address.lot = lotNo;
+    r.fees.fee = 150;
     //add stakeholders
     r.stakeholders.push(
       new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
@@ -254,7 +259,7 @@ export class PlanningFactory {
   }
 
   //Create projection
-  public static createProjection(registry: RegistryItem, projectionVersion: string): Projection {
+  public static createProjection(registry: RegistryItem, projectionVersion: string = '1'): Projection {
     if (!registry || !projectionVersion)
       return null;
     let fullAddress = registry.location.address.lot + ' '
