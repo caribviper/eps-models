@@ -212,7 +212,7 @@ export class RegistryItem extends Entity {
   get otherApplicants(): Stakeholder[] {
     let array: Stakeholder[] = [];
     this.stakeholders.forEach((s: Stakeholder) => {
-      if (s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY)
+      if (s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY && (!!s.contact.lastname || !!s.contact.company))
         array.push(s);
     });
     return array;
@@ -239,7 +239,11 @@ export class RegistryItem extends Entity {
     Assert.isTruthy(this.projection, 'Must have a valid projection');
   }
 
-  public createReferenceNumber(counterValue: number) {
+  /**
+   * Creates a reference number for the registry item.
+   * @param counterValue Incremental counter value
+   */
+  public createReferenceNumber(counterValue: number = 1) {
     Assert.isTrue(counterValue >= 1, "Counter value cannot be less than 1");
 
     let referenceNo: string = '';
@@ -247,7 +251,7 @@ export class RegistryItem extends Entity {
     //check for permitted
     if (this.fileType === RegistryFileTypes.permitted) {
       //do permitted
-      this.referenceNo = numeral(counterValue).format('0000') + "/" + this.location.address.lot + "/" + this.subDivisionNumber;
+      this.referenceNo = this.location.address.lot.padStart(4, '0') + "/" + this.subDivisionNumber;
       return;
     }
 
@@ -265,7 +269,7 @@ export class RegistryItem extends Entity {
     }
 
     this.referenceNo = referenceNo;
-    this.counterValue = counterValue;
+    this.counterValue = (typeof counterValue === 'number') ? counterValue : 0;
   }
 
   /**
