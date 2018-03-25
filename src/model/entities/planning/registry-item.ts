@@ -187,10 +187,12 @@ export class RegistryItem extends Entity {
 
   }
 
+  //checks if the registry item has a valid agent
   get hasValidAgent(): boolean {
     return (this.agent && !this.agent.isEmpty && !this.agent.contact);
   }
 
+  //Gets the associated agent
   get agent(): Stakeholder {
     if (!!this.stakeholders && this.stakeholders.length > 1) {
       return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.AGENT });
@@ -198,10 +200,12 @@ export class RegistryItem extends Entity {
     return undefined;
   }
 
+  //Gets whether the registry item has a valid applicant
   get hasValidApplicant(): boolean {
     return (this.applicant && !this.applicant.isEmpty);
   }
 
+  //Get any valid applicant
   get applicant(): Stakeholder {
     if (!!this.stakeholders && this.stakeholders.length > 0) {
       return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT });
@@ -209,15 +213,43 @@ export class RegistryItem extends Entity {
     return undefined;
   }
 
+  //Gets the main stakeholder. i.e. applicant/offender
+  get mainStakeholder(): Stakeholder {
+    if (!!this.stakeholders && this.stakeholders.length > 0) {
+      return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT || s.stakeholderType === STAKEHOLDER_TYPES.OFFENDER });
+    }
+  }
+
+  //Gets the offender if it is complaint, enquiry or unauthorised development
+  get offender(): Stakeholder {
+    if (this.fileType.folderPrefix === RegistryFileTypes.complaint.folderPrefix ||
+      this.fileType.folderPrefix === RegistryFileTypes.enquiry.folderPrefix ||
+      this.fileType.folderPrefix === RegistryFileTypes.unauthorised.folderPrefix)
+      return this.mainStakeholder;
+    return null;
+  }
+
+  //Gets the complainant if the registry item is an enquiry or complaint
+  get complainant(): Stakeholder {
+    if (this.fileType.folderPrefix === RegistryFileTypes.complaint.folderPrefix ||
+      this.fileType.folderPrefix === RegistryFileTypes.enquiry.folderPrefix)
+      return this.stakeholders.find((s: Stakeholder) => { return s.stakeholderType === STAKEHOLDER_TYPES.COMPLAINANT; });
+    return null;
+  }
+
+  //Gets all other applicants/stakeholders
   get otherApplicants(): Stakeholder[] {
     let array: Stakeholder[] = [];
     this.stakeholders.forEach((s: Stakeholder) => {
-      if (s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY && (!!s.contact.lastname || !!s.contact.company))
+      if ((s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY
+        || s.stakeholderType === STAKEHOLDER_TYPES.COMPLAINANT
+        || s.stakeholderType === STAKEHOLDER_TYPES.THIRD_PARTY) && (!!s.contact.lastname || !!s.contact.company))
         array.push(s);
     });
     return array;
   }
 
+  //Gets the current status of the registry item
   get registryStatus(): string {
     return FileStatusFactory.convertToStringStatus(this.status);
   }
@@ -229,6 +261,10 @@ export class RegistryItem extends Entity {
     return (!!this.otherApplicants && this.otherApplicants.length > 0);
   }
 
+  /**
+   * Gets the passed stakeholder full name from its contact information as one string 
+   * @param s The stakeholder in question
+   */
   getStakeholderContactFullname(s: Stakeholder) {
     return (!!s && !!s.contact) ? (s.contact.firstname + " " + s.contact.lastname).trim() : '';
   }
