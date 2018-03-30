@@ -71,11 +71,15 @@ export class FileStatusFactory {
    * @param status Numerical status to be converted to string
    */
   public static convertToStringStatus(status: any): string {
+    let convertedStatus: string;
     try {
-      return this.dictionary[status.toString()];
+      convertedStatus = this.dictionary[status.toString()];
+      if(convertedStatus === undefined || !convertedStatus)
+        convertedStatus = status;
     } catch (error) {
-      return 'N/A';
+      convertedStatus = 'N/A';
     }
+    return convertedStatus;
 
   }
 }
