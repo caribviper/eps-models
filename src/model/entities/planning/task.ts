@@ -137,15 +137,27 @@ export class GroupTasksBox {
 
   public static clone(box: GroupTasksBox): GroupTasksBox {
     let newBox = new GroupTasksBox(box.membersTasksBoxes);
-    newBox.membersTasksBoxes.forEach((b: UserTasksBox) => {
-      b = UserTasksBox.clone(b);
-    });
+    for (let i: number = 0; i < newBox.membersTasksBoxes.length; i++) {
+      newBox.membersTasksBoxes[i] = UserTasksBox.clone(newBox.membersTasksBoxes[i]);
+    }
     return newBox;
   }
 }
 
 /**Manages todo, inbox and outbox of a user */
 export class UserTasksBox {
+
+  //used to store the unassigned tasks, such that loop doesn't need to be called
+  private _unassignedTasks: Task[] = [];
+
+  //get/set all undone task whether they are inbox/todo list
+  private _allUndoneTasks: Task[] = [];
+
+  //get/set all undone task whether they are inbox/todo list
+  private _inboxUndoneTasks: Task[] = [];
+
+  //forces the _unassignedTasks to update
+  public _forceUpdate: boolean = false;
 
   /**
    * Creates a user's todo, inbox and outbox 
@@ -154,7 +166,9 @@ export class UserTasksBox {
    * @param inbox Inbox of tasks for a user
    * @param outbox Outbox of tasks for a user
    */
-  constructor(public username: string, public todo: Task[] = [], public inbox: Task[] = [], public outbox: Task[] = []) { }
+  constructor(public username: string, public todo: Task[] = [], public inbox: Task[] = [], public outbox: Task[] = []) {
+    this.forceUpdate = true;
+  }
 
   /**Sort all boxes */
   public sortAll() {
@@ -182,8 +196,8 @@ export class UserTasksBox {
     if (!tasks || tasks.length == 0)
       return [];
     tasks.sort((a: Task, b: Task) => {
-      let x = moment(a.dateStarted);
-      let y = moment(b.dateStarted);
+      let x = moment(new Date(a.dateStarted));
+      let y = moment(new Date(b.dateStarted));
       if (x < y) return -1;
       if (y < x) return 1;
       return 0;
@@ -198,6 +212,103 @@ export class UserTasksBox {
       Task.mapToEntityArray(box.inbox || []),
       Task.mapToEntityArray(box.outbox || []));
     return newBox;
+  }
+
+  ///Get the all files that have been worked on but not unassigned within the period
+  public get nonAssignedTasks(): Task[] { return this._unassignedTasks; }
+
+  ///Gets all undone task. Merge between undone inbox and todo list
+  public get allUndoneTasks(): Task[] { return this._allUndoneTasks; }
+
+  ///Gets all undone tasks within the inbox
+  public get inboxUndoneTasks(): Task[] { return this._inboxUndoneTasks; }
+
+  ///Gets the status of force update
+  public get forceUpdate(): boolean { return this._forceUpdate; }
+
+  //Sets force update
+  public set forceUpdate(value: boolean) {
+    this._forceUpdate = value;
+    if (value === true) {
+      this.update();
+    }
+  }
+
+  //updates the properties
+  public update() {
+    //update nonAssignedTasks
+    this._unassignedTasks = Task.mapToEntityArray(this.outbox);
+    for (let x: number = this._unassignedTasks.length - 1; x > -1; x--) {
+      if (this.inbox.find((i: Task) => i.referenceNo === this._unassignedTasks[x].referenceNo))
+        this._unassignedTasks.splice(x, 1);
+    }
+
+    //update undoneTasks
+    this._allUndoneTasks = [];
+    this._allUndoneTasks = this._allUndoneTasks.concat(...this.inbox);
+    for (let i: number = this._allUndoneTasks.length - 1; i > -1; i--) {
+      if (this.outbox.find((o: Task) => o.referenceNo === this._allUndoneTasks[i].referenceNo))
+        this._allUndoneTasks.splice(i, 1);
+    }
+    this._inboxUndoneTasks = this._allUndoneTasks;
+    this._allUndoneTasks.concat(...this.inbox);
+    this._allUndoneTasks = this.sortTasks(this._allUndoneTasks);
+  }
+}
+
+export class UserStatistics {
+  private _unassignedFiles: Task[] = [];
+
+  constructor(private box: UserTasksBox) {
+    if (!this.box || !this.box.username)
+      throw new Error('Invalid UserTasksBox');
+  }
+
+  ///Gets the total number of Tasks within the Inbox and Outbox
+  get totalTasks(): number {
+    return this.totalTasksUncompletedFromInbox + this.totalCompletedTasks;
+  }
+
+  ///Gets the total number of Tasks assigned within the period
+  get totalAssigned(): number {
+    return this.box.inbox.length;
+  }
+
+  ///Gets the total number of tasks within the Inbox that have been processed
+  get totalTasksCompletedFromInbox(): number {
+    return (this.box.inbox.length - this.box.inboxUndoneTasks.length);
+  }
+
+  ///Gets the total number of tasks uncompleted within the inbox
+  get totalTasksUncompletedFromInbox(): number {
+    return this.box.inbox.length - this.totalTasksCompletedFromInbox;
+  }
+
+  ///Get all uncompleted tasks
+  get totalUncompletedTasks(): number {
+    return this.box.allUndoneTasks.length;
+  }
+
+  ///Get all completed tasks
+  get totalCompletedTasks(): number {
+    return this.box.outbox.length;
+  }
+
+  ///Get all tasks brought over or self assigned
+  get totalTasksBroughtOver(): number {
+    if (!this.box || !this.box.nonAssignedTasks)
+      return 0;
+    return this.box.nonAssignedTasks.length;
+  }
+
+  ///Get basic productivity for the period in question
+  get productivity(): number {
+    return (this.totalTasks == 0) ? 0 : (this.totalCompletedTasks / this.totalTasks) * 100;
+  }
+
+  //Updates the statistics calcuations
+  update() {
+    this.box.forceUpdate = true;
   }
 }
 
