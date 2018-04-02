@@ -31,6 +31,9 @@ export class User extends Entity {
   /**List of group user supervises */
   supervisorGroups: string[] = [];
 
+  /**security level */
+  securityLevel: number = 1;
+
   /**
    * Creates a new user
    * @param username Username of the user
@@ -48,6 +51,7 @@ export class User extends Entity {
     this.lastLoggedOn = null;
     this.groups = [];
     this.supervisorGroups = [];
+    this.securityLevel = 1;
   }
 
   validateEntity() {
