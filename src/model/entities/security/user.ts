@@ -69,7 +69,7 @@ export class User extends Entity {
       return;
     groupNames.forEach((group: string) => {
       //check to see if group exists and if not add it
-      if (this.groups.findIndex((g: string) => { return g === group; }) > -1)
+      if (this.groups.findIndex((g: string) => { return g.toLowerCase() === group.toLowerCase(); }) < 0)
         this.groups.push(group);
     });
   }
@@ -93,7 +93,7 @@ export class User extends Entity {
       return;
     groupNames.forEach((group: string) => {
       //check to see if group exists and if not add it
-      if (this.supervisorGroups.findIndex((g: string) => { return g === group; }) > -1)
+      if (this.supervisorGroups.findIndex((g: string) => { return g === group; }) < 0)
         this.supervisorGroups.push(group);
     });
   }
