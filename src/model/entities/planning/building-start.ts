@@ -36,7 +36,10 @@ export class BuildingStart extends Entity {
   registryId: string = '';
 
   /**Fee associated with building start */
-  fee: FeeItem = new FeeItem();
+  fees: FeeItem = new FeeItem();
+
+  /**Postal information */
+  maillingAddress: Contact = new Contact();
 
   /**dispatched infor */
   dispatchedInfo: DispatchedInfo = null;

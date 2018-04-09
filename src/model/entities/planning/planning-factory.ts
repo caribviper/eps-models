@@ -105,8 +105,9 @@ export class PlanningFactory {
 
   //create building start
   public static createBuildingStart(registryId: string): BuildingStart {
-    let c = new BuildingStart(registryId, '');
-    return c;
+    let b = new BuildingStart(registryId, '', new Date());
+    b.fees = new FeeItem(100, '');
+    return b;
   }
 
   public static createCertificateBuildings(existingRegistry: RegistryItem): RegistryItem {
@@ -159,6 +160,7 @@ export class PlanningFactory {
       certificate.bondedWarehouseInformation = new BondedWarehouseInformation(0, '');
     certificate.applicationReferenceNo = existingRegistry.referenceNo;
     certificate.registryId = existingRegistry._id;
+    r.fees = new FeeItem(150, '');
     return r;
   }
 
@@ -173,6 +175,7 @@ export class PlanningFactory {
 
     //details
     r.details = new Certificate();
+    r.fees = new FeeItem(150, '');
     let certificate = (r.details as Certificate);
     certificate.certificateType = CERTIFICATES_COMPLIANCE_TYPES.CONTINUING_USE;
     return r;
