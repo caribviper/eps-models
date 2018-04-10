@@ -39,7 +39,7 @@ export class BuildingStart extends Entity {
   fees: FeeItem = new FeeItem();
 
   /**Postal information */
-  maillingAddress: Contact = new Contact();
+  mailingAddress: Contact = new Contact();
 
   /**dispatched infor */
   dispatchedInfo: DispatchedInfo = null;
