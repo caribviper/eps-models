@@ -23,7 +23,7 @@ export class Notice extends Entity {
     /**Reference number for notice */
     public noticeNo: string;
 
-    /**PErsons receiving notice */
+    /**Persons receiving notice */
     public contacts: Contact[] = [];
 
     constructor(public registryId: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
