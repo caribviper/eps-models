@@ -1,3 +1,4 @@
+import { Notice } from './notice';
 import { CERTIFICATES_COMPLIANCE_TYPES } from './../../value-objects/enumerators/certificate-types';
 import { Certificate, BondedWarehouseInformation } from './applications/certificate';
 import { BuildingStart } from './../planning/building-start';
@@ -19,6 +20,7 @@ import { FileType, RegistryFileTypes, FILE_TYPES, FILE_STATUS_VALUES, FILE_STATU
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
 import { RegistryItem, Location, Coordinate, CrossReferenceItem } from './registry-item';
 import { Report } from "./report";
+import { RegistryNoticeTypes, NoticeType } from '../../..';
 
 const projectionVersion: string = '1';
 
@@ -88,7 +90,7 @@ export class PlanningFactory {
   //create permitted development
   public static createPermittedDevelopment(registryItem: RegistryItem, lotNo: string = '000'): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.permitted);
-    r.location.address = !!registryItem ? registryItem.location.address: r.location.address;
+    r.location.address = !!registryItem ? registryItem.location.address : r.location.address;
     r.location.address.lot = lotNo;
     r.fees.fee = 150;
     //add stakeholders
@@ -149,7 +151,7 @@ export class PlanningFactory {
     r.details = new Certificate();
     let certificate = (r.details as Certificate);
     certificate.certificateType = certificateType;
-    if(!!existingRegistry && certificateType !== CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE) {
+    if (!!existingRegistry && certificateType !== CERTIFICATES_COMPLIANCE_TYPES.BONDED_WAREHOUSE) {
       certificate.proposedDevelopment = existingRegistry.landDescription;
     }
     else {
@@ -179,6 +181,28 @@ export class PlanningFactory {
     let certificate = (r.details as Certificate);
     certificate.certificateType = CERTIFICATES_COMPLIANCE_TYPES.CONTINUING_USE;
     return r;
+  }
+
+  /**
+   * Creates a new notice
+   * @param registryId Id of the registry item notice is bound to
+   * @param type Prefix type of the notice
+   * @param user User that created notice
+   */
+  public static createNotice(registryId: string, type: string, user): Notice {
+    let noticeType: NoticeType;
+    if (!!type || RegistryNoticeTypes.enforcement().prefix == type.toUpperCase())
+      noticeType = RegistryNoticeTypes.enforcement();
+    if (RegistryNoticeTypes.stop().prefix == type.toUpperCase())
+      noticeType = RegistryNoticeTypes.stop();
+    if (RegistryNoticeTypes.warning().prefix == type.toUpperCase())
+      noticeType = RegistryNoticeTypes.warning();
+    if (RegistryNoticeTypes.section37().prefix == type.toUpperCase())
+      noticeType = RegistryNoticeTypes.section37();
+    if (RegistryNoticeTypes.final().prefix == type.toUpperCase())
+      noticeType = RegistryNoticeTypes.final();
+    let n = new Notice(registryId, '', noticeType, '', user);
+    return n;
   }
 
   //create temporary
