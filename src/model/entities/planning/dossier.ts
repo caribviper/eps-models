@@ -11,6 +11,7 @@ import { Attachment } from './attachment';
 import { Report } from './report';
 import { RegistryItem } from './registry-item';
 import * as moment from 'moment';
+import { Notice } from './notice';
 
 /**Encompasses all documents related to a file */
 export class Dossier {
@@ -25,6 +26,7 @@ export class Dossier {
   dispatchedItems: DispatchedItem[] = [];
   buildingStarts: BuildingStart[] = [];
   certificates: RegistryItem[] = [];
+  notices: Notice[] = [];
 
   constructor() {
     this.registry = new RegistryItem();
@@ -37,6 +39,7 @@ export class Dossier {
     this.dispatchedItems = [];
     this.buildingStarts = [];
     this.certificates = [];
+    this.notices = [];
   }
 
   public static mapToEntity(dossier: Dossier): Dossier {
@@ -51,6 +54,7 @@ export class Dossier {
     d.tasks = Task.mapToEntityArray(d.tasks);
     d.dispatchedItems = DispatchedItem.mapToEntityArray(d.dispatchedItems);
     d.buildingStarts = BuildingStart.mapToEntityArray(d.buildingStarts);
+    d.notices = Notice.mapToEntityArray(d.notices);
     if(!!d.certificates) {
       d.certificates = RegistryItem.mapToEntityArray(d.certificates);
     }
@@ -74,6 +78,7 @@ export class Dossier {
         case ENTITY_MODELS.PLANNING.REPORT: { dossier.reports.push(Report.mapToEntity(item)); break; }
         case ENTITY_MODELS.PLANNING.BUILDING_START: { dossier.buildingStarts.push(BuildingStart.mapToEntity(item)); break; }
         case ENTITY_MODELS.SYSTEM.TASK: { dossier.tasks.push(Task.mapToEntity(item)); break; }
+        case ENTITY_MODELS.PLANNING.NOTICE: { dossier.notices.push(Notice.mapToEntity(item)); break;}
         case ENTITY_MODELS.PLANNING.REGISTRY_ITEM: { dossier.registry = RegistryItem.mapToEntity(item); break; }
       }
     });

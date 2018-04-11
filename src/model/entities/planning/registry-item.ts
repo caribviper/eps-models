@@ -249,6 +249,19 @@ export class RegistryItem extends Entity {
     return array;
   }
 
+  //Gets all other applicants/stakeholders
+  get nonAgentNorComplainantStakeholders(): Stakeholder[] {
+    let array: Stakeholder[] = [];
+    this.stakeholders.forEach((s: Stakeholder) => {
+      if ((s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT_SECONDARY
+        || s.stakeholderType === STAKEHOLDER_TYPES.OFFENDER
+        || s.stakeholderType === STAKEHOLDER_TYPES.APPLICANT
+        || s.stakeholderType === STAKEHOLDER_TYPES.THIRD_PARTY) && (!!s.contact.lastname || !!s.contact.company))
+        array.push(s);
+    });
+    return array;
+  }
+
   //Gets the current status of the registry item
   get registryStatus(): string {
     return FileStatusFactory.convertToStringStatus(this.status);

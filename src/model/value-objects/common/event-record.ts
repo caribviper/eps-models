@@ -21,7 +21,7 @@ export class EventRecord {
   dispatcher: UserInfo;
 
   constructor(user: UserInfo) {
-    Assert.isTruthy(user, 'Creator cannot be undefined');
+    //Assert.isTruthy(user, 'Creator cannot be undefined');
     this.creator = user;
     this.created = new Date();
   }

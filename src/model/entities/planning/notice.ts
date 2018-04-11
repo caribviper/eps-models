@@ -26,8 +26,8 @@ export class Notice extends Entity {
     /**Persons receiving notice */
     public contacts: Contact[] = [];
 
-    constructor(public registryId: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
-      super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(''));
+    constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
+      super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
       this.events = new EventRecord(user);
     }
   
