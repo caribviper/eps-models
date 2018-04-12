@@ -26,21 +26,26 @@ export class Notice extends Entity {
     /**Persons receiving notice */
     public contacts: Contact[] = [];
 
+    /**Stores the development control area */
+    public area: string = '';
+
     constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
       super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
       this.events = new EventRecord(user);
     }
   
-    generateNo(area: string) {
+    generateNo(area: string = '') {
+      this.area = !!area ? area: this.area;
       this.noticeNo = this.noticeType.prefix + '/'
         + numeral(this.counterValue).format('0000') + '/'
         + numeral(this.events.created.getFullYear()).format('0000')
-        + '/' + area;
+        + '/' + this.area;
     }
 
     validateEntity() {
       Assert.isFalse(this.isTransient, 'Notice cannot be transient');
       Assert.isTruthy(this.registryId, 'Notice must have a valid registry id');
+      Assert.isTruthy(this.area, 'Notice must have a valid development control area');
     }
   
     /**

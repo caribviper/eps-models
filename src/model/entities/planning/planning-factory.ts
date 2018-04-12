@@ -188,8 +188,9 @@ export class PlanningFactory {
    * @param registryId Id of the registry item notice is bound to
    * @param type Prefix type of the notice
    * @param user User that created notice
+   * @param area Development control area of the notice
    */
-  public static createNotice(registryId: string, type: string, user): Notice {
+  public static createNotice(registryId: string, type: string, user: UserInfo, area: string): Notice {
     let noticeType: NoticeType;
     if (!!type || RegistryNoticeTypes.enforcement().prefix == type.toUpperCase())
       noticeType = RegistryNoticeTypes.enforcement();
@@ -202,6 +203,7 @@ export class PlanningFactory {
     if (RegistryNoticeTypes.final().prefix == type.toUpperCase())
       noticeType = RegistryNoticeTypes.final();
     let n = new Notice(registryId, '', noticeType, '', user);
+    n.area = area;
     return n;
   }
 
