@@ -1,5 +1,5 @@
 import { Contact } from './../../value-objects/common/contact';
-import { NoticeType } from './../../value-objects/enumerators/filetype';
+import { NoticeType, FileType } from './../../value-objects/enumerators/filetype';
 import { Assert } from 'caribviper-common';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
