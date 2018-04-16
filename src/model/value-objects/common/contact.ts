@@ -1,5 +1,7 @@
 import { Address } from './address';
 
+export const OrganisationTitleValues: string[] = ['COMPANY', 'BARBADOS ASSOCIATION', 'THE GENERAL MANAGER', 'THE MANAGER', 'THE REGISTRAR'];
+
 /**Encapsulates the contact information */
 export class Contact {
 
@@ -29,10 +31,20 @@ export class Contact {
     let f: string = '';
     if (!!this.company)
       f = this.company;
-    if (!!this.firstname)
+    if (!!this.firstname) {
       f = (f.length > 0) ? f.concat(', ', this.firstname) : this.firstname;
-    if (!!this.lastname)
-      f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
+    }
+    if (!!this.lastname) {
+      if (!this.firstname) {//then it was company information 
+        //check to see if it is on list
+        if (OrganisationTitleValues.indexOf(this.company))
+          f = this.lastname;
+        else
+          f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
+      }
+      else //previous text was firstname
+        f = (f.length > 0) ? f.concat(' ', this.lastname) : this.lastname;
+    }
     return f;
   }
 
@@ -42,10 +54,24 @@ export class Contact {
       f = this.company;
     if (!!this.title)
       f = (f.length > 0) ? f.concat(', ', this.title) : this.title;
-    if (!!this.firstname)
-      f = (f.length > 0) ? f.concat(', ', this.firstname) : this.firstname;
-    if (!!this.lastname)
-      f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
+
+    if (!!this.firstname) {
+      if (!!this.title)
+        f = (f.length > 0) ? f.concat(' ', this.firstname) : this.firstname;
+      else
+        f = (f.length > 0) ? f.concat(', ', this.firstname) : this.firstname;
+    }
+    if (!!this.lastname) {
+      if (!this.firstname) {//then it was company information 
+        //check to see if it is on list
+        if (OrganisationTitleValues.indexOf(this.company))
+          f = this.lastname;
+        else
+          f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
+      }
+      else //previous text was firstname
+        f = (f.length > 0) ? f.concat(' ', this.lastname) : this.lastname;
+    }
     return f;
   }
 }
