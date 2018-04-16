@@ -25,7 +25,7 @@ export class Contact {
   }
 
   /**
-   * Gets the full name of the contact inclusive
+   * Gets the full name of the contact
    */
   public get fullname(): string {
     let f: string = '';
@@ -48,6 +48,7 @@ export class Contact {
     return f;
   }
 
+  /**Gets the full name of the contact with the title  */
   public get fullnameWithTitle(): string {
     let f: string = '';
     if (!!this.company)
@@ -73,6 +74,15 @@ export class Contact {
         f = (f.length > 0) ? f.concat(' ', this.lastname) : this.lastname;
     }
     return f;
+  }
+
+  //Creates a new contact
+  public clone(): Contact {
+    let a = new Address(this.address.parish, this.address.streetOne, this.address.streetTwo, this.address.lot, this.address.country, this.address.postalCode);
+    a.inCareOf = this.address.inCareOf;
+    let c = Object.assign(new Contact(), this);
+    c.address = a;
+    return c;
   }
 }
 

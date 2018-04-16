@@ -37,13 +37,13 @@ export class Address {
     if (address.lot)
       result = result + `LOT ${address.lot}, `;
 
-    result = result + `${address.streetOne} `;
+    result = result + `${address.streetOne}`;
     if (address.streetTwo)
       result = result + `, ${address.streetTwo} `;
     if (address.parish)
       result = result + `, ${address.parish} `;
     if (address.postalCode)
       result = result + `, ${address.postalCode} `;
-    return result;
+    return !!result ? result.trim(): result;
   }
 }
