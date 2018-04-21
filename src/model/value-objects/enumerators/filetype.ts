@@ -6,9 +6,9 @@ export const FILE_STATUS = {
   DENIED: 'Denied',
   DISMISSED: 'Dismissed',
   DRAFT: 'Draft',
-  ENFORCEMENT: 'Enforcement',
+  ENFORCEMENT: 'Enforcement Notice Served',
   EXECUTUION: 'Execution',
-  FINAL: 'Final',
+  FINAL: 'Final Notice Served',
   INDEFINTE_DEFERAL: 'Indefinte Deferral',
   INVESTIGATING: 'Investigating',
   ISSUED: 'Issued',
@@ -16,11 +16,13 @@ export const FILE_STATUS = {
   PERMITTED: 'Permitted',
   REFUSED: 'Refused',
   REVOCATED: 'Revocated',
-  SECTION37: 'Section37',
-  STOPPED: 'Stopped',
+  SECTION37: 'Section37 Letter',
+  STOPPED: 'Stop Notice Served',
   SUBMITTED: 'Submitted',
-  WARNING: 'Warning',
-  WITHDRAWN: 'Withdrawn'
+  WARNING: 'Warning Notice Served',
+  WITHDRAWN: 'Withdrawn',
+  ENFORCEMENT_EXECUTED: 'Enforcement Executed',
+  INDEFINTE_DEFFERAL: 'Indefinite Defferal'
 }
 
 export const FILE_STATUS_VALUES = {
@@ -74,7 +76,7 @@ export class FileStatusFactory {
     let convertedStatus: string;
     try {
       convertedStatus = this.dictionary[status.toString()];
-      if(convertedStatus === undefined || !convertedStatus)
+      if (convertedStatus === undefined || !convertedStatus)
         convertedStatus = status;
     } catch (error) {
       convertedStatus = 'N/A';
@@ -154,6 +156,14 @@ export class RegistryFileTypes {
   public static get temporaryUse() { return this._temporaryUse; }
 }
 
+export const NOTICE_TYPE_PREFIXES = {
+  WARNING: 'WN',
+  ENFORCEMENT: 'EN',
+  FINAL: 'FN',
+  STOP: 'SN',
+  SECTION37: 'S37'
+};
+
 /**Type of notice */
 export class NoticeType {
   /**
@@ -162,12 +172,24 @@ export class NoticeType {
    * @param prefix prefix associated with notice
    */
   constructor(public name: string, public prefix: string) { }
+
+  public static getNoticeType(prefix: string): NoticeType {
+    let type: NoticeType = null;
+    switch (prefix) {
+      case NOTICE_TYPE_PREFIXES.WARNING: { type = RegistryNoticeTypes.warning(); break; }
+      case NOTICE_TYPE_PREFIXES.STOP: { type = RegistryNoticeTypes.stop(); break; }
+      case NOTICE_TYPE_PREFIXES.ENFORCEMENT: { type = RegistryNoticeTypes.enforcement(); break; }
+      case NOTICE_TYPE_PREFIXES.FINAL: { type = RegistryNoticeTypes.final(); break; }
+      case NOTICE_TYPE_PREFIXES.SECTION37: { type = RegistryNoticeTypes.section37(); break; }
+    }
+    return type;
+  }
 }
 
 export class RegistryNoticeTypes {
-  public static warning(): NoticeType { return new NoticeType('warning', 'WN'); }
-  public static enforcement(): NoticeType { return new NoticeType('enforcement', 'EN'); }
-  public static final(): NoticeType { return new NoticeType('final', 'FN'); }
-  public static stop(): NoticeType { return new NoticeType('stop', 'SN'); }
-  public static section37(): NoticeType { return new NoticeType('warning', 'S37N'); }
+  public static warning(): NoticeType { return new NoticeType('warning notice', NOTICE_TYPE_PREFIXES.WARNING); }
+  public static enforcement(): NoticeType { return new NoticeType('enforcement notice', NOTICE_TYPE_PREFIXES.ENFORCEMENT); }
+  public static final(): NoticeType { return new NoticeType('final notice', NOTICE_TYPE_PREFIXES.FINAL); }
+  public static stop(): NoticeType { return new NoticeType('stop notice', NOTICE_TYPE_PREFIXES.STOP); }
+  public static section37(): NoticeType { return new NoticeType('section 37 notice', NOTICE_TYPE_PREFIXES.SECTION37); }
 }
