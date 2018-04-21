@@ -102,6 +102,23 @@ export class FileType {
   }
 }
 
+//Prefixes for the the various counter files
+//
+export const COUNTER_PREFIXES = [
+  { prefix: 'A', description: 'Applications', type: 'application' },
+  { prefix: 'COC', description: 'Certificate of Compliance', type: 'application' },
+  { prefix: 'LB', description: 'Listed Buildings', type: 'application' },
+  { prefix: 'KT', description: 'Trees', type: 'application' },
+  { prefix: 'C', description: 'Complaint', type: 'enforcement' },
+  { prefix: 'E', description: 'Enquiry', type: 'enforcement' },
+  { prefix: 'UA', description: 'Unauthorised Development', type: 'enforcement' },
+  { prefix: 'EN', description: 'Enforcement Notice', type: 'notice' },
+  { prefix: 'S37', description: 'Section 37 Letter' , type: 'notice'},
+  { prefix: 'SN', description: 'Stop Notice', type: 'notice' },
+  { prefix: 'FN', description: 'Final Notice', type: 'notice' },
+  { prefix: 'WN', description: 'Warning Notice', type: 'notice' }
+];
+
 /**Types of file types */
 export const FILE_TYPES = {
   FORMAL: 'Formal Application',
