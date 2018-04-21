@@ -31,6 +31,9 @@ export * from './model/value-objects/system/search-result';
 
 export * from './model/value-objects/system/backup-container';
 
+//statistics
+export * from './model/value-objects/system/statistic-item';
+
 //entities
 export * from './model/entities/entity-model-type';
 
