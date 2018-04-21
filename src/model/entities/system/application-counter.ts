@@ -31,8 +31,8 @@ export class ApplicationCounter extends Entity {
     if (!applicationType)
       return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString());
     if (counter < 1)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType);
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType, counter.toString());
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType.toLowerCase());
+    return Entity.generateId(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, year.toString(), applicationType.toLowerCase(), counter.toString());
   }
 
   /**
