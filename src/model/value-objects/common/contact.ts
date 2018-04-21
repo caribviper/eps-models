@@ -28,61 +28,73 @@ export class Contact {
    * Gets the full name of the contact
    */
   public get fullname(): string {
-    let f: string = '';
-    if (!!this.company)
-      f = this.company;
-    if (!!this.firstname) {
-      f = (f.length > 0) ? f.concat(', ', this.firstname) : this.firstname;
-    }
-    if (!!this.lastname) {
-      if (!this.firstname) {//then it was company information 
-        //check to see if it is on list
-        if (OrganisationTitleValues.indexOf(this.company))
-          f = this.lastname;
-        else
-          f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
-      }
-      else //previous text was firstname
-        f = (f.length > 0) ? f.concat(' ', this.lastname) : this.lastname;
-    }
-    return f;
+    return Contact.getFullname(this);
   }
 
   /**Gets the full name of the contact with the title  */
   public get fullnameWithTitle(): string {
-    let f: string = '';
-    if (!!this.company)
-      f = this.company;
-    if (!!this.title)
-      f = (f.length > 0) ? f.concat(', ', this.title) : this.title;
-
-    if (!!this.firstname) {
-      if (!!this.title)
-        f = (f.length > 0) ? f.concat(' ', this.firstname) : this.firstname;
-      else
-        f = (f.length > 0) ? f.concat(', ', this.firstname) : this.firstname;
-    }
-    if (!!this.lastname) {
-      if (!this.firstname) {//then it was company information 
-        //check to see if it is on list
-        if (OrganisationTitleValues.indexOf(this.company))
-          f = this.lastname;
-        else
-          f = (f.length > 0) ? f.concat(', ', this.lastname) : this.lastname;
-      }
-      else //previous text was firstname
-        f = (f.length > 0) ? f.concat(' ', this.lastname) : this.lastname;
-    }
-    return f;
+    return Contact.getFullnameWithTitle(this);
   }
 
   //Creates a new contact
   public clone(): Contact {
-    let a = new Address(this.address.parish, this.address.streetOne, this.address.streetTwo, this.address.lot, this.address.country, this.address.postalCode);
-    a.inCareOf = this.address.inCareOf;
-    let c = Object.assign(new Contact(), this);
+    return Contact.clone(this);
+  }
+
+  public static clone(contact: Contact): Contact {
+    let a = new Address(contact.address.parish, contact.address.streetOne, contact.address.streetTwo, contact.address.lot, contact.address.country, contact.address.postalCode);
+    a.inCareOf = contact.address.inCareOf;
+    let c = Object.assign(new Contact(), contact);
     c.address = a;
-    return c;
+    return contact;
+  }
+
+  public static getFullname(c: Contact): string {
+    let f: string = '';
+    if (!!c.company)
+      f = c.company;
+    if (!!c.firstname) {
+      f = (f.length > 0) ? f.concat(', ', c.firstname) : c.firstname;
+    }
+    if (!!c.lastname) {
+      if (!c.firstname) {//then it was company information 
+        //check to see if it is on list
+        if (OrganisationTitleValues.indexOf(c.company))
+          f = c.lastname;
+        else
+          f = (f.length > 0) ? f.concat(', ', c.lastname) : c.lastname;
+      }
+      else //previous text was firstname
+        f = (f.length > 0) ? f.concat(' ', c.lastname) : c.lastname;
+    }
+    return f;
+  }
+
+  public static getFullnameWithTitle(contact: Contact): string {
+    let f: string = '';
+    if (!!contact.company)
+      f = contact.company;
+    if (!!contact.title)
+      f = (f.length > 0) ? f.concat(', ', contact.title) : contact.title;
+
+    if (!!contact.firstname) {
+      if (!!contact.title)
+        f = (f.length > 0) ? f.concat(' ', contact.firstname) : contact.firstname;
+      else
+        f = (f.length > 0) ? f.concat(', ', contact.firstname) : contact.firstname;
+    }
+    if (!!contact.lastname) {
+      if (!contact.firstname) {//then it was company information 
+        //check to see if it is on list
+        if (OrganisationTitleValues.indexOf(contact.company))
+          f = contact.lastname;
+        else
+          f = (f.length > 0) ? f.concat(', ', contact.lastname) : contact.lastname;
+      }
+      else //previous text was firstname
+        f = (f.length > 0) ? f.concat(' ', contact.lastname) : contact.lastname;
+    }
+    return f;
   }
 }
 
