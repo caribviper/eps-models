@@ -192,16 +192,9 @@ export class PlanningFactory {
    */
   public static createNotice(registryId: string, type: string, user: UserInfo, area: string): Notice {
     let noticeType: NoticeType;
-    if (!!type || RegistryNoticeTypes.enforcement().prefix == type.toUpperCase())
-      noticeType = RegistryNoticeTypes.enforcement();
-    if (RegistryNoticeTypes.stop().prefix == type.toUpperCase())
-      noticeType = RegistryNoticeTypes.stop();
-    if (RegistryNoticeTypes.warning().prefix == type.toUpperCase())
-      noticeType = RegistryNoticeTypes.warning();
-    if (RegistryNoticeTypes.section37().prefix == type.toUpperCase())
-      noticeType = RegistryNoticeTypes.section37();
-    if (RegistryNoticeTypes.final().prefix == type.toUpperCase())
-      noticeType = RegistryNoticeTypes.final();
+    noticeType = NoticeType.getNoticeType(type);
+    if(!noticeType)
+      throw new Error('Invalid notice type');
     let n = new Notice(registryId, '', noticeType, '', user);
     n.area = area;
     return n;
