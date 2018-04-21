@@ -4,15 +4,14 @@ import { Entity } from 'caribviper-entity';
 
 export class ApplicationCounter extends Entity {
 
-  /**Stores the associated registry identifier */
-  registryId: string;
   /**
    * Creates an application counter for the specified application type
    * @param year Year of counter
    * @param applicationType Type of application being counted
    * @param counter Counter value
+   * @param registryId Stores the associated registry identifier 
    */
-  constructor(public year: number = 0, public applicationType: string = '', public counter: number = 0) {
+  constructor(public year: number = 0, public applicationType: string = '', public counter: number = 0, public registryId: string = '') {
     super(ENTITY_MODELS.SYSTEM.APPLICATION_COUNTER, ApplicationCounter.createId(year, applicationType, counter), true);
   }
 
@@ -23,7 +22,7 @@ export class ApplicationCounter extends Entity {
     Assert.isTrue(this.year > 0, 'ApplicationCounter year cannot be less than 1');
     Assert.isTruthy(this.counter, 'ApplicationCounter counter cannot be undefined');
     Assert.isTrue(this.counter > 0, 'ApplicationCounter counter cannot be less than 1');
-    Assert.isTruthy(this.registryId, 'ApplicationCounter registry cannot be undefied/empty');
+    Assert.isTruthy(this.registryId, 'ApplicationCounter registry cannot be undefined/empty');
   }
 
   public static createId(year: number, applicationType: string = '', counter: number = 0): string {
