@@ -44,9 +44,8 @@ export class Contact {
   public static clone(contact: Contact): Contact {
     let a = new Address(contact.address.parish, contact.address.streetOne, contact.address.streetTwo, contact.address.lot, contact.address.country, contact.address.postalCode);
     a.inCareOf = contact.address.inCareOf;
-    let c = Object.assign(new Contact(), contact);
-    c.address = a;
-    return contact;
+    let c = new Contact(a, contact.company, contact.firstname, contact.lastname, contact.title, contact.email, contact.telephone, contact.mobile);
+    return c;
   }
 
   public static getFullname(c: Contact): string {
