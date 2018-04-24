@@ -1,3 +1,4 @@
+import { Stakeholder } from './../../value-objects/common/stakeholder';
 import { Contact } from './../../value-objects/common/contact';
 import { NoticeType, FileType } from './../../value-objects/enumerators/filetype';
 import { Assert } from 'caribviper-common';
@@ -24,13 +25,34 @@ export class Notice extends Entity {
   public noticeNo: string;
 
   /**Persons receiving notice */
-  public contacts: Contact[] = [];
+  public stakeholders: Stakeholder[] = [];
 
   /**Stores the development control area */
   public area: string = '';
 
   /**Has the development been completed */
   public completedDeveloment: boolean = false;
+
+  //Gets the associated enforcement number if this notice is a stop notice/final notice/section37
+  public enforcementNo: string = '';
+
+  //Gets the associated enforcement date if this notice is a stop notice/final notice/section37
+  public enforcementDate: Date = null;
+
+  //Gets or sets the start date of the infraction
+  public infractionStartDate: Date = null;
+
+  //Gets or sets infraction end date
+  public infractionEndDate: Date = null;
+
+  //Gets or sets the recommended action to be taken
+  public action: string ='';
+
+  //Gets the date to carry out the action
+  public actionDate: Date;
+
+  //Person at tcp to be contacted
+  public tcpContact: string;
 
   constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
     super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
