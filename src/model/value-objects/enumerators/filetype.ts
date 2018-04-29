@@ -125,7 +125,7 @@ export const FILE_TYPES = {
   CHATTEL: 'Chattel Application',
   PERMITTED: 'Permitted Development Application',
   LISTED: 'Listed Building Application',
-  TREE: 'Tree Application',
+  TREE: 'Permission to Kill Tree',
 
   UNAUTHORISED: 'Unauthorised Development',
   COMPLAINT: 'Complaint',
