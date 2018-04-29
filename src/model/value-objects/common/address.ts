@@ -27,8 +27,9 @@ export class Address {
   /**
    * Converts an address into a string.
    * @param address Address to be stringified.
+   * @param useCountry Specifies whether to use the address country in the resulting string
    */
-  public static stringifyAddress(address: Address): string {
+  public static stringifyAddress(address: Address, useCountry: boolean = false): string {
     let result: string = '';
     if (!address)
       return '';
@@ -42,8 +43,10 @@ export class Address {
       result = result + `, ${address.streetTwo} `;
     if (address.parish)
       result = result + `, ${address.parish} `;
-    if (address.postalCode)
-      result = result + `, ${address.postalCode} `;
+      if (address.postalCode)
+        result = result + `, ${address.postalCode} `;
+        if (address.country && useCountry)
+          result = result + `, ${address.country} `;
     return !!result ? result.trim(): result;
   }
 }
