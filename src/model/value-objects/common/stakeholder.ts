@@ -23,7 +23,9 @@ export const STAKEHOLDER_TYPES = {
   //Ignores the specified contact
   IGNORE: 'ignore contact',
   //An associated organisation
-  ASSOCIATED_ORGANISATION: 'associated organisation'
+  ASSOCIATED_ORGANISATION: 'associated organisation',
+  //associated
+  AGENCY: 'government agency'
 };
 
 /** Details of the a stakeholder */
