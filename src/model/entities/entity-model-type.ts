@@ -49,6 +49,8 @@ export const ENTITY_MODELS = {
     DOCUMENT_TEMPLATE: 'document-template',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
-    TASK: 'task'
+    TASK: 'task',
+    MESSAGE: 'message',
+    ALERT: 'alert'
   }
 }

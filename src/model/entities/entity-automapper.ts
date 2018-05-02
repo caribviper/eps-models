@@ -22,6 +22,7 @@ import { BuildingStart } from './planning/building-start';
 import { Attachment } from './planning/attachment';
 import { Agency } from './general/agency';
 import { IEntityMapBuilder, Entity } from "caribviper-entity";
+import { Message } from './system/message';
 
 export class EntityMap<T extends Entity> {
   constructor(public map: IEntityMapBuilder<T>) { }
@@ -52,6 +53,7 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.SYSTEM.WORKFLOW_TEMPLATE] = new EntityMap<WorkflowTemplate>(WorkflowTemplate);
     this.maps[ENTITY_MODELS.SYSTEM.TASK] = new EntityMap<Task>(Task);
     this.maps[ENTITY_MODELS.GENERAL.FAVOURITE] = new EntityMap<Favourite>(Favourite);
+    this.maps[ENTITY_MODELS.SYSTEM.MESSAGE] = new EntityMap<Message>(Message);
   }
 
   getMap(entity: any): any {

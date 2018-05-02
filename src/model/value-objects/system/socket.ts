@@ -1,0 +1,40 @@
+/**
+ * Detail events and namespaces used the server and client with respect to sockets
+ */
+export const SOCKETS = {
+    SYSTEM: {
+      NAMESPACE: 'system',
+      ALERT: 'system.alert',
+      ERROR: 'system.error',
+      ERROR_SERVER: 'system.error.server',
+      ERROR_CLIENT:'sysem.error.client',
+      NOTIFICATION: 'system.notification'
+    },
+    ADMIN: {
+      NAMESPACE: 'admin',
+      INVALID_LOGON: 'admin.invalid.logon',
+      REQUEST: 'admin.notification.request'
+    },
+    COMMUNICATION: {
+      NAMESPACE: 'communication',
+      MESSAGE: 'communication.message',
+      MESSAGE_UNREAD_COUNT: 'communication.message.unread.count',
+      ALERT: 'communication.alert',
+      ALERT_ACTIVE_COUNT: 'communication.alert.active.count',
+      NOTICE: 'communication.notice',
+      NOTICE_UNREAD_COUNT: 'communication.notice.unread.count',
+      USER_CONNECTED: 'communication.user.connected',
+      USER_DISCONNECTED: 'communication.user.disconnected'
+    },
+    RESERVED: {
+      ERROR: 'error',
+      CONNECT: 'connect',
+      CONNECTION: 'connection',
+      DISCONNECT: 'disconnect',
+      DISCONNECTING: 'disconnecting',
+      NEW_LISTENER: 'newListener',
+      REMOVE_LISTENER: 'removeListener',
+      PING: 'ping',
+      PONG: 'pong'
+    }
+};
