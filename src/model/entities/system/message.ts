@@ -22,8 +22,10 @@ export class Message extends Entity {
   //Date message read
   public readDate: Date = null;
 
-  //Date message should be dispalyed
-  //this allows reminder functionality
+  /**
+   * Date message should be displayed and stored as a timestamp.
+   * This allows reminder functionality
+  */
   public reminderDate: number = 0;
 
   /**
