@@ -251,7 +251,7 @@ export class UserTasksBox {
         this._allUndoneTasks.splice(i, 1);
     }
     this._inboxUndoneTasks = this._allUndoneTasks;
-    this._allUndoneTasks.concat(...this.inbox);
+    //this._allUndoneTasks.concat(...this.inbox);
     this._allUndoneTasks = this.sortTasks(this._allUndoneTasks);
   }
 }
@@ -262,6 +262,7 @@ export class UserStatistics {
   constructor(private box: UserTasksBox) {
     if (!this.box || !this.box.username)
       throw new Error('Invalid UserTasksBox');
+    this.box.update();
   }
 
   ///Gets the total number of Tasks within the Inbox and Outbox
