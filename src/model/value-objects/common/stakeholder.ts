@@ -43,8 +43,8 @@ export class Stakeholder {
    */
   constructor(public contact: Contact, public stakeholderType: string) { }
 
-  public isEmpty(): boolean {
-    return (!this.contact || this.contact.isEmpty);
+  public get isEmpty(): boolean {
+    return (!this.contact || Contact.isEmpty(this.contact));
   }
 
   /**
@@ -52,6 +52,10 @@ export class Stakeholder {
    */
   public stringifyContact(): string {
     return `${this.contact.firstname} ${this.contact.lastname}`;
+  }
+
+  public static isEmpty(stakeholder: Stakeholder): boolean {
+    return !stakeholder || !stakeholder.contact || Contact.isEmpty(stakeholder.contact)
   }
 
 }
