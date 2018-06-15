@@ -52,6 +52,9 @@ export class Task extends Entity {
   /**version assigned to task */
   version: string = '';
 
+  /**add reminder to creator */
+  addReminderToSender: boolean = false;
+
   constructor(registryId: string = '', guid = '', referenceNo: string = '', sender: UserInfo = null, dateStarted: Date = null, groupAssigned: string = '') {
     super(ENTITY_MODELS.SYSTEM.TASK, Task.createId(registryId, guid), true);
     this.dateStarted = dateStarted;
@@ -59,6 +62,7 @@ export class Task extends Entity {
     this.status = '';
     this.groupAssiged = groupAssigned;
     this.referenceNo = referenceNo;
+    this.addReminderToSender = false;
   }
 
   validateEntity() {
@@ -106,6 +110,42 @@ export class Task extends Entity {
       array.push(Object.assign(new Task(), element));
     });
     return array;
+  }
+}
+
+/**Manages over due tasks */
+export class OverdueTask {
+
+  /**Gets the total days overdue */
+  public readonly daysOverDue: number;
+
+  /**Get the highest supervisors that should be notified */
+  public readonly highestSupervisorNotification: number;
+
+  /**
+   * Creates an overdue tasks
+   * @param task Task that is overdue
+   */
+  constructor(public readonly task: Task) {
+    Assert.isTrue(OverdueTask.isTaskOverdue(task), 'Task has already been completed and get not be assigned to overdue tasks');
+    //calculate overdue days
+    this.daysOverDue = moment(new Date(task.dateStarted)).diff(moment(), 'days');
+    this.highestSupervisorNotification = parseInt((this.daysOverDue / task.activity.estimatedDays).toFixed(2));
+  }
+
+  /**
+   * Gets a list of overdue from regular tasks
+   * @param tasks Tasks to be converted to overdue tasks
+   */
+  public static createOverdueTasks(tasks: Task[]): OverdueTask[] {
+    return tasks.map(t => {
+      if (this.isTaskOverdue(t))
+        return new OverdueTask(t);
+    });
+  }
+
+  public static isTaskOverdue(task: Task): boolean {
+    return !task.dateCompleted && moment(new Date(task.dateStarted)).add(task.activity.estimatedDays, 'days') < moment();
   }
 }
 
