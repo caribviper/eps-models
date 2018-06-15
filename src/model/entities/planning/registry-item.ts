@@ -146,6 +146,9 @@ export class RegistryItem extends Entity {
   /**Stores search related information for processing */
   projection: Projection;
 
+  /**Indicates whether the registry item is a fast track file */
+  fastTrack: boolean = false;
+
   /**
    * Creates a new registry item
    * @param fileType Type of registry file to create
@@ -189,7 +192,7 @@ export class RegistryItem extends Entity {
 
   //checks if the registry item has a valid agent
   get hasValidAgent(): boolean {
-    return (this.agent && !this.agent.isEmpty && !this.agent.contact);
+    return (!!this.agent && !this.agent.isEmpty && !!this.agent.contact);
   }
 
   //Gets the associated agent
@@ -341,8 +344,13 @@ export class RegistryItem extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): RegistryItem {
+  public static mapToEntity(source: RegistryItem): RegistryItem {
     let r: RegistryItem = Object.assign(new RegistryItem(), source);
+    r.location.address = Address.cloneAddress(r.location.address);
+    for(let i =0; i< r.stakeholders.length;i++) {
+      if(!Stakeholder.isEmpty(r.stakeholders[i]))
+        r.stakeholders[i] = new Stakeholder(Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType);
+    }
     r.counterValue = parseInt(r.counterValue.toString());
     return r;
   }
@@ -351,8 +359,8 @@ export class RegistryItem extends Entity {
     if (source.length < 1)
       return [];
     let array = [];
-    source.forEach(element => {
-      array.push(Object.assign(new RegistryItem(), element));
+    source.forEach(r => {
+      array.push(this.mapToEntity(r));
     });
     return array;
   }
