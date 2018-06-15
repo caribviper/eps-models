@@ -22,6 +22,9 @@ export class Message extends Entity {
   //Date message read
   public readDate: Date = null;
 
+  /**Stores the level of duplication */
+  public duplicate: number = 0;
+
   /**
    * Date message should be displayed and stored as a timestamp.
    * This allows reminder functionality
@@ -79,6 +82,23 @@ export class Message extends Entity {
   //Sets the message as read
   public readMessage() {
     this.readDate = new Date();
+  }
+
+  /**
+   * Creates a duplicate of the alert for the new recipient
+   * @param message Message alert to be duplicated
+   * @param newRecipient New Recipient of the alert
+   */
+  public static createDuplicate(message: Message, newRecipient: UserInfo): Message {
+    if(!message.dismissedDate)
+      return null;
+    if(new Date(message.reminderDate) > new Date() )
+      return null;
+    let m = Message.mapToEntity(message);
+    m.duplicate++;
+    m._id = m._id + ':duplicate' + m.duplicate;
+    m.recipient = newRecipient;
+    return m;
   }
 
   public static createId(username: string, guid: string = '') {
