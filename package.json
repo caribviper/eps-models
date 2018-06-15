@@ -1,6 +1,6 @@
 {
   "name": "eps-models",
-  "version": "0.18.1",
+  "version": "0.19.0",
   "description": "Manages the electronic planning system models or entities",
   "author": "Kurtis Best <kurtis.best@townplanning.gov.bb>",
   "main": "dist/index.js",
@@ -13,16 +13,16 @@
   "dependencies": {
     "caribviper-common": "file:..\\..\\caribviper\\library\\common",
     "caribviper-entity": "file:..\\..\\caribviper\\library\\entity",
-    "moment": "^2.18.1",
+    "moment": "^2.22.1",
     "numeral": "^2.0.6"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
-    "gulp-typescript": "^3.1.1",
-    "merge2": "^1.1.0",
+    "gulp-typescript": "^3.2.4",
+    "merge2": "^1.2.2",
     "ts-node": "^3.2.0",
-    "tslint": "^5.5.0",
-    "typescript": "^2.4.1"
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
   }
 }
