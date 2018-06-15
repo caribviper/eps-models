@@ -11,7 +11,7 @@ export class DocumentTemplate extends Entity {
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'DocumentTemplate cannot be transient');
-    Assert.isTruthy(this.name, 'DcumentTemplate templateName cannot be undefined/empty');
+    Assert.isTruthy(this.name, 'DocumentTemplate templateName cannot be undefined/empty');
   }
 
   public static createId(name: string = '') : string {
