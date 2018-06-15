@@ -54,6 +54,10 @@ export class User extends Entity {
     this.securityLevel = 1;
   }
 
+  get fullname(): string {
+    return this.firstname + ' ' + this.lastname;
+  }
+
   validateEntity() {
     Assert.isTruthy(this.username, 'Invalid username. User name cannot be null/empty');
     Assert.isTruthy(this.firstname, 'Invalid firstname. First name cannot be null/empty');
