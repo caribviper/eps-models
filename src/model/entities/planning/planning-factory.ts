@@ -1,3 +1,5 @@
+import { LetterTemplate } from './../system/letter-template';
+import { Note } from './note';
 import { Notice } from './notice';
 import { CERTIFICATES_COMPLIANCE_TYPES } from './../../value-objects/enumerators/certificate-types';
 import { Certificate, BondedWarehouseInformation } from './applications/certificate';
@@ -20,7 +22,7 @@ import { FileType, RegistryFileTypes, FILE_TYPES, FILE_STATUS_VALUES, FILE_STATU
 import { STAKEHOLDER_TYPES, Stakeholder } from './../../value-objects/common/stakeholder';
 import { RegistryItem, Location, Coordinate, CrossReferenceItem } from './registry-item';
 import { Report } from "./report";
-import { RegistryNoticeTypes, NoticeType } from '../../..';
+import { RegistryNoticeTypes, NoticeType, Letter } from '../../..';
 
 const projectionVersion: string = '1';
 
@@ -58,7 +60,7 @@ export class PlanningFactory {
   //create chattel
   public static createChattel(): RegistryItem {
     let r = this.createRegistry(RegistryFileTypes.chattel);
-    r.fees.fee = 100;
+    r.fees.fee = 10;
     //add stakeholders
     r.stakeholders.push(
       new Stakeholder(new Contact(new Address('', '')), STAKEHOLDER_TYPES.APPLICANT),
@@ -193,11 +195,15 @@ export class PlanningFactory {
   public static createNotice(registryId: string, type: string, user: UserInfo, area: string): Notice {
     let noticeType: NoticeType;
     noticeType = NoticeType.getNoticeType(type);
-    if(!noticeType)
+    if (!noticeType)
       throw new Error('Invalid notice type');
     let n = new Notice(registryId, '', noticeType, '', user);
     n.area = area;
     return n;
+  }
+
+  public static createNote(registryId: string, user: UserInfo): Note {
+    return new Note('', registryId, '', user, null);
   }
 
   //create temporary
@@ -278,6 +284,22 @@ export class PlanningFactory {
       }
     }
     return report;
+  }
+
+  /**
+   * Creates a new letter
+   * @param letterTemplate Type of letter template
+   * @param registry RegistryItem letter will be attached to
+   * @param currentUser Current user/editor of the letter
+   */
+  public static createLetter(letterTemplate: LetterTemplate, registry:RegistryItem, currentUser: UserInfo) : Letter {
+    let l = new Letter('', registry._id, '', currentUser);
+    l.templateName = letterTemplate.name;
+    l.templateId = letterTemplate._id;
+    l.salutation = 'Dear Sir/Madam';
+    l.valediction = 'Yours faithfully'
+    l.owner = new UserInfo(currentUser.username, currentUser.fullname);
+    return l;
   }
 
   //Create projection

@@ -23,6 +23,9 @@ import { Attachment } from './planning/attachment';
 import { Agency } from './general/agency';
 import { IEntityMapBuilder, Entity } from "caribviper-entity";
 import { Message } from './system/message';
+import { Note } from './planning/note';
+import { Letter } from './planning/letter';
+import { Job } from './system/job';
 
 export class EntityMap<T extends Entity> {
   constructor(public map: IEntityMapBuilder<T>) { }
@@ -39,6 +42,8 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.PLANNING.DISPATCHED_ITEM] = new EntityMap<DispatchedItem>(DispatchedItem)
     this.maps[ENTITY_MODELS.PLANNING.REGISTRY_ITEM] = new EntityMap<RegistryItem>(RegistryItem);
     this.maps[ENTITY_MODELS.PLANNING.NOTICE] = new EntityMap<Notice>(Notice);
+    this.maps[ENTITY_MODELS.PLANNING.NOTE] = new EntityMap<Note>(Note);
+    this.maps[ENTITY_MODELS.PLANNING.LETTER] = new EntityMap<Letter>(Letter);
     this.maps[ENTITY_MODELS.PLANNING.REPORT] = new EntityMap<Report>(Report);
     this.maps[ENTITY_MODELS.SECURITY.USER_TOKEN] = new EntityMap<UserToken>(UserToken);
     this.maps[ENTITY_MODELS.SECURITY.USER] = new EntityMap<User>(User);
@@ -54,6 +59,7 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.SYSTEM.TASK] = new EntityMap<Task>(Task);
     this.maps[ENTITY_MODELS.GENERAL.FAVOURITE] = new EntityMap<Favourite>(Favourite);
     this.maps[ENTITY_MODELS.SYSTEM.MESSAGE] = new EntityMap<Message>(Message);
+    this.maps[ENTITY_MODELS.SYSTEM.JOB] = new EntityMap<Job>(Job);
   }
 
   getMap(entity: any): any {

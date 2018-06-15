@@ -9,6 +9,8 @@ export const ENTITY_MODELS = {
     DECISION: 'decision',
     REGISTRY_ITEM: 'registry',
     NOTICE: 'notice',
+    NOTE: 'note',
+    LETTER: 'letter',
     REPORT: 'report',
     //used for searches and not creation of ids
     SITE_REPORT_DEVELOPMENT: 'development',
@@ -47,10 +49,12 @@ export const ENTITY_MODELS = {
     DECISION_TEMPLATE: 'decision-template',
     DOCUMENT: 'document',
     DOCUMENT_TEMPLATE: 'document-template',
+    LETTER_TEMPLATE: 'letter-template',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
     TASK: 'task',
     MESSAGE: 'message',
-    ALERT: 'alert'
+    ALERT: 'alert',
+    JOB: 'job'
   }
 }

@@ -60,6 +60,8 @@ export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
 export * from './model/entities/planning/task';
 export * from './model/entities/planning/building-start';
+export * from './model/entities/planning/note';
+export * from './model/entities/planning/letter';
 
 export * from './model/entities/planning/iregistry-details';
 export * from './model/entities/planning/applications/chattel';
@@ -74,7 +76,9 @@ export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/document-template';
+export * from './model/entities/system/letter-template';
 export * from './model/entities/system/message';
+export * from './model/entities/system/job';
 
 //model factory
 export * from './model/entities/planning/dossier';
