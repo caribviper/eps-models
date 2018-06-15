@@ -40,14 +40,14 @@ export class PolicyItem {
 
 /**Pictures attached to reports */
 export class AttachedPicture {
-  /**Id of the attachment */
-  attachmentId: number;
 
-  /**Filename with path */
-  filename: string;
-
-  /**Associated caption string */
-  caption: string;
+  /**
+   * Creates a new AttachedPicture item
+   * @param attachmentId Id of the attachment
+   * @param filename Filename with path
+   * @param caption Associated caption string
+   */
+  constructor(public attachmentId: string, public filename: string, public caption: string = '') { }
 }
 
 /**Measurements associated with site reports */
