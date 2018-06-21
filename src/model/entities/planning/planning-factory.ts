@@ -35,7 +35,6 @@ export class PlanningFactory {
     r.dateLastModified = new Date();
     r.dateReceived = new Date();
     r.fees = new FeeItem();
-    r.majorApplication = false;
     r.status = FILE_STATUS.SUBMITTED;
     r.projection = new Projection(projectionVersion, '', '', '', fileType.displayName);
     return r;

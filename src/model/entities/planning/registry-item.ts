@@ -141,13 +141,16 @@ export class RegistryItem extends Entity {
   //notices: Notice[] = [];
 
   /**This registry item has been flagged as major application */
-  majorApplication: boolean = false;
+  //majorApplication: boolean = false;
 
   /**Stores search related information for processing */
   projection: Projection;
 
   /**Indicates whether the registry item is a fast track file */
-  fastTrack: boolean = false;
+  //fastTrack: boolean = false;
+
+  /**Stores the necessary report tags */
+  reportTags: string[] = [];
 
   /**
    * Creates a new registry item
@@ -344,11 +347,11 @@ export class RegistryItem extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: RegistryItem): RegistryItem {
+  public static mapToEntity(source: RegistryItem | Entity): RegistryItem {
     let r: RegistryItem = Object.assign(new RegistryItem(), source);
     r.location.address = Address.cloneAddress(r.location.address);
-    for(let i =0; i< r.stakeholders.length;i++) {
-      if(!Stakeholder.isEmpty(r.stakeholders[i]))
+    for (let i = 0; i < r.stakeholders.length; i++) {
+      if (!Stakeholder.isEmpty(r.stakeholders[i]))
         r.stakeholders[i] = new Stakeholder(Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType);
     }
     r.counterValue = parseInt(r.counterValue.toString());
