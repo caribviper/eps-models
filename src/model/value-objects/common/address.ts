@@ -52,19 +52,19 @@ export class Address {
     let result: string = '';
     if (!address)
       return '';
-    if (address.inCareOf)
+    if (!!address.inCareOf)
       result = result + `C/O ${address.inCareOf}, `;
-    if (address.lot)
+    if (!!address.lot && address.lot.trim() != '.')
       result = result + `Lot ${address.lot}, `;
 
     result = result + `${address.streetOne}`;
-    if (address.streetTwo)
+    if (!!address.streetTwo)
       result = result + `, ${address.streetTwo} `;
-    if (address.parish && useParish)
+    if (!!address.parish && useParish)
       result = result + `, ${address.parish} `;
-    if (address.postalCode)
+    if (!!address.postalCode)
       result = result + `, ${address.postalCode} `;
-    if (address.country && useCountry)
+    if (!!address.country && useCountry)
       result = result + `, ${address.country} `;
     result = !!result ? result.trim() : result;
     if(titleCase)
