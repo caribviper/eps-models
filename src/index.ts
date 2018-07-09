@@ -34,6 +34,7 @@ export * from './model/value-objects/system/socket';
 
 //statistics
 export * from './model/value-objects/system/statistic-item';
+export * from './model/value-objects/system/user-statistic-value';
 
 //entities
 export * from './model/entities/entity-model-type';
@@ -77,6 +78,7 @@ export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/document-template';
 export * from './model/entities/system/letter-template';
+export * from './model/entities/system/statistics-template';
 export * from './model/entities/system/message';
 export * from './model/entities/system/job';
 

@@ -90,7 +90,7 @@ export class Message extends Entity {
    * @param newRecipient New Recipient of the alert
    */
   public static createDuplicate(message: Message, newRecipient: UserInfo): Message {
-    if(!message.dismissedDate)
+    if(message.dismissedDate)
       return null;
     if(new Date(message.reminderDate) > new Date() )
       return null;

@@ -50,6 +50,7 @@ export const ENTITY_MODELS = {
     DOCUMENT: 'document',
     DOCUMENT_TEMPLATE: 'document-template',
     LETTER_TEMPLATE: 'letter-template',
+    STATISTICS_TEMPLATE: 'statistics-template',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
     TASK: 'task',

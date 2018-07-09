@@ -6,7 +6,7 @@ import { Entity } from 'caribviper-entity';
 export class LetterTemplate extends Entity {
 
   constructor(public name: string = '', public template: string = '') {
-    super(ENTITY_MODELS.SYSTEM.DOCUMENT_TEMPLATE, LetterTemplate.createId(name), true);
+    super(ENTITY_MODELS.SYSTEM.LETTER_TEMPLATE, LetterTemplate.createId(name), true);
   }
 
   public validateEntity() {
