@@ -26,7 +26,10 @@ export const SOCKETS = {
       NOTICE: 'communication.notice',
       NOTICE_UNREAD_COUNT: 'communication.notice.unread.count',
       USER_CONNECTED: 'communication.user.connected',
-      USER_DISCONNECTED: 'communication.user.disconnected'
+      USER_DISCONNECTED: 'communication.user.disconnected',
+      VERSION_CHECK: 'communication.version.check',
+      VERSION_RESPONSE: 'communication.version.response',
+      VERSION_UPDATE: 'communication.version.update'
     },
     RESERVED: {
       ERROR: 'error',
