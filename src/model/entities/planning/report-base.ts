@@ -24,6 +24,9 @@ export abstract class BaseReport extends Entity {
   /**Attached pictures */
   attachedPictures: AttachedPicture[];
 
+  /**Indicates whether photos should be done on a new page */
+  photographsOnNewPage: boolean = true;
+
   /**Owner of the site report. */
   author: UserInfo;
 
