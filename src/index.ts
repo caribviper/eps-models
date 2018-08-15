@@ -26,6 +26,7 @@ export * from './model/value-objects/planning/measurement';
 export * from './model/value-objects/planning/descriptive';
 export * from './model/value-objects/planning/report';
 export * from './model/value-objects/common/label';
+export * from './model/value-objects/planning/registry-flat-table';
 
 export * from './model/value-objects/system/search-result';
 

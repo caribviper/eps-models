@@ -1,3 +1,4 @@
+import { RegistryFlatTable } from './../../value-objects/planning/registry-flat-table';
 import { Projection } from './../../value-objects/common/projection';
 import { Invest } from './enforcement/invest';
 import { KillTreeApplication } from './applications/tree';
@@ -21,12 +22,20 @@ import { Stakeholder, STAKEHOLDER_TYPES } from "../../value-objects/common/stake
  * Geo-spatial coordinate based on xy point data.
  */
 export class Coordinate {
+
+  public datePlotted: number = null;
+  public landTaxId: string = null;
+  public landUse: string = null;
+  public lotsCreated: string = null;
+
   /**
    * Create a new coordinates
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    */
-  constructor(public x: number = 0, public y: number = 0) { }
+  constructor(public x: number = 0, public y: number = 0) {
+    this.datePlotted = new Date().getTime();
+  }
 }
 
 /**Provides cross referenceing capabilities for registry items */
@@ -366,5 +375,50 @@ export class RegistryItem extends Entity {
       array.push(this.mapToEntity(r));
     });
     return array;
+  }
+
+  public static convertToRegistryFlatFile(registry: RegistryItem): RegistryFlatTable {
+    registry = this.mapToEntity(registry);
+    let regFlat = new RegistryFlatTable();
+    regFlat.registryId = registry._id;
+    regFlat.referenceNo = registry.referenceNo;
+    regFlat.area = registry.area;
+    regFlat.dateReceived = new Date(registry.dateReceived);
+    regFlat.fileType = registry.fileType.displayName;
+    regFlat.status = registry.registryStatus;
+
+    regFlat.siteAddressFull = registry.projection.location;
+    regFlat.siteAddressLotNo = registry.location.address.lot;
+    regFlat.siteAddressStreetOne = registry.location.address.streetOne;
+    regFlat.siteAddressStreetTwo = registry.location.address.streetTwo;
+    regFlat.siteAddressParish = registry.location.address.parish;
+
+    regFlat.gisCoordinate_X = registry.location.coordinate.x;
+    regFlat.gisCoordinate_Y = registry.location.coordinate.y;
+    regFlat.gisDatePlotted = new Date(registry.location.coordinate.datePlotted);
+    regFlat.gisLandTaxId = registry.location.coordinate.landTaxId;
+    regFlat.gisLandUse = registry.location.coordinate.landUse;
+    regFlat.gisLotsCreated = registry.location.coordinate.lotsCreated;
+
+    regFlat.applicant = registry.applicant.contact.fullname;
+    regFlat.applicantFirstname = registry.applicant.contact.firstname;
+    regFlat.applicantLastname = registry.applicant.contact.lastname;
+
+    if (registry.hasValidAgent) {
+
+      regFlat.agent = registry.agent.contact.fullname;
+      regFlat.agentFirstname = registry.agent.contact.firstname;
+      regFlat.agentLastname = registry.agent.contact.lastname;
+    }
+    else {
+      regFlat.agent = '';
+      regFlat.agentFirstname = '';
+      regFlat.agentLastname = '';
+    }
+
+    regFlat.landDescription = registry.projection.description;
+    regFlat.reportTags = registry.reportTags.join(',');
+
+    return regFlat;
   }
 }

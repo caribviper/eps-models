@@ -28,7 +28,7 @@ export class FormalApplication extends RegistryDetails implements IRegistryDetai
   proposedPrimaryLandUse: CategoryDescription = new CategoryDescription();
 
   /**Description of proposed secondary land uses. */
-  proposedSecondaryLandUse: CategoryDescription = new CategoryDescription()
+  proposedSecondaryLandUse: CategoryDescription = new CategoryDescription();
 
   /**Description of current land uses. */
   currentLandUse: CategoryDescription = new CategoryDescription()
