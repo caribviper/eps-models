@@ -61,6 +61,7 @@ export * from './model/entities/planning/report';
 export * from './model/entities/planning/site-report';
 export * from './model/entities/planning/decision';
 export * from './model/entities/planning/task';
+export * from './model/entities/planning/task-share';
 export * from './model/entities/planning/building-start';
 export * from './model/entities/planning/note';
 export * from './model/entities/planning/letter';

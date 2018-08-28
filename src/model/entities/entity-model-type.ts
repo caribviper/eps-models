@@ -54,6 +54,7 @@ export const ENTITY_MODELS = {
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
     TASK: 'task',
+    TASK_SHARE: 'task-share',
     MESSAGE: 'message',
     ALERT: 'alert',
     JOB: 'job'
