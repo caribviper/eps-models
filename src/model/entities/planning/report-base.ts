@@ -36,6 +36,9 @@ export abstract class BaseReport extends Entity {
   /**Gets the associated registry item */
   registryId: string;
 
+  /**recipient of report */
+  recipient: UserInfo;
+
   /**Indicates if the report has been finalised */
   get isFinalised(): boolean {
     return !!this.dateAttached;
