@@ -1,3 +1,4 @@
+import { AttachedPicture } from './../../value-objects/planning/report';
 import { ActionEvent } from './../../value-objects/common/action-event';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
@@ -15,7 +16,7 @@ export class Consultation extends Entity {
 
   /**Date consultation was requested */
   public dateRequested: Date;
-  
+
   /**Date consultation is expected back */
   public dateDue: Date;
 
@@ -40,6 +41,9 @@ export class Consultation extends Entity {
   /**Attachment id  */
   attachment: string;
 
+  /**pictures */
+  attachedPictures: AttachedPicture[];
+
   constructor(registryId: string = '', guid: string = '', organisation: Contact = null, comments: string = '', documentId: string = '', attachmentId: string = '') {
     super(ENTITY_MODELS.PLANNING.CONSULTATION, Consultation.createId(registryId, guid), true);
     this.registryId = registryId;
@@ -47,6 +51,12 @@ export class Consultation extends Entity {
     this.comments = comments;
     this.documentId = documentId;
     this.attachment = attachmentId;
+    this.attachedPictures = [];
+  }
+  
+  /**Indicates if the report has pictures attached */
+  get hasPictures(): boolean {
+    return !!this.attachedPictures && this.attachedPictures.length > 0;
   }
 
   public validateEntity() {
@@ -57,7 +67,7 @@ export class Consultation extends Entity {
 
 
   public static createId(registryId: string = '', guid: string = '') {
-    if(!registryId)
+    if (!registryId)
       return '';
     if (!guid)
       return Entity.generateId(registryId, ENTITY_MODELS.PLANNING.CONSULTATION);
