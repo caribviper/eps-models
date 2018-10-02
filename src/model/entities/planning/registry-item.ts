@@ -398,22 +398,45 @@ export class RegistryItem extends Entity {
     regFlat.gisDatePlotted = new Date(registry.location.coordinate.datePlotted);
     regFlat.gisLandTaxId = registry.location.coordinate.landTaxId;
     regFlat.gisLandUse = registry.location.coordinate.landUse;
-    regFlat.gisLotsCreated = registry.location.coordinate.lotsCreated;
+    if (registry.fileType.folderPrefix === RegistryFileTypes.formal.prefix)
+      regFlat.gisLotsCreated = (registry.details as FormalApplication).lotsToBeCreated;
+    else
+      regFlat.gisLotsCreated = 0;
 
-    regFlat.applicant = registry.applicant.contact.fullname;
-    regFlat.applicantFirstname = registry.applicant.contact.firstname;
-    regFlat.applicantLastname = registry.applicant.contact.lastname;
+    if (registry.fileType.isApplication) {
+      regFlat.applicant = registry.applicant.contact.fullname;
+      regFlat.applicantFirstname = registry.applicant.contact.firstname;
+      regFlat.applicantLastname = registry.applicant.contact.lastname;
 
-    if (registry.hasValidAgent) {
-
-      regFlat.agent = registry.agent.contact.fullname;
-      regFlat.agentFirstname = registry.agent.contact.firstname;
-      regFlat.agentLastname = registry.agent.contact.lastname;
+      if (registry.hasValidAgent) {
+        regFlat.agent = registry.agent.contact.fullname;
+        regFlat.agentFirstname = registry.agent.contact.firstname;
+        regFlat.agentLastname = registry.agent.contact.lastname;
+      }
+      else {
+        regFlat.agent = '';
+        regFlat.agentFirstname = '';
+        regFlat.agentLastname = '';
+      }
     }
     else {
-      regFlat.agent = '';
-      regFlat.agentFirstname = '';
-      regFlat.agentLastname = '';
+      if (!!registry.offender) {
+        regFlat.applicant = registry.offender.contact.fullname;
+        regFlat.applicantFirstname = registry.offender.contact.firstname;
+        regFlat.applicantLastname = registry.offender.contact.lastname;
+      }
+
+      if (!!registry.complainant) {
+        //make complainant agent     
+        regFlat.agent = registry.complainant.contact.fullname;
+        regFlat.agentFirstname = registry.complainant.contact.firstname;
+        regFlat.agentLastname = registry.complainant.contact.lastname;
+      }
+      else {
+        regFlat.agent = '';
+        regFlat.agentFirstname = '';
+        regFlat.agentLastname = '';
+      }
     }
 
     regFlat.landDescription = registry.projection.description;
