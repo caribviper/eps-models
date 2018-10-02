@@ -17,7 +17,7 @@ export class RegistryFlatTable {
   gisLandUse: string;
   gisDatePlotted: Date;
   gisLandTaxId: string;
-  gisLotsCreated: string;
+  gisLotsCreated: number;
 
   applicant: string;
   applicantFirstname: string;
