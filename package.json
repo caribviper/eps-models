@@ -1,18 +1,18 @@
 {
   "name": "eps-models",
-  "version": "0.20.2",
+  "version": "0.22.0",
   "description": "Manages the electronic planning system models or entities",
   "author": "Kurtis Best <kurtis.best@townplanning.gov.bb>",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
-    "type": "???",
-    "url": "???"
+    "type": "library",
+    "url": "https://github.com/caribviper/eps-models"
   },
   "license": "SEE LICENSE IN <licence.txt>",
   "dependencies": {
-    "caribviper-common": "file:..\\..\\caribviper\\library\\common",
-    "caribviper-entity": "file:..\\..\\caribviper\\library\\entity",
+    "caribviper-common": "caribviper/common",
+    "caribviper-entity": "caribviper/entity",
     "moment": "^2.22.1",
     "numeral": "^2.0.6"
   },
