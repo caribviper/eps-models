@@ -80,9 +80,9 @@ export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/document-template';
 export * from './model/entities/system/letter-template';
-export * from './model/entities/system/statistics-template';
 export * from './model/entities/system/message';
 export * from './model/entities/system/job';
+export * from './model/entities/system/statistical-report-template';
 
 //model factory
 export * from './model/entities/planning/dossier';
