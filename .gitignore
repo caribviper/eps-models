@@ -3,3 +3,4 @@ log
 .idea
 .DS_STORE
 package-lock.json
+.vscode
