@@ -1,0 +1,32 @@
+import { Stakeholder } from './../../value-objects/common/stakeholder';
+import { NoticeType } from './../../value-objects/enumerators/filetype';
+import { UserInfo } from './../../value-objects/common/userinfo';
+import { EventRecord } from './../../value-objects/common/event-record';
+import { Entity } from 'caribviper-entity';
+export declare class Notice extends Entity {
+    registryId: string;
+    noticeType: NoticeType;
+    content: string;
+    events: EventRecord;
+    documentId: string;
+    counterValue: number;
+    noticeNo: string;
+    stakeholders: Stakeholder[];
+    area: string;
+    completedDeveloment: boolean;
+    enforcementNo: string;
+    enforcementDate: Date;
+    infractionStartDate: Date;
+    infractionEndDate: Date;
+    action: string;
+    actionDate: Date;
+    tcpContact: string;
+    constructor(registryId?: string, guid?: string, noticeType?: NoticeType, content?: string, user?: UserInfo);
+    generateNo(area?: string): void;
+    validateEntity(): void;
+    sign(user: UserInfo): void;
+    dispatch(user: UserInfo): void;
+    static createId(registryId?: string, guid?: string): string;
+    static mapToEntity(source: any): Notice;
+    static mapToEntityArray(source: Notice[]): Notice[];
+}

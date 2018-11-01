@@ -1,0 +1,34 @@
+import { LetterTemplate } from './../system/letter-template';
+import { Note } from './note';
+import { Notice } from './notice';
+import { BuildingStart } from './../planning/building-start';
+import { Projection } from './../../value-objects/common/projection';
+import { SiteReportDevelopment, SiteReportEnforcement } from './site-report';
+import { UserInfo } from './../../value-objects/common/userinfo';
+import { FileType } from './../../value-objects/enumerators/filetype';
+import { RegistryItem } from './registry-item';
+import { Report } from "./report";
+import { Letter } from '../../..';
+export declare class PlanningFactory {
+    static createRegistry(fileType: FileType): RegistryItem;
+    static createFormal(): RegistryItem;
+    static createChattel(): RegistryItem;
+    static createTree(): RegistryItem;
+    static createPermittedDevelopment(registryItem: RegistryItem, lotNo?: string): RegistryItem;
+    static createBuildingStart(registryId: string): BuildingStart;
+    static createCertificateBuildings(existingRegistry: RegistryItem): RegistryItem;
+    static createCertificateRoads(existingRegistry: RegistryItem): RegistryItem;
+    static createCertificateSubdivisions(existingRegistry: RegistryItem): RegistryItem;
+    static createCertificateWarehouse(existingRegistry: RegistryItem): RegistryItem;
+    private static createCertificate(existingRegistry, certificateType);
+    static createContinuedUseCertificate(): RegistryItem;
+    static createNotice(registryId: string, type: string, user: UserInfo, area: string): Notice;
+    static createNote(registryId: string, user: UserInfo): Note;
+    static createTemporary(): RegistryItem;
+    static createComplaint(): RegistryItem;
+    static createEnquiry(): RegistryItem;
+    static createUnAuthorised(): RegistryItem;
+    static createReport(reportType: number, registry: RegistryItem, currentUser: UserInfo): Report | SiteReportDevelopment | SiteReportEnforcement;
+    static createLetter(letterTemplate: LetterTemplate, registry: RegistryItem, currentUser: UserInfo): Letter;
+    static createProjection(registry: RegistryItem, projectionVersion?: string): Projection;
+}

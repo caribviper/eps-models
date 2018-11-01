@@ -1,0 +1,30 @@
+import { BuildingStart } from './building-start';
+import { DispatchedItem } from './dispatched-item';
+import { Task } from './task';
+import { Minute } from './minute';
+import { Decision } from './decision';
+import { Consultation } from './consultation';
+import { Attachment } from './attachment';
+import { Report } from './report';
+import { RegistryItem } from './registry-item';
+import { Notice } from './notice';
+import { Note } from './note';
+import { Letter } from './letter';
+export declare class Dossier {
+    registry: RegistryItem;
+    attachments: Attachment[];
+    consultations: Consultation[];
+    decisions: Decision[];
+    minutes: Minute[];
+    reports: Report[];
+    tasks: Task[];
+    dispatchedItems: DispatchedItem[];
+    buildingStarts: BuildingStart[];
+    certificates: RegistryItem[];
+    notices: Notice[];
+    notes: Note[];
+    letters: Letter[];
+    constructor();
+    static mapToEntity(dossier: Dossier): Dossier;
+    static createDossier(items: any[], registryCertificates?: RegistryItem[]): Dossier;
+}

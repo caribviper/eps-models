@@ -1,21 +1,42 @@
 {
-  "name": "eps-models",
-  "version": "0.22.0",
-  "description": "Manages the electronic planning system models or entities",
-  "author": "Kurtis Best <kurtis.best@townplanning.gov.bb>",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "repository": {
-    "type": "library",
-    "url": "https://github.com/caribviper/eps-models"
+  "_from": "github:caribviper/eps-models",
+  "_id": "eps-models@0.22.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/eps-models",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "eps-models@github:caribviper/eps-models",
+    "name": "eps-models",
+    "escapedName": "eps-models",
+    "rawSpec": "github:caribviper/eps-models",
+    "saveSpec": "github:caribviper/eps-models",
+    "fetchSpec": null,
+    "gitCommittish": null
   },
-  "license": "SEE LICENSE IN <licence.txt>",
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "github:caribviper/eps-models#724ee39533ef8bfaba5f4455d150c5419103330f",
+  "_spec": "eps-models@github:caribviper/eps-models",
+  "_where": "C:\\Projects\\eplanning\\server-online\\node_modules_private",
+  "author": {
+    "name": "Kurtis Best",
+    "email": "kurtis.best@townplanning.gov.bb"
+  },
+  "bugs": {
+    "url": "https://github.com/caribviper/eps-models/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {
-    "caribviper-common": "caribviper/common",
-    "caribviper-entity": "caribviper/entity",
+    "caribviper-common": "github:caribviper/common",
+    "caribviper-entity": "github:caribviper/entity",
     "moment": "^2.22.1",
     "numeral": "^2.0.6"
   },
+  "deprecated": false,
+  "description": "Manages the electronic planning system models or entities",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
@@ -24,5 +45,15 @@
     "ts-node": "^3.2.0",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3"
-  }
+  },
+  "homepage": "https://github.com/caribviper/eps-models#readme",
+  "license": "SEE LICENSE IN <licence.txt>",
+  "main": "dist/index.js",
+  "name": "eps-models",
+  "repository": {
+    "type": "library",
+    "url": "git+https://github.com/caribviper/eps-models.git"
+  },
+  "typings": "dist/index.d.ts",
+  "version": "0.22.0"
 }

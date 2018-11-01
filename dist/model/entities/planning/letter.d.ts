@@ -1,0 +1,32 @@
+import { Entity } from 'caribviper-entity';
+import { UserInfo, AttachedPicture, Contact } from '../../..';
+export declare class Letter extends Entity {
+    registryId: string;
+    content: string;
+    creator: UserInfo;
+    created: Date;
+    signed: Date;
+    dispatched: Date;
+    updated: Date;
+    subject: string;
+    owner: UserInfo;
+    templateName: string;
+    templateId: string;
+    description: string;
+    salutation: string;
+    valediction: string;
+    carbonCopy: string;
+    attachedPictures: AttachedPicture[];
+    contacts: Contact[];
+    formFields: any;
+    constructor(guid?: string, registryId?: string, content?: string, creator?: UserInfo);
+    validateEntity(): void;
+    readonly hasPictures: boolean;
+    canSign(username: string): boolean;
+    sign(username: string): void;
+    canDispatch(): boolean;
+    dispatch(): void;
+    static createId(registryId?: string, guid?: string): string;
+    static mapToEntity(source: any): Letter;
+    static mapToEntityArray(source: Letter[]): Letter[];
+}
