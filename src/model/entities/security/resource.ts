@@ -1,6 +1,10 @@
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
+
+/**Type of resource, which is either an 'api' or 'view' resource */
+export type ResourceType = 'api' | 'view';
+
 /**
  * Resource item used to determine permissions
  */
@@ -8,12 +12,11 @@ export class Resource extends Entity {
 
   /**
    * Creates a resource
-   * @param group Group resource belong to
    * @param url Resource url
    * @param verb Verb used to access resource
    * @param description Description about the resource
    */
-  constructor(public url: string = '', public verb: string = '', public group: string = '', public description: string = '') {
+  constructor(public url: string = '', public verb: string = '', public description: string = '', public resourceType: ResourceType | string = 'view') {
     super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb), true);
   }
 
@@ -21,8 +24,8 @@ export class Resource extends Entity {
     Assert.isFalse(this.isTransient, 'Resource cannot be transient');
     Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
     Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
-    Assert.isTruthy(this.group, 'Resource group cannot be empty/undefined');
     Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
+    Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
   }
 
   public static createId(url: string, verb: string): string {

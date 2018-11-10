@@ -21,6 +21,7 @@ var Group = (function (_super) {
         if (pooled === void 0) { pooled = false; }
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.GROUP, Group.createId(groupName), true) || this;
         _this.pooled = false;
+        _this.resources = [];
         _this.groupName = groupName;
         _this.description = description;
         _this.pooled = pooled;
@@ -44,6 +45,25 @@ var Group = (function (_super) {
             array.push(Object.assign(new Group(), element));
         });
         return array;
+    };
+    Group.prototype.ensureResoureInitialised = function () {
+        if (!this.resources)
+            this.resources = [];
+    };
+    Group.prototype.addResource = function (resourceId) {
+        this.ensureResoureInitialised();
+        if (!resourceId)
+            return;
+        if (!this.resources.includes(resourceId))
+            this.resources.push(resourceId);
+    };
+    Group.prototype.removeResource = function (resourceId) {
+        this.ensureResoureInitialised();
+        if (!resourceId)
+            return;
+        var index = this.resources.findIndex(function (r) { return r === resourceId; });
+        if (index > -1)
+            this.resources.splice(index, 1);
     };
     return Group;
 }(caribviper_entity_1.Entity));

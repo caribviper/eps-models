@@ -33,6 +33,7 @@ export declare const ENTITY_MODELS: {
         USER_TOKEN: string;
         USER: string;
         GROUP: string;
+        ORGANISATION: string;
         RESOURCE: string;
     };
     GENERAL: {

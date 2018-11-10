@@ -37,6 +37,7 @@ export const ENTITY_MODELS = {
     USER_TOKEN: 'token',
     USER: 'user',
     GROUP: 'group',
+    ORGANISATION: 'organisation',
     RESOURCE: 'resource'
   },
   GENERAL: {

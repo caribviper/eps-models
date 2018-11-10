@@ -15,24 +15,24 @@ var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var Resource = (function (_super) {
     __extends(Resource, _super);
-    function Resource(url, verb, group, description) {
+    function Resource(url, verb, description, resourceType) {
         if (url === void 0) { url = ''; }
         if (verb === void 0) { verb = ''; }
-        if (group === void 0) { group = ''; }
         if (description === void 0) { description = ''; }
+        if (resourceType === void 0) { resourceType = 'view'; }
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb), true) || this;
         _this.url = url;
         _this.verb = verb;
-        _this.group = group;
         _this.description = description;
+        _this.resourceType = resourceType;
         return _this;
     }
     Resource.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Resource cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
         caribviper_common_1.Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
-        caribviper_common_1.Assert.isTruthy(this.group, 'Resource group cannot be empty/undefined');
         caribviper_common_1.Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
+        caribviper_common_1.Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
     };
     Resource.createId = function (url, verb) {
         if (!url || !verb)

@@ -27,6 +27,7 @@ var User = (function (_super) {
         _this.groups = [];
         _this.supervisorGroups = [];
         _this.securityLevel = 1;
+        _this.organisation = '';
         _this.username = username;
         _this.firstname = firstname;
         _this.lastname = lastname;

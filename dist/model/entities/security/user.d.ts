@@ -10,6 +10,7 @@ export declare class User extends Entity {
     groups: string[];
     supervisorGroups: string[];
     securityLevel: number;
+    organisation: string;
     constructor(username?: string, firstname?: string, lastname?: string, email?: string);
     readonly fullname: string;
     validateEntity(): void;

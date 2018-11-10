@@ -34,6 +34,9 @@ export class User extends Entity {
   /**security level */
   securityLevel: number = 1;
 
+  /**Organisations a user belongs*/
+  organisation: string = '';
+
   /**
    * Creates a new user
    * @param username Username of the user

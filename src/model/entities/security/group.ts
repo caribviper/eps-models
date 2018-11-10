@@ -11,6 +11,7 @@ export class Group extends Entity {
   public groupName: string;
   public description: string;
   public pooled: boolean = false;
+  public resources: string[] = [];
 
   /**
    * Creates a new Group
@@ -51,5 +52,26 @@ export class Group extends Entity {
       array.push(Object.assign(new Group(), element));
     });
     return array;
+  }
+
+  /** Ensures that the resource property has been initialised */
+  private ensureResoureInitialised() {
+    if(!this.resources)
+      this.resources = [];
+  }
+
+  public addResource(resourceId: string) {
+    this.ensureResoureInitialised();
+    if(!resourceId) return;
+    if(!this.resources.includes(resourceId))
+      this.resources.push(resourceId);
+  }
+
+  public removeResource(resourceId: string) {
+    this.ensureResoureInitialised();
+    if(!resourceId) return;
+    const index = this.resources.findIndex(r=>r === resourceId);
+    if(index > - 1)
+      this.resources.splice(index, 1);
   }
 }
