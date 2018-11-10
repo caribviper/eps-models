@@ -17,7 +17,7 @@ export class Resource extends Entity {
    * @param description Description about the resource
    */
   constructor(public url: string = '', public verb: string = '', public description: string = '', public resourceType: ResourceType | string = 'view') {
-    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb), true);
+    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb, resourceType), true);
   }
 
   public validateEntity() {
@@ -28,10 +28,11 @@ export class Resource extends Entity {
     Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
   }
 
-  public static createId(url: string, verb: string): string {
-    if (!url || !verb)
+  public static createId(url: string, verb: string, type: string): string {
+    if (!url || !verb || !type)
       return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE);
-    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, url, verb);
+    url = encodeURIComponent(url);
+    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, type, verb, url);
   }
 
   public static mapToEntity(source): Resource {

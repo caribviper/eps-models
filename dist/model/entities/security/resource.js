@@ -20,7 +20,7 @@ var Resource = (function (_super) {
         if (verb === void 0) { verb = ''; }
         if (description === void 0) { description = ''; }
         if (resourceType === void 0) { resourceType = 'view'; }
-        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb), true) || this;
+        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb, resourceType), true) || this;
         _this.url = url;
         _this.verb = verb;
         _this.description = description;
@@ -34,10 +34,11 @@ var Resource = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
         caribviper_common_1.Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
     };
-    Resource.createId = function (url, verb) {
-        if (!url || !verb)
+    Resource.createId = function (url, verb, type) {
+        if (!url || !verb || !type)
             return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE);
-        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, url, verb);
+        url = encodeURIComponent(url);
+        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, type, verb, url);
     };
     Resource.mapToEntity = function (source) {
         return Object.assign(new Resource(), source);

@@ -7,7 +7,7 @@ export declare class Resource extends Entity {
     resourceType: ResourceType | string;
     constructor(url?: string, verb?: string, description?: string, resourceType?: ResourceType | string);
     validateEntity(): void;
-    static createId(url: string, verb: string): string;
+    static createId(url: string, verb: string, type: string): string;
     static mapToEntity(source: any): Resource;
     static mapToEntityArray(source: Resource[]): Resource[];
 }
