@@ -24,7 +24,7 @@ var UserToken = (function (_super) {
         _this.dateCreated = new Date();
         return _this;
     }
-    UserToken.prototype.hasExpired = function () { return !this.expires ? this.expires < Date.now() : true; };
+    UserToken.prototype.hasExpired = function () { return !!this.expires ? this.expires < Date.now() : true; };
     UserToken.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Entity cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.username, 'Username cannot be null/empty');

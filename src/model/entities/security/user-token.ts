@@ -40,7 +40,7 @@ export class UserToken extends Entity {
   /**
    * Check if the user token has expired. Empty tokens or invalid expire data will result in true
    */
-  public hasExpired(): boolean { return !this.expires ? this.expires < Date.now() : true; }
+  public hasExpired(): boolean { return !!this.expires ? this.expires < Date.now() : true; }
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Entity cannot be transient');
