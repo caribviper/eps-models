@@ -11,6 +11,7 @@ export declare class User extends Entity {
     supervisorGroups: string[];
     securityLevel: number;
     organisation: string;
+    passwordHash: string;
     constructor(username?: string, firstname?: string, lastname?: string, email?: string);
     readonly fullname: string;
     validateEntity(): void;

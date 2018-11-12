@@ -37,6 +37,9 @@ export class User extends Entity {
   /**Organisations a user belongs*/
   organisation: string = '';
 
+  /**Hashed password */
+  passwordHash = '';
+
   /**
    * Creates a new user
    * @param username Username of the user
