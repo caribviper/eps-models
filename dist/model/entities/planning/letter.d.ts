@@ -7,7 +7,7 @@ export declare class Letter extends Entity {
     created: Date;
     signed: Date;
     dispatched: Date;
-    ddispatchingUser: UserInfo;
+    dispatchingUser: UserInfo;
     updated: Date;
     subject: string;
     owner: UserInfo;

@@ -11,7 +11,7 @@ export class Letter extends Entity {
   /**Gets the date the letter was dispatched */
   public dispatched: Date = null;
   /**Gets the user that dispatched the letter */
-  public ddispatchingUser: UserInfo;
+  public dispatchingUser: UserInfo;
   /**Gets the date the letter was last updated */
   public updated: Date = null;
   /**Gets the subject matter of the letter */
@@ -86,7 +86,7 @@ export class Letter extends Entity {
   public dispatch(user: UserInfo) {
     if (this.canDispatch()) {
       this.dispatched = new Date();
-      this.ddispatchingUser = user;
+      this.dispatchingUser = user;
     }
   }
 

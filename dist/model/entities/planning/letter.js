@@ -68,7 +68,7 @@ var Letter = (function (_super) {
     Letter.prototype.dispatch = function (user) {
         if (this.canDispatch()) {
             this.dispatched = new Date();
-            this.ddispatchingUser = user;
+            this.dispatchingUser = user;
         }
     };
     Letter.createId = function (registryId, guid) {
