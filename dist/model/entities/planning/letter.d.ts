@@ -7,6 +7,7 @@ export declare class Letter extends Entity {
     created: Date;
     signed: Date;
     dispatched: Date;
+    ddispatchingUser: UserInfo;
     updated: Date;
     subject: string;
     owner: UserInfo;
@@ -25,7 +26,7 @@ export declare class Letter extends Entity {
     canSign(username: string): boolean;
     sign(username: string): void;
     canDispatch(): boolean;
-    dispatch(): void;
+    dispatch(user: UserInfo): void;
     static createId(registryId?: string, guid?: string): string;
     static mapToEntity(source: any): Letter;
     static mapToEntityArray(source: Letter[]): Letter[];

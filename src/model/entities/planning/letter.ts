@@ -10,6 +10,8 @@ export class Letter extends Entity {
   public signed: Date = null;
   /**Gets the date the letter was dispatched */
   public dispatched: Date = null;
+  /**Gets the user that dispatched the letter */
+  public ddispatchingUser: UserInfo;
   /**Gets the date the letter was last updated */
   public updated: Date = null;
   /**Gets the subject matter of the letter */
@@ -81,9 +83,11 @@ export class Letter extends Entity {
     return !!this.signed;
   }
 
-  public dispatch() {
-    if (this.canDispatch())
+  public dispatch(user: UserInfo) {
+    if (this.canDispatch()) {
       this.dispatched = new Date();
+      this.ddispatchingUser = user;
+    }
   }
 
   public static createId(registryId: string = '', guid: string = '') {

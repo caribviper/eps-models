@@ -65,9 +65,11 @@ var Letter = (function (_super) {
     Letter.prototype.canDispatch = function () {
         return !!this.signed;
     };
-    Letter.prototype.dispatch = function () {
-        if (this.canDispatch())
+    Letter.prototype.dispatch = function (user) {
+        if (this.canDispatch()) {
             this.dispatched = new Date();
+            this.ddispatchingUser = user;
+        }
     };
     Letter.createId = function (registryId, guid) {
         if (registryId === void 0) { registryId = ''; }
