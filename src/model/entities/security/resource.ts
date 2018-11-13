@@ -11,28 +11,27 @@ export type ResourceType = 'api' | 'view';
 export class Resource extends Entity {
 
   /**
-   * Creates a resource
-   * @param url Resource url
-   * @param verb Verb used to access resource
-   * @param description Description about the resource
+   * Creates a new resource
+   * @param resourceType Type of resource
+   * @param operation Operation of resource
+   * @param category Category of resource
+   * @param description Description about resource
    */
-  constructor(public url: string = '', public verb: string = '', public description: string = '', public resourceType: ResourceType | string = 'view') {
-    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb, resourceType), true);
+  constructor(public resourceType: ResourceType | string = 'api', public operation:string = '', public category: string = '', public description: string = '') {
+    super(ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(resourceType, operation), true);
   }
 
   public validateEntity() {
     Assert.isFalse(this.isTransient, 'Resource cannot be transient');
-    Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
-    Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
-    Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
+    Assert.isTruthy(this.operation, 'Resource operation cannot be empty/undefined');
+    Assert.isTruthy(this.category, 'Resource category cannot be empty/undefined');
     Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
   }
 
-  public static createId(url: string, verb: string, type: string): string {
-    if (!url || !verb || !type)
+  public static createId(resourceType: ResourceType | string = '', operation:string = ''): string {
+    if (!resourceType || !operation)
       return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE);
-    url = encodeURIComponent(url);
-    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, type, verb, url);
+    return Entity.generateId(ENTITY_MODELS.SECURITY.RESOURCE, resourceType, operation);
   }
 
   public static mapToEntity(source): Resource {

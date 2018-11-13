@@ -15,30 +15,30 @@ var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var Resource = (function (_super) {
     __extends(Resource, _super);
-    function Resource(url, verb, description, resourceType) {
-        if (url === void 0) { url = ''; }
-        if (verb === void 0) { verb = ''; }
+    function Resource(resourceType, operation, category, description) {
+        if (resourceType === void 0) { resourceType = 'api'; }
+        if (operation === void 0) { operation = ''; }
+        if (category === void 0) { category = ''; }
         if (description === void 0) { description = ''; }
-        if (resourceType === void 0) { resourceType = 'view'; }
-        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(url, verb, resourceType), true) || this;
-        _this.url = url;
-        _this.verb = verb;
-        _this.description = description;
+        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, Resource.createId(resourceType, operation), true) || this;
         _this.resourceType = resourceType;
+        _this.operation = operation;
+        _this.category = category;
+        _this.description = description;
         return _this;
     }
     Resource.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Resource cannot be transient');
-        caribviper_common_1.Assert.isTruthy(this.url, 'Resource url cannot be empty/undefined');
-        caribviper_common_1.Assert.isTruthy(this.verb, 'Resource verb cannot be empty/undefined');
-        caribviper_common_1.Assert.isTruthy(this.description, 'Resource description cannot be empty/undefined');
+        caribviper_common_1.Assert.isTruthy(this.operation, 'Resource operation cannot be empty/undefined');
+        caribviper_common_1.Assert.isTruthy(this.category, 'Resource category cannot be empty/undefined');
         caribviper_common_1.Assert.isTruthy(this.resourceType, 'Resource type cannot be empty/undefined');
     };
-    Resource.createId = function (url, verb, type) {
-        if (!url || !verb || !type)
+    Resource.createId = function (resourceType, operation) {
+        if (resourceType === void 0) { resourceType = ''; }
+        if (operation === void 0) { operation = ''; }
+        if (!resourceType || !operation)
             return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE);
-        url = encodeURIComponent(url);
-        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, type, verb, url);
+        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.RESOURCE, resourceType, operation);
     };
     Resource.mapToEntity = function (source) {
         return Object.assign(new Resource(), source);
