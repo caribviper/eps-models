@@ -38,7 +38,9 @@ export class Organisation extends Entity {
    * Creates a new organisation id
    * @param orgId Name of organisation
    */
-  public static createId(orgId: string): string {
+  public static createId(orgId: string = ''): string {
+    if(!orgId)
+      return Entity.generateId(ENTITY_MODELS.SECURITY.ORGANISATION);
     return Entity.generateId(ENTITY_MODELS.SECURITY.ORGANISATION, orgId);
   }
 

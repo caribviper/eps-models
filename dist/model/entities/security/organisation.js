@@ -36,6 +36,9 @@ var Organisation = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.name, 'Organisation name cannot be undefined/empty');
     };
     Organisation.createId = function (orgId) {
+        if (orgId === void 0) { orgId = ''; }
+        if (!orgId)
+            return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.ORGANISATION);
         return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.ORGANISATION, orgId);
     };
     Organisation.mapToEntity = function (source) {

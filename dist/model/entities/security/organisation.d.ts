@@ -9,7 +9,7 @@ export declare class Organisation extends Entity {
     groups: string[];
     constructor(orgId?: string, name?: string, description?: string);
     validateEntity(): void;
-    static createId(orgId: string): string;
+    static createId(orgId?: string): string;
     static mapToEntity(source: any): Organisation;
     static mapToEntityArray(source: Organisation[]): Organisation[];
     static toOrganisationInfo(organisation: Organisation): OrganisationInfo;
