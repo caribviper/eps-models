@@ -1,3 +1,4 @@
+import { OrganisationInfo } from './../../value-objects/common/organisation-info';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
@@ -35,7 +36,7 @@ export class User extends Entity {
   securityLevel: number = 1;
 
   /**Organisations a user belongs*/
-  organisation: string = '';
+  organisation: OrganisationInfo = undefined;
 
   /**Hashed password */
   passwordHash = '';
