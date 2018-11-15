@@ -13,7 +13,7 @@ export * from './model/value-objects/common/timed-result';
 export * from './model/value-objects/common/contact';
 export * from './model/value-objects/common/userinfo';
 export * from './model/value-objects/common/dispatched-info';
-export * from './model/value-objects/common/organisation-info';
+export * from './model/value-objects/common/domain-info';
 
 export * from './model/value-objects/enumerators/filetype';
 export * from './model/value-objects/enumerators/decision-types';
@@ -49,7 +49,7 @@ export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
 export * from './model/entities/security/user-token';
 export * from './model/entities/security/user';
-export * from './model/entities/security/organisation';
+export * from './model/entities/security/domain';
 
 export * from './model/entities/planning/registry-item';
 export * from './model/entities/planning/consultation';

@@ -1,4 +1,4 @@
-import { OrganisationInfo } from './../../value-objects/common/organisation-info';
+import { DomainInfo } from '../../value-objects/common/domain-info';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
 export declare class User extends Entity {
@@ -11,7 +11,7 @@ export declare class User extends Entity {
     groups: string[];
     supervisorGroups: string[];
     securityLevel: number;
-    organisation: OrganisationInfo;
+    domain: DomainInfo;
     passwordHash: string;
     constructor(username?: string, firstname?: string, lastname?: string, email?: string);
     readonly fullname: string;
