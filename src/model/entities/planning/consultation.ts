@@ -29,6 +29,9 @@ export class Consultation extends Entity {
   /**Contact */
   organisation: Contact;
 
+  //agency code
+  agencyCode: string;
+
   /**Comments/information sent to agency */
   comments: string;
 
@@ -52,6 +55,7 @@ export class Consultation extends Entity {
     this.documentId = documentId;
     this.attachment = attachmentId;
     this.attachedPictures = [];
+    this.agencyCode = '';
   }
   
   /**Indicates if the report has pictures attached */

@@ -10,6 +10,7 @@ export declare class Consultation extends Entity {
     requestingUser: UserInfo;
     returnedByUser: UserInfo;
     organisation: Contact;
+    agencyCode: string;
     comments: string;
     agencyComment: string;
     documentId: string;

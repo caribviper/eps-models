@@ -29,6 +29,7 @@ var Consultation = (function (_super) {
         _this.documentId = documentId;
         _this.attachment = attachmentId;
         _this.attachedPictures = [];
+        _this.agencyCode = '';
         return _this;
     }
     Object.defineProperty(Consultation.prototype, "hasPictures", {
