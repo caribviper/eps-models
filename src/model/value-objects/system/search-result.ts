@@ -24,6 +24,7 @@ export class SearchFetchResults {
   search_duration: number;
   skip: number;
   rows: ScoredRow[];
+  bookmark: string;
 
   /**
    * Apply new settings to the search results. Ensuring that it has all properties of the SearchFetchResults class
