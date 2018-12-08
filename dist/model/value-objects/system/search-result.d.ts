@@ -13,5 +13,6 @@ export declare class SearchFetchResults {
     search_duration: number;
     skip: number;
     rows: ScoredRow[];
+    bookmark: string;
     static initialise(results: SearchFetchResults): SearchFetchResults;
 }
