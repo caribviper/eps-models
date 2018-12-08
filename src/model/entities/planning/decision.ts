@@ -163,7 +163,7 @@ export class Decision extends Entity {
   }
 
   get finalised(): boolean {
-    return !!this.properties && this.finalised;
+    return !!this.properties && this.properties.isFinalised;
   }
 
   get conditions(): DecisionItem[] {

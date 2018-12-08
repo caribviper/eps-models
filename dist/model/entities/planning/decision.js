@@ -115,7 +115,7 @@ var Decision = (function (_super) {
     });
     Object.defineProperty(Decision.prototype, "finalised", {
         get: function () {
-            return !!this.properties && this.finalised;
+            return !!this.properties && this.properties.isFinalised;
         },
         enumerable: true,
         configurable: true
