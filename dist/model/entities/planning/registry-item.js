@@ -287,7 +287,7 @@ var RegistryItem = (function (_super) {
         }
         if (this.fileType.isApplication) {
             referenceNo = "" + this.fileType.prefix + numeral(counterValue).format('0000')
-                + ("/" + numeral(this.dateReceived.getMonth()).format('00'))
+                + ("/" + numeral(this.dateReceived.getMonth() + 1).format('00'))
                 + ("/" + numeral(this.dateReceived.getFullYear()).format('00'))
                 + ("" + this.area);
         }
