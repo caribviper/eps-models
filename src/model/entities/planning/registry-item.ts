@@ -322,7 +322,7 @@ export class RegistryItem extends Entity {
     if (this.fileType.isApplication) {
       //applications
       referenceNo = `${this.fileType.prefix}${numeral(counterValue).format('0000')}`
-        + `/${numeral(this.dateReceived.getMonth()).format('00')}`
+        + `/${numeral(this.dateReceived.getMonth() + 1).format('00')}`
         + `/${numeral(this.dateReceived.getFullYear()).format('00')}`
         + `${this.area}`;
     }
