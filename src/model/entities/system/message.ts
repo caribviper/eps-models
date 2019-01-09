@@ -92,7 +92,7 @@ export class Message extends Entity {
   public static createDuplicate(message: Message, newRecipient: UserInfo): Message {
     if(message.dismissedDate)
       return null;
-    if(new Date(message.reminderDate) > new Date() )
+    if(new Date(message.reminderDate) < new Date() )
       return null;
     let m = Message.mapToEntity(message);
     m.duplicate++;

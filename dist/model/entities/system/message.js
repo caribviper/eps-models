@@ -71,7 +71,7 @@ var Message = (function (_super) {
     Message.createDuplicate = function (message, newRecipient) {
         if (message.dismissedDate)
             return null;
-        if (new Date(message.reminderDate) > new Date())
+        if (new Date(message.reminderDate) < new Date())
             return null;
         var m = Message.mapToEntity(message);
         m.duplicate++;
