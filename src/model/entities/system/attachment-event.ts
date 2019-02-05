@@ -13,10 +13,10 @@ export const ATTACHMENT_EVENTS = {
   DELETED: 'deleted'
 };
 
-export class FileEvent extends Entity {
+export class AttachmentEvent extends Entity {
   public date: Date;
   constructor(public registryId:string ='', public filePath: string ='', public state: string ='', public event: string ='') {
-    super(ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, FileEvent.createId(filePath), true);
+    super(ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, AttachmentEvent.createId(filePath), true);
     this.date = new Date();
   }
 
@@ -37,17 +37,17 @@ export class FileEvent extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): FileEvent {
-    let o = Object.assign(new FileEvent(), source);
+  public static mapToEntity(source): AttachmentEvent {
+    let o = Object.assign(new AttachmentEvent(), source);
     return o;
   }
 
-  public static mapToEntityArray(source: FileEvent[]): FileEvent[] {
+  public static mapToEntityArray(source: AttachmentEvent[]): AttachmentEvent[] {
     if (source.length < 1)
       return [];
     let array = [];
     source.forEach(element => {
-      let o = Object.assign(new FileEvent(), element);
+      let o = Object.assign(new AttachmentEvent(), element);
       array.push(o);
     });
     return array;

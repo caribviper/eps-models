@@ -8,7 +8,7 @@ export declare const ATTACHMENT_EVENTS: {
     CREATED: string;
     DELETED: string;
 };
-export declare class FileEvent extends Entity {
+export declare class AttachmentEvent extends Entity {
     registryId: string;
     filePath: string;
     state: string;
@@ -17,6 +17,6 @@ export declare class FileEvent extends Entity {
     constructor(registryId?: string, filePath?: string, state?: string, event?: string);
     validateEntity(): void;
     static createId(filepath?: string): string;
-    static mapToEntity(source: any): FileEvent;
-    static mapToEntityArray(source: FileEvent[]): FileEvent[];
+    static mapToEntity(source: any): AttachmentEvent;
+    static mapToEntityArray(source: AttachmentEvent[]): AttachmentEvent[];
 }

@@ -22,14 +22,14 @@ exports.ATTACHMENT_EVENTS = {
     CREATED: 'created',
     DELETED: 'deleted'
 };
-var FileEvent = (function (_super) {
-    __extends(FileEvent, _super);
-    function FileEvent(registryId, filePath, state, event) {
+var AttachmentEvent = (function (_super) {
+    __extends(AttachmentEvent, _super);
+    function AttachmentEvent(registryId, filePath, state, event) {
         if (registryId === void 0) { registryId = ''; }
         if (filePath === void 0) { filePath = ''; }
         if (state === void 0) { state = ''; }
         if (event === void 0) { event = ''; }
-        var _this = _super.call(this, __1.ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, FileEvent.createId(filePath), true) || this;
+        var _this = _super.call(this, __1.ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, AttachmentEvent.createId(filePath), true) || this;
         _this.registryId = registryId;
         _this.filePath = filePath;
         _this.state = state;
@@ -37,33 +37,33 @@ var FileEvent = (function (_super) {
         _this.date = new Date();
         return _this;
     }
-    FileEvent.prototype.validateEntity = function () {
+    AttachmentEvent.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'FileEvent cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.registryId, 'FileEvent must have a valid registry id');
         caribviper_common_1.Assert.isTruthy(this.filePath, 'FileEvent must have a valid filepath');
         caribviper_common_1.Assert.isTruthy(this.state, 'FileEvent must have a valid state');
         caribviper_common_1.Assert.isTruthy(this.event, 'FileEvent must have a valid event');
     };
-    FileEvent.createId = function (filepath) {
+    AttachmentEvent.createId = function (filepath) {
         if (filepath === void 0) { filepath = ''; }
         if (!filepath)
             return '';
         return caribviper_entity_1.Entity.generateId(filepath, __1.ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT);
     };
-    FileEvent.mapToEntity = function (source) {
-        var o = Object.assign(new FileEvent(), source);
+    AttachmentEvent.mapToEntity = function (source) {
+        var o = Object.assign(new AttachmentEvent(), source);
         return o;
     };
-    FileEvent.mapToEntityArray = function (source) {
+    AttachmentEvent.mapToEntityArray = function (source) {
         if (source.length < 1)
             return [];
         var array = [];
         source.forEach(function (element) {
-            var o = Object.assign(new FileEvent(), element);
+            var o = Object.assign(new AttachmentEvent(), element);
             array.push(o);
         });
         return array;
     };
-    return FileEvent;
+    return AttachmentEvent;
 }(caribviper_entity_1.Entity));
-exports.FileEvent = FileEvent;
+exports.AttachmentEvent = AttachmentEvent;
