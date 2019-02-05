@@ -48,6 +48,7 @@ export declare const ENTITY_MODELS: {
         DOCUMENT_TEMPLATE: string;
         LETTER_TEMPLATE: string;
         STATISTICAL_REPORT_TEMPLATE: string;
+        FILE_EVENT: string;
         EVENT: string;
         WORKFLOW_TEMPLATE: string;
         TASK: string;
