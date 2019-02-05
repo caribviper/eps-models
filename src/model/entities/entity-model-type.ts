@@ -52,7 +52,7 @@ export const ENTITY_MODELS = {
     DOCUMENT_TEMPLATE: 'document-template',
     LETTER_TEMPLATE: 'letter-template',
     STATISTICAL_REPORT_TEMPLATE: 'statistical-report-template',
-    ATTACHMENT_EVENT: 'file-event',
+    ATTACHMENT_EVENT: 'attachment-event',
     EVENT: 'event',
     WORKFLOW_TEMPLATE: 'workflow-template',
     TASK: 'task',
