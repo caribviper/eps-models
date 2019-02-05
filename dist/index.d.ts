@@ -70,6 +70,6 @@ export * from './model/entities/system/letter-template';
 export * from './model/entities/system/message';
 export * from './model/entities/system/job';
 export * from './model/entities/system/statistical-report-template';
-export * from './model/entities/system/file-event';
+export * from './model/entities/system/attachment-event';
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

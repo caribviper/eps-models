@@ -2,13 +2,13 @@ import { Entity } from 'caribviper-entity';
 import { ENTITY_MODELS } from '../../..';
 import { Assert } from 'caribviper-common';
 
-export const FILE_STATES = {
+export const ATTACHMENT_STATES = {
   LOCAL: 'local',
   REMOTE: 'remote',
   REPLICATED: 'replicatef'
 };
 
-export const FILE_EVENTS = {
+export const ATTACHMENT_EVENTS = {
   CREATED: 'created',
   DELETED: 'deleted'
 };
@@ -16,7 +16,7 @@ export const FILE_EVENTS = {
 export class FileEvent extends Entity {
   public date: Date;
   constructor(public registryId:string ='', public filePath: string ='', public state: string ='', public event: string ='') {
-    super(ENTITY_MODELS.SYSTEM.FILE_EVENT, FileEvent.createId(filePath), true);
+    super(ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, FileEvent.createId(filePath), true);
     this.date = new Date();
   }
 
@@ -31,7 +31,7 @@ export class FileEvent extends Entity {
   public static createId(filepath: string = '') {
     if (!filepath)
       return '';
-    return Entity.generateId(filepath, ENTITY_MODELS.SYSTEM.FILE_EVENT);
+    return Entity.generateId(filepath, ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT);
   }
   /**
    * Maps data from source to an entity of this type
