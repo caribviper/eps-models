@@ -48,7 +48,7 @@ var AttachmentEvent = (function (_super) {
         if (filepath === void 0) { filepath = ''; }
         if (!filepath)
             return '';
-        return caribviper_entity_1.Entity.generateId(filepath, __1.ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT);
+        return caribviper_entity_1.Entity.generateId(__1.ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, filepath);
     };
     AttachmentEvent.mapToEntity = function (source) {
         var o = Object.assign(new AttachmentEvent(), source);

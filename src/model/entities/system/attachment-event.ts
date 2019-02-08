@@ -31,7 +31,7 @@ export class AttachmentEvent extends Entity {
   public static createId(filepath: string = '') {
     if (!filepath)
       return '';
-    return Entity.generateId(filepath, ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT);
+    return Entity.generateId(ENTITY_MODELS.SYSTEM.ATTACHMENT_EVENT, filepath);
   }
   /**
    * Maps data from source to an entity of this type
