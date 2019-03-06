@@ -17,6 +17,7 @@ export declare class BuildingStart extends Entity {
     mailingAddress: Contact;
     dispatchedInfo: DispatchedInfo;
     commencementDate: Date;
+    constructionStarted: boolean;
     readonly isCertified: boolean;
     constructor(registryId?: string, guid?: string, commencementDate?: Date);
     validateEntity(): void;
