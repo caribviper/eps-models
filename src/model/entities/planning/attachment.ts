@@ -19,12 +19,15 @@ export class Attachment extends Entity {
 
 	/**
 	 * Gets whether the file is viewable for all.
-	 * By default all new files are only visible to attachedby user
+	 * By default all files are only visible to tcp staff
 	 */
   isPublic: boolean = true;
 
   /**Gets the new filename of the attached file */
   filename: string = '';
+
+  /** Type of attachment */
+  category: string = '';
 
   constructor(registryId: string = '', guid: string = '', filename: string = '', attachedBy: UserInfo = undefined, description: string = '') {
     super(ENTITY_MODELS.PLANNING.ATTACHMENT, Attachment.createId(registryId, guid), true);

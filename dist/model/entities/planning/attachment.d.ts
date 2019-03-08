@@ -7,6 +7,7 @@ export declare class Attachment extends Entity {
     description: string;
     isPublic: boolean;
     filename: string;
+    category: string;
     constructor(registryId?: string, guid?: string, filename?: string, attachedBy?: UserInfo, description?: string);
     validateEntity(): void;
     static createId(registryId?: string, guid?: string): string;

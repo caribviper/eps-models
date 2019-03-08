@@ -25,6 +25,7 @@ var Attachment = (function (_super) {
         _this.description = '';
         _this.isPublic = true;
         _this.filename = '';
+        _this.category = '';
         _this.registryId = registryId;
         _this.attachedBy = attachedBy;
         _this.filename = filename;
