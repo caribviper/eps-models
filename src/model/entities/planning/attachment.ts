@@ -17,6 +17,12 @@ export class Attachment extends Entity {
   /** Gets description about the file */
   description: string = '';
 
+  /** Gets the category of the attachment */
+  category: string = '';
+
+  /**Gets the certified date of the attachment */
+  certifiedDate: Date;
+
 	/**
 	 * Gets whether the file is viewable for all.
 	 * By default all files are only visible to tcp staff
@@ -25,9 +31,6 @@ export class Attachment extends Entity {
 
   /**Gets the new filename of the attached file */
   filename: string = '';
-
-  /** Type of attachment */
-  category: string = '';
 
   constructor(registryId: string = '', guid: string = '', filename: string = '', attachedBy: UserInfo = undefined, description: string = '') {
     super(ENTITY_MODELS.PLANNING.ATTACHMENT, Attachment.createId(registryId, guid), true);

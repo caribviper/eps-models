@@ -28,7 +28,7 @@ var PlanningFactory = (function () {
     }
     PlanningFactory.createRegistry = function (fileType) {
         var r = new registry_item_1.RegistryItem(fileType, '');
-        r.acceptingUser = new userinfo_1.UserInfo('', '');
+        r.acceptingUser = new userinfo_1.UserInfo('', '', '');
         r.area = '';
         r.dateLastModified = new Date();
         r.dateReceived = new Date();
@@ -192,7 +192,7 @@ var PlanningFactory = (function () {
         l.templateId = letterTemplate._id;
         l.salutation = 'Dear Sir/Madam';
         l.valediction = 'Yours faithfully';
-        l.owner = new userinfo_1.UserInfo(currentUser.username, currentUser.fullname);
+        l.owner = new userinfo_1.UserInfo(currentUser.username, currentUser.fullname, currentUser.domain);
         return l;
     };
     PlanningFactory.createProjection = function (registry, projectionVersion) {

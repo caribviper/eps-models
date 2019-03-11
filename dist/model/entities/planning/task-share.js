@@ -16,7 +16,7 @@ var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var TaskShareItem = (function () {
     function TaskShareItem() {
-        this.principle = new userinfo_1.UserInfo('', '');
+        this.principle = new userinfo_1.UserInfo('', '', '');
         this.users = [];
     }
     return TaskShareItem;

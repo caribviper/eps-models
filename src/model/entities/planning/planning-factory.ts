@@ -30,7 +30,7 @@ export class PlanningFactory {
 
   public static createRegistry(fileType: FileType): RegistryItem {
     let r = new RegistryItem(fileType, '');
-    r.acceptingUser = new UserInfo('', '');
+    r.acceptingUser = new UserInfo('', '', '');
     r.area = '';
     r.dateLastModified = new Date();
     r.dateReceived = new Date();
@@ -297,7 +297,7 @@ export class PlanningFactory {
     l.templateId = letterTemplate._id;
     l.salutation = 'Dear Sir/Madam';
     l.valediction = 'Yours faithfully'
-    l.owner = new UserInfo(currentUser.username, currentUser.fullname);
+    l.owner = new UserInfo(currentUser.username, currentUser.fullname, currentUser.domain);
     return l;
   }
 

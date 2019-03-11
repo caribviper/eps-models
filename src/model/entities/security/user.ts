@@ -146,7 +146,7 @@ export class User extends Entity {
    * @param user User to be converted to UserInfo
    */
   public static toUserInfo(user: User): UserInfo {
-    return new UserInfo(user.username, user.firstname + ' ' + user.lastname);
+    return new UserInfo(user.username, user.firstname + ' ' + user.lastname, user.domain.code);
   }
 
 }

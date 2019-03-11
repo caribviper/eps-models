@@ -39,7 +39,7 @@ export class Message extends Entity {
    * @param message Message detailing the message
    * @param created Date message was created
    */
-  constructor(public guid: string = '', public creator: UserInfo = new UserInfo('',''), public recipient: UserInfo = new UserInfo('',''), public message: string = '', public created: number = null) {
+  constructor(public guid: string = '', public creator: UserInfo = new UserInfo('','', ''), public recipient: UserInfo = new UserInfo('','', ''), public message: string = '', public created: number = null) {
     super(ENTITY_MODELS.SYSTEM.MESSAGE, Message.createId(recipient.username, guid), true );
   }
 

@@ -15,7 +15,7 @@ export class TaskShareItem {
   public users: UserInfo[];
 
   constructor() {
-    this.principle = new UserInfo('', '');
+    this.principle = new UserInfo('', '', '');
     this.users = [];
   }
 }

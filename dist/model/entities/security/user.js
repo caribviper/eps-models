@@ -104,7 +104,7 @@ var User = (function (_super) {
         return array;
     };
     User.toUserInfo = function (user) {
-        return new userinfo_1.UserInfo(user.username, user.firstname + ' ' + user.lastname);
+        return new userinfo_1.UserInfo(user.username, user.firstname + ' ' + user.lastname, user.domain.code);
     };
     return User;
 }(caribviper_entity_1.Entity));

@@ -19,8 +19,8 @@ var Message = (function (_super) {
     __extends(Message, _super);
     function Message(guid, creator, recipient, message, created) {
         if (guid === void 0) { guid = ''; }
-        if (creator === void 0) { creator = new userinfo_1.UserInfo('', ''); }
-        if (recipient === void 0) { recipient = new userinfo_1.UserInfo('', ''); }
+        if (creator === void 0) { creator = new userinfo_1.UserInfo('', '', ''); }
+        if (recipient === void 0) { recipient = new userinfo_1.UserInfo('', '', ''); }
         if (message === void 0) { message = ''; }
         if (created === void 0) { created = null; }
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SYSTEM.MESSAGE, Message.createId(recipient.username, guid), true) || this;
