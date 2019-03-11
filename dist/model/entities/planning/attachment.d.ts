@@ -5,9 +5,10 @@ export declare class Attachment extends Entity {
     dateAttached: Date;
     attachedBy: UserInfo;
     description: string;
+    category: string;
+    certifiedDate: Date;
     isPublic: boolean;
     filename: string;
-    category: string;
     constructor(registryId?: string, guid?: string, filename?: string, attachedBy?: UserInfo, description?: string);
     validateEntity(): void;
     static createId(registryId?: string, guid?: string): string;

@@ -23,9 +23,9 @@ var Attachment = (function (_super) {
         if (description === void 0) { description = ''; }
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.PLANNING.ATTACHMENT, Attachment.createId(registryId, guid), true) || this;
         _this.description = '';
+        _this.category = '';
         _this.isPublic = true;
         _this.filename = '';
-        _this.category = '';
         _this.registryId = registryId;
         _this.attachedBy = attachedBy;
         _this.filename = filename;
