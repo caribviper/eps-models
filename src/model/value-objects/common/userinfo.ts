@@ -8,6 +8,13 @@ export class UserInfo {
    * @param domain Domain of the user
    */
   constructor(public username: string, public fullname: string, public domain: string) { }
+
+  /**
+   * Creates an empty userinfo item
+   */
+  public static EmptyUserInfo(): UserInfo {
+    return new UserInfo('','','');
+  }
 }
 
 export const SYSTEM_USER = new UserInfo('system', 'system', 'system');

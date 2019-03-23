@@ -6,6 +6,9 @@ var UserInfo = (function () {
         this.fullname = fullname;
         this.domain = domain;
     }
+    UserInfo.EmptyUserInfo = function () {
+        return new UserInfo('', '', '');
+    };
     return UserInfo;
 }());
 exports.UserInfo = UserInfo;
