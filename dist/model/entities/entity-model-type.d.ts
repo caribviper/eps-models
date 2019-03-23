@@ -54,6 +54,8 @@ export declare const ENTITY_MODELS: {
         TASK: string;
         TASK_SHARE: string;
         MESSAGE: string;
+        BROADCAST: string;
+        BROADCAST_EVENT: string;
         ALERT: string;
         JOB: string;
     };

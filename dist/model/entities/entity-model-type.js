@@ -56,6 +56,8 @@ exports.ENTITY_MODELS = {
         TASK: 'task',
         TASK_SHARE: 'task-share',
         MESSAGE: 'message',
+        BROADCAST: 'broadcast',
+        BROADCAST_EVENT: 'broadcast-event',
         ALERT: 'alert',
         JOB: 'job'
     }
