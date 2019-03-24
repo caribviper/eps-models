@@ -8,7 +8,7 @@ export class BroadcastEvent extends Entity {
   hidden: boolean = false;
 
   constructor(public broadcastId: string = '', public username: string = '') {
-    super(ENTITY_MODELS.SYSTEM.BROADCAST_EVENT, BroadcastEvent.createId(broadcastId, username), true)
+    super(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE_EVENT, BroadcastEvent.createId(broadcastId, username), true)
   }
 
   validateEntity() {

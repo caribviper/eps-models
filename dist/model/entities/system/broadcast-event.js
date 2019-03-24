@@ -18,7 +18,7 @@ var BroadcastEvent = (function (_super) {
     function BroadcastEvent(broadcastId, username) {
         if (broadcastId === void 0) { broadcastId = ''; }
         if (username === void 0) { username = ''; }
-        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_EVENT, BroadcastEvent.createId(broadcastId, username), true) || this;
+        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE_EVENT, BroadcastEvent.createId(broadcastId, username), true) || this;
         _this.broadcastId = broadcastId;
         _this.username = username;
         _this.hidden = false;

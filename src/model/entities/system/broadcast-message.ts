@@ -8,7 +8,7 @@ const ACTIVE_DAYS_MIN = 1,
   ACTIVE_DAYS_MAX = 7,
   ACTIVE_DAYS_DEFAULT = 5;
 
-export class BroadcastReceiver {
+export class BroadcastMessageReceiver {
   public readonly domains: string[];
   public readonly groups: string[];
   public readonly users: string[];
@@ -21,7 +21,7 @@ export class BroadcastReceiver {
 }
 
 /**Manages broadcasts of the system */
-export class Broadcast extends Entity {
+export class BroadcastMessage extends Entity {
 
   /**Date broadcast was created */
   public dateCreated: Date;
@@ -33,20 +33,26 @@ export class Broadcast extends Entity {
   public activeDays: number;
 
   /**Recipients of the message */
-  public broadcastReceivers: BroadcastReceiver;
+  public broadcastReceivers: BroadcastMessageReceiver;
 
   constructor(public guid: string = '', public title: string = '', public message: string = '', public creator: UserInfo = UserInfo.EmptyUserInfo()) {
-    super(ENTITY_MODELS.SYSTEM.BROADCAST, Broadcast.createId(guid), true);
+    super(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE, BroadcastMessage.createId(guid), true);
     this.dateCreated = new Date();
     this.activeDays = ACTIVE_DAYS_DEFAULT;
-    this.broadcastReceivers = new BroadcastReceiver();
+    this.broadcastReceivers = new BroadcastMessageReceiver();
   }
 
+  /**Expiration date of the message */
   get expirationDate(): Date {
     if (!this.dateDispatched)
       return null;
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
     moment(new Date(this.dateDispatched)).add(this.activeDays, 'days');
+  }
+
+  /**Indicates if the message can be broadcasted */
+  get canBroadcast(): boolean {
+    return !!this.dateDispatched !== true;
   }
 
   validateEntity() {
@@ -58,8 +64,8 @@ export class Broadcast extends Entity {
     Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
   }
 
-  /**Sets the broadcast ready for dispatching */
-  finalise() {
+  /**Commits the broadcast ready for dispatching */
+  broadcast() {
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
     this.dateDispatched = new Date();
   }
@@ -67,24 +73,24 @@ export class Broadcast extends Entity {
 
   public static createId(guid: string = '') {
     if (!guid)
-      return Entity.generateId(ENTITY_MODELS.SYSTEM.BROADCAST);
-    return Entity.generateId(ENTITY_MODELS.SYSTEM.BROADCAST, guid);
+      return Entity.generateId(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE);
+    return Entity.generateId(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE, guid);
   }
 
   /**
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): Broadcast {
-    return Object.assign(new Broadcast(), source);
+  public static mapToEntity(source): BroadcastMessage {
+    return Object.assign(new BroadcastMessage(), source);
   }
 
-  public static mapToEntityArray(source: Broadcast[]): Broadcast[] {
+  public static mapToEntityArray(source: BroadcastMessage[]): BroadcastMessage[] {
     if (source.length < 1)
       return [];
     let array = [];
     source.forEach(element => {
-      array.push(Object.assign(new Broadcast(), element));
+      array.push(Object.assign(new BroadcastMessage(), element));
     });
     return array;
   }

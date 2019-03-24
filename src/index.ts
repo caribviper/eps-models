@@ -86,7 +86,7 @@ export * from './model/entities/system/message';
 export * from './model/entities/system/job';
 export * from './model/entities/system/statistical-report-template';
 export * from './model/entities/system/attachment-event';
-export * from './model/entities/system/broadcast';
+export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-event';
 
 //model factory
