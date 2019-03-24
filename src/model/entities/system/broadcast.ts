@@ -5,8 +5,20 @@ import { Entity } from 'caribviper-entity';
 import * as moment from 'moment';
 
 const ACTIVE_DAYS_MIN = 1,
-      ACTIVE_DAYS_MAX = 7,
-      ACTIVE_DAYS_DEFAULT = 5;
+  ACTIVE_DAYS_MAX = 7,
+  ACTIVE_DAYS_DEFAULT = 5;
+
+export class BroadcastReceiver {
+  public readonly domains: string[];
+  public readonly groups: string[];
+  public readonly users: string[];
+
+  constructor() {
+    this.domains = [];
+    this.groups = [];
+    this.users = [];
+  }
+}
 
 /**Manages broadcasts of the system */
 export class Broadcast extends Entity {
@@ -20,13 +32,14 @@ export class Broadcast extends Entity {
   /**Number of days broadcast should exists until self expiring */
   public activeDays: number;
 
-  /**Domains allowed to view broadcast */
-  domains: string[];
+  /**Recipients of the message */
+  public broadcastReceivers: BroadcastReceiver;
 
   constructor(public guid: string = '', public title: string = '', public message: string = '', public creator: UserInfo = UserInfo.EmptyUserInfo()) {
     super(ENTITY_MODELS.SYSTEM.BROADCAST, Broadcast.createId(guid), true);
     this.dateCreated = new Date();
     this.activeDays = ACTIVE_DAYS_DEFAULT;
+    this.broadcastReceivers = new BroadcastReceiver();
   }
 
   get expirationDate(): Date {
@@ -42,6 +55,7 @@ export class Broadcast extends Entity {
     Assert.isTruthy(this.dateCreated, 'Must have a valid creation date');
     Assert.isTruthy(this.title, 'Must have a valid message');
     Assert.isTruthy(this.message, 'Must have a valid title');
+    Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
   }
 
   /**Sets the broadcast ready for dispatching */
