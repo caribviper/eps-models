@@ -38,7 +38,7 @@ var BroadcastUserMessageInstance = (function (_super) {
         if (broadcastId === void 0) { broadcastId = ''; }
         if (username === void 0) { username = ''; }
         if (!username)
-            return caribviper_entity_1.Entity.generateId(broadcastId);
+            return caribviper_entity_1.Entity.generateId(broadcastId, entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE);
         return caribviper_entity_1.Entity.generateId(broadcastId, entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE, username);
     };
     BroadcastUserMessageInstance.mapToEntity = function (source) {
