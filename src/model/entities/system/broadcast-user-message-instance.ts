@@ -34,7 +34,7 @@ export class BroadcastUserMessageInstance extends Entity {
   public static createId(broadcastId: string = '', username: string = '') {
     if (!username)
       return Entity.generateId(broadcastId);
-    return Entity.generateId(broadcastId, username);
+    return Entity.generateId(broadcastId, ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE, username);
   }
 
   /**
