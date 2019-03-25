@@ -1,5 +1,5 @@
 import { Entity } from 'caribviper-entity';
-export declare class BroadcastEvent extends Entity {
+export declare class BroadcastUserMessageInstance extends Entity {
     broadcastId: string;
     username: string;
     expirationDate: Date;
@@ -8,6 +8,6 @@ export declare class BroadcastEvent extends Entity {
     validateEntity(): void;
     hideBroadcast(): void;
     static createId(broadcastId?: string, username?: string): string;
-    static mapToEntity(source: any): BroadcastEvent;
-    static mapToEntityArray(source: BroadcastEvent[]): BroadcastEvent[];
+    static mapToEntity(source: any): BroadcastUserMessageInstance;
+    static mapToEntityArray(source: BroadcastUserMessageInstance[]): BroadcastUserMessageInstance[];
 }

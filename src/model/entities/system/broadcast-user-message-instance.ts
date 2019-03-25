@@ -2,19 +2,19 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 
-export class BroadcastEvent extends Entity {
+export class BroadcastUserMessageInstance extends Entity {
 
   /**Indicates that the broadcast specified should be hidden */
   hidden: boolean = false;
 
   /**
-   * 
+   * Creates a new broadcast user instance
    * @param broadcastId Id of broadcast message
    * @param username Recipient of broadcast
    * @param expirationDate Date of expiration of automatically shown broadcast
    */
   constructor(public broadcastId: string = '', public username: string = '', public expirationDate: Date = null) {
-    super(ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE, BroadcastEvent.createId(broadcastId, username), true)
+    super(ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE, BroadcastUserMessageInstance.createId(broadcastId, username), true)
   }
 
   validateEntity() {
@@ -41,16 +41,16 @@ export class BroadcastEvent extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): BroadcastEvent {
-    return Object.assign(new BroadcastEvent(), source);
+  public static mapToEntity(source): BroadcastUserMessageInstance {
+    return Object.assign(new BroadcastUserMessageInstance(), source);
   }
 
-  public static mapToEntityArray(source: BroadcastEvent[]): BroadcastEvent[] {
+  public static mapToEntityArray(source: BroadcastUserMessageInstance[]): BroadcastUserMessageInstance[] {
     if (source.length < 1)
       return [];
     let array = [];
     source.forEach(element => {
-      array.push(Object.assign(new BroadcastEvent(), element));
+      array.push(Object.assign(new BroadcastUserMessageInstance(), element));
     });
     return array;
   }
