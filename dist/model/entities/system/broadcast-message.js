@@ -54,7 +54,7 @@ var BroadcastMessage = (function (_super) {
     });
     Object.defineProperty(BroadcastMessage.prototype, "canBroadcast", {
         get: function () {
-            return !!this.dateDispatched !== true;
+            return !!this.dateDispatched !== true && !!this.title && !!this.message;
         },
         enumerable: true,
         configurable: true

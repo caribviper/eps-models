@@ -35,6 +35,13 @@ export class BroadcastMessage extends Entity {
   /**Recipients of the message */
   public broadcastReceivers: BroadcastMessageReceiver;
 
+  /**
+   * 
+   * @param guid Id of the broadcast message
+   * @param title Title of the broadcast
+   * @param message Content of the broadcast
+   * @param creator Creator of the broadcast
+   */
   constructor(public guid: string = '', public title: string = '', public message: string = '', public creator: UserInfo = UserInfo.EmptyUserInfo()) {
     super(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE, BroadcastMessage.createId(guid), true);
     this.dateCreated = new Date();
@@ -52,7 +59,7 @@ export class BroadcastMessage extends Entity {
 
   /**Indicates if the message can be broadcasted */
   get canBroadcast(): boolean {
-    return !!this.dateDispatched !== true;
+    return !!this.dateDispatched !== true && !!this.title && !!this.message;
   }
 
   validateEntity() {
