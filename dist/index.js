@@ -77,6 +77,6 @@ __export(require("./model/entities/system/job"));
 __export(require("./model/entities/system/statistical-report-template"));
 __export(require("./model/entities/system/attachment-event"));
 __export(require("./model/entities/system/broadcast-message"));
-__export(require("./model/entities/system/broadcast-event"));
+__export(require("./model/entities/system/broadcast-user-message-instance"));
 __export(require("./model/entities/planning/dossier"));
 __export(require("./model/entities/planning/planning-factory"));

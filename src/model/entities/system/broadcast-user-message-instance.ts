@@ -3,12 +3,18 @@ import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 
 export class BroadcastEvent extends Entity {
-  
+
   /**Indicates that the broadcast specified should be hidden */
   hidden: boolean = false;
 
-  constructor(public broadcastId: string = '', public username: string = '') {
-    super(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE_EVENT, BroadcastEvent.createId(broadcastId, username), true)
+  /**
+   * 
+   * @param broadcastId Id of broadcast message
+   * @param username Recipient of broadcast
+   * @param expirationDate Date of expiration of automatically shown broadcast
+   */
+  constructor(public broadcastId: string = '', public username: string = '', public expirationDate: Date = null) {
+    super(ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE, BroadcastEvent.createId(broadcastId, username), true)
   }
 
   validateEntity() {
@@ -16,14 +22,14 @@ export class BroadcastEvent extends Entity {
     Assert.isTruthy(this.broadcastId, 'Must have a valid broadcast Id');
     Assert.isTruthy(this.username, 'Must have a valid user');
   }
-  
+
   /**
    * Hide the current broadcast
    */
   public hideBroadcast() {
     this.hidden = true;
   }
-  
+
 
   public static createId(broadcastId: string = '', username: string = '') {
     if (!username)

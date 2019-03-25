@@ -59,7 +59,7 @@ export const ENTITY_MODELS = {
     TASK_SHARE: 'task-share',
     MESSAGE: 'message',
     BROADCAST_MESSAGE: 'broadcast',
-    BROADCAST_MESSAGE_EVENT: 'broadcast-event',
+    BROADCAST_USER_MESSAGE_INSTANCE: 'broadcast-instance',
     ALERT: 'alert',
     JOB: 'job'
   }
