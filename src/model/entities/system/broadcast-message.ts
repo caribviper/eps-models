@@ -1,3 +1,4 @@
+import { BroadcastUserMessageInstance } from './broadcast-user-message-instance';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
@@ -71,12 +72,23 @@ export class BroadcastMessage extends Entity {
     Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
   }
 
-  /**Commits the broadcast ready for dispatching */
-  broadcast() {
+  /**
+   * Commits the broadcast to dispatching
+   * @param users Users to get broadcast
+   */
+  broadcast(users: string[] = []): BroadcastUserMessageInstance[] {
+    if (!!users || users.length < 1)
+      return [];
+    if (!!this.dateDispatched)
+      throw 'Broadcast message already sent'
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
     this.dateDispatched = new Date();
+    const bInstances: BroadcastUserMessageInstance[] = [];
+    users.forEach(user => {
+      bInstances.push(new BroadcastUserMessageInstance(this._id, user, this.expirationDate));
+    });
+    return bInstances;
   }
-
 
   public static createId(guid: string = '') {
     if (!guid)

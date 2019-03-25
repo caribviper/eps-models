@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var broadcast_user_message_instance_1 = require("./broadcast-user-message-instance");
 var caribviper_common_1 = require("caribviper-common");
 var entity_model_type_1 = require("./../entity-model-type");
 var userinfo_1 = require("./../../value-objects/common/userinfo");
@@ -67,9 +68,20 @@ var BroadcastMessage = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.message, 'Must have a valid title');
         caribviper_common_1.Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
     };
-    BroadcastMessage.prototype.broadcast = function () {
+    BroadcastMessage.prototype.broadcast = function (users) {
+        var _this = this;
+        if (users === void 0) { users = []; }
+        if (!!users || users.length < 1)
+            return [];
+        if (!!this.dateDispatched)
+            throw 'Broadcast message already sent';
         this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
         this.dateDispatched = new Date();
+        var bInstances = [];
+        users.forEach(function (user) {
+            bInstances.push(new broadcast_user_message_instance_1.BroadcastUserMessageInstance(_this._id, user, _this.expirationDate));
+        });
+        return bInstances;
     };
     BroadcastMessage.createId = function (guid) {
         if (guid === void 0) { guid = ''; }
