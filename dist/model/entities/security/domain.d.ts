@@ -7,6 +7,7 @@ export declare class Domain extends Entity {
     description: string;
     contact: ContactAttributes;
     groups: string[];
+    crossDomainUsers: string[];
     constructor(code?: string, name?: string, description?: string);
     validateEntity(): void;
     static createId(code?: string): string;
@@ -15,4 +16,6 @@ export declare class Domain extends Entity {
     static toDomainInfo(domain: Domain): DomainInfo;
     addGroup(group: string): void;
     removeGroup(group: string): void;
+    addCrossDomainUser(username: string): void;
+    removeCrossDomainUser(username: string): void;
 }

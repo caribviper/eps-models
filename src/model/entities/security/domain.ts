@@ -15,6 +15,9 @@ export class Domain extends Entity {
   /** Stores the groups the domain has access to */
   public groups: string[] = [];
 
+  /** Stores a list of users who natively belong to another domain, but have access to this domain as well and can be accessed by this domain */
+  public crossDomainUsers: string[] = [];
+
 
   /**
    * Creates a new Domain
@@ -39,7 +42,7 @@ export class Domain extends Entity {
    * @param code Name of domain
    */
   public static createId(code: string = ''): string {
-    if(!code)
+    if (!code)
       return Entity.generateId(ENTITY_MODELS.SECURITY.DOMAIN);
     return Entity.generateId(ENTITY_MODELS.SECURITY.DOMAIN, code);
   }
@@ -58,23 +61,56 @@ export class Domain extends Entity {
     return array;
   }
 
+  /**
+   * Converts a domain entity to a DomainUserInfo object
+   * @param domain Domain to be converted to DomainInfo
+   */
   public static toDomainInfo(domain: Domain): DomainInfo {
-    if(!domain)
+    if (!domain)
       return undefined;
     return new DomainInfo(domain._id, domain.code, domain.name);
   }
 
+  /**
+   * Adds a group to the domain
+   * @param group Name of group to be added
+   */
   public addGroup(group: string) {
     if (!this.groups) this.groups = [];
     if (!this.groups.includes(group))
       this.groups.push(group);
   }
 
-  public removeGroup(group: string){ 
+  /**
+   * Removes a group from the domain
+   * @param group Name of group to be removed
+   */
+  public removeGroup(group: string) {
     if (!this.groups) this.groups = [];
     const index = this.groups.indexOf(group);
     if (index > -1)
       this.groups.splice(index, 1);
+  }
+
+  /**
+   * Adds a user to the domain as a cross domain user
+   * @param username Name od user to be added to the domain
+   */
+  public addCrossDomainUser(username: string) { 
+    if(!this.crossDomainUsers) this.crossDomainUsers = [];
+    if(!this.crossDomainUsers.includes(username))
+      this.crossDomainUsers.push(username);
+  }
+
+  /**
+   * Removes a user from the domain as a cross domain user
+   * @param username Name of user to be removed from domain
+   */
+  public removeCrossDomainUser(username: string) { 
+    if(!this.crossDomainUsers) this.crossDomainUsers = [];
+    const index = this.crossDomainUsers.indexOf(username);
+    if(index > -1)
+      this.crossDomainUsers.splice(index, 1);
   }
 }
 

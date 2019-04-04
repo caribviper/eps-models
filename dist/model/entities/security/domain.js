@@ -26,6 +26,7 @@ var Domain = (function (_super) {
         _this.description = description;
         _this.contact = undefined;
         _this.groups = [];
+        _this.crossDomainUsers = [];
         _this.name = name;
         _this.description = description;
         return _this;
@@ -70,6 +71,19 @@ var Domain = (function (_super) {
         var index = this.groups.indexOf(group);
         if (index > -1)
             this.groups.splice(index, 1);
+    };
+    Domain.prototype.addCrossDomainUser = function (username) {
+        if (!this.crossDomainUsers)
+            this.crossDomainUsers = [];
+        if (!this.crossDomainUsers.includes(username))
+            this.crossDomainUsers.push(username);
+    };
+    Domain.prototype.removeCrossDomainUser = function (username) {
+        if (!this.crossDomainUsers)
+            this.crossDomainUsers = [];
+        var index = this.crossDomainUsers.indexOf(username);
+        if (index > -1)
+            this.crossDomainUsers.splice(index, 1);
     };
     return Domain;
 }(caribviper_entity_1.Entity));
