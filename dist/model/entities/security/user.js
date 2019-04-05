@@ -28,7 +28,7 @@ var User = (function (_super) {
         _this.supervisorGroups = [];
         _this.securityLevel = 1;
         _this.domain = undefined;
-        _this.domains = [];
+        _this.crossDomains = [];
         _this.passwordHash = '';
         _this.username = username;
         _this.firstname = firstname;
@@ -89,24 +89,18 @@ var User = (function (_super) {
         if (index > -1)
             this.supervisorGroups.splice(index, 1);
     };
-    User.prototype.addDomain = function (domain) {
-        if (!this.domains)
-            this.domains = [];
-        if (!!this.domain && !this.domains.includes(this.domain))
-            this.domains.push(this.domain);
-        if (!this.domain)
-            this.domain = domain;
-        if (!this.domains.includes(domain))
-            this.domains.push(domain);
+    User.prototype.addCrossDomain = function (domain) {
+        if (!this.crossDomains)
+            this.crossDomains = [];
+        if (!this.crossDomains.includes(domain))
+            this.crossDomains.push(domain);
     };
-    User.prototype.removeDomain = function (domain) {
-        if (!this.domains)
-            this.domains = [];
-        if (this.domain === domain)
-            return;
-        var index = this.domains.indexOf(domain);
+    User.prototype.removeCrossDomain = function (domain) {
+        if (!this.crossDomains)
+            this.crossDomains = [];
+        var index = this.crossDomains.indexOf(domain);
         if (index > -1)
-            this.domains.splice(index, 1);
+            this.crossDomains.splice(index, 1);
     };
     User.createId = function (username) {
         return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.USER, username);

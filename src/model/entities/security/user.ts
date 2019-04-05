@@ -39,7 +39,7 @@ export class User extends Entity {
   domain: DomainInfo = undefined;
 
   /**Store list of domains user belongs */
-  domains: DomainInfo[] = [];
+  crossDomains: string[] = [];
 
   /**Hashed password */
   passwordHash = '';
@@ -126,26 +126,21 @@ export class User extends Entity {
    * Adds the user to a domain
    * @param domain Domain to add the user to
    */
-  public addDomain(domain: DomainInfo) {
-    if (!this.domains) this.domains = [];
-    if (!!this.domain && !this.domains.includes(this.domain))
-      this.domains.push(this.domain);
-    if (!this.domain) this.domain = domain;
-    if (!this.domains.includes(domain))
-      this.domains.push(domain);
+  public addCrossDomain(domain: string) {
+    if (!this.crossDomains) this.crossDomains = [];
+    if (!this.crossDomains.includes(domain))
+      this.crossDomains.push(domain);
   }
 
   /**
    * Removes the specified domain. If the domain is the main domain it will not be removed
    * @param domain Domain to be removed
    */
-  public removeDomain(domain: DomainInfo) {
-    if (!this.domains) this.domains = [];
-    if (this.domain === domain)
-      return;
-    const index = this.domains.indexOf(domain);
+  public removeCrossDomain(domain: string) {
+    if (!this.crossDomains) this.crossDomains = [];
+    const index = this.crossDomains.indexOf(domain);
     if (index > -1)
-      this.domains.splice(index, 1);
+      this.crossDomains.splice(index, 1);
   }
 
   /**
