@@ -12,6 +12,7 @@ export declare class User extends Entity {
     supervisorGroups: string[];
     securityLevel: number;
     domain: DomainInfo;
+    domains: DomainInfo[];
     passwordHash: string;
     constructor(username?: string, firstname?: string, lastname?: string, email?: string);
     readonly fullname: string;
@@ -20,6 +21,8 @@ export declare class User extends Entity {
     removeGroup(groupName: string): void;
     addSupervisorGroup(...groupNames: string[]): void;
     removeSupervisorGroup(groupName: string): void;
+    addDomain(domain: DomainInfo): void;
+    removeDomain(domain: DomainInfo): void;
     static createId(username: string): string;
     static mapToEntity(source: any): User;
     static mapToEntityArray(source: User[]): User[];

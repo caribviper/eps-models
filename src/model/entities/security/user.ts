@@ -35,8 +35,11 @@ export class User extends Entity {
   /**security level */
   securityLevel: number = 1;
 
-  /**The domain a user belongs*/
+  /**The main domain of a user*/
   domain: DomainInfo = undefined;
+
+  /**Store list of domains user belongs */
+  domains: DomainInfo[] = [];
 
   /**Hashed password */
   passwordHash = '';
@@ -117,6 +120,32 @@ export class User extends Entity {
     let index = this.supervisorGroups.findIndex((g: string) => { return g === groupName; });
     if (index > -1)
       this.supervisorGroups.splice(index, 1);
+  }
+
+  /**
+   * Adds the user to a domain
+   * @param domain Domain to add the user to
+   */
+  public addDomain(domain: DomainInfo) {
+    if (!this.domains) this.domains = [];
+    if (!!this.domain && !this.domains.includes(this.domain))
+      this.domains.push(this.domain);
+    if (!this.domain) this.domain = domain;
+    if (!this.domains.includes(domain))
+      this.domains.push(domain);
+  }
+
+  /**
+   * Removes the specified domain. If the domain is the main domain it will not be removed
+   * @param domain Domain to be removed
+   */
+  public removeDomain(domain: DomainInfo) {
+    if (!this.domains) this.domains = [];
+    if (this.domain === domain)
+      return;
+    const index = this.domains.indexOf(domain);
+    if (index > -1)
+      this.domains.splice(index, 1);
   }
 
   /**
