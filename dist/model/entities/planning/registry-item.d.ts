@@ -1,3 +1,4 @@
+import { Feature } from './../../value-objects/geometry/geo-data';
 import { RegistryFlatTable } from './../../value-objects/planning/registry-flat-table';
 import { Projection } from './../../value-objects/common/projection';
 import { RegistryDetails } from './iregistry-details';
@@ -35,9 +36,12 @@ export declare class Location {
     parcel: string;
     landTaxNo: string;
     validated: boolean;
+    feature: Feature;
     constructor(address: Address, coordinate: Coordinate, parcel?: string, landTaxNo?: string, validated?: boolean);
     readonly isEmpty: boolean;
     stringifyAddress(): string;
+    static convertToGeoJson(location: Location): boolean;
+    static appendNewGeoJson(location: Location, x: number, y: number): boolean;
 }
 export declare class RegistryItem extends Entity {
     referenceNo: string;

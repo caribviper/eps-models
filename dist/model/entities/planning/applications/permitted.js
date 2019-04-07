@@ -16,6 +16,7 @@ var PermittedApplication = (function (_super) {
     function PermittedApplication() {
         var _this = _super.call(this) || this;
         _this.officerComments = '';
+        _this.proposedDevelopment = '';
         return _this;
     }
     PermittedApplication.prototype.validateEntity = function () { };

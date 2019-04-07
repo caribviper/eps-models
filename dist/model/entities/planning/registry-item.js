@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var geo_data_1 = require("./../../value-objects/geometry/geo-data");
 var registry_flat_table_1 = require("./../../value-objects/planning/registry-flat-table");
 var projection_1 = require("./../../value-objects/common/projection");
 var filetype_1 = require("./../../value-objects/enumerators/filetype");
@@ -75,6 +76,20 @@ var Location = (function () {
     });
     Location.prototype.stringifyAddress = function () {
         return address_1.Address.stringifyAddress(this.address);
+    };
+    Location.convertToGeoJson = function (location) {
+        if (!!location.coordinate.x && !!location.coordinate.y) {
+            location.feature = new geo_data_1.Feature(new geo_data_1.Point(location.coordinate.x, location.coordinate.y));
+            return true;
+        }
+        return false;
+    };
+    Location.appendNewGeoJson = function (location, x, y) {
+        if (!!x && !!y) {
+            location.feature = new geo_data_1.Feature(new geo_data_1.Point(x, y));
+            return true;
+        }
+        return false;
     };
     return Location;
 }());
