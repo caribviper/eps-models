@@ -6,6 +6,8 @@ export class PermittedApplication extends RegistryDetails implements IRegistryDe
   /**Comments by accepting officer. */
   officerComments: string = '';
 
+  proposedDevelopment: string = '';
+
   /**
    * Creates new Permitted details
    */
