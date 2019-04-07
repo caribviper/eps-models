@@ -1,3 +1,4 @@
+import { Feature, Point } from './../../value-objects/geometry/geo-data';
 import { RegistryFlatTable } from './../../value-objects/planning/registry-flat-table';
 import { Projection } from './../../value-objects/common/projection';
 import { Invest } from './enforcement/invest';
@@ -67,6 +68,9 @@ export class Milestone {
 /** Details of the location data of a registry item */
 export class Location {
 
+  /**Stores geojson data for the site */
+  public feature: Feature;
+
   /**
    * 
    * @param address Address of the registry item
@@ -86,6 +90,22 @@ export class Location {
    */
   public stringifyAddress(): string {
     return Address.stringifyAddress(this.address);
+  }
+
+  public static convertToGeoJson(location: Location): boolean {
+    if(!!location.coordinate.x && !!location.coordinate.y) {
+      location.feature = new Feature(new Point(location.coordinate.x, location.coordinate.y));
+      return true;
+    }
+    return false;
+  }
+
+  public static appendNewGeoJson(location: Location, x: number, y: number): boolean {
+    if(!!x && !!y) {
+      location.feature = new Feature(new Point(x, y));
+      return true;
+    }
+    return false;
   }
 }
 
