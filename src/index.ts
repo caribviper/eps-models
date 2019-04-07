@@ -89,6 +89,9 @@ export * from './model/entities/system/attachment-event';
 export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 
+//Geometry
+export * from './model/value-objects/geometry/geo-data';
+
 //model factory
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';
