@@ -74,5 +74,6 @@ export * from './model/entities/system/attachment-event';
 export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 export * from './model/value-objects/geometry/geo-data';
+export * from './model/entities/geometry/geo-layer-entity';
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

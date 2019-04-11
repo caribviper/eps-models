@@ -62,5 +62,9 @@ export const ENTITY_MODELS = {
     BROADCAST_USER_MESSAGE_INSTANCE: 'instance',
     ALERT: 'alert',
     JOB: 'job'
+  },
+
+  GEOMETRY: {    
+    GEO_LAYER: 'geo-layer'
   }
 }

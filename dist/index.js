@@ -79,5 +79,6 @@ __export(require("./model/entities/system/attachment-event"));
 __export(require("./model/entities/system/broadcast-message"));
 __export(require("./model/entities/system/broadcast-user-message-instance"));
 __export(require("./model/value-objects/geometry/geo-data"));
+__export(require("./model/entities/geometry/geo-layer-entity"));
 __export(require("./model/entities/planning/dossier"));
 __export(require("./model/entities/planning/planning-factory"));

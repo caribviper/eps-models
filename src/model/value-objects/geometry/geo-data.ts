@@ -8,8 +8,17 @@ export const GEOMETRY_NAMED_TYPES = {
   MULTI_POINT: 'MultiPoint',
   MULTI_LINE_STRING: 'MultiLineString',
   MULTI_POLYGON: 'MultiPolygon',
-  FEATURE: 'Feature'
+  FEATURE: 'Feature',
+  FEATURE_COLLECTION: 'FeatureCollection'
 }
+
+/** Store base crs for all FeatureCollection */
+export const CRS = {
+  type: 'name',
+  properties: {
+    name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+  }
+};
 
 /**Base geometry structure to be implemented by all geometry types */
 export interface IGeometry {
@@ -82,6 +91,16 @@ export class Feature {
   }
 
   public static createNamedFeature(name: string, geometry: Point | MultiPoint | LineString | MultiLineString | Polygon | MultiPolygon) {
-    return new Feature(geometry, {name: name});
+    return new Feature(geometry, { name: name });
+  }
+}
+
+export class FeatureCollection {
+  public readonly type: string = GEOMETRY_NAMED_TYPES.FEATURE_COLLECTION;
+  crs = CRS;
+  
+  constructor(public name: string, public features: Feature[] = []) {
+    if (!name) throw 'Invalid FeatureCollection name'
+    if (!features) features = [];
   }
 }

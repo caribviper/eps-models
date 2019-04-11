@@ -59,4 +59,7 @@ export declare const ENTITY_MODELS: {
         ALERT: string;
         JOB: string;
     };
+    GEOMETRY: {
+        GEO_LAYER: string;
+    };
 };

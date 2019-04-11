@@ -7,7 +7,14 @@ exports.GEOMETRY_NAMED_TYPES = {
     MULTI_POINT: 'MultiPoint',
     MULTI_LINE_STRING: 'MultiLineString',
     MULTI_POLYGON: 'MultiPolygon',
-    FEATURE: 'Feature'
+    FEATURE: 'Feature',
+    FEATURE_COLLECTION: 'FeatureCollection'
+};
+exports.CRS = {
+    type: 'name',
+    properties: {
+        name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+    }
 };
 var geoPoint = (function () {
     function geoPoint(x, y, z, temporal) {
@@ -102,3 +109,18 @@ var Feature = (function () {
     return Feature;
 }());
 exports.Feature = Feature;
+var FeatureCollection = (function () {
+    function FeatureCollection(name, features) {
+        if (features === void 0) { features = []; }
+        this.name = name;
+        this.features = features;
+        this.type = exports.GEOMETRY_NAMED_TYPES.FEATURE_COLLECTION;
+        this.crs = exports.CRS;
+        if (!name)
+            throw 'Invalid FeatureCollection name';
+        if (!features)
+            features = [];
+    }
+    return FeatureCollection;
+}());
+exports.FeatureCollection = FeatureCollection;
