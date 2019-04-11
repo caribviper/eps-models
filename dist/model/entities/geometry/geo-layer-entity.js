@@ -20,6 +20,7 @@ var GeoLayerEntity = (function (_super) {
         _this.name = name;
         _this.featureCollection = featureCollection;
         _this.popUpContent = popUpContent;
+        _this.show = false;
         return _this;
     }
     GeoLayerEntity.prototype.validateEntity = function () {

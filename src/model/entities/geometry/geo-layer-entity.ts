@@ -5,6 +5,17 @@ import { Entity } from "caribviper-entity";
 
 export class GeoLayerEntity extends Entity {
 
+  /**
+   * Indicates that the layer should be displayed by default
+   */
+  public show: boolean = false;
+
+  /**
+   * Creates a new GeoLayerEntity
+   * @param name Name of the layer
+   * @param featureCollection FeatureCollection data
+   * @param popUpContent Pop content written in handlebar
+   */
   constructor(public name?: string, public featureCollection?: FeatureCollection, public popUpContent?: string) {
     super(ENTITY_MODELS.GEOMETRY.GEO_LAYER, GeoLayerEntity.createId(name), true);
   }
