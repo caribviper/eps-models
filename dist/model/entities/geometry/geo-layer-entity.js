@@ -21,6 +21,7 @@ var GeoLayerEntity = (function (_super) {
         _this.featureCollection = featureCollection;
         _this.popUpContent = popUpContent;
         _this.show = false;
+        _this.description = '';
         return _this;
     }
     GeoLayerEntity.prototype.validateEntity = function () {

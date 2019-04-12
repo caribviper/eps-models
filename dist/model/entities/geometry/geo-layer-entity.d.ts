@@ -5,6 +5,7 @@ export declare class GeoLayerEntity extends Entity {
     featureCollection: FeatureCollection;
     popUpContent: string;
     show: boolean;
+    description: string;
     constructor(name?: string, featureCollection?: FeatureCollection, popUpContent?: string);
     validateEntity(): void;
     static createId(name?: string): string;

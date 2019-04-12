@@ -10,6 +10,9 @@ export class GeoLayerEntity extends Entity {
    */
   public show: boolean = false;
 
+  /**Describes the layer */
+  public description: string = '';
+
   /**
    * Creates a new GeoLayerEntity
    * @param name Name of the layer
