@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var geo_data_1 = require("./../../value-objects/geometry/geo-data");
+var geo_data_1 = require("./../../value-objects/spatial/geo-data");
 var registry_flat_table_1 = require("./../../value-objects/planning/registry-flat-table");
 var projection_1 = require("./../../value-objects/common/projection");
 var filetype_1 = require("./../../value-objects/enumerators/filetype");

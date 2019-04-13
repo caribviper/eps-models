@@ -1,6 +1,6 @@
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
-import { Assert, StringUtilities } from 'caribviper-common';
+import { Assert } from 'caribviper-common';
 
 /**
  * Settings for a map

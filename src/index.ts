@@ -90,10 +90,10 @@ export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 
 //Geometry
-export * from './model/value-objects/geometry/geo-data';
-export * from './model/entities/geometry/geo-feature-layer';
-export * from './model/entities/geometry/geo-tile-layer';
-export * from './model/entities/geometry/geo-map-settings';
+export * from './model/value-objects/spatial/geo-data';
+export * from './model/entities/spatial/geo-feature-layer';
+export * from './model/entities/spatial/geo-tile-layer';
+export * from './model/entities/spatial/geo-map-settings';
 
 //model factory
 export * from './model/entities/planning/dossier';

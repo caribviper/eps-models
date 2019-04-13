@@ -1,6 +1,6 @@
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { FeatureCollection } from './../../value-objects/geometry/geo-data';
+import { FeatureCollection, FeatureStyle } from './../../value-objects/spatial/geo-data';
 import { Entity } from "caribviper-entity";
 
 /**
@@ -15,6 +15,9 @@ export class GeoFeatureLayer extends Entity {
 
   /**Describes the layer */
   public description: string = '';
+
+  /**A list of styles denoted by style name */
+  public featureStyles: FeatureStyle[] = [];
 
   /**
    * Creates a new GeoLayerEntity

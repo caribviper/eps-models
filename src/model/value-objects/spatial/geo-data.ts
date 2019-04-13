@@ -104,3 +104,11 @@ export class FeatureCollection {
     if (!features) features = [];
   }
 }
+
+export class FeatureStyle {
+  /**name of style */
+  public name: string;
+
+  /**Json propties associated with the style */
+  public properties: {} = {};
+}
