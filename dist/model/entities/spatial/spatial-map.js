@@ -13,10 +13,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
-var SpatialMapSettings = (function (_super) {
-    __extends(SpatialMapSettings, _super);
-    function SpatialMapSettings(name, description, tiles, features) {
-        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SPATIAL.GSPATIAL_MAP_SETTINGS, SpatialMapSettings.createId(name), true) || this;
+var SpatialMap = (function (_super) {
+    __extends(SpatialMap, _super);
+    function SpatialMap(name, description, tiles, features) {
+        var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true) || this;
         _this.name = name;
         _this.description = description;
         _this.tiles = tiles;
@@ -31,62 +31,62 @@ var SpatialMapSettings = (function (_super) {
         };
         return _this;
     }
-    SpatialMapSettings.prototype.validateEntity = function () {
+    SpatialMap.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.name, 'Must have a valid name');
         caribviper_common_1.Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
         caribviper_common_1.Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
     };
-    SpatialMapSettings.prototype.addTile = function (tile) {
+    SpatialMap.prototype.addTile = function (tile) {
         this.tiles = this.tiles || [];
         if (!this.tiles.indexOf(tile))
             this.tiles.push(tile);
     };
-    SpatialMapSettings.prototype.removeTile = function (tile) {
+    SpatialMap.prototype.removeTile = function (tile) {
         this.tiles = this.tiles || [];
         var index = this.tiles.indexOf(tile);
         if (index > -1)
             this.tiles.splice(index, 1);
     };
-    SpatialMapSettings.prototype.addFeature = function (feature) {
+    SpatialMap.prototype.addFeature = function (feature) {
         this.features = this.features || [];
         if (!this.features.findIndex(function (f) { return f.name === feature.name; }))
             this.features.push(feature);
     };
-    SpatialMapSettings.prototype.removeFeature = function (feature) {
+    SpatialMap.prototype.removeFeature = function (feature) {
         this.features = this.features || [];
         var index = this.features.findIndex(function (f) { return f.name === feature.name; });
         if (index > -1)
             this.features.splice(index, 1);
     };
-    SpatialMapSettings.prototype.canMoveTileUp = function (index) {
+    SpatialMap.prototype.canMoveTileUp = function (index) {
         return (!!this.tiles && this.tiles.length > 1 && index > 0);
     };
-    SpatialMapSettings.prototype.canMoveTileDown = function (index) {
+    SpatialMap.prototype.canMoveTileDown = function (index) {
         return (!!this.tiles && this.tiles.length > 1 && index < this.tiles.length - 1);
     };
-    SpatialMapSettings.prototype.moveTileUp = function (index) {
+    SpatialMap.prototype.moveTileUp = function (index) {
         if (this.canMoveTileUp(index)) {
             _a = [this.tiles[index], this.tiles[index - 1]], this.tiles[index - 1] = _a[0], this.tiles[index] = _a[1];
         }
         var _a;
     };
-    SpatialMapSettings.prototype.moveTileDown = function (index) {
+    SpatialMap.prototype.moveTileDown = function (index) {
         if (this.canMoveTileDown(index)) {
             _a = [this.tiles[index + 1], this.tiles[index]], this.tiles[index] = _a[0], this.tiles[index + 1] = _a[1];
         }
         var _a;
     };
-    SpatialMapSettings.createId = function (name) {
+    SpatialMap.createId = function (name) {
         if (!name)
             return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER);
         return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER, name);
     };
-    SpatialMapSettings.mapToEntity = function (source) {
-        var r = Object.assign(new SpatialMapSettings(), source);
+    SpatialMap.mapToEntity = function (source) {
+        var r = Object.assign(new SpatialMap(), source);
         return r;
     };
-    SpatialMapSettings.mapToEntityArray = function (source) {
+    SpatialMap.mapToEntityArray = function (source) {
         var _this = this;
         if (source.length < 1)
             return [];
@@ -96,6 +96,6 @@ var SpatialMapSettings = (function (_super) {
         });
         return array;
     };
-    return SpatialMapSettings;
+    return SpatialMap;
 }(caribviper_entity_1.Entity));
-exports.SpatialMapSettings = SpatialMapSettings;
+exports.SpatialMap = SpatialMap;

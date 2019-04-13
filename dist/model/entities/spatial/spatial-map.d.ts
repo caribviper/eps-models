@@ -1,6 +1,6 @@
 import { Entity } from 'caribviper-entity';
 import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
-export declare class SpatialMapSettings extends Entity {
+export declare class SpatialMap extends Entity {
     name: string;
     description: string;
     tiles: string[];
@@ -24,6 +24,6 @@ export declare class SpatialMapSettings extends Entity {
     moveTileUp(index: number): void;
     moveTileDown(index: number): void;
     static createId(name?: string): string;
-    static mapToEntity(source: SpatialMapSettings | Entity): SpatialMapSettings;
-    static mapToEntityArray(source: SpatialMapSettings[]): SpatialMapSettings[];
+    static mapToEntity(source: SpatialMap | Entity): SpatialMap;
+    static mapToEntityArray(source: SpatialMap[]): SpatialMap[];
 }

@@ -77,6 +77,6 @@ export * from './model/value-objects/spatial/spatial-data';
 export * from './model/value-objects/spatial/spatial-registry-property';
 export * from './model/entities/spatial/spatial-feature-layer';
 export * from './model/entities/spatial/spatial-tile-layer';
-export * from './model/entities/spatial/spatial-map-settings';
+export * from './model/entities/spatial/spatial-map';
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

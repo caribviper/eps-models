@@ -82,6 +82,6 @@ __export(require("./model/value-objects/spatial/spatial-data"));
 __export(require("./model/value-objects/spatial/spatial-registry-property"));
 __export(require("./model/entities/spatial/spatial-feature-layer"));
 __export(require("./model/entities/spatial/spatial-tile-layer"));
-__export(require("./model/entities/spatial/spatial-map-settings"));
+__export(require("./model/entities/spatial/spatial-map"));
 __export(require("./model/entities/planning/dossier"));
 __export(require("./model/entities/planning/planning-factory"));

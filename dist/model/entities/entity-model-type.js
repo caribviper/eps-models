@@ -64,6 +64,6 @@ exports.ENTITY_MODELS = {
     SPATIAL: {
         SPATIAL_FEATURE_LAYER: 'spatial-feature-layer',
         SPATIAL_TILE_LAYER: 'spatial-tile-layer',
-        GSPATIAL_MAP_SETTINGS: 'spatial-map-settings'
+        SPATIAL_MAP: 'spatial-map'
     }
 };

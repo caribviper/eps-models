@@ -62,6 +62,6 @@ export declare const ENTITY_MODELS: {
     SPATIAL: {
         SPATIAL_FEATURE_LAYER: string;
         SPATIAL_TILE_LAYER: string;
-        GSPATIAL_MAP_SETTINGS: string;
+        SPATIAL_MAP: string;
     };
 };

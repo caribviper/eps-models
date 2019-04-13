@@ -5,9 +5,9 @@ import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
 
 
 /**
- * Settings for a map
+ * Manages a map
  */
-export class SpatialMapSettings extends Entity {
+export class SpatialMap extends Entity {
 
   /**Store map setting options */
   public options: {
@@ -27,14 +27,14 @@ export class SpatialMapSettings extends Entity {
     };
 
   /**
-   * Creates a new map settings
+   * Creates a new map
    * @param name Name of map
    * @param description Description about map
    * @param tiles Tiles to be displayed on map and in order
    * @param features Features to be displayed on map
    */
   constructor(public name?: string, public description?: string, public tiles?: string[], public features?: FeatureMapSetting[]) {
-    super(ENTITY_MODELS.SPATIAL.GSPATIAL_MAP_SETTINGS, SpatialMapSettings.createId(name), true);
+    super(ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true);
   }
 
   validateEntity() {
@@ -134,12 +134,12 @@ export class SpatialMapSettings extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: SpatialMapSettings | Entity): SpatialMapSettings {
-    let r: SpatialMapSettings = Object.assign(new SpatialMapSettings(), source);
+  public static mapToEntity(source: SpatialMap | Entity): SpatialMap {
+    let r: SpatialMap = Object.assign(new SpatialMap(), source);
     return r;
   }
 
-  public static mapToEntityArray(source: SpatialMapSettings[]): SpatialMapSettings[] {
+  public static mapToEntityArray(source: SpatialMap[]): SpatialMap[] {
     if (source.length < 1)
       return [];
     let array = [];
