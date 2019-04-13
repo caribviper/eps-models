@@ -60,6 +60,8 @@ export declare const ENTITY_MODELS: {
         JOB: string;
     };
     GEOMETRY: {
-        GEO_LAYER: string;
+        GEO_FEATURE_LAYER: string;
+        GEO_TILE_LAYER: string;
+        GEO_MAP_SETTINGS: string;
     };
 };

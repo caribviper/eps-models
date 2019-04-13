@@ -62,6 +62,8 @@ exports.ENTITY_MODELS = {
         JOB: 'job'
     },
     GEOMETRY: {
-        GEO_LAYER: 'geo-layer'
+        GEO_FEATURE_LAYER: 'geo-feature-layer',
+        GEO_TILE_LAYER: 'geo-tile-layer',
+        GEO_MAP_SETTINGS: 'geo-map-settings'
     }
 };
