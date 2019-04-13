@@ -1,4 +1,4 @@
-import { Feature } from './../../value-objects/spatial/geo-data';
+import { Feature } from './../../value-objects/spatial/spatial-data';
 import { RegistryFlatTable } from './../../value-objects/planning/registry-flat-table';
 import { Projection } from './../../value-objects/common/projection';
 import { RegistryDetails } from './iregistry-details';

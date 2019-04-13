@@ -59,9 +59,9 @@ export declare const ENTITY_MODELS: {
         ALERT: string;
         JOB: string;
     };
-    GEOMETRY: {
-        GEO_FEATURE_LAYER: string;
-        GEO_TILE_LAYER: string;
-        GEO_MAP_SETTINGS: string;
+    SPATIAL: {
+        SPATIAL_FEATURE_LAYER: string;
+        SPATIAL_TILE_LAYER: string;
+        GSPATIAL_MAP_SETTINGS: string;
     };
 };

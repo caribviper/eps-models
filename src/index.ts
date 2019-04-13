@@ -90,11 +90,11 @@ export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 
 //spatial
-export * from './model/value-objects/spatial/geo-data';
-export * from './model/value-objects/spatial/geo-registry-property';
-export * from './model/entities/spatial/geo-feature-layer';
-export * from './model/entities/spatial/geo-tile-layer';
-export * from './model/entities/spatial/geo-map-settings';
+export * from './model/value-objects/spatial/spatial-data';
+export * from './model/value-objects/spatial/spatial-registry-property';
+export * from './model/entities/spatial/spatial-feature-layer';
+export * from './model/entities/spatial/spatial-tile-layer';
+export * from './model/entities/spatial/spatial-map-settings';
 
 //model factory
 export * from './model/entities/planning/dossier';

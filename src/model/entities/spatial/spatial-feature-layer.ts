@@ -1,12 +1,12 @@
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS } from './../entity-model-type';
-import { FeatureCollection, FeatureStyle } from './../../value-objects/spatial/geo-data';
+import { FeatureCollection, FeatureStyle } from './../../value-objects/spatial/spatial-data';
 import { Entity } from "caribviper-entity";
 
 /**
  * Geometry feature layer
  */
-export class GeoFeatureLayer extends Entity {
+export class SpatialFeatureLayer extends Entity {
 
   /**
    * Indicates that the layer should be displayed by default
@@ -26,7 +26,7 @@ export class GeoFeatureLayer extends Entity {
    * @param popUpContent Pop content written in handlebar
    */
   constructor(public name?: string, public featureCollection?: FeatureCollection, public popUpContent?: string) {
-    super(ENTITY_MODELS.GEOMETRY.GEO_FEATURE_LAYER, GeoFeatureLayer.createId(name), true);
+    super(ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER, SpatialFeatureLayer.createId(name), true);
   }
 
   validateEntity() {
@@ -37,20 +37,20 @@ export class GeoFeatureLayer extends Entity {
 
   public static createId(name: string = ''): string {
     if (!name)
-      return Entity.generateId(ENTITY_MODELS.GEOMETRY.GEO_FEATURE_LAYER);
-    return Entity.generateId(ENTITY_MODELS.GEOMETRY.GEO_FEATURE_LAYER, name);
+      return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER);
+    return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER, name);
   }
 
   /**
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: GeoFeatureLayer | Entity): GeoFeatureLayer {
-    let r: GeoFeatureLayer = Object.assign(new GeoFeatureLayer(), source);
+  public static mapToEntity(source: SpatialFeatureLayer | Entity): SpatialFeatureLayer {
+    let r: SpatialFeatureLayer = Object.assign(new SpatialFeatureLayer(), source);
     return r;
   }
 
-  public static mapToEntityArray(source: GeoFeatureLayer[]): GeoFeatureLayer[] {
+  public static mapToEntityArray(source: SpatialFeatureLayer[]): SpatialFeatureLayer[] {
     if (source.length < 1)
       return [];
     let array = [];

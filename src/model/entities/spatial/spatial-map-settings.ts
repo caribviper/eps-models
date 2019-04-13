@@ -1,11 +1,13 @@
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
+import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
+
 
 /**
  * Settings for a map
  */
-export class GeoMapSettings extends Entity {
+export class SpatialMapSettings extends Entity {
 
   /**Store map setting options */
   public options: {
@@ -31,8 +33,8 @@ export class GeoMapSettings extends Entity {
    * @param tiles Tiles to be displayed on map and in order
    * @param features Features to be displayed on map
    */
-  constructor(public name?: string, public description?: string, public tiles?: string[], public features?: string[]) {
-    super(ENTITY_MODELS.GEOMETRY.GEO_MAP_SETTINGS, GeoMapSettings.createId(name), true);
+  constructor(public name?: string, public description?: string, public tiles?: string[], public features?: FeatureMapSetting[]) {
+    super(ENTITY_MODELS.SPATIAL.GSPATIAL_MAP_SETTINGS, SpatialMapSettings.createId(name), true);
   }
 
   validateEntity() {
@@ -68,9 +70,9 @@ export class GeoMapSettings extends Entity {
    * Adds a feature
    * @param feature Feature to be added
    */
-  public addFeature(feature: string) {
+  public addFeature(feature: FeatureMapSetting) {
     this.features = this.features || [];
-    if (!this.features.indexOf(feature))
+    if (!this.features.findIndex(f => f.name === feature.name))
       this.features.push(feature);
   }
 
@@ -78,9 +80,9 @@ export class GeoMapSettings extends Entity {
    * Removes a feature
    * @param feature Feature to be removed
    */
-  public removeFeature(feature: string) {
+  public removeFeature(feature: FeatureMapSetting) {
     this.features = this.features || [];
-    const index = this.features.indexOf(feature);
+    const index = this.features.findIndex(f => f.name === feature.name);
     if (index > -1)
       this.features.splice(index, 1);
   }
@@ -124,20 +126,20 @@ export class GeoMapSettings extends Entity {
 
   public static createId(name: string): string {
     if (!name)
-      return Entity.generateId(ENTITY_MODELS.GEOMETRY.GEO_TILE_LAYER);
-    return Entity.generateId(ENTITY_MODELS.GEOMETRY.GEO_TILE_LAYER, name);
+      return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER);
+    return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER, name);
   }
 
   /**
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source: GeoMapSettings | Entity): GeoMapSettings {
-    let r: GeoMapSettings = Object.assign(new GeoMapSettings(), source);
+  public static mapToEntity(source: SpatialMapSettings | Entity): SpatialMapSettings {
+    let r: SpatialMapSettings = Object.assign(new SpatialMapSettings(), source);
     return r;
   }
 
-  public static mapToEntityArray(source: GeoMapSettings[]): GeoMapSettings[] {
+  public static mapToEntityArray(source: SpatialMapSettings[]): SpatialMapSettings[] {
     if (source.length < 1)
       return [];
     let array = [];

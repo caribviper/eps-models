@@ -112,3 +112,11 @@ export class FeatureStyle {
   /**Json propties associated with the style */
   public properties: {} = {};
 }
+
+export class FeatureMapSetting {
+  //Name of feature
+  public name: string;
+
+  //Specifies if to display feature by default on the suggested map
+  public display: boolean = false;
+}
