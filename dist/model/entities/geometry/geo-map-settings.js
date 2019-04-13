@@ -21,6 +21,14 @@ var GeoMapSettings = (function (_super) {
         _this.description = description;
         _this.tiles = tiles;
         _this.features = features;
+        _this.options = {
+            zoomControl: false,
+            maxZoom: 19,
+            minZoom: 10,
+            zoom: 15,
+            bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
+            center: [13.080873414866646, -59.60453689098359]
+        };
         return _this;
     }
     GeoMapSettings.prototype.validateEntity = function () {

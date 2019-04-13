@@ -6,7 +6,24 @@ import { Assert, StringUtilities } from 'caribviper-common';
  * Settings for a map
  */
 export class GeoMapSettings extends Entity {
-  
+
+  /**Store map setting options */
+  public options: {
+    zoomControl: boolean,
+    maxZoom: number,
+    minZoom: number,
+    zoom: number,
+    bounds: [number, number][],
+    center: [number, number]
+  } = {
+      zoomControl: false,
+      maxZoom: 19,
+      minZoom: 10,
+      zoom: 15,
+      bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
+      center: [13.080873414866646, -59.60453689098359]
+    };
+
   /**
    * Creates a new map settings
    * @param name Name of map
@@ -45,7 +62,7 @@ export class GeoMapSettings extends Entity {
     if (index > -1)
       this.tiles.splice(index, 1);
   }
-  
+
 
   /**
    * Adds a feature
@@ -67,7 +84,7 @@ export class GeoMapSettings extends Entity {
     if (index > -1)
       this.features.splice(index, 1);
   }
-  
+
 
   /**
    * Determines if a tile can be moved up

@@ -4,6 +4,14 @@ export declare class GeoMapSettings extends Entity {
     description: string;
     tiles: string[];
     features: string[];
+    options: {
+        zoomControl: boolean;
+        maxZoom: number;
+        minZoom: number;
+        zoom: number;
+        bounds: [number, number][];
+        center: [number, number];
+    };
     constructor(name?: string, description?: string, tiles?: string[], features?: string[]);
     validateEntity(): void;
     addTile(tile: string): void;
