@@ -1,5 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var spatial_feature_layer_1 = require("./spatial/spatial-feature-layer");
+var spatial_tile_layer_1 = require("./spatial/spatial-tile-layer");
+var broadcast_user_message_instance_1 = require("./system/broadcast-user-message-instance");
+var broadcast_message_1 = require("./system/broadcast-message");
+var spatial_map_1 = require("./spatial/spatial-map");
 var favourite_1 = require("./general/favourite");
 var dispatched_item_1 = require("./planning/dispatched-item");
 var entity_model_type_1 = require("./entity-model-type");
@@ -63,6 +68,11 @@ var EntityAutoMapper = (function () {
         this.maps[entity_model_type_1.ENTITY_MODELS.GENERAL.FAVOURITE] = new EntityMap(favourite_1.Favourite);
         this.maps[entity_model_type_1.ENTITY_MODELS.SYSTEM.MESSAGE] = new EntityMap(message_1.Message);
         this.maps[entity_model_type_1.ENTITY_MODELS.SYSTEM.JOB] = new EntityMap(job_1.Job);
+        this.maps[entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE] = new EntityMap(broadcast_message_1.BroadcastMessage);
+        this.maps[entity_model_type_1.ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE] = new EntityMap(broadcast_user_message_instance_1.BroadcastUserMessageInstance);
+        this.maps[entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_MAP] = new EntityMap(spatial_map_1.SpatialMap);
+        this.maps[entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER] = new EntityMap(spatial_tile_layer_1.SpatialTileLayer);
+        this.maps[entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER] = new EntityMap(spatial_feature_layer_1.SpatialFeatureLayer);
     }
     EntityAutoMapper.prototype.getMap = function (entity) {
         if (!entity || !entity.type)

@@ -1,3 +1,8 @@
+import { SpatialFeatureLayer } from './spatial/spatial-feature-layer';
+import { SpatialTileLayer } from './spatial/spatial-tile-layer';
+import { BroadcastUserMessageInstance } from './system/broadcast-user-message-instance';
+import { BroadcastMessage } from './system/broadcast-message';
+import { SpatialMap } from './spatial/spatial-map';
 import { Favourite } from './general/favourite';
 import { DispatchedItem } from './planning/dispatched-item';
 import { ENTITY_MODELS } from './entity-model-type';
@@ -60,7 +65,13 @@ export class EntityAutoMapper {
     this.maps[ENTITY_MODELS.GENERAL.FAVOURITE] = new EntityMap<Favourite>(Favourite);
     this.maps[ENTITY_MODELS.SYSTEM.MESSAGE] = new EntityMap<Message>(Message);
     this.maps[ENTITY_MODELS.SYSTEM.JOB] = new EntityMap<Job>(Job);
-  }
+    this.maps[ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE] = new EntityMap<BroadcastMessage>(BroadcastMessage);
+    this.maps[ENTITY_MODELS.SYSTEM.BROADCAST_USER_MESSAGE_INSTANCE] = new EntityMap<BroadcastUserMessageInstance>(BroadcastUserMessageInstance);
+    
+    this.maps[ENTITY_MODELS.SPATIAL.SPATIAL_MAP] = new EntityMap<SpatialMap>(SpatialMap);
+    this.maps[ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER] = new EntityMap<SpatialTileLayer>(SpatialTileLayer);
+    this.maps[ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER] = new EntityMap<SpatialFeatureLayer>(SpatialFeatureLayer);
+    }
 
   getMap(entity: any): any {
     if(!entity || !entity.type)
