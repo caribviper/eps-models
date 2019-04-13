@@ -25,7 +25,7 @@ export class SpatialTileLayer extends Entity {
     Assert.isTruthy(this.tileLayerOptions, 'Must have a valid tile layer options and can be {}');
   }
 
-  public static createId(name: string): string {
+  public static createId(name?: string): string {
     if(!name)
       return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER);
     return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER, name);

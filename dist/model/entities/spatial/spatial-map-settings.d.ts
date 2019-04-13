@@ -23,7 +23,7 @@ export declare class SpatialMapSettings extends Entity {
     canMoveTileDown(index: number): boolean;
     moveTileUp(index: number): void;
     moveTileDown(index: number): void;
-    static createId(name: string): string;
+    static createId(name?: string): string;
     static mapToEntity(source: SpatialMapSettings | Entity): SpatialMapSettings;
     static mapToEntityArray(source: SpatialMapSettings[]): SpatialMapSettings[];
 }
