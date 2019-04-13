@@ -89,8 +89,9 @@ export * from './model/entities/system/attachment-event';
 export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 
-//Geometry
+//spatial
 export * from './model/value-objects/spatial/geo-data';
+export * from './model/value-objects/spatial/geo-registry-property';
 export * from './model/entities/spatial/geo-feature-layer';
 export * from './model/entities/spatial/geo-tile-layer';
 export * from './model/entities/spatial/geo-map-settings';

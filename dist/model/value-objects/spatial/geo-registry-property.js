@@ -57,6 +57,7 @@ var GeoRegistryProperty = (function (_super) {
                 break;
             }
         }
+        return p;
     };
     return GeoRegistryProperty;
 }(projection_1.Projection));
