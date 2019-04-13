@@ -2,7 +2,7 @@ import { Projection } from './../common/projection';
 import { RegistryItem } from './../../entities/planning/registry-item';
 import { RegistryFileTypes, FormalApplication } from '../../..';
 
-export class GeoRegistryProperty extends Projection {
+export class GeoSpatialRegistryProperty extends Projection {
   /** Reference number of registry item */
   public referenceNo: string;
 
@@ -31,7 +31,7 @@ export class GeoRegistryProperty extends Projection {
   public siteArea: number;
 
   public static createFromRegistry(registry: RegistryItem) {
-    const p: GeoRegistryProperty = new GeoRegistryProperty();
+    const p: GeoSpatialRegistryProperty = new GeoSpatialRegistryProperty();
     p.area = registry.area;
     p.description = registry.projection.description;
     p.primaryContact = registry.projection.primaryContact;

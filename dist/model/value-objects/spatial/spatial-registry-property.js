@@ -12,15 +12,15 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var projection_1 = require("./../common/projection");
 var __1 = require("../../..");
-var GeoRegistryProperty = (function (_super) {
-    __extends(GeoRegistryProperty, _super);
-    function GeoRegistryProperty() {
+var GeoSpatialRegistryProperty = (function (_super) {
+    __extends(GeoSpatialRegistryProperty, _super);
+    function GeoSpatialRegistryProperty() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.formalType = '';
         return _this;
     }
-    GeoRegistryProperty.createFromRegistry = function (registry) {
-        var p = new GeoRegistryProperty();
+    GeoSpatialRegistryProperty.createFromRegistry = function (registry) {
+        var p = new GeoSpatialRegistryProperty();
         p.area = registry.area;
         p.description = registry.projection.description;
         p.primaryContact = registry.projection.primaryContact;
@@ -59,6 +59,6 @@ var GeoRegistryProperty = (function (_super) {
         }
         return p;
     };
-    return GeoRegistryProperty;
+    return GeoSpatialRegistryProperty;
 }(projection_1.Projection));
-exports.GeoRegistryProperty = GeoRegistryProperty;
+exports.GeoSpatialRegistryProperty = GeoSpatialRegistryProperty;
