@@ -29,6 +29,8 @@ var SpatialMap = (function (_super) {
             bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
             center: [13.080873414866646, -59.60453689098359]
         };
+        _this.tiles = tiles || [];
+        _this.features = features || [];
         return _this;
     }
     SpatialMap.prototype.validateEntity = function () {
@@ -79,8 +81,8 @@ var SpatialMap = (function (_super) {
     };
     SpatialMap.createId = function (name) {
         if (!name)
-            return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER);
-        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER, name);
+            return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_MAP);
+        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_MAP, name);
     };
     SpatialMap.mapToEntity = function (source) {
         var r = Object.assign(new SpatialMap(), source);

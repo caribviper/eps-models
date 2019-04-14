@@ -35,6 +35,8 @@ export class SpatialMap extends Entity {
    */
   constructor(public name?: string, public description?: string, public tiles?: string[], public features?: FeatureMapSetting[]) {
     super(ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true);
+    this.tiles = tiles || [];
+    this.features = features || [];
   }
 
   validateEntity() {
@@ -126,8 +128,8 @@ export class SpatialMap extends Entity {
 
   public static createId(name?: string): string {
     if (!name)
-      return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER);
-    return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_TILE_LAYER, name);
+      return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_MAP);
+    return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_MAP, name);
   }
 
   /**
