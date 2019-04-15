@@ -13,6 +13,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
+var SpatialMapOptions = (function () {
+    function SpatialMapOptions() {
+    }
+    return SpatialMapOptions;
+}());
+exports.SpatialMapOptions = SpatialMapOptions;
 var SpatialMap = (function (_super) {
     __extends(SpatialMap, _super);
     function SpatialMap(name, description, tiles, features) {

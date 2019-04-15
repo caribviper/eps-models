@@ -1,18 +1,19 @@
 import { Entity } from 'caribviper-entity';
 import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
+export declare class SpatialMapOptions {
+    zoomControl: boolean;
+    maxZoom: number;
+    minZoom: number;
+    zoom: number;
+    bounds: [number, number][];
+    center: [number, number];
+}
 export declare class SpatialMap extends Entity {
     name: string;
     description: string;
     tiles: string[];
     features: FeatureMapSetting[];
-    options: {
-        zoomControl: boolean;
-        maxZoom: number;
-        minZoom: number;
-        zoom: number;
-        bounds: [number, number][];
-        center: [number, number];
-    };
+    options: SpatialMapOptions;
     constructor(name?: string, description?: string, tiles?: string[], features?: FeatureMapSetting[]);
     validateEntity(): void;
     addTile(tile: string): void;

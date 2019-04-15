@@ -3,6 +3,31 @@ import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
 
+export class SpatialMapOptions {
+  /** Zoom control */
+  zoomControl: boolean;
+
+  /**
+   * Maximum zoom
+   */
+  maxZoom: number;
+
+  /**
+   * Minimum zoom
+   */
+  minZoom: number;
+
+  /**
+   * Starting zoom
+   */
+  zoom: number;
+
+  /** Bounds of map. Lower left bounds to upper right bounds */
+  bounds: [number, number][];
+
+  /**Center point */
+  center: [number, number];
+}
 
 /**
  * Manages a map
@@ -10,14 +35,7 @@ import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
 export class SpatialMap extends Entity {
 
   /**Store map setting options */
-  public options: {
-    zoomControl: boolean,
-    maxZoom: number,
-    minZoom: number,
-    zoom: number,
-    bounds: [number, number][],
-    center: [number, number]
-  } = {
+  public options: SpatialMapOptions = {
       zoomControl: false,
       maxZoom: 19,
       minZoom: 10,
