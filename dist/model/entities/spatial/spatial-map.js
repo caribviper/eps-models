@@ -35,8 +35,10 @@ var SpatialMap = (function (_super) {
             bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
             center: [13.080873414866646, -59.60453689098359]
         };
+        _this.domains = [];
         _this.tiles = tiles || [];
         _this.features = features || [];
+        _this.domains = [];
         return _this;
     }
     SpatialMap.prototype.validateEntity = function () {
@@ -45,6 +47,15 @@ var SpatialMap = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
         caribviper_common_1.Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
     };
+    Object.defineProperty(SpatialMap.prototype, "dataLayer", {
+        get: function () {
+            if (this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)
+                return undefined;
+            return this.features[this.dataLayerIndex];
+        },
+        enumerable: true,
+        configurable: true
+    });
     SpatialMap.prototype.addTile = function (tile) {
         this.tiles = this.tiles || [];
         if (!this.tiles.indexOf(tile))

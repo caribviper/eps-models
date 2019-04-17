@@ -1,3 +1,4 @@
+import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
@@ -45,6 +46,28 @@ export class SpatialMap extends Entity {
     };
 
   /**
+   * Indicates the index position of the layer that should get the data.
+   * Only one layer can exists
+   * Layer must also have no data within its layer 
+   **/
+  dataLayerIndex: number;
+
+  /**List of allowed domains to view map */
+  domains: string[] = [];
+
+  /**Person who designed map */
+  createdBy: UserInfo;
+
+  /** Last modified by */
+  lastModifiedBy: UserInfo;
+
+  /**Date created */
+  created: Date;
+
+  /**Date last modified */
+  modified: Date;
+
+  /**
    * Creates a new map
    * @param name Name of map
    * @param description Description about map
@@ -55,6 +78,7 @@ export class SpatialMap extends Entity {
     super(ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true);
     this.tiles = tiles || [];
     this.features = features || [];
+    this.domains = [];
   }
 
   validateEntity() {
@@ -62,6 +86,15 @@ export class SpatialMap extends Entity {
     Assert.isTruthy(this.name, 'Must have a valid name');
     Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
     Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
+  }
+
+  /**
+   * Gets the specified data layer
+   */
+  public get dataLayer(): FeatureMapSetting {
+    if(this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)
+      return undefined;
+    return this.features[this.dataLayerIndex];
   }
 
   /**
