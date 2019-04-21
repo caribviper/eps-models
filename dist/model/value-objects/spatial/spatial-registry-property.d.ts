@@ -10,5 +10,7 @@ export declare class GeoSpatialRegistryProperty extends Projection {
     landUse: string;
     formalType: string;
     siteArea: number;
+    status: string;
     static createFromRegistry(registry: RegistryItem): GeoSpatialRegistryProperty;
+    private static getStatus(registry);
 }

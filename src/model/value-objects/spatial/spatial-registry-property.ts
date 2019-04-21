@@ -1,6 +1,6 @@
 import { Projection } from './../common/projection';
 import { RegistryItem } from './../../entities/planning/registry-item';
-import { RegistryFileTypes, FormalApplication } from '../../..';
+import { RegistryFileTypes, FormalApplication, FileStatusFactory } from '../../..';
 
 export class GeoSpatialRegistryProperty extends Projection {
   /** Reference number of registry item */
@@ -30,6 +30,9 @@ export class GeoSpatialRegistryProperty extends Projection {
   /**Size of area to be developed or in question */
   public siteArea: number;
 
+  /**Get the current status of the registry item */
+  public status: string;
+
   public static createFromRegistry(registry: RegistryItem) {
     const p: GeoSpatialRegistryProperty = new GeoSpatialRegistryProperty();
     p.area = registry.area;
@@ -43,6 +46,7 @@ export class GeoSpatialRegistryProperty extends Projection {
     p.landTax = registry.location.landTaxNo;
     p.parcel = registry.location.parcel;
     p.area = registry.area;
+	  p.status = this.getStatus(registry);
 
     switch(registry.fileType.folderPrefix) {
       case RegistryFileTypes.enforcement.folderPrefix:
@@ -72,5 +76,12 @@ export class GeoSpatialRegistryProperty extends Projection {
     }
 
     return p;
+  }
+  
+  private static getStatus(registry: RegistryItem) {
+	  let value = 'N/A';
+    if (!!registry && !!registry.status)
+      value = FileStatusFactory.convertToStringStatus(registry.status) || registry.status;
+    return value;
   }
 }

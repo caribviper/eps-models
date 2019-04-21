@@ -32,6 +32,7 @@ var GeoSpatialRegistryProperty = (function (_super) {
         p.landTax = registry.location.landTaxNo;
         p.parcel = registry.location.parcel;
         p.area = registry.area;
+        p.status = this.getStatus(registry);
         switch (registry.fileType.folderPrefix) {
             case __1.RegistryFileTypes.enforcement.folderPrefix:
             case __1.RegistryFileTypes.enquiry.folderPrefix:
@@ -58,6 +59,12 @@ var GeoSpatialRegistryProperty = (function (_super) {
             }
         }
         return p;
+    };
+    GeoSpatialRegistryProperty.getStatus = function (registry) {
+        var value = 'N/A';
+        if (!!registry && !!registry.status)
+            value = __1.FileStatusFactory.convertToStringStatus(registry.status) || registry.status;
+        return value;
     };
     return GeoSpatialRegistryProperty;
 }(projection_1.Projection));
