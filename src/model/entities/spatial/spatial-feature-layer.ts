@@ -84,36 +84,6 @@ export class SpatialFeatureLayer extends Entity {
     }
   }
 
-  /**
-   * Filters the styles looking for its match
-   * @param value Value containing properties
-   */
-  public filterFeatureStyle(value: any): FeatureStyle {
-    let style: FeatureStyle;
-    for (let i = 0; i < this.featureStyles.length; i++) {
-      const temp = this.featureStyles[i];
-      if (value === undefined || this.featureStyles.length === 1) { //do when value is invalid or featureStles has more 1 value
-        style = temp;
-        break;
-      }
-      else if (!temp.predicate && !!temp.properties && Object.keys(temp.properties).length > 0) { //do when the style has no predicate and its properties is valid
-        style = temp;
-        break;
-      }
-      else if (!!temp.predicate) {
-        if (!!temp.predicate.match && !!temp.predicate.property) {
-          let property = temp.predicate.property;
-          //do compare
-          if (value[property] !== undefined && value[property] === temp.predicate.match) {
-            style = temp;
-            break;
-          }
-        }
-      }
-      return style;
-    }
-  }
-
   public static createId(name: string = ''): string {
     if (!name)
       return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER);

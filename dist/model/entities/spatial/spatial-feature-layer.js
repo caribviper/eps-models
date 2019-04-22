@@ -80,8 +80,8 @@ var SpatialFeatureLayer = (function (_super) {
                     }
                 }
             }
-            return style;
         }
+        return style;
     };
     SpatialFeatureLayer.createId = function (name) {
         if (name === void 0) { name = ''; }
