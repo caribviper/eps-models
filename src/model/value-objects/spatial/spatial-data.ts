@@ -98,11 +98,21 @@ export class Feature {
 export class FeatureCollection {
   public readonly type: string = GEOMETRY_NAMED_TYPES.FEATURE_COLLECTION;
   crs = CRS;
-  
+
   constructor(public name: string, public features: Feature[] = []) {
     if (!name) throw 'Invalid FeatureCollection name'
     if (!features) features = [];
   }
+}
+
+export type FeatureStyleType = 'marker' | 'style';
+export const FEATURE_STYLE_TYPES = { MARKER: 'marker' as FeatureStyleType, STYLE: 'style' as FeatureStyleType };
+
+export interface FeatureStylePredicate {
+  /**The value of the property specified the style is to match */
+  match: any;
+  /**The property name to indicate the property to be used to do match */
+  property: string;
 }
 
 export class FeatureStyle {
@@ -111,6 +121,12 @@ export class FeatureStyle {
 
   /**Json propties associated with the style */
   public properties: {} = {};
+
+  /**Type of style */
+  public type: FeatureStyleType = FEATURE_STYLE_TYPES.MARKER;
+
+  /**Predicate used for match */
+  public predicate: FeatureStylePredicate = null;
 }
 
 export class FeatureMapSetting {

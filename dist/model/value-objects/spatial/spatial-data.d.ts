@@ -79,9 +79,20 @@ export declare class FeatureCollection {
     };
     constructor(name: string, features?: Feature[]);
 }
+export declare type FeatureStyleType = 'marker' | 'style';
+export declare const FEATURE_STYLE_TYPES: {
+    MARKER: FeatureStyleType;
+    STYLE: FeatureStyleType;
+};
+export interface FeatureStylePredicate {
+    match: any;
+    property: string;
+}
 export declare class FeatureStyle {
     name: string;
     properties: {};
+    type: FeatureStyleType;
+    predicate: FeatureStylePredicate;
 }
 export declare class FeatureMapSetting {
     name: string;

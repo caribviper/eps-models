@@ -124,9 +124,12 @@ var FeatureCollection = (function () {
     return FeatureCollection;
 }());
 exports.FeatureCollection = FeatureCollection;
+exports.FEATURE_STYLE_TYPES = { MARKER: 'marker', STYLE: 'style' };
 var FeatureStyle = (function () {
     function FeatureStyle() {
         this.properties = {};
+        this.type = exports.FEATURE_STYLE_TYPES.MARKER;
+        this.predicate = null;
     }
     return FeatureStyle;
 }());
