@@ -30,6 +30,59 @@ var SpatialFeatureLayer = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.name, 'Must have a valid name');
         caribviper_common_1.Assert.isTruthy(this.featureCollection, 'Must have a valid FeatureCollection');
     };
+    SpatialFeatureLayer.prototype.addFeatureStyle = function (featureStyle) {
+        this.featureStyles = this.featureStyles || [];
+        if (!this.featureStyles.findIndex(function (f) { return f.name === featureStyle.name; }))
+            this.featureStyles.push(featureStyle);
+    };
+    SpatialFeatureLayer.prototype.removeFeature = function (featureStyle) {
+        this.featureStyles = this.featureStyles || [];
+        var index = this.featureStyles.findIndex(function (f) { return f.name === featureStyle.name; });
+        if (index > -1)
+            this.featureStyles.splice(index, 1);
+    };
+    SpatialFeatureLayer.prototype.canMoveFeatureStyleUp = function (index) {
+        return (!!this.featureStyles && this.featureStyles.length > 1 && index > 0);
+    };
+    SpatialFeatureLayer.prototype.canMoveFeatureStyleDown = function (index) {
+        return (!!this.featureStyles && this.featureStyles.length > 1 && index < this.featureStyles.length - 1);
+    };
+    SpatialFeatureLayer.prototype.moveFeatureStyleUp = function (index) {
+        if (this.canMoveFeatureStyleUp(index)) {
+            _a = [this.featureStyles[index], this.featureStyles[index - 1]], this.featureStyles[index - 1] = _a[0], this.featureStyles[index] = _a[1];
+        }
+        var _a;
+    };
+    SpatialFeatureLayer.prototype.moveFeatureStyleDown = function (index) {
+        if (this.canMoveFeatureStyleDown(index)) {
+            _a = [this.featureStyles[index + 1], this.featureStyles[index]], this.featureStyles[index] = _a[0], this.featureStyles[index + 1] = _a[1];
+        }
+        var _a;
+    };
+    SpatialFeatureLayer.prototype.filterFeatureStyle = function (value) {
+        var style;
+        for (var i = 0; i < this.featureStyles.length; i++) {
+            var temp = this.featureStyles[i];
+            if (value === undefined || this.featureStyles.length === 1) {
+                style = temp;
+                break;
+            }
+            else if (!temp.predicate && !!temp.properties && Object.keys(temp.properties).length > 0) {
+                style = temp;
+                break;
+            }
+            else if (!!temp.predicate) {
+                if (!!temp.predicate.match && !!temp.predicate.property) {
+                    var property = temp.predicate.property;
+                    if (value[property] !== undefined && value[property] === temp.predicate.match) {
+                        style = temp;
+                        break;
+                    }
+                }
+            }
+            return style;
+        }
+    };
     SpatialFeatureLayer.createId = function (name) {
         if (name === void 0) { name = ''; }
         if (!name)

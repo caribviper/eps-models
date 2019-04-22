@@ -9,6 +9,13 @@ export declare class SpatialFeatureLayer extends Entity {
     featureStyles: FeatureStyle[];
     constructor(name?: string, featureCollection?: FeatureCollection, popUpContent?: string);
     validateEntity(): void;
+    addFeatureStyle(featureStyle: FeatureStyle): void;
+    removeFeature(featureStyle: FeatureStyle): void;
+    canMoveFeatureStyleUp(index: number): boolean;
+    canMoveFeatureStyleDown(index: number): boolean;
+    moveFeatureStyleUp(index: number): void;
+    moveFeatureStyleDown(index: number): void;
+    filterFeatureStyle(value: any): FeatureStyle;
     static createId(name?: string): string;
     static mapToEntity(source: SpatialFeatureLayer | Entity): SpatialFeatureLayer;
     static mapToEntityArray(source: SpatialFeatureLayer[]): SpatialFeatureLayer[];

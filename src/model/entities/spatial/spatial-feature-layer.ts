@@ -35,6 +35,85 @@ export class SpatialFeatureLayer extends Entity {
     Assert.isTruthy(this.featureCollection, 'Must have a valid FeatureCollection');
   }
 
+  /**
+   * Adds a FeatureStyle
+   * @param featureStyle FeatureStyle to be added
+   */
+  public addFeatureStyle(featureStyle: FeatureStyle) {
+    this.featureStyles = this.featureStyles || [];
+    if (!this.featureStyles.findIndex(f => f.name === featureStyle.name))
+      this.featureStyles.push(featureStyle);
+  }
+
+  /**
+   * Removes a FeatureStyle
+   * @param featureStyle FeatureStyle to be removed
+   */
+  public removeFeature(featureStyle: FeatureStyle) {
+    this.featureStyles = this.featureStyles || [];
+    const index = this.featureStyles.findIndex(f => f.name === featureStyle.name);
+    if (index > -1)
+      this.featureStyles.splice(index, 1);
+  }
+
+  public canMoveFeatureStyleUp(index: number): boolean {
+    return (!!this.featureStyles && this.featureStyles.length > 1 && index > 0);
+  }
+
+  public canMoveFeatureStyleDown(index: number): boolean {
+    return (!!this.featureStyles && this.featureStyles.length > 1 && index < this.featureStyles.length - 1);
+  }
+
+  /**
+   * Moves a FeatureStyle up, if it can do so
+   * @param index Index position of FeatureStyle to be moved
+   */
+  public moveFeatureStyleUp(index: number) {
+    if (this.canMoveFeatureStyleUp(index)) {
+      [this.featureStyles[index - 1], this.featureStyles[index]] = [this.featureStyles[index], this.featureStyles[index - 1]];
+    }
+  }
+
+  /**
+   * Moves a FeatureStyle down, if it can do so
+   * @param index Index position of FeatureStyle to be moved
+   */
+  public moveFeatureStyleDown(index: number) {
+    if (this.canMoveFeatureStyleDown(index)) {
+      [this.featureStyles[index], this.featureStyles[index + 1]] = [this.featureStyles[index + 1], this.featureStyles[index]];
+    }
+  }
+
+  /**
+   * Filters the styles looking for its match
+   * @param value Value containing properties
+   */
+  public filterFeatureStyle(value: any): FeatureStyle {
+    let style: FeatureStyle;
+    for (let i = 0; i < this.featureStyles.length; i++) {
+      const temp = this.featureStyles[i];
+      if (value === undefined || this.featureStyles.length === 1) { //do when value is invalid or featureStles has more 1 value
+        style = temp;
+        break;
+      }
+      else if (!temp.predicate && !!temp.properties && Object.keys(temp.properties).length > 0) { //do when the style has no predicate and its properties is valid
+        style = temp;
+        break;
+      }
+      else if (!!temp.predicate) {
+        if (!!temp.predicate.match && !!temp.predicate.property) {
+          let property = temp.predicate.property;
+          //do compare
+          if (value[property] !== undefined && value[property] === temp.predicate.match) {
+            style = temp;
+            break;
+          }
+        }
+      }
+      return style;
+    }
+  }
+
   public static createId(name: string = ''): string {
     if (!name)
       return Entity.generateId(ENTITY_MODELS.SPATIAL.SPATIAL_FEATURE_LAYER);
