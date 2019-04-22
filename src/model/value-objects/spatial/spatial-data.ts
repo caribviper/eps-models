@@ -120,7 +120,7 @@ export class FeatureStyle {
   public name: string;
 
   /**Json propties associated with the style */
-  public properties: {} = {};
+  public properties: any = {};
 
   /**Type of style */
   public type: FeatureStyleType = FEATURE_STYLE_TYPES.MARKER;

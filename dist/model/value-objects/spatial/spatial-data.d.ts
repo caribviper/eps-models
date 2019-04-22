@@ -90,7 +90,7 @@ export interface FeatureStylePredicate {
 }
 export declare class FeatureStyle {
     name: string;
-    properties: {};
+    properties: any;
     type: FeatureStyleType;
     predicate: FeatureStylePredicate;
 }
