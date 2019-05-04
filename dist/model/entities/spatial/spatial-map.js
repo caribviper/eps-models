@@ -47,6 +47,17 @@ var SpatialMap = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
         caribviper_common_1.Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
     };
+    Object.defineProperty(SpatialMap.prototype, "baseMap", {
+        get: function () {
+            if (!!this.baseMapTile)
+                return this.baseMapTile;
+            if (this.tiles.length > 0)
+                return this.tiles[0];
+            return '';
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SpatialMap.prototype, "dataLayer", {
         get: function () {
             if (this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)

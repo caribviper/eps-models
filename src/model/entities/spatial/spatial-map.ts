@@ -37,13 +37,13 @@ export class SpatialMap extends Entity {
 
   /**Store map setting options */
   public options: SpatialMapOptions = {
-      zoomControl: false,
-      maxZoom: 19,
-      minZoom: 10,
-      zoom: 15,
-      bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
-      center: [13.080873414866646, -59.60453689098359]
-    };
+    zoomControl: false,
+    maxZoom: 19,
+    minZoom: 10,
+    zoom: 15,
+    bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
+    center: [13.080873414866646, -59.60453689098359]
+  };
 
   /**
    * Indicates the index position of the layer that should get the data.
@@ -67,6 +67,9 @@ export class SpatialMap extends Entity {
   /**Date last modified */
   modified: Date;
 
+  /**Specifies which map to use as the base map*/
+  baseMapTile: string;
+
   /**
    * Creates a new map
    * @param name Name of map
@@ -89,10 +92,21 @@ export class SpatialMap extends Entity {
   }
 
   /**
+   * Get the base map tile to be used
+   */
+  get baseMap(): string {
+    if (!!this.baseMapTile)
+      return this.baseMapTile;
+    if (this.tiles.length > 0)
+      return this.tiles[0];
+    return '';
+  }
+
+  /**
    * Gets the specified data layer
    */
   public get dataLayer(): FeatureMapSetting {
-    if(this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)
+    if (this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)
       return undefined;
     return this.features[this.dataLayerIndex];
   }

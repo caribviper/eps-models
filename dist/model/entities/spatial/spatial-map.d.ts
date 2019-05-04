@@ -21,8 +21,10 @@ export declare class SpatialMap extends Entity {
     lastModifiedBy: UserInfo;
     created: Date;
     modified: Date;
+    baseMapTile: string;
     constructor(name?: string, description?: string, tiles?: string[], features?: FeatureMapSetting[]);
     validateEntity(): void;
+    readonly baseMap: string;
     readonly dataLayer: FeatureMapSetting;
     addTile(tile: string): void;
     removeTile(tile: string): void;
