@@ -59,30 +59,6 @@ var SpatialFeatureLayer = (function (_super) {
         }
         var _a;
     };
-    SpatialFeatureLayer.prototype.filterFeatureStyle = function (value) {
-        var style;
-        for (var i = 0; i < this.featureStyles.length; i++) {
-            var temp = this.featureStyles[i];
-            if (value === undefined || this.featureStyles.length === 1) {
-                style = temp;
-                break;
-            }
-            else if (!temp.predicate && !!temp.properties && Object.keys(temp.properties).length > 0) {
-                style = temp;
-                break;
-            }
-            else if (!!temp.predicate) {
-                if (!!temp.predicate.match && !!temp.predicate.property) {
-                    var property = temp.predicate.property;
-                    if (value[property] !== undefined && value[property] === temp.predicate.match) {
-                        style = temp;
-                        break;
-                    }
-                }
-            }
-        }
-        return style;
-    };
     SpatialFeatureLayer.createId = function (name) {
         if (name === void 0) { name = ''; }
         if (!name)

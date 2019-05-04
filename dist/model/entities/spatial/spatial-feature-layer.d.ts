@@ -15,7 +15,6 @@ export declare class SpatialFeatureLayer extends Entity {
     canMoveFeatureStyleDown(index: number): boolean;
     moveFeatureStyleUp(index: number): void;
     moveFeatureStyleDown(index: number): void;
-    filterFeatureStyle(value: any): FeatureStyle;
     static createId(name?: string): string;
     static mapToEntity(source: SpatialFeatureLayer | Entity): SpatialFeatureLayer;
     static mapToEntityArray(source: SpatialFeatureLayer[]): SpatialFeatureLayer[];
