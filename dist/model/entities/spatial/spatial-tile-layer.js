@@ -21,6 +21,7 @@ var SpatialTileLayer = (function (_super) {
         _this.description = description;
         _this.templateUrl = templateUrl;
         _this.tileLayerOptions = tileLayerOptions;
+        _this.esriDynamicLayer = false;
         return _this;
     }
     SpatialTileLayer.prototype.validateEntity = function () {

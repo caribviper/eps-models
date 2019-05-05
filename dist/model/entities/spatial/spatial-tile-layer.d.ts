@@ -4,6 +4,7 @@ export declare class SpatialTileLayer extends Entity {
     description: string;
     templateUrl: string;
     tileLayerOptions: {};
+    esriDynamicLayer: boolean;
     constructor(name?: string, description?: string, templateUrl?: string, tileLayerOptions?: {});
     validateEntity(): void;
     static createId(name?: string): string;

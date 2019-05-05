@@ -6,6 +6,9 @@ import { Assert } from 'caribviper-common';
  * Geometry tile layer
  */
 export class SpatialTileLayer extends Entity {
+
+  /**Specifies whether tile is an esri dynamic map  layer */
+  public esriDynamicLayer: boolean = false;
   
   /**
    * Creates a new SpatialTileLayer
