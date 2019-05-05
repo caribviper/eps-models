@@ -141,3 +141,42 @@ var FeatureMapSetting = (function () {
     return FeatureMapSetting;
 }());
 exports.FeatureMapSetting = FeatureMapSetting;
+var TileMapSetting = (function () {
+    function TileMapSetting() {
+        this.display = false;
+    }
+    return TileMapSetting;
+}());
+exports.TileMapSetting = TileMapSetting;
+exports.GROUP_MAP_LAYER_TYPE = {
+    FEATURE: 'feature',
+    TILE: 'tile'
+};
+var GroupMapLayerItem = (function () {
+    function GroupMapLayerItem(name, legend, group, display, type, legendImage) {
+        if (legend === void 0) { legend = ''; }
+        if (group === void 0) { group = ''; }
+        if (display === void 0) { display = false; }
+        if (type === void 0) { type = exports.GROUP_MAP_LAYER_TYPE.FEATURE; }
+        if (legendImage === void 0) { legendImage = ''; }
+        this.name = name;
+        this.legend = legend;
+        this.group = group;
+        this.display = display;
+        this.type = type;
+        this.legendImage = legendImage;
+    }
+    return GroupMapLayerItem;
+}());
+exports.GroupMapLayerItem = GroupMapLayerItem;
+var GroupLayerLegend = (function () {
+    function GroupLayerLegend(name, legend, image) {
+        if (legend === void 0) { legend = ''; }
+        if (image === void 0) { image = ''; }
+        this.name = name;
+        this.legend = legend;
+        this.image = image;
+    }
+    return GroupLayerLegend;
+}());
+exports.GroupLayerLegend = GroupLayerLegend;

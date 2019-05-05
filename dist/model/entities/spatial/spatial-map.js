@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
+var spatial_data_1 = require("../../value-objects/spatial/spatial-data");
 var SpatialMapOptions = (function () {
     function SpatialMapOptions() {
     }
@@ -21,12 +22,11 @@ var SpatialMapOptions = (function () {
 exports.SpatialMapOptions = SpatialMapOptions;
 var SpatialMap = (function (_super) {
     __extends(SpatialMap, _super);
-    function SpatialMap(name, description, tiles, features) {
+    function SpatialMap(name, description, layers) {
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true) || this;
         _this.name = name;
         _this.description = description;
-        _this.tiles = tiles;
-        _this.features = features;
+        _this.layers = layers;
         _this.options = {
             zoomControl: false,
             maxZoom: 19,
@@ -36,24 +36,57 @@ var SpatialMap = (function (_super) {
             center: [13.080873414866646, -59.60453689098359]
         };
         _this.domains = [];
-        _this.tiles = tiles || [];
-        _this.features = features || [];
+        _this.layers = layers || [];
         _this.domains = [];
         return _this;
     }
     SpatialMap.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.name, 'Must have a valid name');
-        caribviper_common_1.Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
-        caribviper_common_1.Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
+        caribviper_common_1.Assert.isTruthy(this.layers, 'Must have a valid set of Tiles');
+        caribviper_common_1.Assert.isNonEmptyArray(this.layers, 'Tiles must have at least one tile set');
     };
-    Object.defineProperty(SpatialMap.prototype, "baseMap", {
+    Object.defineProperty(SpatialMap.prototype, "tiles", {
+        get: function () {
+            var _tiles = [];
+            this.layers.forEach(function (l) {
+                if (l.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.TILE)
+                    _tiles.push(l);
+            });
+            return _tiles;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SpatialMap.prototype, "features", {
+        get: function () {
+            var _features = [];
+            this.layers.forEach(function (l) {
+                if (l.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.FEATURE)
+                    _features.push(l);
+            });
+            return _features;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SpatialMap.prototype, "baseMapName", {
         get: function () {
             if (!!this.baseMapTile)
                 return this.baseMapTile;
-            if (this.tiles.length > 0)
-                return this.tiles[0];
+            if (this.layers.length > 0)
+                return this.layers[0].name;
             return '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SpatialMap.prototype, "baseMap", {
+        get: function () {
+            var _this = this;
+            if (this.layers.length < 0)
+                return undefined;
+            return this.layers.find(function (t) { return t.name === _this.baseMapName; });
         },
         enumerable: true,
         configurable: true
@@ -67,43 +100,48 @@ var SpatialMap = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    SpatialMap.prototype.addTile = function (tile) {
-        this.tiles = this.tiles || [];
-        if (!this.tiles.indexOf(tile))
-            this.tiles.push(tile);
+    SpatialMap.prototype.addLayer = function (layer) {
+        this.layers = this.layers || [];
+        if (!this.layers.findIndex(function (t) { return t.name === layer.name; })) {
+            this.layers.push(layer);
+        }
     };
-    SpatialMap.prototype.removeTile = function (tile) {
-        this.tiles = this.tiles || [];
-        var index = this.tiles.indexOf(tile);
+    SpatialMap.prototype.removeLayer = function (layer) {
+        this.layers = this.layers || [];
+        var index = this.layers.findIndex(function (tileSetting) { return tileSetting.name === layer; });
         if (index > -1)
-            this.tiles.splice(index, 1);
+            this.layers.splice(index, 1);
     };
-    SpatialMap.prototype.addFeature = function (feature) {
-        this.features = this.features || [];
-        if (!this.features.findIndex(function (f) { return f.name === feature.name; }))
-            this.features.push(feature);
-    };
-    SpatialMap.prototype.removeFeature = function (feature) {
-        this.features = this.features || [];
-        var index = this.features.findIndex(function (f) { return f.name === feature.name; });
-        if (index > -1)
-            this.features.splice(index, 1);
-    };
-    SpatialMap.prototype.canMoveTileUp = function (index) {
-        return (!!this.tiles && this.tiles.length > 1 && index > 0);
+    Object.defineProperty(SpatialMap.prototype, "groupLayerNames", {
+        get: function () {
+            var group = [];
+            this.layers.forEach(function (l) {
+                if (!!l.group && group.indexOf(l.group) < 0)
+                    group.push(l.group);
+                else {
+                    group.push(l.name);
+                }
+            });
+            return group;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SpatialMap.prototype.canMoveLayerUp = function (index) {
+        return (!!this.layers && this.layers.length > 1 && index > 0);
     };
     SpatialMap.prototype.canMoveTileDown = function (index) {
-        return (!!this.tiles && this.tiles.length > 1 && index < this.tiles.length - 1);
+        return (!!this.layers && this.layers.length > 1 && index < this.layers.length - 1);
     };
     SpatialMap.prototype.moveTileUp = function (index) {
-        if (this.canMoveTileUp(index)) {
-            _a = [this.tiles[index], this.tiles[index - 1]], this.tiles[index - 1] = _a[0], this.tiles[index] = _a[1];
+        if (this.canMoveLayerUp(index)) {
+            _a = [this.layers[index], this.layers[index - 1]], this.layers[index - 1] = _a[0], this.layers[index] = _a[1];
         }
         var _a;
     };
     SpatialMap.prototype.moveTileDown = function (index) {
         if (this.canMoveTileDown(index)) {
-            _a = [this.tiles[index + 1], this.tiles[index]], this.tiles[index] = _a[0], this.tiles[index + 1] = _a[1];
+            _a = [this.layers[index + 1], this.layers[index]], this.layers[index] = _a[0], this.layers[index + 1] = _a[1];
         }
         var _a;
     };

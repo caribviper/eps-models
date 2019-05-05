@@ -129,10 +129,72 @@ export class FeatureStyle {
   public predicate: FeatureStylePredicate = null;
 }
 
+/**Feature map settings */
 export class FeatureMapSetting {
-  //Name of feature
+  /**Name of feature */
   public name: string;
 
-  //Specifies if to display feature by default on the suggested map
+  /**Specifies if to display feature by default on the suggested map */
   public display: boolean = false;
+}
+
+/**
+ * Provides settings for use of tiles within map
+ */
+export class TileMapSetting {
+  /**Name of tile */
+  public name: string;
+
+  /**Information to be displayed in the legend */
+  public legend: string;
+
+  /**Group tile belongs to */
+  public group: string;
+
+  //Specifies if to display the feature by default on the suggested map
+  public display: boolean = false;
+
+}
+
+export type GroupLayerType = 'feature' | 'tile';
+
+export const GROUP_MAP_LAYER_TYPE = {
+  FEATURE: 'feature' as GroupLayerType,
+  TILE: 'tile' as GroupLayerType
+};
+
+
+
+/**
+ * Provides settings for use of group layers within map
+ */
+export class GroupMapLayerItem {
+
+  /**
+   * Creates a new GroupLayerItem
+   * @param name Name of layer
+   * @param legend Display legend name
+   * @param group Group layer belongs to
+   * @param display Display layer on map by default
+   * @param type Type of layer (feature/tile)
+   * @param legendImage Image to represent tile
+   */
+  constructor(public name: string, public legend: string = '', public group: string = '', public display: boolean = false, public type: GroupLayerType = GROUP_MAP_LAYER_TYPE.FEATURE, public legendImage: string = '') {
+  }
+
+}
+
+/**
+ * Group information for legend
+ */
+export class GroupLayerLegend {
+  /**
+   * Creates a new group layer legend
+   * @param name Name of group
+   * @param legend Legend displayed
+   * @param image Image displayed
+   */
+  constructor(public name: string, public legend: string = '', public image: string = '' ) {
+
+  }
 }

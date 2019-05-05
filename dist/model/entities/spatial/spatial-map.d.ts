@@ -1,6 +1,6 @@
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
-import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
+import { GroupMapLayerItem } from '../../value-objects/spatial/spatial-data';
 export declare class SpatialMapOptions {
     zoomControl: boolean;
     maxZoom: number;
@@ -12,8 +12,7 @@ export declare class SpatialMapOptions {
 export declare class SpatialMap extends Entity {
     name: string;
     description: string;
-    tiles: string[];
-    features: FeatureMapSetting[];
+    layers: GroupMapLayerItem[];
     options: SpatialMapOptions;
     dataLayerIndex: number;
     domains: string[];
@@ -22,15 +21,17 @@ export declare class SpatialMap extends Entity {
     created: Date;
     modified: Date;
     baseMapTile: string;
-    constructor(name?: string, description?: string, tiles?: string[], features?: FeatureMapSetting[]);
+    constructor(name?: string, description?: string, layers?: GroupMapLayerItem[]);
     validateEntity(): void;
-    readonly baseMap: string;
-    readonly dataLayer: FeatureMapSetting;
-    addTile(tile: string): void;
-    removeTile(tile: string): void;
-    addFeature(feature: FeatureMapSetting): void;
-    removeFeature(feature: FeatureMapSetting): void;
-    canMoveTileUp(index: number): boolean;
+    readonly tiles: GroupMapLayerItem[];
+    readonly features: GroupMapLayerItem[];
+    readonly baseMapName: string;
+    readonly baseMap: GroupMapLayerItem;
+    readonly dataLayer: GroupMapLayerItem;
+    addLayer(layer: GroupMapLayerItem): void;
+    removeLayer(layer: string): void;
+    readonly groupLayerNames: string[];
+    canMoveLayerUp(index: number): boolean;
     canMoveTileDown(index: number): boolean;
     moveTileUp(index: number): void;
     moveTileDown(index: number): void;

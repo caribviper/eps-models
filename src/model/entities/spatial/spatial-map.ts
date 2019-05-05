@@ -2,7 +2,7 @@ import { UserInfo } from './../../value-objects/common/userinfo';
 import { ENTITY_MODELS } from './../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
-import { FeatureMapSetting } from '../../value-objects/spatial/spatial-data';
+import { GroupMapLayerItem, GROUP_MAP_LAYER_TYPE } from '../../value-objects/spatial/spatial-data';
 
 export class SpatialMapOptions {
   /** Zoom control */
@@ -70,88 +70,115 @@ export class SpatialMap extends Entity {
   /**Specifies which map to use as the base map*/
   baseMapTile: string;
 
+  /**Store group names */
+
   /**
    * Creates a new map
    * @param name Name of map
    * @param description Description about map
-   * @param tiles Tiles to be displayed on map and in order
-   * @param features Features to be displayed on map
+   * @param layers Tiles to be displayed on map and in order
    */
-  constructor(public name?: string, public description?: string, public tiles?: string[], public features?: FeatureMapSetting[]) {
+  constructor(public name?: string, public description?: string, public layers?: GroupMapLayerItem[]) {
     super(ENTITY_MODELS.SPATIAL.SPATIAL_MAP, SpatialMap.createId(name), true);
-    this.tiles = tiles || [];
-    this.features = features || [];
+    this.layers = layers || [];
     this.domains = [];
   }
 
   validateEntity() {
     Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
     Assert.isTruthy(this.name, 'Must have a valid name');
-    Assert.isTruthy(this.tiles, 'Must have a valid set of Tiles');
-    Assert.isNonEmptyArray(this.tiles, 'Tiles must have at least one tile set');
+    Assert.isTruthy(this.layers, 'Must have a valid set of Tiles');
+    Assert.isNonEmptyArray(this.layers, 'Tiles must have at least one tile set');
   }
 
   /**
-   * Get the base map tile to be used
+   * Get all tiles
    */
-  get baseMap(): string {
+  get tiles(): GroupMapLayerItem[] {
+    const _tiles: GroupMapLayerItem[] = [];
+    this.layers.forEach(l => {
+      if (l.type === GROUP_MAP_LAYER_TYPE.TILE)
+        _tiles.push(l);
+    });
+    return _tiles;
+  }
+
+  /**
+   * Get all features
+   */
+  get features(): GroupMapLayerItem[] {
+    const _features: GroupMapLayerItem[] = [];
+    this.layers.forEach(l => {
+      if (l.type === GROUP_MAP_LAYER_TYPE.FEATURE)
+        _features.push(l);
+    });
+    return _features;
+  }
+
+  /**
+   * Get the base map tile name to be used
+   */
+  get baseMapName(): string {
     if (!!this.baseMapTile)
       return this.baseMapTile;
-    if (this.tiles.length > 0)
-      return this.tiles[0];
+    if (this.layers.length > 0)
+      return this.layers[0].name;
     return '';
+  }
+
+  /**
+   * Gets the base map tile
+   */
+  get baseMap(): GroupMapLayerItem {
+    if (this.layers.length < 0)
+      return undefined;
+    return this.layers.find(t => t.name === this.baseMapName);
   }
 
   /**
    * Gets the specified data layer
    */
-  public get dataLayer(): FeatureMapSetting {
+  public get dataLayer(): GroupMapLayerItem {
     if (this.dataLayerIndex < 0 || this.dataLayerIndex > this.features.length)
       return undefined;
     return this.features[this.dataLayerIndex];
   }
 
   /**
-   * Adds a tile
-   * @param tile Tile to be added
+   * Adds a layer
+   * @param layer Layer to be added
    */
-  public addTile(tile: string) {
-    this.tiles = this.tiles || [];
-    if (!this.tiles.indexOf(tile))
-      this.tiles.push(tile);
+  public addLayer(layer: GroupMapLayerItem) {
+    this.layers = this.layers || [];
+    if (!this.layers.findIndex(t => t.name === layer.name)) {
+      this.layers.push(layer)
+    }
   }
 
   /**
-   * Removes a tile
-   * @param tile Tile to be removed
+   * Removes a layer
+   * @param layer Layer to be removed
    */
-  public removeTile(tile: string) {
-    this.tiles = this.tiles || [];
-    const index = this.tiles.indexOf(tile);
+  public removeLayer(layer: string) {
+    this.layers = this.layers || [];
+    const index = this.layers.findIndex(tileSetting => tileSetting.name === layer);
     if (index > -1)
-      this.tiles.splice(index, 1);
-  }
-
-
-  /**
-   * Adds a feature
-   * @param feature Feature to be added
-   */
-  public addFeature(feature: FeatureMapSetting) {
-    this.features = this.features || [];
-    if (!this.features.findIndex(f => f.name === feature.name))
-      this.features.push(feature);
+      this.layers.splice(index, 1);
   }
 
   /**
-   * Removes a feature
-   * @param feature Feature to be removed
+   * Get all groups layers withing map
    */
-  public removeFeature(feature: FeatureMapSetting) {
-    this.features = this.features || [];
-    const index = this.features.findIndex(f => f.name === feature.name);
-    if (index > -1)
-      this.features.splice(index, 1);
+  public get groupLayerNames(): string[] {
+    const group: string[] = [];
+    this.layers.forEach(l => {
+      if (!!l.group && group.indexOf(l.group) < 0)
+        group.push(l.group);
+      else {
+        group.push(l.name);
+      }
+    });
+    return group;
   }
 
 
@@ -159,8 +186,8 @@ export class SpatialMap extends Entity {
    * Determines if a tile can be moved up
    * @param index Index position of tile to be moved
    */
-  public canMoveTileUp(index: number): boolean {
-    return (!!this.tiles && this.tiles.length > 1 && index > 0);
+  public canMoveLayerUp(index: number): boolean {
+    return (!!this.layers && this.layers.length > 1 && index > 0);
   }
 
   /**
@@ -168,7 +195,7 @@ export class SpatialMap extends Entity {
    * @param index Index position of tile to be moved
    */
   public canMoveTileDown(index: number): boolean {
-    return (!!this.tiles && this.tiles.length > 1 && index < this.tiles.length - 1);
+    return (!!this.layers && this.layers.length > 1 && index < this.layers.length - 1);
   }
 
   /**
@@ -176,8 +203,8 @@ export class SpatialMap extends Entity {
    * @param index Index position of tile to be moved
    */
   public moveTileUp(index: number) {
-    if (this.canMoveTileUp(index)) {
-      [this.tiles[index - 1], this.tiles[index]] = [this.tiles[index], this.tiles[index - 1]];
+    if (this.canMoveLayerUp(index)) {
+      [this.layers[index - 1], this.layers[index]] = [this.layers[index], this.layers[index - 1]];
     }
   }
 
@@ -187,7 +214,7 @@ export class SpatialMap extends Entity {
    */
   public moveTileDown(index: number) {
     if (this.canMoveTileDown(index)) {
-      [this.tiles[index], this.tiles[index + 1]] = [this.tiles[index + 1], this.tiles[index]];
+      [this.layers[index], this.layers[index + 1]] = [this.layers[index + 1], this.layers[index]];
     }
   }
 

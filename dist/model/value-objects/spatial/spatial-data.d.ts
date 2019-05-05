@@ -98,3 +98,29 @@ export declare class FeatureMapSetting {
     name: string;
     display: boolean;
 }
+export declare class TileMapSetting {
+    name: string;
+    legend: string;
+    group: string;
+    display: boolean;
+}
+export declare type GroupLayerType = 'feature' | 'tile';
+export declare const GROUP_MAP_LAYER_TYPE: {
+    FEATURE: GroupLayerType;
+    TILE: GroupLayerType;
+};
+export declare class GroupMapLayerItem {
+    name: string;
+    legend: string;
+    group: string;
+    display: boolean;
+    type: GroupLayerType;
+    legendImage: string;
+    constructor(name: string, legend?: string, group?: string, display?: boolean, type?: GroupLayerType, legendImage?: string);
+}
+export declare class GroupLayerLegend {
+    name: string;
+    legend: string;
+    image: string;
+    constructor(name: string, legend?: string, image?: string);
+}
