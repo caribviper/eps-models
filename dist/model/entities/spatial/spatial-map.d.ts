@@ -32,9 +32,9 @@ export declare class SpatialMap extends Entity {
     removeLayer(layer: string): void;
     readonly groupLayerNames: string[];
     canMoveLayerUp(index: number): boolean;
-    canMoveTileDown(index: number): boolean;
-    moveTileUp(index: number): void;
-    moveTileDown(index: number): void;
+    canMoveLayerDown(index: number): boolean;
+    moveLayerUp(index: number): void;
+    moveLayerDown(index: number): void;
     static createId(name?: string): string;
     static mapToEntity(source: SpatialMap | Entity): SpatialMap;
     static mapToEntityArray(source: SpatialMap[]): SpatialMap[];

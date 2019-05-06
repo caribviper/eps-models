@@ -87,7 +87,7 @@ export class SpatialMap extends Entity {
   validateEntity() {
     Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
     Assert.isTruthy(this.name, 'Must have a valid name');
-    Assert.isTruthy(this.layers, 'Must have a valid set of Tiles');
+    Assert.isTruthy(this.layers, 'Must have a valid set of Layers');
     Assert.isNonEmptyArray(this.layers, 'Tiles must have at least one tile set');
   }
 
@@ -112,7 +112,13 @@ export class SpatialMap extends Entity {
       if (l.type === GROUP_MAP_LAYER_TYPE.FEATURE)
         _features.push(l);
     });
-    return _features;
+    return _features.sort((a: GroupMapLayerItem, b: GroupMapLayerItem) => {
+      let x = a.name.toLowerCase();
+      let y = b.name.toLowerCase();
+      if (x < y) return -1;
+      if (y < x) return 1;
+      return 0;
+    });
   }
 
   /**
@@ -167,7 +173,7 @@ export class SpatialMap extends Entity {
   }
 
   /**
-   * Get all groups layers withing map
+   * Get all groups layers within map
    */
   public get groupLayerNames(): string[] {
     const group: string[] = [];
@@ -183,37 +189,37 @@ export class SpatialMap extends Entity {
 
 
   /**
-   * Determines if a tile can be moved up
-   * @param index Index position of tile to be moved
+   * Determines if a layer can be moved up
+   * @param index Index position of layer to be moved
    */
   public canMoveLayerUp(index: number): boolean {
     return (!!this.layers && this.layers.length > 1 && index > 0);
   }
 
   /**
-   * Determines if a tile can be moved down
-   * @param index Index position of tile to be moved
+   * Determines if a layer can be moved down
+   * @param index Index position of layer to be moved
    */
-  public canMoveTileDown(index: number): boolean {
+  public canMoveLayerDown(index: number): boolean {
     return (!!this.layers && this.layers.length > 1 && index < this.layers.length - 1);
   }
 
   /**
-   * Moves a tile up, if it can do so
-   * @param index Index position of tile to be moved
+   * Moves a layer up, if it can do so
+   * @param index Index position of layer to be moved
    */
-  public moveTileUp(index: number) {
+  public moveLayerUp(index: number) {
     if (this.canMoveLayerUp(index)) {
       [this.layers[index - 1], this.layers[index]] = [this.layers[index], this.layers[index - 1]];
     }
   }
 
   /**
-   * Moves a tile down, if it can do so
-   * @param index Index position of tile to be moved
+   * Moves a layer down, if it can do so
+   * @param index Index position of layer to be moved
    */
-  public moveTileDown(index: number) {
-    if (this.canMoveTileDown(index)) {
+  public moveLayerDown(index: number) {
+    if (this.canMoveLayerDown(index)) {
       [this.layers[index], this.layers[index + 1]] = [this.layers[index + 1], this.layers[index]];
     }
   }

@@ -43,7 +43,7 @@ var SpatialMap = (function (_super) {
     SpatialMap.prototype.validateEntity = function () {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Registry item cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.name, 'Must have a valid name');
-        caribviper_common_1.Assert.isTruthy(this.layers, 'Must have a valid set of Tiles');
+        caribviper_common_1.Assert.isTruthy(this.layers, 'Must have a valid set of Layers');
         caribviper_common_1.Assert.isNonEmptyArray(this.layers, 'Tiles must have at least one tile set');
     };
     Object.defineProperty(SpatialMap.prototype, "tiles", {
@@ -65,7 +65,15 @@ var SpatialMap = (function (_super) {
                 if (l.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.FEATURE)
                     _features.push(l);
             });
-            return _features;
+            return _features.sort(function (a, b) {
+                var x = a.name.toLowerCase();
+                var y = b.name.toLowerCase();
+                if (x < y)
+                    return -1;
+                if (y < x)
+                    return 1;
+                return 0;
+            });
         },
         enumerable: true,
         configurable: true
@@ -130,17 +138,17 @@ var SpatialMap = (function (_super) {
     SpatialMap.prototype.canMoveLayerUp = function (index) {
         return (!!this.layers && this.layers.length > 1 && index > 0);
     };
-    SpatialMap.prototype.canMoveTileDown = function (index) {
+    SpatialMap.prototype.canMoveLayerDown = function (index) {
         return (!!this.layers && this.layers.length > 1 && index < this.layers.length - 1);
     };
-    SpatialMap.prototype.moveTileUp = function (index) {
+    SpatialMap.prototype.moveLayerUp = function (index) {
         if (this.canMoveLayerUp(index)) {
             _a = [this.layers[index], this.layers[index - 1]], this.layers[index - 1] = _a[0], this.layers[index] = _a[1];
         }
         var _a;
     };
-    SpatialMap.prototype.moveTileDown = function (index) {
-        if (this.canMoveTileDown(index)) {
+    SpatialMap.prototype.moveLayerDown = function (index) {
+        if (this.canMoveLayerDown(index)) {
             _a = [this.layers[index + 1], this.layers[index]], this.layers[index] = _a[0], this.layers[index + 1] = _a[1];
         }
         var _a;
