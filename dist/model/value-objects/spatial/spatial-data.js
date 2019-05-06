@@ -165,6 +165,7 @@ var GroupMapLayerItem = (function () {
         this.display = display;
         this.type = type;
         this.legendImage = legendImage;
+        this.layerId = '';
     }
     return GroupMapLayerItem;
 }());

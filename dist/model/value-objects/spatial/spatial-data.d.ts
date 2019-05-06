@@ -116,6 +116,7 @@ export declare class GroupMapLayerItem {
     display: boolean;
     type: GroupLayerType;
     legendImage: string;
+    layerId: string;
     constructor(name: string, legend?: string, group?: string, display?: boolean, type?: GroupLayerType, legendImage?: string);
 }
 export declare class GroupLayerLegend {

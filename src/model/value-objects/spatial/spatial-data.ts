@@ -170,6 +170,9 @@ export const GROUP_MAP_LAYER_TYPE = {
  */
 export class GroupMapLayerItem {
 
+  /**Stores the id of the layer */
+  public layerId: string = '';
+
   /**
    * Creates a new GroupLayerItem
    * @param name Name of layer
