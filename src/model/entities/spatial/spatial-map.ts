@@ -112,6 +112,16 @@ export class SpatialMap extends Entity {
       if (l.type === GROUP_MAP_LAYER_TYPE.FEATURE)
         _features.push(l);
     });
+    return _features;
+  }
+
+  get featuresSorted(): GroupMapLayerItem[] {
+    const _features: GroupMapLayerItem[] = [];
+    this.layers.forEach(l => {
+      if (l.type === GROUP_MAP_LAYER_TYPE.FEATURE)
+        _features.push(l);
+    });
+    
     return _features.sort((a: GroupMapLayerItem, b: GroupMapLayerItem) => {
       let x = a.name.toLowerCase();
       let y = b.name.toLowerCase();
@@ -119,6 +129,7 @@ export class SpatialMap extends Entity {
       if (y < x) return 1;
       return 0;
     });
+
   }
 
   /**
@@ -140,6 +151,7 @@ export class SpatialMap extends Entity {
       return undefined;
     return this.layers.find(t => t.name === this.baseMapName && t.type === GROUP_MAP_LAYER_TYPE.TILE);
   }
+
 
   /**
    * Gets the specified data layer

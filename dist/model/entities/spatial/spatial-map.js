@@ -65,6 +65,18 @@ var SpatialMap = (function (_super) {
                 if (l.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.FEATURE)
                     _features.push(l);
             });
+            return _features;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SpatialMap.prototype, "featuresSorted", {
+        get: function () {
+            var _features = [];
+            this.layers.forEach(function (l) {
+                if (l.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.FEATURE)
+                    _features.push(l);
+            });
             return _features.sort(function (a, b) {
                 var x = a.name.toLowerCase();
                 var y = b.name.toLowerCase();
