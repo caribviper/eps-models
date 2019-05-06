@@ -127,8 +127,8 @@ export class SpatialMap extends Entity {
   get baseMapName(): string {
     if (!!this.baseMapTile)
       return this.baseMapTile;
-    if (this.layers.length > 0)
-      return this.layers[0].name;
+    if (this.tiles.length > 0)
+      return this.tiles[0].name;
     return '';
   }
 
@@ -138,7 +138,7 @@ export class SpatialMap extends Entity {
   get baseMap(): GroupMapLayerItem {
     if (this.layers.length < 0)
       return undefined;
-    return this.layers.find(t => t.name === this.baseMapName);
+    return this.layers.find(t => t.name === this.baseMapName && t.type === GROUP_MAP_LAYER_TYPE.TILE);
   }
 
   /**

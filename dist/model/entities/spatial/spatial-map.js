@@ -82,8 +82,8 @@ var SpatialMap = (function (_super) {
         get: function () {
             if (!!this.baseMapTile)
                 return this.baseMapTile;
-            if (this.layers.length > 0)
-                return this.layers[0].name;
+            if (this.tiles.length > 0)
+                return this.tiles[0].name;
             return '';
         },
         enumerable: true,
@@ -94,7 +94,7 @@ var SpatialMap = (function (_super) {
             var _this = this;
             if (this.layers.length < 0)
                 return undefined;
-            return this.layers.find(function (t) { return t.name === _this.baseMapName; });
+            return this.layers.find(function (t) { return t.name === _this.baseMapName && t.type === spatial_data_1.GROUP_MAP_LAYER_TYPE.TILE; });
         },
         enumerable: true,
         configurable: true
