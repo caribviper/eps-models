@@ -70,7 +70,8 @@ export class SpatialMap extends Entity {
   /**Specifies which map to use as the base map*/
   baseMapTile: string;
 
-  /**Store group names */
+  /**Make map public */
+  public: boolean;
 
   /**
    * Creates a new map

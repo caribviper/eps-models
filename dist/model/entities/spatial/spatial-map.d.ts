@@ -21,6 +21,7 @@ export declare class SpatialMap extends Entity {
     created: Date;
     modified: Date;
     baseMapTile: string;
+    public: boolean;
     constructor(name?: string, description?: string, layers?: GroupMapLayerItem[]);
     validateEntity(): void;
     readonly tiles: GroupMapLayerItem[];
