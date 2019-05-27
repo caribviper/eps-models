@@ -28,6 +28,9 @@ export class SpatialMapOptions {
 
   /**Center point */
   center: [number, number];
+
+  /**Advance controls options*/
+  controls: any = {};
 }
 
 /**
@@ -42,7 +45,8 @@ export class SpatialMap extends Entity {
     minZoom: 10,
     zoom: 15,
     bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
-    center: [13.080873414866646, -59.60453689098359]
+    center: [13.080873414866646, -59.60453689098359],
+    controls: {}
   };
 
   /**

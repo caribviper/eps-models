@@ -16,6 +16,7 @@ var caribviper_common_1 = require("caribviper-common");
 var spatial_data_1 = require("../../value-objects/spatial/spatial-data");
 var SpatialMapOptions = (function () {
     function SpatialMapOptions() {
+        this.controls = {};
     }
     return SpatialMapOptions;
 }());
@@ -33,7 +34,8 @@ var SpatialMap = (function (_super) {
             minZoom: 10,
             zoom: 15,
             bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
-            center: [13.080873414866646, -59.60453689098359]
+            center: [13.080873414866646, -59.60453689098359],
+            controls: {}
         };
         _this.domains = [];
         _this.layers = layers || [];

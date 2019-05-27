@@ -8,6 +8,7 @@ export declare class SpatialMapOptions {
     zoom: number;
     bounds: [number, number][];
     center: [number, number];
+    controls: any;
 }
 export declare class SpatialMap extends Entity {
     name: string;
