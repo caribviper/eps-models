@@ -4,9 +4,22 @@ import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 import { GroupMapLayerItem, GROUP_MAP_LAYER_TYPE } from '../../value-objects/spatial/spatial-data';
 
+/**Custom controls for map */
+export class CustomMapControls {
+  /**Indicates if the map has the side bar */
+  hasSideBar: boolean = true;
+
+  /**Indicates if the map has the drawing control bar*/
+  hasDrawingControlBar: boolean = true;
+
+  /**Indicates if the map displays the legend */
+  hasLegend: boolean = true;
+}
+
+/**Map options defined for Leaflet maps */
 export class SpatialMapOptions {
   /** Zoom control */
-  zoomControl: boolean;
+  zoomControl: boolean = true;
 
   /**
    * Maximum zoom
@@ -30,7 +43,7 @@ export class SpatialMapOptions {
   center: [number, number];
 
   /**Advance controls options*/
-  controls: any = {};
+  controls: CustomMapControls = new CustomMapControls();
 }
 
 /**
@@ -46,7 +59,7 @@ export class SpatialMap extends Entity {
     zoom: 15,
     bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
     center: [13.080873414866646, -59.60453689098359],
-    controls: {}
+    controls: new CustomMapControls()
   };
 
   /**

@@ -1,6 +1,11 @@
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
 import { GroupMapLayerItem } from '../../value-objects/spatial/spatial-data';
+export declare class CustomMapControls {
+    hasSideBar: boolean;
+    hasDrawingControlBar: boolean;
+    hasLegend: boolean;
+}
 export declare class SpatialMapOptions {
     zoomControl: boolean;
     maxZoom: number;
@@ -8,7 +13,7 @@ export declare class SpatialMapOptions {
     zoom: number;
     bounds: [number, number][];
     center: [number, number];
-    controls: any;
+    controls: CustomMapControls;
 }
 export declare class SpatialMap extends Entity {
     name: string;

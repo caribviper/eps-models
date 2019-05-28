@@ -14,9 +14,19 @@ var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var spatial_data_1 = require("../../value-objects/spatial/spatial-data");
+var CustomMapControls = (function () {
+    function CustomMapControls() {
+        this.hasSideBar = true;
+        this.hasDrawingControlBar = true;
+        this.hasLegend = true;
+    }
+    return CustomMapControls;
+}());
+exports.CustomMapControls = CustomMapControls;
 var SpatialMapOptions = (function () {
     function SpatialMapOptions() {
-        this.controls = {};
+        this.zoomControl = true;
+        this.controls = new CustomMapControls();
     }
     return SpatialMapOptions;
 }());
@@ -35,7 +45,7 @@ var SpatialMap = (function (_super) {
             zoom: 15,
             bounds: [[13.014294693510667, -59.801473199443855], [13.340127231898112, -59.261435936746146]],
             center: [13.080873414866646, -59.60453689098359],
-            controls: {}
+            controls: new CustomMapControls()
         };
         _this.domains = [];
         _this.layers = layers || [];
