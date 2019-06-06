@@ -170,6 +170,19 @@ var PlanningFactory = (function () {
     PlanningFactory.createReport = function (reportType, registry, currentUser) {
         var report = null;
         var description = registry.projection.description;
+        if (!description) {
+            if (!registry.fileType.isApplication) {
+                description = registry.details.offendingAction;
+            }
+            else if (registry.fileType.folderPrefix === 'T')
+                description = registry.details.reasonForKilling;
+            else if (registry.fileType.folderPrefix === 'FA')
+                description = registry.details.proposedDevelopment.description;
+            else if (registry.fileType.folderPrefix === 'PD')
+                description = registry.details.proposedDevelopment;
+            else if (registry.fileType.folderPrefix === 'CH')
+                description = registry.details.proposedDevelopment;
+        }
         switch (reportType) {
             case 0: {
                 report = new site_report_1.SiteReportDevelopment(registry._id, currentUser, description);

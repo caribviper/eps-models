@@ -265,6 +265,19 @@ export class PlanningFactory {
     //   || (registry.details as any).proposedDevelopment
     //   || (registry.details as any).offendingAction;
     let description = registry.projection.description;
+    if(!description) {
+      if(!registry.fileType.isApplication) {
+        description = (registry.details as Invest).offendingAction;
+      }
+      else if(registry.fileType.folderPrefix === 'T')
+        description = (registry.details as KillTreeApplication).reasonForKilling;
+      else if(registry.fileType.folderPrefix === 'FA')
+        description = (registry.details as FormalApplication).proposedDevelopment.description;
+      else if(registry.fileType.folderPrefix === 'PD')
+        description = (registry.details as PermittedApplication).proposedDevelopment;
+      else if(registry.fileType.folderPrefix === 'CH')
+        description = (registry.details as ChattelApplication).proposedDevelopment;
+    }
     switch (reportType) {
       case 0: {//site
         report = new SiteReportDevelopment(registry._id, currentUser, description);
