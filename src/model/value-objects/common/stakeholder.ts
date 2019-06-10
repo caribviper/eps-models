@@ -33,15 +33,13 @@ export class Stakeholder {
   /**Indicates if the stakeholder is active. A false indicates that the stakeholder was present but is no longer active */
   active: boolean;
 
-  /**Possible secondary type to assist with notices and other areas that require two categories for stakeholder */
-  secondaryType: string = '';
-
   /**
    * Creates a new stakeholder
    * @param contact Contact information of the stakeholder
    * @param stakeholderType Type of stakeholder
+   * @param secondaryType Type to assist with notices and other areas that require two categories for stakeholder
    */
-  constructor(public contact: Contact, public stakeholderType: string) { }
+  constructor(public contact: Contact, public stakeholderType: string, public secondaryType:string = '') { }
 
   public get isEmpty(): boolean {
     return (!this.contact || Contact.isEmpty(this.contact));

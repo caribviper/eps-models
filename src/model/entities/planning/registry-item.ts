@@ -93,7 +93,7 @@ export class Location {
   }
 
   public static convertToGeoJson(location: Location): boolean {
-    if(!!location.coordinate.x && !!location.coordinate.y) {
+    if (!!location.coordinate.x && !!location.coordinate.y) {
       location.feature = new Feature(new Point(location.coordinate.x, location.coordinate.y));
       return true;
     }
@@ -101,7 +101,7 @@ export class Location {
   }
 
   public static appendNewGeoJson(location: Location, x: number, y: number): boolean {
-    if(!!x && !!y) {
+    if (!!x && !!y) {
       location.feature = new Feature(new Point(x, y));
       return true;
     }
@@ -380,8 +380,9 @@ export class RegistryItem extends Entity {
     let r: RegistryItem = Object.assign(new RegistryItem(), source);
     r.location.address = Address.cloneAddress(r.location.address);
     for (let i = 0; i < r.stakeholders.length; i++) {
-      if (!Stakeholder.isEmpty(r.stakeholders[i]))
-        r.stakeholders[i] = new Stakeholder(Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType);
+      if (!Stakeholder.isEmpty(r.stakeholders[i])) {
+        r.stakeholders[i] = new Stakeholder(Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType, !!r.stakeholders[i].secondaryType ? r.stakeholders[i].secondaryType : '');
+      }
     }
     r.counterValue = parseInt(r.counterValue.toString());
     return r;

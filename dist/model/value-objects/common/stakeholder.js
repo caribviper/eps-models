@@ -16,10 +16,11 @@ exports.STAKEHOLDER_TYPES = {
     AGENCY: 'government agency'
 };
 var Stakeholder = (function () {
-    function Stakeholder(contact, stakeholderType) {
+    function Stakeholder(contact, stakeholderType, secondaryType) {
+        if (secondaryType === void 0) { secondaryType = ''; }
         this.contact = contact;
         this.stakeholderType = stakeholderType;
-        this.secondaryType = '';
+        this.secondaryType = secondaryType;
     }
     Object.defineProperty(Stakeholder.prototype, "isEmpty", {
         get: function () {

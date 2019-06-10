@@ -329,8 +329,9 @@ var RegistryItem = (function (_super) {
         var r = Object.assign(new RegistryItem(), source);
         r.location.address = address_1.Address.cloneAddress(r.location.address);
         for (var i = 0; i < r.stakeholders.length; i++) {
-            if (!stakeholder_1.Stakeholder.isEmpty(r.stakeholders[i]))
-                r.stakeholders[i] = new stakeholder_1.Stakeholder(contact_1.Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType);
+            if (!stakeholder_1.Stakeholder.isEmpty(r.stakeholders[i])) {
+                r.stakeholders[i] = new stakeholder_1.Stakeholder(contact_1.Contact.clone(r.stakeholders[i].contact), r.stakeholders[i].stakeholderType, !!r.stakeholders[i].secondaryType ? r.stakeholders[i].secondaryType : '');
+            }
         }
         r.counterValue = parseInt(r.counterValue.toString());
         return r;

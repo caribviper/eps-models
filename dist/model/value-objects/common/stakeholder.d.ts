@@ -16,9 +16,9 @@ export declare const STAKEHOLDER_TYPES: {
 export declare class Stakeholder {
     contact: Contact;
     stakeholderType: string;
-    active: boolean;
     secondaryType: string;
-    constructor(contact: Contact, stakeholderType: string);
+    active: boolean;
+    constructor(contact: Contact, stakeholderType: string, secondaryType?: string);
     readonly isEmpty: boolean;
     stringifyContact(): string;
     static isEmpty(stakeholder: Stakeholder): boolean;
