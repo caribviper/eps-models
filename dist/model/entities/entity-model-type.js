@@ -48,6 +48,7 @@ exports.ENTITY_MODELS = {
         DECISION_TEMPLATE: 'decision-template',
         DOCUMENT: 'document',
         DOCUMENT_TEMPLATE: 'document-template',
+        CONTENT_TEMPLATE: 'content-template',
         LETTER_TEMPLATE: 'letter-template',
         STATISTICAL_REPORT_TEMPLATE: 'statistical-report-template',
         ATTACHMENT_EVENT: 'attachment-event',

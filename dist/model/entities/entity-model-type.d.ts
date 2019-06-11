@@ -46,6 +46,7 @@ export declare const ENTITY_MODELS: {
         DECISION_TEMPLATE: string;
         DOCUMENT: string;
         DOCUMENT_TEMPLATE: string;
+        CONTENT_TEMPLATE: string;
         LETTER_TEMPLATE: string;
         STATISTICAL_REPORT_TEMPLATE: string;
         ATTACHMENT_EVENT: string;

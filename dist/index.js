@@ -71,6 +71,7 @@ __export(require("./model/entities/system/application-counter"));
 __export(require("./model/entities/system/decision-template"));
 __export(require("./model/entities/system/workflow-template"));
 __export(require("./model/entities/system/document-template"));
+__export(require("./model/entities/system/content-template"));
 __export(require("./model/entities/system/letter-template"));
 __export(require("./model/entities/system/message"));
 __export(require("./model/entities/system/job"));

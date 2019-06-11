@@ -81,6 +81,7 @@ export * from './model/entities/system/application-counter';
 export * from './model/entities/system/decision-template';
 export * from './model/entities/system/workflow-template';
 export * from './model/entities/system/document-template';
+export * from './model/entities/system/content-template';
 export * from './model/entities/system/letter-template';
 export * from './model/entities/system/message';
 export * from './model/entities/system/job';
