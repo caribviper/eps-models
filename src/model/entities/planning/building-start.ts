@@ -50,6 +50,9 @@ export class BuildingStart extends Entity {
   /** indicates if construction has started */
   public constructionStarted: boolean = false;
 
+  /**Has the development been completed */
+  public completed: boolean = false;
+
 
   /**Gets whether building start/certificate was certified */
   get isCertified(): boolean {

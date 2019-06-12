@@ -32,6 +32,7 @@ var BuildingStart = (function (_super) {
         _this.mailingAddress = new contact_1.Contact();
         _this.dispatchedInfo = null;
         _this.constructionStarted = false;
+        _this.completed = false;
         _this.registryId = registryId;
         _this.commencementDate = commencementDate;
         return _this;
