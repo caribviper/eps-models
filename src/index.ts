@@ -40,6 +40,7 @@ export * from './model/value-objects/system/user-statistic-value';
 
 //entities
 export * from './model/entities/entity-model-type';
+export * from './model/entities/document-entity';
 
 export * from './model/entities/general/category';
 export * from './model/entities/general/agency';

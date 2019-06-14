@@ -2,8 +2,8 @@ import { Stakeholder } from './../../value-objects/common/stakeholder';
 import { NoticeType } from './../../value-objects/enumerators/filetype';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { EventRecord } from './../../value-objects/common/event-record';
-import { Entity } from 'caribviper-entity';
-export declare class Notice extends Entity {
+import { DocumentEntity } from '../document-entity';
+export declare class Notice extends DocumentEntity {
     registryId: string;
     noticeType: NoticeType;
     content: string;

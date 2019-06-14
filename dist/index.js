@@ -35,6 +35,7 @@ __export(require("./model/value-objects/system/socket"));
 __export(require("./model/value-objects/system/statistic-item"));
 __export(require("./model/value-objects/system/user-statistic-value"));
 __export(require("./model/entities/entity-model-type"));
+__export(require("./model/entities/document-entity"));
 __export(require("./model/entities/general/category"));
 __export(require("./model/entities/general/agency"));
 __export(require("./model/entities/general/favourite"));

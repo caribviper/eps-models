@@ -1,6 +1,6 @@
-import { Entity } from 'caribviper-entity';
 import { UserInfo, AttachedPicture, Contact } from '../../..';
-export declare class Letter extends Entity {
+import { DocumentEntity } from '../document-entity';
+export declare class Letter extends DocumentEntity {
     registryId: string;
     content: string;
     creator: UserInfo;

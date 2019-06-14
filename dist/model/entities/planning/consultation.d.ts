@@ -1,8 +1,8 @@
 import { AttachedPicture } from './../../value-objects/planning/report';
 import { Contact } from './../../value-objects/common/contact';
 import { UserInfo } from './../../value-objects/common/userinfo';
-import { Entity } from 'caribviper-entity';
-export declare class Consultation extends Entity {
+import { DocumentEntity } from '../document-entity';
+export declare class Consultation extends DocumentEntity {
     registryId: string;
     dateCompleted: Date;
     dateRequested: Date;

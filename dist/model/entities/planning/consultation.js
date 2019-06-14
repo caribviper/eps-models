@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var caribviper_common_1 = require("caribviper-common");
 var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_entity_1 = require("caribviper-entity");
+var document_entity_1 = require("../document-entity");
 var Consultation = (function (_super) {
     __extends(Consultation, _super);
     function Consultation(registryId, guid, organisation, comments, documentId, attachmentId) {
@@ -66,5 +67,5 @@ var Consultation = (function (_super) {
         return array;
     };
     return Consultation;
-}(caribviper_entity_1.Entity));
+}(document_entity_1.DocumentEntity));
 exports.Consultation = Consultation;

@@ -30,6 +30,7 @@ export * from './model/value-objects/system/socket';
 export * from './model/value-objects/system/statistic-item';
 export * from './model/value-objects/system/user-statistic-value';
 export * from './model/entities/entity-model-type';
+export * from './model/entities/document-entity';
 export * from './model/entities/general/category';
 export * from './model/entities/general/agency';
 export * from './model/entities/general/favourite';

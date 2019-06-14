@@ -14,6 +14,7 @@ var decision_types_1 = require("./../../value-objects/enumerators/decision-types
 var entity_model_type_1 = require("./../entity-model-type");
 var caribviper_common_1 = require("caribviper-common");
 var caribviper_entity_1 = require("caribviper-entity");
+var document_entity_1 = require("../document-entity");
 exports.DECISION_AUTHORITY = {
     CTP: { name: 'CTP', value: 0 },
     MINISTER: { name: 'MINISTER', value: 1 }
@@ -221,5 +222,5 @@ var Decision = (function (_super) {
         return array;
     };
     return Decision;
-}(caribviper_entity_1.Entity));
+}(document_entity_1.DocumentEntity));
 exports.Decision = Decision;

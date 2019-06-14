@@ -7,11 +7,12 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { EventRecord } from './../../value-objects/common/event-record';
 import { Entity } from 'caribviper-entity';
 import * as numeral from 'numeral';
+import { DocumentEntity } from '../document-entity';
 
 /**
  * Specifies the enforcement notice done
  */
-export class Notice extends Entity {
+export class Notice extends DocumentEntity {
 
   public events: EventRecord;
 

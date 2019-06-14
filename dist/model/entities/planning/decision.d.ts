@@ -1,6 +1,6 @@
 import { DecisionItemTemplate } from './../system/decision-template';
 import { UserInfo } from './../../value-objects/common/userinfo';
-import { Entity } from 'caribviper-entity';
+import { DocumentEntity } from '../document-entity';
 export declare const DECISION_AUTHORITY: {
     CTP: {
         name: string;
@@ -39,7 +39,7 @@ export declare class DecisionProperty {
     loggedAppeal(appealDate: Date): void;
     validateProperty(): void;
 }
-export declare class Decision extends Entity {
+export declare class Decision extends DocumentEntity {
     registryId: string;
     properties: DecisionProperty;
     decisionItems: DecisionItem[];

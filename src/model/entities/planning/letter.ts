@@ -1,7 +1,9 @@
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 import { ENTITY_MODELS, UserInfo, AttachedPicture, Contact } from '../../..';
-export class Letter extends Entity {
+import { DocumentEntity } from '../document-entity';
+
+export class Letter extends DocumentEntity {
 
   /** Gets/sets the date the letter was created */
   public created: Date = null;

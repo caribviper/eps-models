@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var __1 = require("../../..");
+var document_entity_1 = require("../document-entity");
 var Letter = (function (_super) {
     __extends(Letter, _super);
     function Letter(guid, registryId, content, creator) {
@@ -95,5 +96,5 @@ var Letter = (function (_super) {
         return array;
     };
     return Letter;
-}(caribviper_entity_1.Entity));
+}(document_entity_1.DocumentEntity));
 exports.Letter = Letter;

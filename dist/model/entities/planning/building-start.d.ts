@@ -2,8 +2,8 @@ import { DispatchedInfo } from './../../value-objects/common/dispatched-info';
 import { FeeItem } from './../../value-objects/common/fee-item';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Contact } from './../../value-objects/common/contact';
-import { Entity } from 'caribviper-entity';
-export declare class BuildingStart extends Entity {
+import { DocumentEntity } from '../document-entity';
+export declare class BuildingStart extends DocumentEntity {
     dateReceived: Date;
     acceptingUser: UserInfo;
     certificationDate: Date;

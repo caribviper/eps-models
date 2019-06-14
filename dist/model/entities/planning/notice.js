@@ -15,6 +15,7 @@ var entity_model_type_1 = require("./../entity-model-type");
 var event_record_1 = require("./../../value-objects/common/event-record");
 var caribviper_entity_1 = require("caribviper-entity");
 var numeral = require("numeral");
+var document_entity_1 = require("../document-entity");
 var Notice = (function (_super) {
     __extends(Notice, _super);
     function Notice(registryId, guid, noticeType, content, user) {
@@ -87,5 +88,5 @@ var Notice = (function (_super) {
         return array;
     };
     return Notice;
-}(caribviper_entity_1.Entity));
+}(document_entity_1.DocumentEntity));
 exports.Notice = Notice;

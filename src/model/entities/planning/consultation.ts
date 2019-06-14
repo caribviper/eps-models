@@ -5,9 +5,10 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { Contact } from './../../value-objects/common/contact';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
+import { DocumentEntity } from '../document-entity';
 
 
-export class Consultation extends Entity {
+export class Consultation extends DocumentEntity {
   /**Id of registry item */
   registryId: string;
 

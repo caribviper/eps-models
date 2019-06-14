@@ -4,6 +4,7 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Assert } from 'caribviper-common';
 import { Entity } from 'caribviper-entity';
+import { DocumentEntity } from '../document-entity';
 
 /**Sepcifies the possible decision maker */
 export const DECISION_AUTHORITY = {
@@ -116,7 +117,7 @@ export class DecisionProperty {
 }
 
 /** Decision */
-export class Decision extends Entity {
+export class Decision extends DocumentEntity {
   /**Registry item id */
   registryId: string;
 

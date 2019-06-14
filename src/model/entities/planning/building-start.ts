@@ -6,9 +6,10 @@ import { ENTITY_MODELS } from './../entity-model-type';
 import { Contact } from './../../value-objects/common/contact';
 import { Assert } from 'caribviper-common';
 import { Entity } from 'caribviper-entity';
+import { DocumentEntity } from '../document-entity';
 
 
-export class BuildingStart extends Entity {
+export class BuildingStart extends DocumentEntity {
 
   //date received
   dateReceived: Date;

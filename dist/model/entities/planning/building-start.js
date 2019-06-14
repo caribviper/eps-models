@@ -16,6 +16,7 @@ var entity_model_type_1 = require("./../entity-model-type");
 var contact_1 = require("./../../value-objects/common/contact");
 var caribviper_common_1 = require("caribviper-common");
 var caribviper_entity_1 = require("caribviper-entity");
+var document_entity_1 = require("../document-entity");
 var BuildingStart = (function (_super) {
     __extends(BuildingStart, _super);
     function BuildingStart(registryId, guid, commencementDate) {
@@ -84,5 +85,5 @@ var BuildingStart = (function (_super) {
         return array;
     };
     return BuildingStart;
-}(caribviper_entity_1.Entity));
+}(document_entity_1.DocumentEntity));
 exports.BuildingStart = BuildingStart;
