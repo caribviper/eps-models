@@ -42,7 +42,7 @@ export class Letter extends DocumentEntity {
   /**contacts of the letter */
   contacts: Contact[];
 
-  /**Stores the vairous fields an their values */
+  /**Stores the vairous fields and their values */
   formFields: any = {};
 
   constructor(guid: string = '', public registryId: string = '', public content: string = '', public creator: UserInfo = null) {
