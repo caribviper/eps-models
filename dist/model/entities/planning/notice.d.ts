@@ -21,6 +21,7 @@ export declare class Notice extends DocumentEntity {
     action: string;
     actionDate: Date;
     tcpContact: string;
+    formFields: any;
     constructor(registryId?: string, guid?: string, noticeType?: NoticeType, content?: string, user?: UserInfo);
     generateNo(area?: string): void;
     validateEntity(): void;

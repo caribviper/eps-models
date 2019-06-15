@@ -55,6 +55,9 @@ export class Notice extends DocumentEntity {
   //Person at tcp to be contacted
   public tcpContact: string;
 
+  /**Stores the vairous fields and their values */
+  formFields: any = {};
+
   constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
     super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
     this.events = new EventRecord(user);

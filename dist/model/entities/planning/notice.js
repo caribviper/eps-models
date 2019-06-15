@@ -36,6 +36,7 @@ var Notice = (function (_super) {
         _this.infractionStartDate = null;
         _this.infractionEndDate = null;
         _this.action = '';
+        _this.formFields = {};
         _this.events = new event_record_1.EventRecord(user);
         return _this;
     }
