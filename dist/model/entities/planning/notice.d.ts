@@ -3,6 +3,12 @@ import { NoticeType } from './../../value-objects/enumerators/filetype';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { EventRecord } from './../../value-objects/common/event-record';
 import { DocumentEntity } from '../document-entity';
+export declare class EnforcementNoticeDetails {
+    location: string;
+    infraction: string;
+    requiredAction: string;
+    constructor(location: string, infraction: string, requiredAction: string);
+}
 export declare class Notice extends DocumentEntity {
     registryId: string;
     noticeType: NoticeType;
@@ -18,9 +24,11 @@ export declare class Notice extends DocumentEntity {
     enforcementDate: Date;
     infractionStartDate: Date;
     infractionEndDate: Date;
+    infraction: string;
     action: string;
     actionDate: Date;
     tcpContact: string;
+    enforcementDetails: EnforcementNoticeDetails;
     formFields: any;
     constructor(registryId?: string, guid?: string, noticeType?: NoticeType, content?: string, user?: UserInfo);
     generateNo(area?: string): void;

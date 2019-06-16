@@ -16,6 +16,15 @@ var event_record_1 = require("./../../value-objects/common/event-record");
 var caribviper_entity_1 = require("caribviper-entity");
 var numeral = require("numeral");
 var document_entity_1 = require("../document-entity");
+var EnforcementNoticeDetails = (function () {
+    function EnforcementNoticeDetails(location, infraction, requiredAction) {
+        this.location = location;
+        this.infraction = infraction;
+        this.requiredAction = requiredAction;
+    }
+    return EnforcementNoticeDetails;
+}());
+exports.EnforcementNoticeDetails = EnforcementNoticeDetails;
 var Notice = (function (_super) {
     __extends(Notice, _super);
     function Notice(registryId, guid, noticeType, content, user) {
@@ -35,6 +44,7 @@ var Notice = (function (_super) {
         _this.enforcementDate = null;
         _this.infractionStartDate = null;
         _this.infractionEndDate = null;
+        _this.infraction = '';
         _this.action = '';
         _this.formFields = {};
         _this.events = new event_record_1.EventRecord(user);

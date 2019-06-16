@@ -10,6 +10,19 @@ import * as numeral from 'numeral';
 import { DocumentEntity } from '../document-entity';
 
 /**
+ * Enforcement Notice Details
+ */
+export class EnforcementNoticeDetails {
+  /**
+   * Creates details for an enforcement notice
+   * @param location Location with possible coordinates of infraction
+   * @param infraction Details of infraction
+   * @param requiredAction Required action to remedy
+   */
+  constructor(public location: string, public infraction: string,  public requiredAction: string) {}
+}
+
+/**
  * Specifies the enforcement notice done
  */
 export class Notice extends DocumentEntity {
@@ -46,6 +59,9 @@ export class Notice extends DocumentEntity {
   //Gets or sets infraction end date
   public infractionEndDate: Date = null;
 
+  /**Stores the infraction information */
+  public infraction: string = '';
+
   //Gets or sets the recommended action to be taken
   public action: string ='';
 
@@ -55,9 +71,20 @@ export class Notice extends DocumentEntity {
   //Person at tcp to be contacted
   public tcpContact: string;
 
+  /**Store enforcement details if applicable */
+  public enforcementDetails: EnforcementNoticeDetails;
+
   /**Stores the vairous fields and their values */
   formFields: any = {};
 
+  /**
+   * 
+   * @param registryId Registry id the notice relates to
+   * @param guid Id of the notice
+   * @param noticeType Type of notice
+   * @param content Content body of notice
+   * @param user User that created notice
+   */
   constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
     super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
     this.events = new EventRecord(user);
