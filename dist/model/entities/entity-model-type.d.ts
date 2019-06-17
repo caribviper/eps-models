@@ -59,6 +59,7 @@ export declare const ENTITY_MODELS: {
         BROADCAST_USER_MESSAGE_INSTANCE: string;
         ALERT: string;
         JOB: string;
+        REGISTRY_LOG_ENTRY: string;
     };
     SPATIAL: {
         SPATIAL_FEATURE_LAYER: string;
