@@ -61,6 +61,9 @@ export class Notice extends DocumentEntity {
   /**Location with possible coordinates of infraction */
   public location: string;
 
+  /**stores the type of enforcement notice, provided notice is an enforcement notice */
+  public enforcementNoticeType: string = '';
+
   /**
    * 
    * @param registryId Registry id the notice relates to
