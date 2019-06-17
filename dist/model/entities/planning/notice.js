@@ -16,15 +16,6 @@ var event_record_1 = require("./../../value-objects/common/event-record");
 var caribviper_entity_1 = require("caribviper-entity");
 var numeral = require("numeral");
 var document_entity_1 = require("../document-entity");
-var EnforcementNoticeDetails = (function () {
-    function EnforcementNoticeDetails(location, infraction, requiredAction) {
-        this.location = location;
-        this.infraction = infraction;
-        this.requiredAction = requiredAction;
-    }
-    return EnforcementNoticeDetails;
-}());
-exports.EnforcementNoticeDetails = EnforcementNoticeDetails;
 var Notice = (function (_super) {
     __extends(Notice, _super);
     function Notice(registryId, guid, noticeType, content, user) {
@@ -46,7 +37,6 @@ var Notice = (function (_super) {
         _this.infractionEndDate = null;
         _this.infraction = '';
         _this.action = '';
-        _this.formFields = {};
         _this.events = new event_record_1.EventRecord(user);
         return _this;
     }
@@ -70,6 +60,12 @@ var Notice = (function (_super) {
     Notice.prototype.dispatch = function (user) {
         this.events = Object.assign(new event_record_1.EventRecord(null), this.events);
         this.events.dispatch(user);
+    };
+    Notice.prototype.loadEnforcementData = function (infraction, infractionStartDate, infractionEndDate, location) {
+        this.infraction = infraction;
+        this.infractionStartDate = infractionStartDate;
+        this.infractionEndDate = infractionEndDate;
+        this.location = location;
     };
     Notice.createId = function (registryId, guid) {
         if (registryId === void 0) { registryId = ''; }

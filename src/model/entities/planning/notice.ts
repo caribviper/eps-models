@@ -10,19 +10,6 @@ import * as numeral from 'numeral';
 import { DocumentEntity } from '../document-entity';
 
 /**
- * Enforcement Notice Details
- */
-export class EnforcementNoticeDetails {
-  /**
-   * Creates details for an enforcement notice
-   * @param location Location with possible coordinates of infraction
-   * @param infraction Details of infraction
-   * @param requiredAction Required action to remedy
-   */
-  constructor(public location: string, public infraction: string,  public requiredAction: string) {}
-}
-
-/**
  * Specifies the enforcement notice done
  */
 export class Notice extends DocumentEntity {
@@ -71,11 +58,8 @@ export class Notice extends DocumentEntity {
   //Person at tcp to be contacted
   public tcpContact: string;
 
-  /**Store enforcement details if applicable */
-  public enforcementDetails: EnforcementNoticeDetails;
-
-  /**Stores the vairous fields and their values */
-  formFields: any = {};
+  /**Location with possible coordinates of infraction */
+  public location: string;
 
   /**
    * 
@@ -120,6 +104,20 @@ export class Notice extends DocumentEntity {
   dispatch(user: UserInfo) { 
     this.events = Object.assign(new EventRecord(null), this.events);
     this.events.dispatch(user); 
+  }
+
+  /**
+   * Loads the notice with enforcement data
+   * @param infraction Infraction to be set
+   * @param infractionStartDate Date start period of infraction commencement
+   * @param infractionEndDate Date end period of infraction commencement
+   * @param location Location of site
+   */
+  loadEnforcementData(infraction: string, infractionStartDate: Date, infractionEndDate: Date, location: string) {
+    this.infraction = infraction;
+    this.infractionStartDate = infractionStartDate;
+    this.infractionEndDate = infractionEndDate;
+    this.location = location;
   }
 
   public static createId(registryId: string = '', guid: string = '') {
