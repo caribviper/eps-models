@@ -64,6 +64,9 @@ export class Notice extends DocumentEntity {
   /**stores the type of enforcement notice, provided notice is an enforcement notice */
   public enforcementNoticeType: string = '';
 
+  /**Store any data not explicitly defined */
+  public fields: any = {}; 
+
   /**
    * 
    * @param registryId Registry id the notice relates to

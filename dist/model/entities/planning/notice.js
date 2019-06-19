@@ -38,6 +38,7 @@ var Notice = (function (_super) {
         _this.infraction = '';
         _this.action = '';
         _this.enforcementNoticeType = '';
+        _this.fields = {};
         _this.events = new event_record_1.EventRecord(user);
         return _this;
     }
