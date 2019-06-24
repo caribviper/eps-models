@@ -47,7 +47,9 @@ var Notice = (function (_super) {
         get: function () {
             if (!this.stakeholders || this.stakeholders.length < 1)
                 return null;
-            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OWNER; });
+            var stakeholder = this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OWNER; });
+            if (!!stakeholder)
+                return stakeholder.contact;
         },
         enumerable: true,
         configurable: true
@@ -56,7 +58,9 @@ var Notice = (function (_super) {
         get: function () {
             if (!this.stakeholders || this.stakeholders.length < 1)
                 return null;
-            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OCCUPIER; });
+            var stakeholder = this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OCCUPIER; });
+            if (!!stakeholder)
+                return stakeholder.contact;
         },
         enumerable: true,
         configurable: true
@@ -65,7 +69,9 @@ var Notice = (function (_super) {
         get: function () {
             if (!this.stakeholders || this.stakeholders.length < 1)
                 return null;
-            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.INTERESTED_PARTY; });
+            var stakeholder = this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.INTERESTED_PARTY; });
+            if (!!stakeholder)
+                return stakeholder.contact;
         },
         enumerable: true,
         configurable: true

@@ -80,22 +80,28 @@ export class Notice extends DocumentEntity {
     this.events = new EventRecord(user);
   }
 
-  get owner(): Stakeholder {
+  get owner(): Contact {
     if (!this.stakeholders || this.stakeholders.length < 1)
       return null;
-    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OWNER);
+    const stakeholder = this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OWNER);
+    if(!!stakeholder)
+      return stakeholder.contact;
   }
 
-  get occupier(): Stakeholder {
+  get occupier(): Contact {
     if (!this.stakeholders || this.stakeholders.length < 1)
       return null;
-    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OCCUPIER);
+    const stakeholder = this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OCCUPIER);
+    if(!!stakeholder)
+      return stakeholder.contact;
   }
 
-  get interestedParty(): Stakeholder {
+  get interestedParty(): Contact {
     if (!this.stakeholders || this.stakeholders.length < 1)
       return null;
-    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.INTERESTED_PARTY);
+    const stakeholder = this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.INTERESTED_PARTY);
+    if(!!stakeholder)
+      return stakeholder.contact;
   }
 
   generateNo(area: string = '') {

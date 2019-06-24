@@ -1,4 +1,5 @@
 import { Stakeholder } from './../../value-objects/common/stakeholder';
+import { Contact } from './../../value-objects/common/contact';
 import { NoticeType } from './../../value-objects/enumerators/filetype';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { EventRecord } from './../../value-objects/common/event-record';
@@ -26,9 +27,9 @@ export declare class Notice extends DocumentEntity {
     enforcementNoticeType: string;
     fields: any;
     constructor(registryId?: string, guid?: string, noticeType?: NoticeType, content?: string, user?: UserInfo);
-    readonly owner: Stakeholder;
-    readonly occupier: Stakeholder;
-    readonly interestedParty: Stakeholder;
+    readonly owner: Contact;
+    readonly occupier: Contact;
+    readonly interestedParty: Contact;
     generateNo(area?: string): void;
     validateEntity(): void;
     sign(user: UserInfo): void;
