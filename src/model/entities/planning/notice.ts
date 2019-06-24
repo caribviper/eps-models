@@ -1,4 +1,4 @@
-import { Stakeholder } from './../../value-objects/common/stakeholder';
+import { Stakeholder, STAKEHOLDER_TYPES } from './../../value-objects/common/stakeholder';
 import { Contact } from './../../value-objects/common/contact';
 import { NoticeType, FileType } from './../../value-objects/enumerators/filetype';
 import { Assert } from 'caribviper-common';
@@ -50,7 +50,7 @@ export class Notice extends DocumentEntity {
   public infraction: string = '';
 
   //Gets or sets the recommended action to be taken
-  public action: string ='';
+  public action: string = '';
 
   //Gets the date to carry out the action
   public actionDate: Date;
@@ -65,7 +65,7 @@ export class Notice extends DocumentEntity {
   public enforcementNoticeType: string = '';
 
   /**Store any data not explicitly defined */
-  public fields: any = {}; 
+  public fields: any = {};
 
   /**
    * 
@@ -78,6 +78,24 @@ export class Notice extends DocumentEntity {
   constructor(public registryId: string = '', guid: string = '', public noticeType: NoticeType = null, public content: string = '', user: UserInfo = null) {
     super(ENTITY_MODELS.PLANNING.NOTICE, Notice.createId(registryId, guid), true);
     this.events = new EventRecord(user);
+  }
+
+  get owner(): Stakeholder {
+    if (!this.stakeholders || this.stakeholders.length < 1)
+      return null;
+    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OWNER);
+  }
+
+  get occupier(): Stakeholder {
+    if (!this.stakeholders || this.stakeholders.length < 1)
+      return null;
+    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.OCCUPIER);
+  }
+
+  get interestedParty(): Stakeholder {
+    if (!this.stakeholders || this.stakeholders.length < 1)
+      return null;
+    return this.stakeholders.find(s => s.secondaryType === STAKEHOLDER_TYPES.INTERESTED_PARTY);
   }
 
   generateNo(area: string = '') {
@@ -107,9 +125,9 @@ export class Notice extends DocumentEntity {
    * Dispatches a notice by the specifed user
    * @param user User dispatching the notice
    */
-  dispatch(user: UserInfo) { 
+  dispatch(user: UserInfo) {
     this.events = Object.assign(new EventRecord(null), this.events);
-    this.events.dispatch(user); 
+    this.events.dispatch(user);
   }
 
   /**

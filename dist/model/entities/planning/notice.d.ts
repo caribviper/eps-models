@@ -26,6 +26,9 @@ export declare class Notice extends DocumentEntity {
     enforcementNoticeType: string;
     fields: any;
     constructor(registryId?: string, guid?: string, noticeType?: NoticeType, content?: string, user?: UserInfo);
+    readonly owner: Stakeholder;
+    readonly occupier: Stakeholder;
+    readonly interestedParty: Stakeholder;
     generateNo(area?: string): void;
     validateEntity(): void;
     sign(user: UserInfo): void;

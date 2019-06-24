@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var stakeholder_1 = require("./../../value-objects/common/stakeholder");
 var caribviper_common_1 = require("caribviper-common");
 var entity_model_type_1 = require("./../entity-model-type");
 var event_record_1 = require("./../../value-objects/common/event-record");
@@ -42,6 +43,33 @@ var Notice = (function (_super) {
         _this.events = new event_record_1.EventRecord(user);
         return _this;
     }
+    Object.defineProperty(Notice.prototype, "owner", {
+        get: function () {
+            if (!this.stakeholders || this.stakeholders.length < 1)
+                return null;
+            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OWNER; });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Notice.prototype, "occupier", {
+        get: function () {
+            if (!this.stakeholders || this.stakeholders.length < 1)
+                return null;
+            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.OCCUPIER; });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Notice.prototype, "interestedParty", {
+        get: function () {
+            if (!this.stakeholders || this.stakeholders.length < 1)
+                return null;
+            return this.stakeholders.find(function (s) { return s.secondaryType === stakeholder_1.STAKEHOLDER_TYPES.INTERESTED_PARTY; });
+        },
+        enumerable: true,
+        configurable: true
+    });
     Notice.prototype.generateNo = function (area) {
         if (area === void 0) { area = ''; }
         this.area = !!area ? area : this.area;
