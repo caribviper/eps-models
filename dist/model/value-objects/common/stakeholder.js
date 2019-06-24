@@ -11,6 +11,7 @@ exports.STAKEHOLDER_TYPES = {
     OCCUPIER: 'occupier',
     NOTICEE: 'notice recipient',
     THIRD_PARTY: 'third party',
+    INTERESTED_PARTY: 'interested party',
     IGNORE: 'ignore contact',
     ASSOCIATED_ORGANISATION: 'associated organisation',
     AGENCY: 'government agency'

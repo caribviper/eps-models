@@ -9,6 +9,7 @@ export declare const STAKEHOLDER_TYPES: {
     OCCUPIER: string;
     NOTICEE: string;
     THIRD_PARTY: string;
+    INTERESTED_PARTY: string;
     IGNORE: string;
     ASSOCIATED_ORGANISATION: string;
     AGENCY: string;

@@ -20,6 +20,8 @@ export const STAKEHOLDER_TYPES = {
   NOTICEE: 'notice recipient',
   //Any other third party recipient
   THIRD_PARTY: 'third party',
+  //Any other interested party recipient
+  INTERESTED_PARTY: 'interested party',
   //Ignores the specified contact
   IGNORE: 'ignore contact',
   //An associated organisation
