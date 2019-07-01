@@ -81,6 +81,7 @@ __export(require("./model/entities/system/attachment-event"));
 __export(require("./model/entities/system/broadcast-message"));
 __export(require("./model/entities/system/broadcast-user-message-instance"));
 __export(require("./model/entities/system/registry-log-entry"));
+__export(require("./model/entities/system/manual"));
 __export(require("./model/value-objects/spatial/spatial-data"));
 __export(require("./model/value-objects/spatial/spatial-registry-property"));
 __export(require("./model/entities/spatial/spatial-feature-layer"));

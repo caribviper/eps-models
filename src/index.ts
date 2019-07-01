@@ -91,6 +91,7 @@ export * from './model/entities/system/attachment-event';
 export * from './model/entities/system/broadcast-message';
 export * from './model/entities/system/broadcast-user-message-instance';
 export * from './model/entities/system/registry-log-entry';
+export * from './model/entities/system/manual';
 
 //spatial
 export * from './model/value-objects/spatial/spatial-data';

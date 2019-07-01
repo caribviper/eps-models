@@ -63,7 +63,8 @@ export const ENTITY_MODELS = {
     BROADCAST_USER_MESSAGE_INSTANCE: 'instance',
     ALERT: 'alert',
     JOB: 'job',
-    REGISTRY_LOG_ENTRY: 'registry-log'
+    REGISTRY_LOG_ENTRY: 'registry-log',
+    MANUAL: 'manual'
   },
 
   SPATIAL: {    

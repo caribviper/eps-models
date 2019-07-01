@@ -60,6 +60,7 @@ export declare const ENTITY_MODELS: {
         ALERT: string;
         JOB: string;
         REGISTRY_LOG_ENTRY: string;
+        MANUAL: string;
     };
     SPATIAL: {
         SPATIAL_FEATURE_LAYER: string;
