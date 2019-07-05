@@ -37,7 +37,7 @@ export class BroadcastMessage extends Entity {
   public broadcastReceivers: BroadcastMessageReceiver;
 
   /**
-   * 
+   * Creates a new broadcast message
    * @param guid Id of the broadcast message
    * @param title Title of the broadcast
    * @param message Content of the broadcast
@@ -74,20 +74,19 @@ export class BroadcastMessage extends Entity {
 
   /**
    * Commits the broadcast to dispatching
-   * @param users Users to get broadcast
    */
-  broadcast(users: string[] = []): BroadcastUserMessageInstance[] {
-    if (!!users || users.length < 1)
-      return [];
+  broadcast() {
     if (!!this.dateDispatched)
-      throw 'Broadcast message already sent'
+      throw new Error('Broadcast message already sent');
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
     this.dateDispatched = new Date();
-    const bInstances: BroadcastUserMessageInstance[] = [];
-    users.forEach(user => {
-      bInstances.push(new BroadcastUserMessageInstance(this._id, user, this.expirationDate));
-    });
-    return bInstances;
+  }
+
+  /**
+   * Recalls a broadcast
+   */
+  recall() {
+    this.dateDispatched = undefined;
   }
 
   public static createId(guid: string = '') {

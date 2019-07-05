@@ -1,4 +1,3 @@
-import { BroadcastUserMessageInstance } from './broadcast-user-message-instance';
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
 export declare class BroadcastMessageReceiver {
@@ -20,7 +19,8 @@ export declare class BroadcastMessage extends Entity {
     readonly expirationDate: Date;
     readonly canBroadcast: boolean;
     validateEntity(): void;
-    broadcast(users?: string[]): BroadcastUserMessageInstance[];
+    broadcast(): void;
+    recall(): void;
     static createId(guid?: string): string;
     static mapToEntity(source: any): BroadcastMessage;
     static mapToEntityArray(source: BroadcastMessage[]): BroadcastMessage[];
