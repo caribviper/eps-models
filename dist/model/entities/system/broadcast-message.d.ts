@@ -12,6 +12,7 @@ export declare class BroadcastMessage extends Entity {
     constructor(guid?: string, title?: string, message?: string, creator?: UserInfo);
     readonly expirationDate: Date;
     readonly canBroadcast: boolean;
+    readonly dispatched: boolean;
     validateEntity(): void;
     broadcast(): void;
     recall(): void;

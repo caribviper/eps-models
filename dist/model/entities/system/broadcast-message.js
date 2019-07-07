@@ -45,7 +45,14 @@ var BroadcastMessage = (function (_super) {
     });
     Object.defineProperty(BroadcastMessage.prototype, "canBroadcast", {
         get: function () {
-            return !!this.dateDispatched !== true && !!this.title && !!this.message;
+            return !!this.dateDispatched !== true && !!this.title && !!this.message && this.domains && this.domains.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BroadcastMessage.prototype, "dispatched", {
+        get: function () {
+            return !!this.dateDispatched === true;
         },
         enumerable: true,
         configurable: true
@@ -59,13 +66,14 @@ var BroadcastMessage = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.domains, 'Must have valid receivers');
     };
     BroadcastMessage.prototype.broadcast = function () {
-        if (!!this.dateDispatched)
+        if (this.dispatched)
             throw new Error('Broadcast message already sent');
         this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
         this.dateDispatched = new Date();
     };
     BroadcastMessage.prototype.recall = function () {
-        this.dateDispatched = undefined;
+        if (this.dispatched)
+            this.dateDispatched = undefined;
     };
     BroadcastMessage.createId = function (guid) {
         if (guid === void 0) { guid = ''; }

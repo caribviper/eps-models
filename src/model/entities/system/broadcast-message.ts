@@ -47,7 +47,12 @@ export class BroadcastMessage extends Entity {
 
   /**Indicates if the message can be broadcasted */
   get canBroadcast(): boolean {
-    return !!this.dateDispatched !== true && !!this.title && !!this.message;
+    return !!this.dateDispatched !== true && !!this.title && !!this.message && this.domains && this.domains.length > 0;
+  }
+
+  /**Indicates if the message has been dispatched */
+  get dispatched(): boolean {
+    return !!this.dateDispatched === true;
   }
 
   validateEntity() {
@@ -63,7 +68,7 @@ export class BroadcastMessage extends Entity {
    * Commits the broadcast to dispatching
    */
   broadcast() {
-    if (!!this.dateDispatched)
+    if (this.dispatched)
       throw new Error('Broadcast message already sent');
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
     this.dateDispatched = new Date();
@@ -73,7 +78,8 @@ export class BroadcastMessage extends Entity {
    * Recalls a broadcast
    */
   recall() {
-    this.dateDispatched = undefined;
+    if(this.dispatched)
+      this.dateDispatched = undefined;
   }
 
   public static createId(guid: string = '') {
