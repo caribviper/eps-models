@@ -1,11 +1,5 @@
 import { UserInfo } from './../../value-objects/common/userinfo';
 import { Entity } from 'caribviper-entity';
-export declare class BroadcastMessageReceiver {
-    readonly domains: string[];
-    readonly groups: string[];
-    readonly users: string[];
-    constructor();
-}
 export declare class BroadcastMessage extends Entity {
     guid: string;
     title: string;
@@ -14,7 +8,7 @@ export declare class BroadcastMessage extends Entity {
     dateCreated: Date;
     dateDispatched: Date;
     activeDays: number;
-    broadcastReceivers: BroadcastMessageReceiver;
+    domains: string[];
     constructor(guid?: string, title?: string, message?: string, creator?: UserInfo);
     readonly expirationDate: Date;
     readonly canBroadcast: boolean;

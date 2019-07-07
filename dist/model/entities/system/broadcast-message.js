@@ -16,15 +16,6 @@ var userinfo_1 = require("./../../value-objects/common/userinfo");
 var caribviper_entity_1 = require("caribviper-entity");
 var moment = require("moment");
 var ACTIVE_DAYS_MIN = 1, ACTIVE_DAYS_MAX = 7, ACTIVE_DAYS_DEFAULT = 5;
-var BroadcastMessageReceiver = (function () {
-    function BroadcastMessageReceiver() {
-        this.domains = [];
-        this.groups = [];
-        this.users = [];
-    }
-    return BroadcastMessageReceiver;
-}());
-exports.BroadcastMessageReceiver = BroadcastMessageReceiver;
 var BroadcastMessage = (function (_super) {
     __extends(BroadcastMessage, _super);
     function BroadcastMessage(guid, title, message, creator) {
@@ -37,9 +28,9 @@ var BroadcastMessage = (function (_super) {
         _this.title = title;
         _this.message = message;
         _this.creator = creator;
+        _this.domains = [];
         _this.dateCreated = new Date();
         _this.activeDays = ACTIVE_DAYS_DEFAULT;
-        _this.broadcastReceivers = new BroadcastMessageReceiver();
         return _this;
     }
     Object.defineProperty(BroadcastMessage.prototype, "expirationDate", {
@@ -65,7 +56,7 @@ var BroadcastMessage = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.dateCreated, 'Must have a valid creation date');
         caribviper_common_1.Assert.isTruthy(this.title, 'Must have a valid message');
         caribviper_common_1.Assert.isTruthy(this.message, 'Must have a valid title');
-        caribviper_common_1.Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
+        caribviper_common_1.Assert.isTruthy(this.domains, 'Must have valid receivers');
     };
     BroadcastMessage.prototype.broadcast = function () {
         if (!!this.dateDispatched)

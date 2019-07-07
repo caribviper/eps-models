@@ -9,18 +9,6 @@ const ACTIVE_DAYS_MIN = 1,
   ACTIVE_DAYS_MAX = 7,
   ACTIVE_DAYS_DEFAULT = 5;
 
-export class BroadcastMessageReceiver {
-  public readonly domains: string[];
-  public readonly groups: string[];
-  public readonly users: string[];
-
-  constructor() {
-    this.domains = [];
-    this.groups = [];
-    this.users = [];
-  }
-}
-
 /**Manages broadcasts of the system */
 export class BroadcastMessage extends Entity {
 
@@ -34,7 +22,7 @@ export class BroadcastMessage extends Entity {
   public activeDays: number;
 
   /**Recipients of the message */
-  public broadcastReceivers: BroadcastMessageReceiver;
+  public domains: string[] = [];
 
   /**
    * Creates a new broadcast message
@@ -47,7 +35,6 @@ export class BroadcastMessage extends Entity {
     super(ENTITY_MODELS.SYSTEM.BROADCAST_MESSAGE, BroadcastMessage.createId(guid), true);
     this.dateCreated = new Date();
     this.activeDays = ACTIVE_DAYS_DEFAULT;
-    this.broadcastReceivers = new BroadcastMessageReceiver();
   }
 
   /**Expiration date of the message */
@@ -69,7 +56,7 @@ export class BroadcastMessage extends Entity {
     Assert.isTruthy(this.dateCreated, 'Must have a valid creation date');
     Assert.isTruthy(this.title, 'Must have a valid message');
     Assert.isTruthy(this.message, 'Must have a valid title');
-    Assert.isTruthy(this.broadcastReceivers, 'Must have valid receivers');
+    Assert.isTruthy(this.domains, 'Must have valid receivers');
   }
 
   /**
