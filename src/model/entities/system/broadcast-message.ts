@@ -59,8 +59,8 @@ export class BroadcastMessage extends Entity {
     Assert.isFalse(this.isTransient, 'Must not be transient');
     Assert.isTruthy(this.creator, 'Must have a valid creator');
     Assert.isTruthy(this.dateCreated, 'Must have a valid creation date');
-    Assert.isTruthy(this.title, 'Must have a valid message');
-    Assert.isTruthy(this.message, 'Must have a valid title');
+    Assert.isTruthy(this.title, 'Must have a valid title');
+    Assert.isTruthy(this.message, 'Must have a valid message');
     Assert.isTruthy(this.domains, 'Must have valid receivers');
   }
 

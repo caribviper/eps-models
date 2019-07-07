@@ -61,8 +61,8 @@ var BroadcastMessage = (function (_super) {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Must not be transient');
         caribviper_common_1.Assert.isTruthy(this.creator, 'Must have a valid creator');
         caribviper_common_1.Assert.isTruthy(this.dateCreated, 'Must have a valid creation date');
-        caribviper_common_1.Assert.isTruthy(this.title, 'Must have a valid message');
-        caribviper_common_1.Assert.isTruthy(this.message, 'Must have a valid title');
+        caribviper_common_1.Assert.isTruthy(this.title, 'Must have a valid title');
+        caribviper_common_1.Assert.isTruthy(this.message, 'Must have a valid message');
         caribviper_common_1.Assert.isTruthy(this.domains, 'Must have valid receivers');
     };
     BroadcastMessage.prototype.broadcast = function () {
