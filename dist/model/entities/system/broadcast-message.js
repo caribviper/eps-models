@@ -36,9 +36,10 @@ var BroadcastMessage = (function (_super) {
     Object.defineProperty(BroadcastMessage.prototype, "expirationDate", {
         get: function () {
             if (!this.dateDispatched)
-                return null;
+                return undefined;
             this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
-            moment(new Date(this.dateDispatched)).add(this.activeDays, 'days');
+            var date = moment(new Date(this.dateDispatched)).add(this.activeDays, 'days');
+            return date.toDate();
         },
         enumerable: true,
         configurable: true

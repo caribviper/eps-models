@@ -40,9 +40,10 @@ export class BroadcastMessage extends Entity {
   /**Expiration date of the message */
   get expirationDate(): Date {
     if (!this.dateDispatched)
-      return null;
+      return undefined;
     this.activeDays = (this.activeDays < ACTIVE_DAYS_MIN || this.activeDays > ACTIVE_DAYS_MAX) ? ACTIVE_DAYS_DEFAULT : this.activeDays;
-    moment(new Date(this.dateDispatched)).add(this.activeDays, 'days');
+    const date = moment(new Date(this.dateDispatched)).add(this.activeDays, 'days');
+    return date.toDate();
   }
 
   /**Indicates if the message can be broadcasted */
