@@ -67,9 +67,10 @@ export const ENTITY_MODELS = {
     MANUAL: 'manual'
   },
 
-  SPATIAL: {    
+  SPATIAL: {
     SPATIAL_FEATURE_LAYER: 'spatial-feature-layer',
     SPATIAL_TILE_LAYER: 'spatial-tile-layer',
-    SPATIAL_MAP: 'spatial-map'
+    SPATIAL_MAP: 'spatial-map',
+    SPATIAL_PARCEL: 'parcel'
   }
 }

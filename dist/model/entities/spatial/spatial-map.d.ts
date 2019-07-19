@@ -16,9 +16,9 @@ export declare class SpatialMapOptions {
     controls: CustomMapControls;
 }
 export declare class SpatialMap extends Entity {
-    name: string;
-    description: string;
-    layers: GroupMapLayerItem[];
+    name?: string;
+    description?: string;
+    layers?: GroupMapLayerItem[];
     options: SpatialMapOptions;
     dataLayerIndex: number;
     domains: string[];

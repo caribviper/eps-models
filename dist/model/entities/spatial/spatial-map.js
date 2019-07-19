@@ -166,16 +166,16 @@ var SpatialMap = (function (_super) {
         return (!!this.layers && this.layers.length > 1 && index < this.layers.length - 1);
     };
     SpatialMap.prototype.moveLayerUp = function (index) {
+        var _a;
         if (this.canMoveLayerUp(index)) {
             _a = [this.layers[index], this.layers[index - 1]], this.layers[index - 1] = _a[0], this.layers[index] = _a[1];
         }
-        var _a;
     };
     SpatialMap.prototype.moveLayerDown = function (index) {
+        var _a;
         if (this.canMoveLayerDown(index)) {
             _a = [this.layers[index + 1], this.layers[index]], this.layers[index] = _a[0], this.layers[index + 1] = _a[1];
         }
-        var _a;
     };
     SpatialMap.createId = function (name) {
         if (!name)

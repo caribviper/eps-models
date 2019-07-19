@@ -22,5 +22,5 @@ export declare class StatisticalReport {
     readonly timestamp: number;
     constructor(template: StatisticalReportTemplate, data?: any);
     static createCustomReport(data: any, reportType: string, query: string, ...parameters: any[]): StatisticalReport;
-    private static generateCustomReportTemplate(reportType, query, ...parameters);
+    private static generateCustomReportTemplate;
 }

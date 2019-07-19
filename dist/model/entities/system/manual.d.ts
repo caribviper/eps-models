@@ -18,7 +18,7 @@ export declare class Manual extends Entity {
     constructor();
     validateEntity(): void;
     tableOfContents(): TableOfContentsItem[];
-    private flattenSections(manualSection);
+    private flattenSections;
     static createId(): string;
     static mapToEntity(source: any): Manual;
     static mapToEntityArray(source: Manual[]): Manual[];

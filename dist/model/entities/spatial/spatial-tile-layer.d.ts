@@ -1,9 +1,9 @@
 import { Entity } from 'caribviper-entity';
 export declare class SpatialTileLayer extends Entity {
-    name: string;
-    description: string;
-    templateUrl: string;
-    tileLayerOptions: {};
+    name?: string;
+    description?: string;
+    templateUrl?: string;
+    tileLayerOptions?: {};
     esriDynamicLayer: boolean;
     constructor(name?: string, description?: string, templateUrl?: string, tileLayerOptions?: {});
     validateEntity(): void;

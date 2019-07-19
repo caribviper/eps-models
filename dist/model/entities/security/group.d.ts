@@ -9,7 +9,7 @@ export declare class Group extends Entity {
     static createId(groupName: string): string;
     static mapToEntity(source: any): Group;
     static mapToEntityArray(source: Group[]): Group[];
-    private ensureResoureInitialised();
+    private ensureResoureInitialised;
     addResource(resourceId: string): void;
     removeResource(resourceId: string): void;
 }

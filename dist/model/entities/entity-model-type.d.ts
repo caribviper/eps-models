@@ -66,5 +66,6 @@ export declare const ENTITY_MODELS: {
         SPATIAL_FEATURE_LAYER: string;
         SPATIAL_TILE_LAYER: string;
         SPATIAL_MAP: string;
+        SPATIAL_PARCEL: string;
     };
 };

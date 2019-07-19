@@ -20,7 +20,7 @@ export declare class PlanningFactory {
     static createCertificateRoads(existingRegistry: RegistryItem): RegistryItem;
     static createCertificateSubdivisions(existingRegistry: RegistryItem): RegistryItem;
     static createCertificateWarehouse(existingRegistry: RegistryItem): RegistryItem;
-    private static createCertificate(existingRegistry, certificateType);
+    private static createCertificate;
     static createContinuedUseCertificate(): RegistryItem;
     static createNotice(registryId: string, type: string, user: UserInfo, area: string): Notice;
     static createNote(registryId: string, user: UserInfo): Note;

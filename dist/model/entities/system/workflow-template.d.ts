@@ -12,7 +12,7 @@ export declare class WorkflowTemplate extends Entity {
     removeActivity(activityIndex: number): void;
     moveActivityUp(order: number): void;
     moveActivityDown(order: number): void;
-    private swap(index1, index2);
+    private swap;
     static createId(name?: string): string;
     static mapToEntity(source: any): WorkflowTemplate;
     static mapToEntityArray(source: WorkflowTemplate[]): WorkflowTemplate[];

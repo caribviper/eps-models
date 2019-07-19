@@ -48,16 +48,16 @@ var SpatialFeatureLayer = (function (_super) {
         return (!!this.featureStyles && this.featureStyles.length > 1 && index < this.featureStyles.length - 1);
     };
     SpatialFeatureLayer.prototype.moveFeatureStyleUp = function (index) {
+        var _a;
         if (this.canMoveFeatureStyleUp(index)) {
             _a = [this.featureStyles[index], this.featureStyles[index - 1]], this.featureStyles[index - 1] = _a[0], this.featureStyles[index] = _a[1];
         }
-        var _a;
     };
     SpatialFeatureLayer.prototype.moveFeatureStyleDown = function (index) {
+        var _a;
         if (this.canMoveFeatureStyleDown(index)) {
             _a = [this.featureStyles[index + 1], this.featureStyles[index]], this.featureStyles[index] = _a[0], this.featureStyles[index + 1] = _a[1];
         }
-        var _a;
     };
     SpatialFeatureLayer.createId = function (name) {
         if (name === void 0) { name = ''; }

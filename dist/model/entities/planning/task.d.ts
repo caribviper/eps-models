@@ -58,7 +58,7 @@ export declare class UserTasksBox {
     sortTodo(): void;
     sortInbox(): void;
     sortOutbox(): void;
-    private sortTasks(tasks);
+    private sortTasks;
     static clone(box: UserTasksBox): UserTasksBox;
     readonly nonAssignedTasks: Task[];
     readonly allUndoneTasks: Task[];

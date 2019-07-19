@@ -202,6 +202,7 @@ var UserTasksBox = (function () {
     });
     UserTasksBox.prototype.update = function () {
         var _this = this;
+        var _a;
         this._unassignedTasks = Task.mapToEntityArray(this.outbox);
         var _loop_1 = function (x) {
             if (this_1.inbox.find(function (i) { return i.referenceNo === _this._unassignedTasks[x].referenceNo; }))
@@ -223,7 +224,6 @@ var UserTasksBox = (function () {
         }
         this._inboxUndoneTasks = this._allUndoneTasks;
         this._allUndoneTasks = this.sortTasks(this._allUndoneTasks);
-        var _a;
     };
     return UserTasksBox;
 }());

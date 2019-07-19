@@ -82,5 +82,6 @@ export * from './model/value-objects/spatial/spatial-registry-property';
 export * from './model/entities/spatial/spatial-feature-layer';
 export * from './model/entities/spatial/spatial-tile-layer';
 export * from './model/entities/spatial/spatial-map';
+export * from './model/entities/spatial/spatial-parcel';
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

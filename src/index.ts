@@ -99,6 +99,7 @@ export * from './model/value-objects/spatial/spatial-registry-property';
 export * from './model/entities/spatial/spatial-feature-layer';
 export * from './model/entities/spatial/spatial-tile-layer';
 export * from './model/entities/spatial/spatial-map';
+export * from './model/entities/spatial/spatial-parcel';
 
 //model factory
 export * from './model/entities/planning/dossier';
