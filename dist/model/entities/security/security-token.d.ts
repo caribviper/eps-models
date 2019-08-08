@@ -1,11 +1,11 @@
 import { Entity } from 'caribviper-entity';
 export declare class SecurityToken extends Entity {
     username: string;
-    token: string;
+    tokenHash: string;
     expiresTimestamp: number;
     valid: boolean;
     dateCreated: Date;
-    constructor(username?: string, token?: string, expiresTimestamp?: number);
+    constructor(username?: string, tokenHash?: string, expiresTimestamp?: number);
     hasExpired(): boolean;
     validateEntity(): void;
     static createId(username: string): string;

@@ -16,10 +16,10 @@ export class SecurityToken extends Entity {
   /**
    * Creates a new security token entity
    * @param username Username of owner of token
-   * @param token Encrypted token to be stored
+   * @param tokenHash Encrypted token to be stored
    * @param expiresTimestamp Expiration date of token
    */
-  constructor(public username: string = '', public token: string = '', public expiresTimestamp: number = undefined) {
+  constructor(public username: string = '', public tokenHash: string = '', public expiresTimestamp: number = undefined) {
     super(ENTITY_MODELS.SECURITY.USER_TOKEN, username);
     this.dateCreated = new Date();
   }
@@ -33,7 +33,7 @@ export class SecurityToken extends Entity {
     Assert.isFalse(this.isTransient, 'Entity cannot be transient');
     Assert.isTruthy(this.username, 'Username cannot be null/empty');
     Assert.isTruthy(this.expiresTimestamp, 'Expiration date cannot be null');
-    Assert.isTruthy(this.token, 'Token cannot be null');
+    Assert.isTruthy(this.tokenHash, 'Token cannot be null');
   }
 
   /**

@@ -15,13 +15,13 @@ var caribviper_entity_1 = require("caribviper-entity");
 var caribviper_common_1 = require("caribviper-common");
 var SecurityToken = (function (_super) {
     __extends(SecurityToken, _super);
-    function SecurityToken(username, token, expiresTimestamp) {
+    function SecurityToken(username, tokenHash, expiresTimestamp) {
         if (username === void 0) { username = ''; }
-        if (token === void 0) { token = ''; }
+        if (tokenHash === void 0) { tokenHash = ''; }
         if (expiresTimestamp === void 0) { expiresTimestamp = undefined; }
         var _this = _super.call(this, entity_model_type_1.ENTITY_MODELS.SECURITY.USER_TOKEN, username) || this;
         _this.username = username;
-        _this.token = token;
+        _this.tokenHash = tokenHash;
         _this.expiresTimestamp = expiresTimestamp;
         _this.valid = true;
         _this.dateCreated = new Date();
@@ -33,7 +33,7 @@ var SecurityToken = (function (_super) {
         caribviper_common_1.Assert.isFalse(this.isTransient, 'Entity cannot be transient');
         caribviper_common_1.Assert.isTruthy(this.username, 'Username cannot be null/empty');
         caribviper_common_1.Assert.isTruthy(this.expiresTimestamp, 'Expiration date cannot be null');
-        caribviper_common_1.Assert.isTruthy(this.token, 'Token cannot be null');
+        caribviper_common_1.Assert.isTruthy(this.tokenHash, 'Token cannot be null');
     };
     SecurityToken.createId = function (username) {
         return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.USER_TOKEN, username);
