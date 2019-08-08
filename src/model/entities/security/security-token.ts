@@ -15,13 +15,12 @@ export class SecurityToken extends Entity {
 
   /**
    * Creates a new security token entity
-   * @param id Id of token
    * @param username Username of owner of token
    * @param token Token to be stored
    * @param expiresTimestamp Expiration date of token
    */
-  constructor(id: string = '', public username: string = '', public token: string = '', public expiresTimestamp: number = undefined) {
-    super(ENTITY_MODELS.SECURITY.USER_TOKEN, id);
+  constructor(public username: string = '', public token: string = '', public expiresTimestamp: number = undefined) {
+    super(ENTITY_MODELS.SECURITY.USER_TOKEN, username);
     this.dateCreated = new Date();
   }
 
@@ -39,10 +38,10 @@ export class SecurityToken extends Entity {
 
   /**
    * Creates a user token id
-   * @param id id reference
+   * @param username id reference
    */
-  public static createId(id: string): string {
-    return Entity.generateId(ENTITY_MODELS.SECURITY.USER_TOKEN, id);
+  public static createId(username: string): string {
+    return Entity.generateId(ENTITY_MODELS.SECURITY.USER_TOKEN, username);
   }
 
   /**
