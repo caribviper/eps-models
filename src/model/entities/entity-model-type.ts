@@ -35,7 +35,7 @@ export const ENTITY_MODELS = {
   SECURITY: {
     // Manges tokens
     USER_TOKEN: 'token',
-    SECURITY_TOKEN: 'security-token',
+    REFRESH_TOKEN: 'refresh-token',
     USER: 'user',
     GROUP: 'group',
     DOMAIN: 'domain',

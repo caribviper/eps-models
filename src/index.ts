@@ -49,7 +49,7 @@ export * from './model/entities/general/favourite';
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
 export * from './model/entities/security/user-token';
-export * from './model/entities/security/security-token';
+export * from './model/entities/security/refresh-token';
 export * from './model/entities/security/user';
 export * from './model/entities/security/domain';
 

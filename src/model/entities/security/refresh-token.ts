@@ -1,11 +1,11 @@
-import { ENTITY_MODELS } from './../entity-model-type';
+import { ENTITY_MODELS } from '../entity-model-type';
 import { Entity } from 'caribviper-entity';
 import { Assert } from 'caribviper-common';
 
 /**
  * Stores a refresh token information for determining access
  */
-export class SecurityToken extends Entity {
+export class RefreshToken extends Entity {
 
   /** Is the token valid */
   public valid: boolean = true;
@@ -14,13 +14,13 @@ export class SecurityToken extends Entity {
   public dateCreated: Date = new Date();
 
   /**
-   * Creates a new security token entity
+   * Creates a new refressh token entity
    * @param username Username of owner of token
    * @param tokenHash Encrypted token to be stored
    * @param expiresTimestamp Expiration date of token
    */
   constructor(public username: string = '', public tokenHash: string = '', public expiresTimestamp: number = undefined) {
-    super(ENTITY_MODELS.SECURITY.USER_TOKEN, username);
+    super(ENTITY_MODELS.SECURITY.REFRESH_TOKEN, username);
     this.dateCreated = new Date();
   }
 
@@ -48,16 +48,16 @@ export class SecurityToken extends Entity {
    * Maps data from source to an entity of this type
    * @param source Data to be mapped to the entity
    */
-  public static mapToEntity(source): SecurityToken {
-    return Object.assign(new SecurityToken(), source);
+  public static mapToEntity(source): RefreshToken {
+    return Object.assign(new RefreshToken(), source);
   }
 
-  public static mapToEntityArray(source: SecurityToken[]): SecurityToken[] {
+  public static mapToEntityArray(source: RefreshToken[]): RefreshToken[] {
     if (source.length < 1)
       return [];
     const array = [];
     source.forEach(element => {
-      array.push(Object.assign(new SecurityToken(), element));
+      array.push(Object.assign(new RefreshToken(), element));
     });
     return array;
   }

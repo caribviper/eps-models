@@ -31,7 +31,7 @@ export declare const ENTITY_MODELS: {
     };
     SECURITY: {
         USER_TOKEN: string;
-        SECURITY_TOKEN: string;
+        REFRESH_TOKEN: string;
         USER: string;
         GROUP: string;
         DOMAIN: string;
