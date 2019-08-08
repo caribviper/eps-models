@@ -16,7 +16,7 @@ export class SecurityToken extends Entity {
   /**
    * Creates a new security token entity
    * @param username Username of owner of token
-   * @param token Token to be stored
+   * @param token Encrypted token to be stored
    * @param expiresTimestamp Expiration date of token
    */
   constructor(public username: string = '', public token: string = '', public expiresTimestamp: number = undefined) {
