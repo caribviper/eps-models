@@ -51,8 +51,8 @@ export class UserToken extends Entity {
 
   /**
    * Creates a new token
-   * @param type Type of entity 
-   * @param data 
+   * @param type Type of entity
+   * @param data
    */
   public static createNew(data: { username: string, expires: number, token: string, valid: boolean }): UserToken {
     return Object.assign(new UserToken(this.createId(data.username, data.expires), true), data);
@@ -78,7 +78,7 @@ export class UserToken extends Entity {
   public static mapToEntityArray(source: UserToken[]): UserToken[] {
     if (source.length < 1)
       return [];
-    let array = [];
+    const array = [];
     source.forEach(element => {
       array.push(Object.assign(new UserToken(), element));
     });
