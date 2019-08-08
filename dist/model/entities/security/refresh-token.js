@@ -36,7 +36,7 @@ var RefreshToken = (function (_super) {
         caribviper_common_1.Assert.isTruthy(this.tokenHash, 'Token cannot be null');
     };
     RefreshToken.createId = function (username) {
-        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.USER_TOKEN, username);
+        return caribviper_entity_1.Entity.generateId(entity_model_type_1.ENTITY_MODELS.SECURITY.REFRESH_TOKEN, username);
     };
     RefreshToken.mapToEntity = function (source) {
         return Object.assign(new RefreshToken(), source);

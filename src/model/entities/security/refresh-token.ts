@@ -41,7 +41,7 @@ export class RefreshToken extends Entity {
    * @param username id reference
    */
   public static createId(username: string): string {
-    return Entity.generateId(ENTITY_MODELS.SECURITY.USER_TOKEN, username);
+    return Entity.generateId(ENTITY_MODELS.SECURITY.REFRESH_TOKEN, username);
   }
 
   /**
