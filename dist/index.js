@@ -42,6 +42,7 @@ __export(require("./model/entities/general/favourite"));
 __export(require("./model/entities/security/group"));
 __export(require("./model/entities/security/resource"));
 __export(require("./model/entities/security/user-token"));
+__export(require("./model/entities/security/security-token"));
 __export(require("./model/entities/security/user"));
 __export(require("./model/entities/security/domain"));
 __export(require("./model/entities/planning/registry-item"));

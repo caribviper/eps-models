@@ -1,4 +1,4 @@
-//value objects
+// value objects
 export * from './model/value-objects/common/address';
 export * from './model/value-objects/common/contact-attributes';
 export * from './model/value-objects/common/contact-name';
@@ -34,11 +34,11 @@ export * from './model/value-objects/system/search-result';
 export * from './model/value-objects/system/backup-container';
 export * from './model/value-objects/system/socket';
 
-//statistics
+// statistics
 export * from './model/value-objects/system/statistic-item';
 export * from './model/value-objects/system/user-statistic-value';
 
-//entities
+// entities
 export * from './model/entities/entity-model-type';
 export * from './model/entities/document-entity';
 
@@ -49,6 +49,7 @@ export * from './model/entities/general/favourite';
 export * from './model/entities/security/group';
 export * from './model/entities/security/resource';
 export * from './model/entities/security/user-token';
+export * from './model/entities/security/security-token';
 export * from './model/entities/security/user';
 export * from './model/entities/security/domain';
 
@@ -93,7 +94,7 @@ export * from './model/entities/system/broadcast-user-message-instance';
 export * from './model/entities/system/registry-log-entry';
 export * from './model/entities/system/manual';
 
-//spatial
+// spatial
 export * from './model/value-objects/spatial/spatial-data';
 export * from './model/value-objects/spatial/spatial-registry-property';
 export * from './model/entities/spatial/spatial-feature-layer';
@@ -101,6 +102,6 @@ export * from './model/entities/spatial/spatial-tile-layer';
 export * from './model/entities/spatial/spatial-map';
 export * from './model/entities/spatial/spatial-parcel';
 
-//model factory
+// model factory
 export * from './model/entities/planning/dossier';
 export * from './model/entities/planning/planning-factory';

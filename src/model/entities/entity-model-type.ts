@@ -1,5 +1,5 @@
 export const ENTITY_MODELS = {
-  //Planning Types
+  // Planning Types
   PLANNING: {
     AGENCY: 'agency',
     ATTACHMENT: 'attachment',
@@ -12,7 +12,7 @@ export const ENTITY_MODELS = {
     NOTE: 'note',
     LETTER: 'letter',
     REPORT: 'report',
-    //used for searches and not creation of ids
+    // used for searches and not creation of ids
     SITE_REPORT_DEVELOPMENT: 'development',
     SITE_REPORT_ENFORCEMENT: 'enforcement',
     DISPATCHED_ITEM: 'dispatched'
@@ -31,10 +31,11 @@ export const ENTITY_MODELS = {
       ENFORCEMENT_FILE: 'details:enforcement'
     }
   },
-  /**Various Security Types */
+  /** Various Security Types */
   SECURITY: {
-    //Manges tokens
+    // Manges tokens
     USER_TOKEN: 'token',
+    SECURITY_TOKEN: 'security-token',
     USER: 'user',
     GROUP: 'group',
     DOMAIN: 'domain',
@@ -73,4 +74,4 @@ export const ENTITY_MODELS = {
     SPATIAL_MAP: 'spatial-map',
     SPATIAL_PARCEL: 'parcel'
   }
-}
+};

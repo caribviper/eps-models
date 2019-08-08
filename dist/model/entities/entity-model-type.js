@@ -33,6 +33,7 @@ exports.ENTITY_MODELS = {
     },
     SECURITY: {
         USER_TOKEN: 'token',
+        SECURITY_TOKEN: 'security-token',
         USER: 'user',
         GROUP: 'group',
         DOMAIN: 'domain',
