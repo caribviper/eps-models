@@ -8,40 +8,40 @@ import { Assert } from 'caribviper-common';
  * Manages the user of the system
  */
 export class User extends Entity {
-  /**User name */
+  /** User name */
   username: string;
 
-  /**First name of user */
+  /** First name of user */
   firstname: string;
 
-  /**Last name of user */
+  /** Last name of user */
   lastname: string;
 
-  /**Email address of user */
+  /** Email address of user */
   email: string = '';
 
-  /**Active status. */
+  /** Active status. */
   disabled: boolean = false;
 
-  /**Date of last login */
+  /** Date of last login */
   lastLoggedOn: Date;
 
-  /**List of groups user belongs to */
+  /** List of groups user belongs to */
   groups: string[] = [];
 
-  /**List of group user supervises */
+  /** List of group user supervises */
   supervisorGroups: string[] = [];
 
-  /**security level */
+  /** security level */
   securityLevel: number = 1;
 
-  /**The main domain of a user*/
+  /** The main domain of a user */
   domain: DomainInfo = undefined;
 
-  /**Store list of domains user belongs */
+  /** Store list of domains user belongs */
   crossDomains: string[] = [];
 
-  /**Hashed password */
+  /** Hashed password */
   passwordHash = '';
 
   /**
@@ -58,7 +58,7 @@ export class User extends Entity {
     this.lastname = lastname;
     this.email = email;
     this.disabled = false;
-    this.lastLoggedOn = null;
+    this.lastLoggedOn = undefined;
     this.groups = [];
     this.supervisorGroups = [];
     this.securityLevel = 1;
@@ -82,7 +82,7 @@ export class User extends Entity {
     if (!groupNames || groupNames.length < 1)
       return;
     groupNames.forEach((group: string) => {
-      //check to see if group exists and if not add it
+      // check to see if group exists and if not add it
       if (this.groups.findIndex((g: string) => { return g.toLowerCase() === group.toLowerCase(); }) < 0)
         this.groups.push(group);
     });
@@ -93,7 +93,7 @@ export class User extends Entity {
    * @param groupName Group to be removed
    */
   removeGroup(groupName: string) {
-    let index = this.groups.findIndex((g: string) => { return g === groupName; });
+    const index = this.groups.findIndex((g: string) => { return g === groupName; });
     if (index > -1)
       this.groups.splice(index, 1);
   }
@@ -106,7 +106,7 @@ export class User extends Entity {
     if (!groupNames || groupNames.length < 1)
       return;
     groupNames.forEach((group: string) => {
-      //check to see if group exists and if not add it
+      // check to see if group exists and if not add it
       if (this.supervisorGroups.findIndex((g: string) => { return g === group; }) < 0)
         this.supervisorGroups.push(group);
     });
@@ -117,7 +117,7 @@ export class User extends Entity {
    * @param groupName Group to be removed
    */
   removeSupervisorGroup(groupName: string) {
-    let index = this.supervisorGroups.findIndex((g: string) => { return g === groupName; });
+    const index = this.supervisorGroups.findIndex((g: string) => { return g === groupName; });
     if (index > -1)
       this.supervisorGroups.splice(index, 1);
   }
@@ -158,7 +158,7 @@ export class User extends Entity {
   public static mapToEntityArray(source: User[]): User[] {
     if (source.length < 1)
       return [];
-    let array = [];
+    const array = [];
     source.forEach(element => {
       array.push(Object.assign(new User(), element));
     });
