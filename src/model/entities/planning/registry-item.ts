@@ -400,7 +400,7 @@ export class RegistryItem extends Entity {
 
   public static convertToRegistryFlatFile(registry: RegistryItem): RegistryFlatTable {
     registry = this.mapToEntity(registry);
-    let regFlat = new RegistryFlatTable();
+    const regFlat = new RegistryFlatTable();
     regFlat.registryId = registry._id;
     regFlat.referenceNo = registry.referenceNo;
     regFlat.area = registry.area;
@@ -419,7 +419,7 @@ export class RegistryItem extends Entity {
     regFlat.gisDatePlotted = new Date(registry.location.coordinate.datePlotted);
     regFlat.gisLandTaxId = registry.location.coordinate.landTaxId;
     regFlat.gisLandUse = registry.location.coordinate.landUse;
-    if (registry.fileType.folderPrefix === RegistryFileTypes.formal.prefix)
+    if (registry.fileType.folderPrefix === RegistryFileTypes.formal.folderPrefix)
       regFlat.gisLotsCreated = (registry.details as FormalApplication).lotsToBeCreated;
     else
       regFlat.gisLotsCreated = 0;

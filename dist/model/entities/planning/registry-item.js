@@ -365,7 +365,7 @@ var RegistryItem = (function (_super) {
         regFlat.gisDatePlotted = new Date(registry.location.coordinate.datePlotted);
         regFlat.gisLandTaxId = registry.location.coordinate.landTaxId;
         regFlat.gisLandUse = registry.location.coordinate.landUse;
-        if (registry.fileType.folderPrefix === filetype_1.RegistryFileTypes.formal.prefix)
+        if (registry.fileType.folderPrefix === filetype_1.RegistryFileTypes.formal.folderPrefix)
             regFlat.gisLotsCreated = registry.details.lotsToBeCreated;
         else
             regFlat.gisLotsCreated = 0;
